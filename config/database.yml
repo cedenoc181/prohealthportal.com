@@ -79,6 +79,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: prohealthportal_com_production
   username: prohealthportal_com
   password: <%= ENV["PROHEALTHPORTAL_COM_DATABASE_PASSWORD"] %>
