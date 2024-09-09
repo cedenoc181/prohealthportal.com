@@ -1,0 +1,2 @@
+class MyMedifile < ApplicationRecord
+end

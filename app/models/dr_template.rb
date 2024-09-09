@@ -1,0 +1,2 @@
+class DrTemplate < ApplicationRecord
+end
