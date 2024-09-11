@@ -30,6 +30,7 @@ class UsersController < ApplicationController
     render json: {user: UserSerializer.new(user), jwt: token}, status: :created
   end
 
+  # PATCH sends email to update password through route to verify user
   def forgot_password  
     if @user.present?
       new_password = params[:new_password]  
@@ -76,6 +77,23 @@ end
   end
 
   end
+
+
+
+# User relational data 
+
+# my_templates 
+
+
+
+
+
+
+
+
+
+
+
 
   private
 

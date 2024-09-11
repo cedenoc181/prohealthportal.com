@@ -46,6 +46,6 @@ class MyTemplatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def my_template_params
-      params.fetch(:my_template, {})
+      params.permit(:user_id, :notes)
     end
 end

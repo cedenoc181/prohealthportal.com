@@ -48,10 +48,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_214401) do
   end
 
   create_table "my_templates", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.bigint "patient_template_id"
     t.bigint "dr_template_id"
     t.text "notes"
+    t.integer "responded_counter", default: 0, null: false
+    t.integer "no_response_counter", default: 0, null: false
+    t.float "effectiveness", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dr_template_id"], name: "index_my_templates_on_dr_template_id"
