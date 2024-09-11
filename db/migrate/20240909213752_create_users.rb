@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :full_name
       t.string :email
       t.string :password_digest
-      t.string :role
+      t.string :role    #staff, provider, admin
       t.string :clinic_location
       t.string :insurance_network, default: "Not Provided"
       t.boolean :direct_access

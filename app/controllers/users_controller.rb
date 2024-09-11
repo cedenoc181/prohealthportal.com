@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy ]
+  rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found
+  before_action :find_user, only: %i[ show update destroy ]
 
   # GET /users
   def index
@@ -9,7 +10,6 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    user = find_user
     render json: user, status: :ok
   end
 
@@ -20,10 +20,9 @@ class UsersController < ApplicationController
 
   end
 
-
   # PATCH/PUT /users/1
   def update
-    if user.update(user_params)
+    if user.update(user_editable_params)
       render json: user
     else
       render json: user.errors, status: :unprocessable_entity
@@ -43,6 +42,16 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def create_user_params
-      params.permit()
+      params.permit(:full_name, :email, :password, :clinic_location, :role)
     end
+
+    def user_editable_params 
+      params.permit(:clinic_location, :password, :email, :role, :insurance_network, :direct_access, :admin)
+    end
+
+    def render_record_not_found 
+      render json: { error: "User not found" }, status: :not_found 
+    end 
+
+
 end
