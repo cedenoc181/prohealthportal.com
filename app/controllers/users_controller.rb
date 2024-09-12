@@ -4,11 +4,13 @@ class UsersController < ApplicationController
   # Callbacks to set user before show and destroy action method
   before_action :find_user, only: %i[ show destroy update]
 
-  # Skip authorization for users to create and update forgotten passwords 
+  # Skip authorization(from App-controller) for users to create account and update forgotten passwords 
   skip_before_action :authorized, only: [:create, :forgot_password]
 
 
   # GET /users
+  #will like to modify in the future so that Admin is the only user 
+  #able to use index all
   def index
     users = User.all
     render json: users, status: :ok
@@ -30,7 +32,9 @@ class UsersController < ApplicationController
     render json: {user: UserSerializer.new(user), jwt: token}, status: :created
   end
 
-  # PATCH sends email to update password through route to verify user
+  # PATCH/ Will send email to to users email account with link to update password through route to verify user
+  #user will also apply email account to system, if email is in database, then user will receive email 
+
   def forgot_password  
     if @user.present?
       new_password = params[:new_password]  
