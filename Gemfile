@@ -27,6 +27,8 @@ gem 'jwt', '~> 1.5', '>= 1.5.4'
 
 gem "sqlite3", "~> 1.4"
 
+gem 'faker'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 
