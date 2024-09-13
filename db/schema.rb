@@ -15,9 +15,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_214401) do
   enable_extension "plpgsql"
 
   create_table "dr_templates", force: :cascade do |t|
-    t.string "dr_temp_title" #title should be stand point from user ex: admin to dr-follow up template, provider to dr-follow up template etc.
+    t.string "dr_temp_title"
     t.text "dr_temp_content"
-    t.string "category" #follow up, POC, APOS Letter, referral, insurance etc.
+    t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -63,9 +63,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_214401) do
   end
 
   create_table "patient_templates", force: :cascade do |t|
-    t.string "px_temp_title" #title should be stand point from user ex: admin to patient-follow up template, provider to patient-follow up template etc.
-    t.text "px_temp_content" #only thing to be updated, and will only update the saved instance not the original.
-    t.string "category" # follow up, inquiry, scheduling, billing, insurance, etc.
+    t.string "px_temp_title"
+    t.text "px_temp_content"
+    t.string "category"
     t.string "language", default: "english"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

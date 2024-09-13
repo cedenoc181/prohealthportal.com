@@ -10,24 +10,38 @@
 
 require 'faker'
 
+p"destroy all old data ♻️"
 
-positions = ['Front-Desk', 'Provider', 'Aide', 'billing', 'management']
+User.destroy_all
+PatientTemplate.destroy_all
+DrTemplate.destroy_all
+MyTemplate.destroy_all
+Medifile.destroy_all
+MyMedifile.destroy_all
+
+positions = ['admin', 'Front-Desk', 'Provider', 'Aide', 'billing', 'management']
 clinics = ['eastside', 'westside', 'Upper westside', 'Bronx', 'Inwood']
-random_boolean = [true, false]
 
-def d_a_providers 
-  unless  user.role == 'provider'
-    user.direct_access = false
-  end
+p "seeding Users 🌱"
+    15.times do 
 
-end
-
-15.times do User.create!(
+    User.create(
     full_name: Faker::Name.name, 
-    email: Faker.Internet.email(name: :full_name, seperators:['-'], domain: 'proHealthptot.com'), 
-    password: Faker.Internet.password(min_length: 6, max_length: 16), 
+    email: Faker::Internet.email(name: :full_name, separators:['-'], domain: 'proHealthptot.com'), 
+    password: Faker::Internet.password(min_length: 6, max_length: 16), 
     role: positions.shuffle.first,
-    clinic_location: clinics.shuffle.last,
-    direct_access: :d_a_providers,
-    admin: 
-)
+    clinic_location: clinics.shuffle.last
+    )
+    p"user created successfully"
+    end
+
+
+     p "seeding Medifiles 🌱"
+
+     p "seeding Patient Templates 🌱"
+
+     p "seeding Dr Templates 🌱"
+
+     p "seeding My Medifiles 🌱"
+
+     p "seeding My Templates 🌱"

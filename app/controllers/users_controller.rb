@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :find_user, only: %i[ show destroy update]
 
   # Skip authorization(from App-controller) for users to create account and update forgotten passwords 
-  skip_before_action :authorized, only: [:create, :forgot_password]
+  skip_before_action :authorized, only: [:index, :show, :create, :forgot_password]
 
 
   # GET /users
