@@ -19,8 +19,9 @@ MyTemplate.destroy_all
 Medifile.destroy_all
 MyMedifile.destroy_all
 
-positions = ['admin', 'Front-Desk', 'Provider', 'Aide', 'billing', 'management']
-clinics = ['eastside', 'westside', 'Upper westside', 'Bronx', 'Inwood']
+positions = ['Admin', 'Front-Desk', 'PT', 'OT', 'PTA', 'OTA', 'Aide', 'Billing', 'Management']
+clinics = ['Eastside', 'Westside', 'Upper westside', 'Bronx', 'Inwood']
+
 
 p "seeding Users 🌱"
     15.times do 

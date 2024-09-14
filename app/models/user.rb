@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-after_create_commit :post_create_update
+after_create_commit :post_create_update, :update_insurance_network
 
 
     has_many :my_medifiles, dependent: :destroy
@@ -14,18 +14,22 @@ after_create_commit :post_create_update
     has_secure_password
 
     validates :password, length: { in: 6..16 }
+
     validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP },  strict: true
-
-    # format: { with: /\A.*(?=.*\d)(?=.*[!@#$%^&*]).*\z/,
-    #   message: 'must contain at least one digit and one special character'}
-
 
 private 
 
 def post_create_update
-  self.update_column(:admin, self.role == 'admin')
+  self.update_column(:admin, self.role == 'Admin')
   
-  self.update_column(:direct_access, self.role == "Provider")
+  self.update_column(:direct_access, self.role == "PT" || self.role == 'OT')
+end
+
+def update_insurance_network
+  insurance_accepted = ['United Health Care', 'Fidelis Care', 'Metroplus', 'BCBS', 'Atnea', 'Emblem Health', 'Oxford', 'Medicare', 'Cigna']
+    if self.role == 'PT' || self.role == 'OT'
+      self.update_column(:insurance_network, insurance_accepted.join(", "))
+    end
 end
 
 end
