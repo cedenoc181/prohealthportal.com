@@ -83,22 +83,6 @@ end
   end
 
 
-
-# User relational data 
-
-# my_templates 
-
-
-
-
-
-
-
-
-
-
-
-
   private
 
     def is_admin?

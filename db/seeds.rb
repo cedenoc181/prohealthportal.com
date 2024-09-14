@@ -19,11 +19,12 @@ MyTemplate.destroy_all
 Medifile.destroy_all
 MyMedifile.destroy_all
 
+################################################################################
+p "testing data model seeding"
 positions = ['Admin', 'Front-Desk', 'PT', 'OT', 'PTA', 'OTA', 'Aide', 'Billing', 'Management']
 clinics = ['Eastside', 'Westside', 'Upper westside', 'Bronx', 'Inwood']
 
-
-p "seeding Users 🌱"
+p "seeding test Users 🌱"
     15.times do 
 
     User.create(
@@ -33,9 +34,13 @@ p "seeding Users 🌱"
     role: positions.shuffle.first,
     clinic_location: clinics.shuffle.last
     )
-    p"user created successfully"
+    p"test user created successfully"
     end
+################################################################################################
 
+    #database seeds
+
+     p "seeding users 🌱"
 
      p "seeding Medifiles 🌱"
 

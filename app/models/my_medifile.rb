@@ -1,4 +1,4 @@
 class MyMedifile < ApplicationRecord
     belongs_to :user
-    belongs_to :medifiles
+    belongs_to :medifile
 end

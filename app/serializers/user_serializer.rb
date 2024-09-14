@@ -1,12 +1,14 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :full_name, :email, :role, :clinic_location, :insurance_network, :direct_access, :admin
+  attributes :id, :full_name, :email, :role, :clinic_location, :insurance_network, :direct_access, :admin, :my_medifiles, :my_templates, :admin_templates
 
-  # attribute :created_at do |object|
-  #   object.created_at.strftime("%B %d, %Y")
-  # end
+  def admin_templates
+    if object.role == 'Admin'
+      object.patient_templates
+      object.dr_templates
+      object.medifiles
+    else
+      nil
+    end
+  end
 
-  has_many :my_medifiles
-
-  has_many :my_templates
-
-end
+end 
