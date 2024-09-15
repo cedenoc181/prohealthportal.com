@@ -15,7 +15,7 @@ after_create_commit :post_create_update, :update_insurance_network
 
     validates :password, length: { in: 6..16 }, strict: true
 
-    validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }, strict: true
+    validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }, strict: true
 
 private 
 
@@ -25,6 +25,7 @@ def post_create_update
   self.update_column(:direct_access, self.role == "PT" || self.role == 'OT')
 end
 
+# could be temperary
 def update_insurance_network
   insurance_accepted = ['United Health Care', 'Fidelis Care', 'Metroplus', 'BCBS', 'Atnea', 'Emblem Health', 'Oxford', 'Medicare', 'Cigna']
     if self.role == 'PT' || self.role == 'OT'

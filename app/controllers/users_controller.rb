@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found
-
+  
   # Callbacks to set user before show and destroy action method
   before_action :find_user, only: %i[ show destroy update]
 
@@ -55,7 +54,7 @@ def update
     if @user.update(user_editable_params)
       render json: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: @user.errors.full_messages, status: :unprocessable_entity
     end
 
   # Check if the current user is updating their own profile
@@ -64,7 +63,7 @@ def update
 
   # If neither, return errors
   else
-    render json: current_user.errors, status: :unprocessable_entity
+    render json: current_user.errors.full_messages, status: :unprocessable_entity
   end
 end
 
@@ -85,10 +84,6 @@ end
 
   private
 
-    def is_admin?
-      current_user.admin?
-    end
-
     # Use callbacks to share common setup or constraints between actions.
     def find_user
       @user = User.find(params[:id])
@@ -102,10 +97,5 @@ end
     def user_editable_params 
       params.permit(:clinic_location, :password, :email, :role, :insurance_network, :direct_access, :admin)
     end
-
-    def render_record_not_found 
-      render json: { error: "User not found" }, status: :not_found 
-    end 
-
 
 end

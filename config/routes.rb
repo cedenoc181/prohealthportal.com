@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   #these models are specifically for users for personalized exp for nom-admins
   resources :users do 
     resources :my_templates
+    # might nest dr and patient template to give user(Admin) crud capability
     resources :my_medifiles
   end
 

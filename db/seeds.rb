@@ -40,11 +40,15 @@ p "seeding test Users 🌱"
 
     #database seeds
 
-     p "seeding users 🌱"
+    #  p "seeding users 🌱"
 
      p "seeding Medifiles 🌱"
 
      p "seeding Patient Templates 🌱"
+
+
+
+     
 
      p "seeding Dr Templates 🌱"
 
