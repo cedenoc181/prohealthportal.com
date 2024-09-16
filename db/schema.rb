@@ -16,6 +16,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_214401) do
 
   create_table "dr_templates", force: :cascade do |t|
     t.string "dr_temp_title"
+    t.string "dr_temp_subject"
     t.text "dr_temp_content"
     t.string "category"
     t.datetime "created_at", null: false
@@ -37,12 +38,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_214401) do
 
   create_table "my_medifiles", force: :cascade do |t|
     t.bigint "user_id"
+    t.bigint "coworker_id"
     t.bigint "medifile_id"
     t.string "my_file_title"
     t.text "my_file_description"
-    t.string "provider_name", default: "no provider associated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["coworker_id"], name: "index_my_medifiles_on_coworker_id"
     t.index ["medifile_id"], name: "index_my_medifiles_on_medifile_id"
     t.index ["user_id"], name: "index_my_medifiles_on_user_id"
   end
@@ -64,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_214401) do
 
   create_table "patient_templates", force: :cascade do |t|
     t.string "px_temp_title"
+    t.string "px_temp_subject"
     t.text "px_temp_content"
     t.string "category"
     t.string "language", default: "english"
@@ -76,7 +79,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_214401) do
     t.string "email"
     t.string "password_digest"
     t.string "role"
+    t.string "credentials"
     t.string "clinic_location"
+    t.string "phone", default: "212-600-4781"
+    t.string "phone_ext"
+    t.string "fax", default: "800-655-3780"
     t.string "insurance_network", default: "Not Provided"
     t.boolean "direct_access"
     t.boolean "admin", default: false
@@ -86,6 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_214401) do
 
   add_foreign_key "my_medifiles", "medifiles"
   add_foreign_key "my_medifiles", "users"
+  add_foreign_key "my_medifiles", "users", column: "coworker_id"
   add_foreign_key "my_templates", "dr_templates"
   add_foreign_key "my_templates", "patient_templates"
   add_foreign_key "my_templates", "users"
