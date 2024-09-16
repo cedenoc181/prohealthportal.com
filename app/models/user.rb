@@ -6,6 +6,14 @@ after_create_commit :post_create_update, :update_insurance_network
     has_many :my_medifiles, dependent: :destroy
     has_many :medifiles, through: :my_medifiles
 
+    has_many :coworker_relationships, 
+    class_name: 'MyMedifile', 
+    foreign_key: 'user_id'
+
+    has_many :coworkers, 
+    through: :coworker_relationships, 
+    source: :coworker
+
     has_many :my_templates, dependent: :destroy
     has_many :patient_templates, through: :my_templates
     has_many :dr_templates, through: :my_templates
