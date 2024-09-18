@@ -1,6 +1,6 @@
 class PatientTemplatesController < ApplicationController
   before_action :set_patient_template, only: %i[ show update destroy ]
-
+  skip_before_action :authorized, only: %i[index show]
   # GET /patient_templates
   def index
     @patient_templates = PatientTemplate.all
