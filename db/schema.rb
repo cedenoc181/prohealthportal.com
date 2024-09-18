@@ -26,10 +26,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_09_214401) do
   create_table "medifiles", force: :cascade do |t|
     t.string "title"
     t.text "description"
+    t.text "instructions"
     t.string "file_link"
     t.string "file_cover"
     t.string "file_cover_alt"
-    t.date "publish_date"
     t.string "language"
     t.boolean "file_editable", default: false
     t.datetime "created_at", null: false

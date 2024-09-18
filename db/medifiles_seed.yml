@@ -1,0 +1,251 @@
+- title: "HealthFirst Authorization"
+  description: |
+     The Orthonet form is a standardized document used to submit patient information, treatment plans, and authorizations for orthopedic and rehabilitation services. 
+     It facilitates communication between healthcare providers and insurance companies, ensuring accurate and timely processing of patient care requests. 
+     This form typically includes fields for patient demographics, diagnosis, treatment details, and provider information.
+  instructions: | 
+     On page 1, please accurately fill in the following fields with patient information. 
+     Once completed, on page 2; provider will fill in treatment information. 
+     Lastly, attach related progress note report and fax to the number listed on the top right corner of page 1.
+  file_cover_alt: "healthfirst auth form"
+  language: "english"
+  file_editable: true
+  file_link: "db/ProHealthPDF/Auth-Orthonet.pdf"
+  file_cover: "db/ProHealthPDFcover/Orthonet.jpg"
+
+- title: "MetroPlus Authorization"
+  description: | 
+    The MetroPlus form is an essential document for our physical and occupational therapy patients. 
+    It allows us to submit detailed information about your treatment plan, progress, and any required authorizations to MetroPlus, ensuring that your therapy services are covered.
+    By completing this form, we help streamline the approval process with your insurance, so you can continue focusing on your rehabilitation and recovery without delays
+  instructions: |
+    Please accurately fill in the following fields with patient and provider information. Once completed, treating provider will fill in treatment information feilds.
+    Lastly attach related progress note report and fax to the number listed in form instructions description at the top of the page.
+  file_cover_alt: "metroplus auth form"
+  language: "english"
+  file_editable: true
+  file_link: "db/ProHealthPDF/Auth-MetroPlus.pdf"
+  file_cover: "db/ProHealthPDFcover/MetroPlus.jpg"
+
+- title: "Anthem Empire BCBS Authorizaton"
+  description: |
+    The Anthem Blue Cross Blue Shield form is important for our physical and occupational therapy patients. 
+    It enables us to provide your insurance with the necessary details about your treatment plan, progress, and authorization needs. 
+    Completing this form ensures that your therapy services are properly covered, allowing for uninterrupted care as you work toward your recovery.
+  instructions: |
+    Please accurately fill in the following fields with patient and provider information. Once completed, treating provider will fill in treatment information feilds.
+    Lastly attach related progress note report and fax to the number listed on the top left of the authorization form.
+  file_cover_alt: "BCBS auth form"
+  language: "english"
+  file_editable: true
+  file_link: "db/ProHealthPDF/Auth-Empire.pdf"
+  file_cover: "db/ProHealthPDFcover/Empire-BlueCross-BlueShield.jpg"
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+- title: ""
+  description: ""
+  instructions: ""
+  file_cover_alt: ""
+  language: ""
+  file_editable: 
+  file_link: ""
+  file_cover: ""
+
+
