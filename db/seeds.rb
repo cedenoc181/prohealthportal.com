@@ -35,6 +35,7 @@ Medifile.destroy_all
      p "seeding Medifiles 🌱"
 
 
+
      p "seeding Patient Templates 🌱"
 patient_templates_array = [
     {
