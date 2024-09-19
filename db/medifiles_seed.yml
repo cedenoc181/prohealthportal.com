@@ -230,22 +230,22 @@
   file_link: "db/ProHealthPDF/APOS-checklist.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-checklist.jpg"
 
-- title: ""
+- title: "Financial hardship form"
   description: ""
   instructions: ""
-  file_cover_alt: ""
-  language: ""
+  file_cover_alt: "general"
+  language: "english"
   file_editable: false
-  file_link: ""
-  file_cover: ""
+  file_link: "db/ProHealthPDF/Financial-hardship-E.pdf"
+  file_cover: "db/ProHealthPDFcover/Financial-hardship-E.jpg"
 
-- title: ""
+- title: "Financial hardship form"
   description: ""
   instructions: ""
-  file_cover_alt: ""
-  language: ""
+  file_cover_alt: "general"
+  language: "spanish"
   file_editable: false
-  file_link: ""
-  file_cover: ""
+  file_link: "db/ProHealthPDF/Financial-hardship-S.pdf"
+  file_cover: "db/ProHealthPDFcover/Financial-hardship-S.jpg"
 
 
