@@ -113,23 +113,23 @@
   file_link: "db/ProHealthPDF/APOS-TP-S.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-TP-S-cover.jpg"
 
-- title: ""
+- title: "APOS intial intake form"
   description: ""
   instructions: ""
-  file_cover_alt: ""
-  language: ""
+  file_cover_alt: "APOS"
+  language: "english"
   file_editable: false
-  file_link: ""
-  file_cover: ""
+  file_link: "db/ProHealthPDF/APOS-initial-Intake.pdf"
+  file_cover: "db/ProHealthPDFcover/APOS-initial-intake.jpg"
 
-- title: ""
+- title: "APOS HF acknowledgement form"
   description: ""
   instructions: ""
-  file_cover_alt: ""
-  language: ""
+  file_cover_alt: "APOS"
+  language: "english"
   file_editable: false
-  file_link: ""
-  file_cover: ""
+  file_link: "db/ProHealthPDF/APOS-HF-Acknolwdgement.pdf"
+  file_cover: "db/ProHealthPDFcover/APOS-HF-Acknowledgement.jpg"
 
 - title: ""
   description: ""
