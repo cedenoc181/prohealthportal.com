@@ -203,23 +203,23 @@
   file_link: "db/ProHealthPDF/APOS-Fitting-S.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-Fitting-S.jpg"
 
-- title: ""
+- title: "Direct access form"
   description: ""
   instructions: ""
-  file_cover_alt: ""
-  language: ""
+  file_cover_alt: "general"
+  language: "english"
   file_editable: false
-  file_link: ""
-  file_cover: ""
+  file_link: "db/ProHealthPDF/Direct-access-E.pdf"
+  file_cover: "db/ProHealthPDFcover/Direct-access-E.jpg"
 
-- title: ""
+- title: "Direct access form"
   description: ""
   instructions: ""
-  file_cover_alt: ""
-  language: ""
+  file_cover_alt: "general"
+  language: "spanish"
   file_editable: false
-  file_link: ""
-  file_cover: ""
+  file_link: "db/ProHealthPDF/Direct-access-S.pdf"
+  file_cover: "db/ProHealthPDFcover/Direct-access-S.jpg"
 
 - title: ""
   description: ""
