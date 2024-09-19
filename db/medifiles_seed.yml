@@ -149,23 +149,23 @@
   file_link: "db/ProHealthPDF/PTOT-HF-beneficiary-acknowledgement-S.pdf"
   file_cover: "db/ProHealthPDFcover/PTOT-HF-beneficiary-acknowledgment-S.jpg"
 
-- title: ""
+- title: "Initial intake form"
   description: ""
   instructions: ""
-  file_cover_alt: ""
-  language: ""
+  file_cover_alt: "PTOT"
+  language: "english"
   file_editable: false
-  file_link: ""
-  file_cover: ""
+  file_link: "db/ProHealthPDF/PTOT-Intake-E.pdf"
+  file_cover: "db/ProHealthPDFcover/PTOT-Intake-E-cover.jpg"
 
-- title: ""
+- title: "Initial intake form"
   description: ""
   instructions: ""
-  file_cover_alt: ""
-  language: ""
+  file_cover_alt: "PTOT"
+  language: "spanish"
   file_editable: false
-  file_link: ""
-  file_cover: ""
+  file_link: "db/ProHealthPDF/PTOT-Intake-S.pdf"
+  file_cover: "db/ProHealthPDFcover/PTOT-Intake-S-cover.jpg"
 
 - title: ""
   description: ""
