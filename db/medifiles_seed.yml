@@ -1,4 +1,4 @@
-- title: "HealthFirst Authorization"
+- title: "HealthFirst Authorization form"
   description: |
      The Orthonet form is a standardized document used to submit patient information, treatment plans, and authorizations for orthopedic and rehabilitation services. 
      It facilitates communication between healthcare providers and insurance companies, ensuring accurate and timely processing of patient care requests. 
@@ -7,13 +7,13 @@
      On page 1, please accurately fill in the following fields with patient information. 
      Once completed, on page 2; provider will fill in treatment information. 
      Lastly, attach related progress note report and fax to the number listed on the top right corner of page 1.
-  file_cover_alt: "healthfirst auth form"
+  file_cover_alt: "authorization"
   language: "english"
   file_editable: true
   file_link: "db/ProHealthPDF/Auth-Orthonet.pdf"
   file_cover: "db/ProHealthPDFcover/Orthonet.jpg"
 
-- title: "MetroPlus Authorization"
+- title: "MetroPlus Authorization form"
   description: | 
     The MetroPlus form is an essential document for our physical and occupational therapy patients. 
     It allows us to submit detailed information about your treatment plan, progress, and any required authorizations to MetroPlus, ensuring that your therapy services are covered.
@@ -21,13 +21,13 @@
   instructions: |
     Please accurately fill in the following fields with patient and provider information. Once completed, treating provider will fill in treatment information feilds.
     Lastly attach related progress note report and fax to the number listed in form instructions description at the top of the page.
-  file_cover_alt: "metroplus auth form"
+  file_cover_alt: "authorization"
   language: "english"
   file_editable: true
   file_link: "db/ProHealthPDF/Auth-MetroPlus.pdf"
   file_cover: "db/ProHealthPDFcover/MetroPlus.jpg"
 
-- title: "Anthem Empire BCBS Authorizaton"
+- title: "Anthem Empire BCBS Authorizaton form"
   description: |
     The Anthem Blue Cross Blue Shield form is important for our physical and occupational therapy patients. 
     It enables us to provide your insurance with the necessary details about your treatment plan, progress, and authorization needs. 
@@ -35,18 +35,90 @@
   instructions: |
     Please accurately fill in the following fields with patient and provider information. Once completed, treating provider will fill in treatment information feilds.
     Lastly attach related progress note report and fax to the number listed on the top left of the authorization form.
-  file_cover_alt: "BCBS auth form"
+  file_cover_alt: "authorization"
   language: "english"
   file_editable: true
   file_link: "db/ProHealthPDF/Auth-Empire.pdf"
   file_cover: "db/ProHealthPDFcover/Empire-BlueCross-BlueShield.jpg"
 
+- title: "APOS initial assessment form"
+  description: ""
+  instructions: ""
+  file_cover_alt: "APOS"
+  language: "english"
+  file_editable: false
+  file_link: "db/ProHealthPDF/APOS-Assessment-E-form.pdf"
+  file_cover: "db/ProHealthPDFcover/APOS-Assessment-E-cover.jpg"
+
+- title: "APOS initial assessment form"
+  description: ""
+  instructions: ""
+  file_cover_alt: "APOS"
+  language: "spanish"
+  file_editable: false
+  file_link: "db/ProHealthPDF/APOS-Assessment-S-form.pdf"
+  file_cover: "db/ProHealthPDFcover/APOS-Assessment-S-cover.jpg"
+
+- title: "APOS follow up questionaire form"
+  description: ""
+  instructions: ""
+  file_cover_alt: "APOS"
+  language: "english"
+  file_editable: false
+  file_link: "db/ProHealthPDF/APOS-Questionaire-FU.pdf"
+  file_cover: "db/ProHealthPDFcover/APOS-Questionare-cover.jpg"
+
+- title: "APOS anual intake form"
+  description: ""
+  instructions: ""
+  file_cover_alt: "APOS"
+  language: "english"
+  file_editable: false
+  file_link: "db/ProHealthPDF/APOS-Anual-Intake-E.pdf"
+  file_cover: "db/ProHealthPDFcover/APOS-Anual-Intake-E-cover.jpg"
+
+- title: "APOS anual intake form"
+  description: ""
+  instructions: ""
+  file_cover_alt: "APOS"
+  language: "spanish"
+  file_editable: false
+  file_link: "db/ProHealthPDF/APOS-Anual-Intake-S.pdf"
+  file_cover: "db/ProHealthPDFcover/APOS-Anual-intake-S-cover.jpg"
+
+- title: "APOS recieved form"
+  description: ""
+  instructions: ""
+  file_cover_alt: "APOS"
+  language: "english"
+  file_editable: false
+  file_link: "db/ProHealthPDF/APOS-PUSO.pdf"
+  file_cover: "db/ProHealthPDFcover/APOS-PUSO-cover.jpg"
+
+- title: "APOS treatment program form"
+  description: ""
+  instructions: ""
+  file_cover_alt: "APOS"
+  language: "english"
+  file_editable: false
+  file_link: "db/ProHealthPDF/APOS-TP-E.pdf"
+  file_cover: "db/ProHealthPDF/APOS-TP-E.pdf"
+
+- title: "APOS treatment program form"
+  description: ""
+  instructions: ""
+  file_cover_alt: "APOS"
+  language: "spanish"
+  file_editable: false
+  file_link: "db/ProHealthPDF/APOS-TP-S.pdf"
+  file_cover: "db/ProHealthPDFcover/APOS-TP-S-cover.jpg"
+
 - title: ""
   description: ""
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -55,7 +127,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -64,7 +136,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -73,7 +145,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -82,7 +154,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -91,7 +163,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -100,7 +172,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -109,7 +181,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -118,7 +190,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -127,7 +199,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -136,7 +208,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -145,7 +217,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -154,7 +226,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -163,7 +235,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
@@ -172,79 +244,7 @@
   instructions: ""
   file_cover_alt: ""
   language: ""
-  file_editable: 
-  file_link: ""
-  file_cover: ""
-
-- title: ""
-  description: ""
-  instructions: ""
-  file_cover_alt: ""
-  language: ""
-  file_editable: 
-  file_link: ""
-  file_cover: ""
-
-- title: ""
-  description: ""
-  instructions: ""
-  file_cover_alt: ""
-  language: ""
-  file_editable: 
-  file_link: ""
-  file_cover: ""
-
-- title: ""
-  description: ""
-  instructions: ""
-  file_cover_alt: ""
-  language: ""
-  file_editable: 
-  file_link: ""
-  file_cover: ""
-
-- title: ""
-  description: ""
-  instructions: ""
-  file_cover_alt: ""
-  language: ""
-  file_editable: 
-  file_link: ""
-  file_cover: ""
-
-- title: ""
-  description: ""
-  instructions: ""
-  file_cover_alt: ""
-  language: ""
-  file_editable: 
-  file_link: ""
-  file_cover: ""
-
-- title: ""
-  description: ""
-  instructions: ""
-  file_cover_alt: ""
-  language: ""
-  file_editable: 
-  file_link: ""
-  file_cover: ""
-
-- title: ""
-  description: ""
-  instructions: ""
-  file_cover_alt: ""
-  language: ""
-  file_editable: 
-  file_link: ""
-  file_cover: ""
-
-- title: ""
-  description: ""
-  instructions: ""
-  file_cover_alt: ""
-  language: ""
-  file_editable: 
+  file_editable: false
   file_link: ""
   file_cover: ""
 
