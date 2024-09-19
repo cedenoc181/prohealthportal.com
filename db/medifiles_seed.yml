@@ -131,23 +131,23 @@
   file_link: "db/ProHealthPDF/APOS-HF-Acknolwdgement.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-HF-Acknowledgement.jpg"
 
-- title: ""
+- title: "HF beneficiary acknowledgement form"
   description: ""
   instructions: ""
-  file_cover_alt: ""
-  language: ""
+  file_cover_alt: "PTOT"
+  language: "english"
   file_editable: false
-  file_link: ""
-  file_cover: ""
+  file_link: "db/ProHealthPDF/PTOT-HF-beneficiary-acknowledgement-E.pdf"
+  file_cover: "db/ProHealthPDFcover/PTOT-HF-beneficiary-acknowledgement-E.jpg"
 
-- title: ""
+- title: "HF beneficiary acknowledgement form"
   description: ""
   instructions: ""
-  file_cover_alt: ""
-  language: ""
+  file_cover_alt: "PTOT"
+  language: "spanish"
   file_editable: false
-  file_link: ""
-  file_cover: ""
+  file_link: "db/ProHealthPDF/PTOT-HF-beneficiary-acknowledgement-S.pdf"
+  file_cover: "db/ProHealthPDFcover/PTOT-HF-beneficiary-acknowledgment-S.jpg"
 
 - title: ""
   description: ""
