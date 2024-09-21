@@ -42,8 +42,11 @@
   file_cover: "db/ProHealthPDFcover/Empire-BlueCross-BlueShield.jpg"
 
 - title: "APOS initial assessment form"
-  description: ""
-  instructions: ""
+description: | 
+  APOS Pain Assessment Questionnaire, designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort, helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment (with APOS
+    Checklist attached).
+ instructions: | 
+   This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice.
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
@@ -51,26 +54,33 @@
   file_cover: "db/ProHealthPDFcover/APOS-Assessment-E-cover.jpg"
 
 - title: "APOS initial assessment form"
-  description: ""
-  instructions: ""
+  description: | 
+   Spanish translated APOS Pain Assessment Questionnaire, designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort, helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment (with APOS
+    Checklist attached).
+  instructions: |
+    This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice.
   file_cover_alt: "APOS"
   language: "spanish"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-Assessment-S-form.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-Assessment-S-cover.jpg"
 
-- title: "APOS initial questionaire form"
-  description: ""
-  instructions: ""
+- title: "APOS initial questionnaire form"
+  description: |  
+     APOS Pain Assessment Questionnaire, designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort, helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment.
+  instructions: |
+     This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice.
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-initial-questionaire.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-initial-questionaire.jpg"
 
-- title: "APOS follow up questionaire form"
-  description: ""
-  instructions: ""
+- title: "APOS follow up questionnaire form"
+  description: |
+    The APOS Pain Assessment follow up Questionnaire is required at each of the five follow-up appointments to consistently assess a patient’s pain levels and areas of discomfort, enabling healthcare providers to track progress and refine treatment plans for optimal care.
+  instructions: | 
+    Once completed upload this to patient documentation labelled with follow up / 5 total. Eg. "APOS follow up 1". 
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
