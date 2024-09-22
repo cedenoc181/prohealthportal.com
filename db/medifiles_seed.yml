@@ -154,8 +154,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/APOS-initial-intake.jpg"
 
 - title: "APOS HF acknowledgement form"
-  description: ""
-  instructions: ""
+  description: |
+       This is a health first patient acknowloedgement form that make patient's aware of on going issues with our credentialling with Health first. There is a potential services will not be covered due to this issue. 
+  instructions: |
+      Please explain to patient about on going Health First crendentialling issues we are facing and make them aware of shoes may not be covered due to HF. Upload document into patient information and please label as eg : "APOS HF Acknowledgement 2024"
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
@@ -163,8 +165,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/APOS-HF-Acknowledgement.jpg"
 
 - title: "HF beneficiary acknowledgement form"
-  description: ""
-  instructions: ""
+  description: |
+          This is a health first form that make patient's aware of health first on going issues with our credentialling. There is a potential services will not be covered due to this issue.
+  instructions: |
+          Please explain to patient about on going Health First crendentialling issues we are facing and make them aware of services may not be covered due to HF. Upload document into patient information and please label as eg : "HF Acknowledgement 2024"
   file_cover_alt: "PTOT"
   language: "english"
   file_editable: false
@@ -172,8 +176,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/PTOT-HF-beneficiary-acknowledgement-E.jpg"
 
 - title: "HF beneficiary acknowledgement form"
-  description: ""
-  instructions: ""
+  description: |
+          This is a health first form that make patient's aware of health first on going issues with our credentialling. There is a potential services will not be covered due to this issue.
+  instructions: |
+          Please explain to patient about on going Health First crendentialling issues we are facing and make them aware of services may not be covered due to HF. Upload document into patient information and please label as eg : "HF Acknowledgement 2024"
   file_cover_alt: "PTOT"
   language: "spanish"
   file_editable: false
@@ -181,8 +187,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/PTOT-HF-beneficiary-acknowledgment-S.jpg"
 
 - title: "Initial intake form"
-  description: ""
-  instructions: ""
+  description: |
+      Our initial intake form is the initial document completed by new patients to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit and ensures a comprehensive understanding of the patient’s needs.
+  instructions: |
+       Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "PT or OT initial intake 2024"
   file_cover_alt: "PTOT"
   language: "english"
   file_editable: false
@@ -190,8 +198,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/PTOT-Intake-E-cover.jpg"
 
 - title: "Initial intake form"
-  description: ""
-  instructions: ""
+  description: |
+      Our initial intake form is the initial document completed by new patients to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit and ensures a comprehensive understanding of the patient’s needs.
+  instructions: |
+        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "PT or OT initial intake 2024"
   file_cover_alt: "PTOT"
   language: "spanish"
   file_editable: false
