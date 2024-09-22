@@ -6,7 +6,7 @@
   instructions: | 
      On page 1, please accurately fill in the following fields with patient information. 
      Once completed, on page 2; provider will fill in treatment information. 
-     Lastly, attach related progress note report and fax to the number listed on the top right corner of page 1.
+     Lastly, attach related progress note report and fax to the number listed on the top right corner of page 1.  please label doc, eg: "AUTH faxed"
   file_cover_alt: "authorization"
   language: "english"
   file_editable: true
@@ -20,7 +20,7 @@
     By completing this form, we help streamline the approval process with your insurance, so you can continue focusing on your rehabilitation and recovery without delays
   instructions: |
     Please accurately fill in the following fields with patient and provider information. Once completed, treating provider will fill in treatment information feilds.
-    Lastly attach related progress note report and fax to the number listed in form instructions description at the top of the page.
+    Lastly attach related progress note report and fax to the number listed in form instructions description at the top of the page. please label doc, eg: "AUTH faxed"
   file_cover_alt: "authorization"
   language: "english"
   file_editable: true
@@ -34,7 +34,7 @@
     Completing this form ensures that your therapy services are properly covered, allowing for uninterrupted care as you work toward your recovery.
   instructions: |
     Please accurately fill in the following fields with patient and provider information. Once completed, treating provider will fill in treatment information feilds.
-    Lastly attach related progress note report and fax to the number listed on the top left of the authorization form.
+    Lastly attach related progress note report and fax to the number listed on the top left of the authorization form.  please label doc, eg: "AUTH faxed"
   file_cover_alt: "authorization"
   language: "english"
   file_editable: true
@@ -44,9 +44,9 @@
 - title: "APOS initial assessment form"
 description: | 
   APOS Pain Assessment Questionnaire, designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort, helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment (with APOS
-    Checklist attached).
+    Checklist attached). eg: "APOS evaluation 2024"
  instructions: | 
-   This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice.
+   This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice. please label eg: "APOS evaluation 2024"
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
@@ -56,9 +56,9 @@ description: |
 - title: "APOS initial assessment form"
   description: | 
    Spanish translated APOS Pain Assessment Questionnaire, designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort, helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment (with APOS
-    Checklist attached).
+    Checklist attached). 
   instructions: |
-    This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice.
+    This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice. please label eg: "APOS evaluation 2024"
   file_cover_alt: "APOS"
   language: "spanish"
   file_editable: false
@@ -69,7 +69,7 @@ description: |
   description: |  
      APOS Pain Assessment Questionnaire, designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort, helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment.
   instructions: |
-     This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice.
+     This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice. please attach to eg: "APOS evaluation 2024"
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
@@ -80,7 +80,7 @@ description: |
   description: |
     The APOS Pain Assessment follow up Questionnaire is required at each of the five follow-up appointments to consistently assess a patient’s pain levels and areas of discomfort, enabling healthcare providers to track progress and refine treatment plans for optimal care.
   instructions: | 
-    Once completed upload this to patient documentation labelled with follow up / 5 total. Eg. "APOS follow up 1". 
+    Once completed upload this to patient documentation labelled with follow up / 5 total. please label eg. "APOS follow up 1". 
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
@@ -88,8 +88,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/APOS-Questionare-cover.jpg"
 
 - title: "APOS anual intake form"
-  description: ""
-  instructions: ""
+  description: | 
+        APOS returning Intake Form is a document patients are required to sign annually, starting one year after their initial intake, to update and verify their information for continued care.
+  instructions: | 
+        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "APOS return intake 2024"
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
@@ -97,8 +99,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/APOS-Anual-Intake-E-cover.jpg"
 
 - title: "APOS anual intake form"
-  description: ""
-  instructions: ""
+  description: | 
+        APOS returning Intake Form is a document patients are required to sign annually, starting one year after their initial intake, to update and verify their information for continued care.
+  instructions: | 
+        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "APOS return intake 2024"
   file_cover_alt: "APOS"
   language: "spanish"
   file_editable: false
@@ -106,26 +110,32 @@ description: |
   file_cover: "db/ProHealthPDFcover/APOS-Anual-intake-S-cover.jpg"
 
 - title: "APOS recieved form"
-  description: ""
-  instructions: ""
+  description: |
+     The APOS Release Form confirms that the patient’s treatment shoes have been calibrated and are ready for use in their therapy. By signing this form, the patient acknowledges receipt of the shoes and their readiness for treatment.
+  instructions: |
+      Once signed by patient. upload file to patient documentation with full date of signing. please label eg: "APOS pick up 02/17/24"
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-PUSO.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-PUSO-cover.jpg"
 
-- title: "APOS treatment program form"
-  description: ""
-  instructions: ""
+- title: "APOS safety and precautions & treatment program form"
+  description: | 
+      The APOS safety and precautions & treatment program form is a detailed plan outlining how the patient should use their calibrated shoes to begin therapy, including safety precautions, usage instructions, and plan of care. The form also specifies a return date for follow-up and further adjustments if necessary.
+  instructions: |
+      Upload APOS safety and precautions & treatment program form to patient documentation. Make sure patient leaves with this document. eg: "APOS safety and precautions"
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-TP-E.pdf"
   file_cover: "db/ProHealthPDF/APOS-TP-E.pdf"
 
-- title: "APOS treatment program form"
-  description: ""
-  instructions: ""
+- title: "APOS safety and precautions & treatment program form"
+  description: | 
+    The APOS safety and precautions & treatment program form is a detailed plan outlining how the patient should use their calibrated shoes to begin therapy, including safety precautions, usage instructions, and plan of care. The form also specifies a return date for follow-up and further adjustments if necessary.
+  instructions: |
+     Upload APOS safety and precautions & treatment program form to patient documentation. Make sure patient leaves with this document. eg: "APOS safety and precautions"
   file_cover_alt: "APOS"
   language: "spanish"
   file_editable: false
@@ -133,8 +143,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/APOS-TP-S-cover.jpg"
 
 - title: "APOS intial intake form"
-  description: ""
-  instructions: ""
+  description: |
+      Our APOS initial intake form is the initial document completed by new patients to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit and ensures a comprehensive understanding of the patient’s needs.
+  instructions: |
+        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "APOS initial intake 2024"
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
