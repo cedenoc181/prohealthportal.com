@@ -1,165 +1,162 @@
-- title: "HealthFirst Authorization form"
+- title: "HealthFirst authorization form"
   description: |
-     The Orthonet form is a standardized document used to submit patient information, treatment plans, and authorizations for orthopedic and rehabilitation services. 
-     It facilitates communication between healthcare providers and insurance companies, ensuring accurate and timely processing of patient care requests. 
-     This form typically includes fields for patient demographics, diagnosis, treatment details, and provider information.
+        The Orthonet form is a standardized document used to submit patient information, treatment plans, and authorizations for orthopedic and rehabilitation services. 
+        It facilitates communication between healthcare providers and insurance companies, ensuring accurate and timely processing of patient care requests. 
+        This form typically includes fields for patient demographics, diagnosis, treatment details, and provider information.
   instructions: | 
-     On page 1, please accurately fill in the following fields with patient information. 
-     Once completed, on page 2; provider will fill in treatment information. 
-     Lastly, attach related progress note report and fax to the number listed on the top right corner of page 1.  please label doc, eg: "AUTH faxed"
+      On page 1, please accurately fill in the following fields with patient information. Once completed, on page 2, the provider will fill in treatment information. 
+      Lastly, attach the related progress note report and fax it to the number listed in the top right corner of page 1. Please label the document, e.g., "AUTH faxed."
   file_cover_alt: "authorization"
-  language: "english"
+  language: "English"
   file_editable: true
   file_link: "db/ProHealthPDF/Auth-Orthonet.pdf"
   file_cover: "db/ProHealthPDFcover/Orthonet.jpg"
 
-- title: "MetroPlus Authorization form"
+- title: "MetroPlus Authorization Form"
   description: | 
-    The MetroPlus form is an essential document for our physical and occupational therapy patients. 
-    It allows us to submit detailed information about your treatment plan, progress, and any required authorizations to MetroPlus, ensuring that your therapy services are covered.
-    By completing this form, we help streamline the approval process with your insurance, so you can continue focusing on your rehabilitation and recovery without delays
+      The MetroPlus form is an essential document for our physical and occupational therapy patients. It allows us to submit detailed information about your treatment plan, progress, and any required authorizations to MetroPlus, ensuring that your therapy services are covered. 
+      By completing this form, we help streamline the approval process with your insurance, so you can continue focusing on your rehabilitation and recovery without delays.
   instructions: |
-    Please accurately fill in the following fields with patient and provider information. Once completed, treating provider will fill in treatment information feilds.
-    Lastly attach related progress note report and fax to the number listed in form instructions description at the top of the page. please label doc, eg: "AUTH faxed"
+      Please accurately fill in the following fields with patient and provider information. Once completed, the treating provider will fill in the treatment information fields. 
+      Lastly, attach the related progress note report and fax it to the number listed in the form instructions at the top of the page. Please label the document, e.g., "AUTH faxed."
   file_cover_alt: "authorization"
-  language: "english"
+  language: "English"
   file_editable: true
   file_link: "db/ProHealthPDF/Auth-MetroPlus.pdf"
   file_cover: "db/ProHealthPDFcover/MetroPlus.jpg"
 
-- title: "Anthem Empire BCBS Authorizaton form"
+- title: "Anthem Empire BCBS Authorization Form"
   description: |
-    The Anthem Blue Cross Blue Shield form is important for our physical and occupational therapy patients. 
-    It enables us to provide your insurance with the necessary details about your treatment plan, progress, and authorization needs. 
+    The Anthem Blue Cross Blue Shield form is important for our physical and occupational therapy patients. It enables us to provide your insurance with the necessary details about your treatment plan, progress, and authorization needs. 
     Completing this form ensures that your therapy services are properly covered, allowing for uninterrupted care as you work toward your recovery.
   instructions: |
-    Please accurately fill in the following fields with patient and provider information. Once completed, treating provider will fill in treatment information feilds.
-    Lastly attach related progress note report and fax to the number listed on the top left of the authorization form.  please label doc, eg: "AUTH faxed"
+      Accurately fill in the following fields with patient and provider information. Once completed, the treating provider will fill in the treatment information fields. 
+      Lastly, attach the related progress note report and fax it to the number listed in the top left corner of the authorization form. Please label the document, e.g., "AUTH faxed."
   file_cover_alt: "authorization"
-  language: "english"
+  language: "English"
   file_editable: true
   file_link: "db/ProHealthPDF/Auth-Empire.pdf"
   file_cover: "db/ProHealthPDFcover/Empire-BlueCross-BlueShield.jpg"
 
-- title: "APOS initial assessment form"
+- title: "APOS Initial Assessment Form"
 description: | 
-  APOS Pain Assessment Questionnaire, designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort, helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment (with APOS
-    Checklist attached). eg: "APOS evaluation 2024"
+  The APOS Pain Assessment Questionnaire is designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort,
+  helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment (with the APOS Checklist attached).
  instructions: | 
-   This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice. please label eg: "APOS evaluation 2024"
+   This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice. Please label it, e.g., "APOS evaluation 2024."
   file_cover_alt: "APOS"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-Assessment-E-form.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-Assessment-E-cover.jpg"
 
-- title: "APOS initial assessment form"
+- title: "APOS Initial Assessment Form"
   description: | 
-   Spanish translated APOS Pain Assessment Questionnaire, designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort, helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment (with APOS
-    Checklist attached). 
+    The APOS Pain Assessment Questionnaire is designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort,
+    helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment (with the APOS Checklist attached).
   instructions: |
-    This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice. please label eg: "APOS evaluation 2024"
+   This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice. Please label it, e.g., "APOS evaluation 2024."
   file_cover_alt: "APOS"
-  language: "spanish"
+  language: "Spanish"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-Assessment-S-form.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-Assessment-S-cover.jpg"
 
-- title: "APOS initial questionnaire form"
+- title: "APOS Initial Questionnaire Form"
   description: |  
-     APOS Pain Assessment Questionnaire, designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort, helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment.
+      The APOS Pain Assessment Questionnaire is designed to provide a comprehensive evaluation of a patient's pain levels and specific areas of discomfort, helping healthcare providers gain deeper insights into the patient's condition for more personalized treatment.  
   instructions: |
-     This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice. please attach to eg: "APOS evaluation 2024"
+      This form must be completed during the patient's initial evaluation and uploaded to their patient documentation chart in TheraOffice. Please label it, e.g., "APOS evaluation 2024."
   file_cover_alt: "APOS"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-initial-questionaire.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-initial-questionaire.jpg"
 
-- title: "APOS follow up questionnaire form"
+- title: "APOS Follow-Up Questionnaire Form"
   description: |
-    The APOS Pain Assessment follow up Questionnaire is required at each of the five follow-up appointments to consistently assess a patient’s pain levels and areas of discomfort, enabling healthcare providers to track progress and refine treatment plans for optimal care.
+      The APOS Pain Assessment Follow-Up Questionnaire is required at each of the five follow-up appointments to consistently assess a patient’s pain levels and areas of discomfort, enabling healthcare providers to track progress and refine treatment plans for optimal care.
   instructions: | 
-    Once completed upload this to patient documentation labelled with follow up / 5 total. please label eg. "APOS follow up 1". 
+      Once completed, upload this to the patient’s documentation labeled with the corresponding follow-up number out of five. Please label it, e.g., "APOS follow-up 1."
   file_cover_alt: "APOS"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-Questionaire-FU.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-Questionare-cover.jpg"
 
-- title: "APOS anual intake form"
+- title: "APOS Annual Intake Form"
   description: | 
-        APOS returning Intake Form is a document patients are required to sign annually, starting one year after their initial intake, to update and verify their information for continued care.
+      The APOS Returning Intake Form is a document that patients are required to sign annually, starting one year after their initial intake, to update and verify their information for continued care.
   instructions: | 
-        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "APOS return intake 2024"
+       Once fully completed, upload the form to the patient’s information and make sure to include the year in the title. Please label it, e.g., "APOS return intake 2024."
   file_cover_alt: "APOS"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-Anual-Intake-E.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-Anual-Intake-E-cover.jpg"
 
-- title: "APOS anual intake form"
+- title: "APOS Annual Intake Form"
   description: | 
-        APOS returning Intake Form is a document patients are required to sign annually, starting one year after their initial intake, to update and verify their information for continued care.
+      The APOS Returning Intake Form is a document that patients are required to sign annually, starting one year after their initial intake, to update and verify their information for continued care.
   instructions: | 
-        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "APOS return intake 2024"
+       Once fully completed, upload the form to the patient’s information and make sure to include the year in the title. Please label it, e.g., "APOS return intake 2024."
   file_cover_alt: "APOS"
-  language: "spanish"
+  language: "Spanish"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-Anual-Intake-S.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-Anual-intake-S-cover.jpg"
 
-- title: "APOS recieved form"
+- title: "APOS Received Form"
   description: |
-     The APOS Release Form confirms that the patient’s treatment shoes have been calibrated and are ready for use in their therapy. By signing this form, the patient acknowledges receipt of the shoes and their readiness for treatment.
+     The APOS Release Form confirms that the patient’s treatment shoes have been calibrated and are ready for use in their therapy. By signing this form, the patient acknowledges receipt of the shoes and confirms they are prepared for treatment.
   instructions: |
-      Once signed by patient. upload file to patient documentation with full date of signing. please label eg: "APOS pick up 02/17/24"
+      Once signed by the patient, upload the file to the patient’s documentation with the full date of signing. Please label it, e.g., "APOS pick up 02/17/24."
   file_cover_alt: "APOS"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-PUSO.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-PUSO-cover.jpg"
 
-- title: "APOS precautions and contraindications & treatment program form"
+- title: "APOS Precautions and Contraindications & Treatment Program Form"
   description: | 
-      The APOS precautions and contraindications & treatment program form is a detailed plan outlining how the patient should use their calibrated shoes to begin therapy, including safety precautions, usage instructions, and plan of care. The form also specifies a return date for follow-up and further adjustments if necessary.
+      The APOS Precautions and Contraindications & Treatment Program Form is a detailed plan outlining how the patient should use their calibrated shoes to begin therapy. It includes safety precautions, usage instructions, and the plan of care. The form also specifies a return date for follow-up or further adjustments if necessary.
   instructions: |
-      Upload APOS precautions and contraindications & treatment program form to patient documentation. Make sure patient leaves with this document. eg: "APOS safety and precautions"
+     Upload the APOS Precautions and Contraindications & Treatment Program Form to the patient’s documentation. Ensure the patient leaves with a copy of this document. Please label it, e.g., "APOS safety and precautions."
   file_cover_alt: "APOS"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-TP-E.pdf"
   file_cover: "db/ProHealthPDF/APOS-TP-E.pdf"
 
-- title: "APOS precautions and contraindications & treatment program form"
+- title: "APOS Precautions and Contraindications & Treatment Program Form"
   description: | 
-    The APOS precautions and contraindications & treatment program form is a detailed plan outlining how the patient should use their calibrated shoes to begin therapy, including safety precautions, usage instructions, and plan of care. The form also specifies a return date for follow-up and further adjustments if necessary.
+      The APOS Precautions and Contraindications & Treatment Program Form is a detailed plan outlining how the patient should use their calibrated shoes to begin therapy. It includes safety precautions, usage instructions, and the plan of care. The form also specifies a return date for follow-up or further adjustments if necessary.
   instructions: |
-     Upload APOS precautions and contraindications & treatment program form to patient documentation. Make sure patient leaves with this document. eg: "APOS safety and precautions"
+     Upload the APOS Precautions and Contraindications & Treatment Program Form to the patient’s documentation. Ensure the patient leaves with a copy of this document. Please label it, e.g., "APOS safety and precautions."
   file_cover_alt: "APOS"
-  language: "spanish"
+  language: "Spanish"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-TP-S.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-TP-S-cover.jpg"
 
-- title: "APOS intial intake form"
+- title: "APOS Initial Intake Form"
   description: |
-      Our APOS initial intake form is the initial document completed by new patients to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit and ensures a comprehensive understanding of the patient’s needs.
+     The APOS Initial Intake Form is the first document completed by new patients to provide essential health and background information, allowing us to tailor their treatment plans effectively. This form is required during the patient’s first visit to ensure a comprehensive understanding of their needs.
   instructions: |
-        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "APOS initial intake 2024"
+     Once fully completed, upload the form to the patient’s information chart. Be sure to include the year in the title. Please label it, e.g., "APOS Initial Intake 2024."
   file_cover_alt: "APOS"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-initial-Intake.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-initial-intake.jpg"
 
-- title: "APOS HF acknowledgement form"
+- title: "APOS HF Acknowledgement Form"
   description: |
-       This is a health first patient acknowloedgement form that make patient's aware of on going issues with our credentialling with Health first. There is a potential services will not be covered due to this issue. 
+       This HealthFirst Patient Acknowledgement Form informs patients of ongoing issues with our credentialing process with HealthFirst. Due to these issues, there is a possibility that services, including shoes, may not be covered.
   instructions: |
-      Please explain to patient about on going Health First crendentialling issues we are facing and make them aware of shoes may not be covered due to HF. Upload document into patient information and please label as eg : "APOS HF Acknowledgement 2024"
+     Please explain the ongoing HealthFirst credentialing issues to the patient and inform them that shoes may not be covered. Upload the document to the patient’s information chart and label it, e.g., "APOS HF Acknowledgement 2024."
   file_cover_alt: "APOS"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-HF-Acknolwdgement.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-HF-Acknowledgement.jpg"
@@ -170,139 +167,139 @@ description: |
   instructions: |
           Please explain to patient about on going Health First crendentialling issues we are facing and make them aware of services may not be covered due to HF. Upload document into patient information and please label as eg : "HF Acknowledgement 2024"
   file_cover_alt: "PTOT"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/PTOT-HF-beneficiary-acknowledgement-E.pdf"
   file_cover: "db/ProHealthPDFcover/PTOT-HF-beneficiary-acknowledgement-E.jpg"
 
-- title: "HF beneficiary acknowledgement form"
-  description: |
-          This is a health first form that make patient's aware of health first on going issues with our credentialling. There is a potential services will not be covered due to this issue.
-  instructions: |
-          Please explain to patient about on going Health First crendentialling issues we are facing and make them aware of services may not be covered due to HF. Upload document into patient information and please label as eg : "HF Acknowledgement 2024"
-  file_cover_alt: "PTOT"
-  language: "spanish"
-  file_editable: false
-  file_link: "db/ProHealthPDF/PTOT-HF-beneficiary-acknowledgement-S.pdf"
-  file_cover: "db/ProHealthPDFcover/PTOT-HF-beneficiary-acknowledgment-S.jpg"
+- title: "HF Beneficiary Acknowledgement Form"
+    description: |
+      This HealthFirst form makes patients aware of ongoing credentialing issues with HealthFirst. Due to these issues, there is a possibility that services may not be covered.
+    instructions: |
+      Please explain the ongoing HealthFirst credentialing issues to the patient and inform them that services may not be covered. Upload the document to the patient’s information chart and label it, e.g., "HF Acknowledgement 2024."
+    file_cover_alt: "PTOT"
+    language: "English"
+    file_editable: false
+    file_link: "db/ProHealthPDF/PTOT-HF-beneficiary-acknowledgement-E.pdf"
+    file_cover: "db/ProHealthPDFcover/PTOT-HF-beneficiary-acknowledgement-E.jpg"
 
-- title: "Initial intake form"
+- title: "Initial Intake Form"
   description: |
-      Our initial intake form is the initial document completed by new patients to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit and ensures a comprehensive understanding of the patient’s needs.
+      Our initial intake form is the primary document completed by new patients to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit and ensures a comprehensive understanding of the patient’s needs.
   instructions: |
-       Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "PT or OT initial intake 2024"
+       Once fully completed, upload the form to the patient's information, and make sure to include the year in the title. Please label it, e.g., "PT or OT Initial Intake 2024."
   file_cover_alt: "PTOT"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/PTOT-Intake-E.pdf"
   file_cover: "db/ProHealthPDFcover/PTOT-Intake-E-cover.jpg"
 
 - title: "Initial intake form"
   description: |
-      Our initial intake form is the initial document completed by new patients to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit and ensures a comprehensive understanding of the patient’s needs.
+       Our initial intake form is the primary document completed by new patients to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit and ensures a comprehensive understanding of the patient’s needs.
   instructions: |
-        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "PT or OT initial intake 2024"
+       Once fully completed, upload the form to the patient's information, and make sure to include the year in the title. Please label it, e.g., "PT or OT Initial Intake 2024."
   file_cover_alt: "PTOT"
-  language: "spanish"
+  language: "Spanish"
   file_editable: false
   file_link: "db/ProHealthPDF/PTOT-Intake-S.pdf"
   file_cover: "db/ProHealthPDFcover/PTOT-Intake-S-cover.jpg"
 
-- title: "Returning patient intake form"
+- title: "Returning Patient Intake Form"
   description: |
-     Our return intake form is the annual document to be completed by returning patients at the beginning of the new year to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit of the new year and ensures a comprehensive understanding of the patient’s current needs, if anything has change in their health or condition it will be documented here.
+      Our return intake form is an annual document completed by returning patients at the start of the new year to provide updated health and background information, allowing us to adjust their treatment plan accordingly. This form ensures a comprehensive understanding of any changes in the patient's health or condition.
   instructions: |
-        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "PT or OT return intake 2024"
+      Once fully completed, upload the form to the patient’s information, and be sure to include the year in the title. Please label it, e.g., "PT or OT Return Intake 2024."
   file_cover_alt: "PTOT"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/PTOT-R-Intake-E.pdf"
   file_cover: "db/ProHealthPDFcover/PTOT-R-Intake-E-cover.jpg"
 
-- title: "Returning patient intake form"
+- title: "Returning Patient Intake Form"
   description: |
-     Our return intake form is the annual document to be completed by returning patients at the beginning of the new year to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit of the new year and ensures a comprehensive understanding of the patient’s current needs, if anything has change in their health or condition it will be documented here.
+      Our return intake form is an annual document completed by returning patients at the start of the new year to provide updated health and background information, allowing us to adjust their treatment plan accordingly. This form ensures a comprehensive understanding of any changes in the patient's health or condition.
   instructions: |
-        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "PT or OT return intake 2024"
+      Once fully completed, upload the form to the patient’s information, and be sure to include the year in the title. Please label it, e.g., "PT or OT Return Intake 2024."
   file_cover_alt: "PTOT"
-  language: "spanish"
+  language: "Spanish"
   file_editable: false
   file_link: "db/ProHealthPDF/PTOT-R-Intake-S.pdf"
   file_cover: "db/ProHealthPDFcover/PTOT-R-Intake-S-cover.jpg"
 
-- title: "APOS fitting form"
+- title: "APOS Fitting Form"
   description: |
-      The APOS Fitting Form, included in the patient's evaluation at the end of appointment, outlines everything discussed during the session to ensure the patient fully understands their APOS treatment and has been properly fitted to address their diagnosis.
+      The APOS Fitting Form, included in the patient's evaluation at the end of the appointment, outlines everything discussed during the session to ensure the patient fully understands their APOS treatment and has been properly fitted to address their diagnosis.
   instructions: |
-      Once signed by patient, make provider sign off on document then upload this to patient's documentation and please label eg: "APOS Fitting 2024"
+      Once signed by the patient, ensure the provider signs off on the document as well. Then upload it to the patient's documentation and label it, e.g., "APOS Fitting 2024."
   file_cover_alt: "APOS"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-Fitting-E.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-Fitting-E.jpg"
 
-- title: "APOS fitting form"
+- title: "APOS Fitting Form"
   description: |
-      The APOS Fitting Form, included in the patient's evaluation at the end of appointment, outlines everything discussed during the session to ensure the patient fully understands their APOS treatment and has been properly fitted to address their diagnosis.
+      The APOS Fitting Form, included in the patient's evaluation at the end of the appointment, outlines everything discussed during the session to ensure the patient fully understands their APOS treatment and has been properly fitted to address their diagnosis.
   instructions: |
-      Once signed by patient, make provider sign off on document then upload this to patient's documentation and please label eg: "APOS Fitting 2024"
+      Once signed by the patient, ensure the provider signs off on the document as well. Then upload it to the patient's documentation and label it, e.g., "APOS Fitting 2024."
   file_cover_alt: "APOS"
-  language: "spanish"
+  language: "Spanish"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-Fitting-S.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-Fitting-S.jpg"
 
-- title: "Direct access form"
+- title: "Direct Access Form"
   description: |
-    Direct Access form are for us to provide treatment for patients who are still in the process of getting a referral. These are signed by both patient and provider; authorized to treat patients under direct access. Any patient being seened for physical therapy, occupational therapy, APOS or any patient being seen by our providers without a referral will sign this document.
+    The Direct Access Form allows us to provide treatment for patients who are still in the process of obtaining a referral. Signed by both the patient and provider, it authorizes treatment under direct access for physical therapy, occupational therapy, APOS, or any other therapy provided without a referral.
   instructions: |
-      Explain to patient they will have 10 visits of treatment in a 30 day period before expiration, this will be a good time to get a appointment for a referral while we begin. Have patient sign this document and provider then upload to patient documentation. Please label eg: "Direct access 2024"
+    Explain to the patient they will have 10 treatment visits within a 30-day period before the form expires. This is a good time to schedule an appointment for a referral while treatment begins. Have the patient and provider sign the document, then upload it to the patient's documentation. Please label it, e.g., "Direct Access 2024."
   file_cover_alt: "general"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/Direct-access-E.pdf"
   file_cover: "db/ProHealthPDFcover/Direct-access-E.jpg"
 
-- title: "Direct access form"
+- title: "Direct Access Form"
   description: |
-    Direct Access form are for us to provide treatment for patients who are still in the process of getting a referral. These are signed by both patient and provider; authorized to treat patients under direct access. Any patient being seened for physical therapy, occupational therapy, APOS or any patient being seen by our providers without a referral will sign this document.
+    The Direct Access Form allows us to provide treatment for patients who are still in the process of obtaining a referral. Signed by both the patient and provider, it authorizes treatment under direct access for physical therapy, occupational therapy, APOS, or any other therapy provided without a referral.
   instructions: |
-      Explain to patient they will have 10 visits of treatment in a 30 day period before expiration, this will be a good time to get a appointment for a referral while we begin. Have patient sign this document and provider then upload to patient documentation. Please label eg: "Direct access 2024"
-  file_cover_alt: "general"
-  language: "spanish"
+    Explain to the patient they will have 10 treatment visits within a 30-day period before the form expires. This is a good time to schedule an appointment for a referral while treatment begins. Have the patient and provider sign the document, then upload it to the patient's documentation. Please label it, e.g., "Direct Access 2024."
+   file_cover_alt: "general"
+  language: "Spanish"
   file_editable: false
   file_link: "db/ProHealthPDF/Direct-access-S.pdf"
   file_cover: "db/ProHealthPDFcover/Direct-access-S.jpg"
 
-- title: "APOS checklist form"
+- title: "APOS Checklist Form"
   description: |
-    The APOS checklist form is for provider use only; this form checks off certain criteria based of patients capabilities and diagnosis to extensevly understand patients treatment.  
+    The APOS Checklist Form is for provider use only. This form helps assess specific criteria based on the patient’s capabilities and diagnosis, allowing for a comprehensive understanding of the patient’s treatment.
   instructions: |
-      This form should be included with APOS assement and or questionnaire, make sure its completed by treating provider and uploaded individually as eg: "APOS Checklist 2024" or included in "APOS evaluation 2024"
+    This form should be included with the APOS assessment and/or questionnaire. Ensure it is completed by the treating provider and uploaded individually as "APOS Checklist 2024," or included in "APOS Evaluation 2024."
   file_cover_alt: "APOS"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-checklist.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-checklist.jpg"
 
-- title: "Financial hardship form"
+- title: "Financial Hardship Form"
   description: |    
-      The Financial Hardship Form allows patients to request assistance by providing documentation of their financial situation, helping them qualify for reduced fees or payment plans. This form ensures that patients facing financial challenges can still access necessary treatment without undue burden.
+     The Financial Hardship Form allows patients to request assistance by providing documentation of their financial situation, helping them qualify for reduced fees or payment plans. This form ensures that patients facing financial challenges can still access necessary treatment without undue burden.
   instructions: |
-      Once filled this form should be included with patients intake form and uploaded attached to that, make sure billing is aware of this patients current situation. Please make sure its attached to eg: "PT/OT/APOS intake form 2024"
+      Once completed, this form should be included with the patient’s intake form and uploaded as an attachment. Ensure that the billing department is made aware of the patient's current financial situation. Please label it, e.g., "PT/OT/APOS Intake Form 2024."
   file_cover_alt: "general"
-  language: "english"
+  language: "English"
   file_editable: false
   file_link: "db/ProHealthPDF/Financial-hardship-E.pdf"
   file_cover: "db/ProHealthPDFcover/Financial-hardship-E.jpg"
 
-- title: "Financial hardship form"
+- title: "Financial Hardship Form"
   description: |    
-      The Financial Hardship Form allows patients to request assistance by providing documentation of their financial situation, helping them qualify for reduced fees or payment plans. This form ensures that patients facing financial challenges can still access necessary treatment without undue burden.
+     The Financial Hardship Form allows patients to request assistance by providing documentation of their financial situation, helping them qualify for reduced fees or payment plans. This form ensures that patients facing financial challenges can still access necessary treatment without undue burden.
   instructions: |
-      Once filled this form should be included with patients intake form and uploaded attached to that, make sure billing is aware of this patients current situation. Please make sure its attached to eg: "PT/OT/APOS intake form 2024"
-   file_cover_alt: "general"
-  language: "spanish"
+      Once completed, this form should be included with the patient’s intake form and uploaded as an attachment. Ensure that the billing department is made aware of the patient's current financial situation. Please label it, e.g., "PT/OT/APOS Intake Form 2024."
+  file_cover_alt: "general"
+  language: "Spanish"
   file_editable: false
   file_link: "db/ProHealthPDF/Financial-hardship-S.pdf"
   file_cover: "db/ProHealthPDFcover/Financial-hardship-S.jpg"
