@@ -120,22 +120,22 @@ description: |
   file_link: "db/ProHealthPDF/APOS-PUSO.pdf"
   file_cover: "db/ProHealthPDFcover/APOS-PUSO-cover.jpg"
 
-- title: "APOS safety and precautions & treatment program form"
+- title: "APOS precautions and contraindications & treatment program form"
   description: | 
-      The APOS safety and precautions & treatment program form is a detailed plan outlining how the patient should use their calibrated shoes to begin therapy, including safety precautions, usage instructions, and plan of care. The form also specifies a return date for follow-up and further adjustments if necessary.
+      The APOS precautions and contraindications & treatment program form is a detailed plan outlining how the patient should use their calibrated shoes to begin therapy, including safety precautions, usage instructions, and plan of care. The form also specifies a return date for follow-up and further adjustments if necessary.
   instructions: |
-      Upload APOS safety and precautions & treatment program form to patient documentation. Make sure patient leaves with this document. eg: "APOS safety and precautions"
+      Upload APOS precautions and contraindications & treatment program form to patient documentation. Make sure patient leaves with this document. eg: "APOS safety and precautions"
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
   file_link: "db/ProHealthPDF/APOS-TP-E.pdf"
   file_cover: "db/ProHealthPDF/APOS-TP-E.pdf"
 
-- title: "APOS safety and precautions & treatment program form"
+- title: "APOS precautions and contraindications & treatment program form"
   description: | 
-    The APOS safety and precautions & treatment program form is a detailed plan outlining how the patient should use their calibrated shoes to begin therapy, including safety precautions, usage instructions, and plan of care. The form also specifies a return date for follow-up and further adjustments if necessary.
+    The APOS precautions and contraindications & treatment program form is a detailed plan outlining how the patient should use their calibrated shoes to begin therapy, including safety precautions, usage instructions, and plan of care. The form also specifies a return date for follow-up and further adjustments if necessary.
   instructions: |
-     Upload APOS safety and precautions & treatment program form to patient documentation. Make sure patient leaves with this document. eg: "APOS safety and precautions"
+     Upload APOS precautions and contraindications & treatment program form to patient documentation. Make sure patient leaves with this document. eg: "APOS safety and precautions"
   file_cover_alt: "APOS"
   language: "spanish"
   file_editable: false
@@ -209,8 +209,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/PTOT-Intake-S-cover.jpg"
 
 - title: "Returning patient intake form"
-  description: ""
-  instructions: ""
+  description: |
+     Our return intake form is the annual document to be completed by returning patients at the beginning of the new year to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit of the new year and ensures a comprehensive understanding of the patient’s current needs, if anything has change in their health or condition it will be documented here.
+  instructions: |
+        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "PT or OT return intake 2024"
   file_cover_alt: "PTOT"
   language: "english"
   file_editable: false
@@ -218,8 +220,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/PTOT-R-Intake-E-cover.jpg"
 
 - title: "Returning patient intake form"
-  description: ""
-  instructions: ""
+  description: |
+     Our return intake form is the annual document to be completed by returning patients at the beginning of the new year to provide essential health and background information, allowing us to tailor their treatment plan effectively. This form is required during the first visit of the new year and ensures a comprehensive understanding of the patient’s current needs, if anything has change in their health or condition it will be documented here.
+  instructions: |
+        Once completely filled, upload form to patient information, make sure to add year to the title. please label eg: "PT or OT return intake 2024"
   file_cover_alt: "PTOT"
   language: "spanish"
   file_editable: false
@@ -227,8 +231,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/PTOT-R-Intake-S-cover.jpg"
 
 - title: "APOS fitting form"
-  description: ""
-  instructions: ""
+  description: |
+      The APOS Fitting Form, included in the patient's evaluation at the end of appointment, outlines everything discussed during the session to ensure the patient fully understands their APOS treatment and has been properly fitted to address their diagnosis.
+  instructions: |
+      Once signed by patient, make provider sign off on document then upload this to patient's documentation and please label eg: "APOS Fitting 2024"
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
@@ -236,8 +242,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/APOS-Fitting-E.jpg"
 
 - title: "APOS fitting form"
-  description: ""
-  instructions: ""
+  description: |
+      The APOS Fitting Form, included in the patient's evaluation at the end of appointment, outlines everything discussed during the session to ensure the patient fully understands their APOS treatment and has been properly fitted to address their diagnosis.
+  instructions: |
+      Once signed by patient, make provider sign off on document then upload this to patient's documentation and please label eg: "APOS Fitting 2024"
   file_cover_alt: "APOS"
   language: "spanish"
   file_editable: false
@@ -245,8 +253,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/APOS-Fitting-S.jpg"
 
 - title: "Direct access form"
-  description: ""
-  instructions: ""
+  description: |
+    Direct Access form are for us to provide treatment for patients who are still in the process of getting a referral. These are signed by both patient and provider; authorized to treat patients under direct access. Any patient being seened for physical therapy, occupational therapy, APOS or any patient being seen by our providers without a referral will sign this document.
+  instructions: |
+      Explain to patient they will have 10 visits of treatment in a 30 day period before expiration, this will be a good time to get a appointment for a referral while we begin. Have patient sign this document and provider then upload to patient documentation. Please label eg: "Direct access 2024"
   file_cover_alt: "general"
   language: "english"
   file_editable: false
@@ -254,8 +264,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/Direct-access-E.jpg"
 
 - title: "Direct access form"
-  description: ""
-  instructions: ""
+  description: |
+    Direct Access form are for us to provide treatment for patients who are still in the process of getting a referral. These are signed by both patient and provider; authorized to treat patients under direct access. Any patient being seened for physical therapy, occupational therapy, APOS or any patient being seen by our providers without a referral will sign this document.
+  instructions: |
+      Explain to patient they will have 10 visits of treatment in a 30 day period before expiration, this will be a good time to get a appointment for a referral while we begin. Have patient sign this document and provider then upload to patient documentation. Please label eg: "Direct access 2024"
   file_cover_alt: "general"
   language: "spanish"
   file_editable: false
@@ -263,8 +275,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/Direct-access-S.jpg"
 
 - title: "APOS checklist form"
-  description: ""
-  instructions: ""
+  description: |
+    The APOS checklist form is for provider use only; this form checks off certain criteria based of patients capabilities and diagnosis to extensevly understand patients treatment.  
+  instructions: |
+      This form should be included with APOS assement and or questionnaire, make sure its completed by treating provider and uploaded individually as eg: "APOS Checklist 2024" or included in "APOS evaluation 2024"
   file_cover_alt: "APOS"
   language: "english"
   file_editable: false
@@ -272,8 +286,10 @@ description: |
   file_cover: "db/ProHealthPDFcover/APOS-checklist.jpg"
 
 - title: "Financial hardship form"
-  description: ""
-  instructions: ""
+  description: |    
+      The Financial Hardship Form allows patients to request assistance by providing documentation of their financial situation, helping them qualify for reduced fees or payment plans. This form ensures that patients facing financial challenges can still access necessary treatment without undue burden.
+  instructions: |
+      Once filled this form should be included with patients intake form and uploaded attached to that, make sure billing is aware of this patients current situation. Please make sure its attached to eg: "PT/OT/APOS intake form 2024"
   file_cover_alt: "general"
   language: "english"
   file_editable: false
@@ -281,9 +297,11 @@ description: |
   file_cover: "db/ProHealthPDFcover/Financial-hardship-E.jpg"
 
 - title: "Financial hardship form"
-  description: ""
-  instructions: ""
-  file_cover_alt: "general"
+  description: |    
+      The Financial Hardship Form allows patients to request assistance by providing documentation of their financial situation, helping them qualify for reduced fees or payment plans. This form ensures that patients facing financial challenges can still access necessary treatment without undue burden.
+  instructions: |
+      Once filled this form should be included with patients intake form and uploaded attached to that, make sure billing is aware of this patients current situation. Please make sure its attached to eg: "PT/OT/APOS intake form 2024"
+   file_cover_alt: "general"
   language: "spanish"
   file_editable: false
   file_link: "db/ProHealthPDF/Financial-hardship-S.pdf"
