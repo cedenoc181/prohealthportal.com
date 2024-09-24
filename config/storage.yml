@@ -7,7 +7,7 @@ local:
   root: <%= Rails.root.join("storage") %>
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
- amazon:
+amazon: &amazon
   service: S3
   access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
@@ -17,18 +17,15 @@ local:
 
 # Default for production
 production:
-  service: S3
-  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
-  secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
-  region: <%= ENV['AWS_REGION'] %>
-  bucket: <%= ENV['AWS_BUCKET'] %>
+  <<: *amazon
 
 # Default for development
 development:
   <<: *amazon
   
- # Default for test
-test:
+ 
+# Default for test
+testing:
   <<: *amazon
 
 
