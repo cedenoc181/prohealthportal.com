@@ -56,7 +56,7 @@ Medifile.destroy_all
             content_type: 'image/jpeg'
         )
 
-p "#{record.title} medifile have been created successfully and uploaded to aws s3"
+p "#{@record.title} medifile have been created successfully and uploaded to aws s3"
     end
         p "medifiles have been seeded"
 
