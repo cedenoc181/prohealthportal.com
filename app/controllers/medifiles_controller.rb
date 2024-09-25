@@ -4,8 +4,8 @@ class MedifilesController < ApplicationController
 
   # GET /medifiles
   def index
-    @medifiles = Medifile.all
-    render json: @medifiles, status: :ok
+    medifiles = Medifile.all
+    render json: medifiles, status: :ok
   end
 
   # GET /medifiles/1
@@ -39,26 +39,26 @@ class MedifilesController < ApplicationController
   end
 
   # DELETE /medifiles/1
-  def destroy
-    unless is_admin?
-      return render json: { errors: "User is not authorized to delete medical file" }, status: :forbidden
-    end
-    if @medifile.destroy
-      render json: { message: "medical file destroyed successfully" }, status: :no_content   
-    else
-      render json: {error: "medical file not found"}
-    end
-    end
-  end
+   def destroy
+     unless is_admin?
+       return render json: { errors: "User is not authorized to delete medical file" }, status: :forbidden
+     end
+     if @medifile.destroy
+       render json: { message: "medical file destroyed successfully" }, status: :no_content   
+     else
+       render json: {error: "medical file not found"}
+     end
+   end
+  
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_medifile
-      @medifile = Medifile.find(params[:id])
-    end
+    private
+ # Use callbacks to share common setup or constraints between actions.
+      def set_medifile
+        @medifile = Medifile.find(params[:id])
+      end
 
-    # Only allow a list of trusted parameters through.
-    def medifile_params
-      params.permit(:title, :description, :instructions, :language, :file_editable, :file_cover, :file_cover_alt, :file_link)
-    end
+      # Only allow a list of trusted parameters through.
+      def medifile_params
+        params.permit(:title, :description, :instructions, :language, :file_editable, :file_cover, :file_cover_alt, :file_link)
+      end
 end

@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   end
 
   #admin accoubt will be able to do full crud of these templates and files 
-  resources :my_templates, only: [:index, :show, :delete]
-  resources :my_medifiles, only: [:index, :show, :delete]
+  # resources :my_templates, only: [:index, :show, :delete]
+  # resources :my_medifiles, only: [:index, :show, :delete]
 
     #admin will be only user to create instances of these models, 
   resources :dr_templates

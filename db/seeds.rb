@@ -1,3 +1,4 @@
+require 'aws-sdk-s3'
 
 p"destroy all old data ♻️"
 
@@ -5,25 +6,21 @@ PatientTemplate.destroy_all
 DrTemplate.destroy_all
 Medifile.destroy_all
 
+# Initialize the S3 client
+aws_region = ENV['AWS_REGION']
+s3 = Aws::S3::Resource.new(region: aws_region)
 
-################################################################################
-# p "testing data model seeding"
-# positions = ['Admin', 'Front-Desk', 'PT', 'OT', 'PTA', 'OTA', 'Aide', 'Billing', 'Management']
-# clinics = ['Eastside', 'Westside', 'Upper westside', 'Bronx', 'Inwood']
+# deleting all aws bucket objects
+aws_bucket_name = ENV['AWS_BUCKET']
+bucket = s3.bucket(aws_bucket_name)
 
-# p "seeding test Users 🌱"
-#     15.times do 
+# Iterate and delete all objects in the bucket
+bucket.objects.each do |obj|
+  obj.delete
+  puts "Deleted: #{obj.key}"
+end
 
-#     User.create(
-#     full_name: Faker::Name.name, 
-#     email: Faker::Internet.email(name: :full_name, separators:['-'], domain: 'proHealthptot.com'), 
-#     password: Faker::Internet.password(min_length: 6, max_length: 16), 
-#     role: positions.shuffle.first,
-#     clinic_location: clinics.shuffle.last
-#     )
-#     p"test user created successfully"
-#     end
-################################################################################################
+puts "All objects in the bucket '#{aws_bucket_name}' have been deleted."
 
     #database seeds
 
@@ -40,24 +37,34 @@ Medifile.destroy_all
             language: medi['language'],
             file_editable: medi['file_editable']
         )
-        begin
+
         @record.file_link.attach(
             io: File.open(Rails.root.join(medi['file_link'])),
             filename: File.basename(medi['file_link']),
             content_type: 'application/pdf'
         )
-    rescue StandardError => e
-        p "Error loading medifiles_seed.yml: #{e.message}"
-     end
 
         @record.file_cover.attach(
             io: File.open(Rails.root.join(medi['file_cover'])),
             filename: File.basename(medi['file_cover']),
             content_type: 'image/jpeg'
         )
+# After attachment, update the URLs to the S3 object URLs
+    if @record.file_link.attached? && @record.file_cover.attached?
+    # Generate the URL for file_link (PDF)
+    file_link_s3_url = Rails.application.routes.url_helpers.rails_blob_url(@record.file_link, host: "http://127.0.0.1:3000/medifiles")
 
-p "#{@record.title} medifile have been created successfully and uploaded to aws s3"
-    end
+    # Generate the URL for file_cover (Image)
+    file_cover_s3_url = Rails.application.routes.url_helpers.rails_blob_url(@record.file_cover, host: "http://127.0.0.1:3000/medifiles")
+
+    # Update the record with the new S3 URLs
+    @record.update_columns(file_link: file_link_s3_url, file_cover: file_cover_s3_url)
+
+    p "#{@record.title} medifile created and uploaded to AWS S3 with updated URLs"
+  else
+    p "Error: Failed to attach files for #{@record.title}"
+  end
+end
         p "medifiles have been seeded"
 
      p "seeding Patient Templates 🌱"
