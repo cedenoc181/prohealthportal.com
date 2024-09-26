@@ -35,7 +35,7 @@ class ApplicationController < ActionController::API
 
     def check_admin
       unless is_admin?
-        render json: { error: 'Unauthorized access' }, status: :forbidden
+        render json: { message: 'Unauthorized access' }, status: :unauthorized
       end
     end
     

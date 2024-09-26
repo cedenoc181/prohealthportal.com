@@ -6,19 +6,17 @@ class DrTemplatesController < ApplicationController
   # GET /dr_templates
   def index
     @dr_templates = DrTemplate.all
-
-    render json: @dr_templates
+    render json: {dr_template: @dr_templates}, status: :ok
   end
 
   # GET /dr_templates/1
   def show
-    render json: @dr_template
+    render json: @dr_template, status: :ok
   end
 
   # POST /dr_templates
   def create
     @dr_template = DrTemplate.new(dr_template_params)
-
     if @dr_template.save
       render json: {dr_template: @dr_template, message: "Template successfully created"}, status: :created, location: @dr_template
      else
@@ -40,7 +38,7 @@ class DrTemplatesController < ApplicationController
     if @dr_template.destroy
       render json: {message: 'Template was successfully deleted'}, status: :no_content
     else 
-      render json: {message: 'Template failed to be deleted', errors: @dr_template.errors}, status: :unprocessable_entity
+      render json: {message: 'Unable to delete template', errors: @dr_template.errors}, status: :unprocessable_entity
     end
   end
 
@@ -48,10 +46,12 @@ class DrTemplatesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_dr_template
       @dr_template = DrTemplate.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: {message: 'Dr Template not found in database'}, status: :not_found
     end
 
     # Only allow a list of trusted parameters through.
     def dr_template_params
-      params.fetch(:dr_template, {})
+      params.permit(:dr_temp_title, :dr_temp_subject, :dr_temp_content, :category)
     end
 end

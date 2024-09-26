@@ -11,7 +11,7 @@ class PatientTemplatesController < ApplicationController
 
   # GET /patient_templates/1
   def show
-    render json: @patient_template
+    render json: @patient_template, status: :ok
   end
 
   # POST /patient_templates
@@ -47,7 +47,7 @@ class PatientTemplatesController < ApplicationController
     def set_patient_template
       @patient_template = PatientTemplate.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      render json: { message: "Patient template not found" }, status: :not_found
+      render json: { message: "Patient template not found in database" }, status: :not_found
     end 
 
     # Only allow a list of trusted parameters through.
