@@ -1,4 +1,6 @@
 class PatientTemplatesController < ApplicationController
+  before_action :authorized
+  before_action :check_admin, only:%i[create, update, destroy]
   before_action :set_patient_template, only: %i[ show update destroy ]
   skip_before_action :authorized, only: %i[index show]
   # GET /patient_templates

@@ -55,11 +55,4 @@ class MedifilesController < ApplicationController
         params.permit(:title, :description, :instructions, :language, :file_editable, :file_cover_alt)
       end
 
-      def check_admin
-        unless is_admin?
-          render json: { error: 'Unauthorized access' }, status: :forbidden
-        end
-      end
-
-
 end
