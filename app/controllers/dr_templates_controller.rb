@@ -1,5 +1,4 @@
-class DrTemplatesController < ApplicationController\
-  before_action :authorized
+class DrTemplatesController < ApplicationController
   before_action :check_admin, only:%i[create, update, destroy]
   before_action :set_dr_template, only: %i[ show update destroy ]
   skip_before_action :authorized, only: %i[index show]

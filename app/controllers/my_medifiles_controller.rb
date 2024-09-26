@@ -1,5 +1,4 @@
 class MyMedifilesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_my_medifile, only: %i[ show update destroy ]
 
   # GET /my_medifiles

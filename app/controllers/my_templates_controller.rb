@@ -1,5 +1,4 @@
 class MyTemplatesController < ApplicationController
-  before_action :authorized
   before_action :set_my_template, only: %i[ show update destroy ]
 
   # GET /my_templates
