@@ -6,8 +6,7 @@ class PatientTemplatesController < ApplicationController
   # GET /patient_templates
   def index
     @patient_templates = PatientTemplate.all
-
-    render json: @patient_templates
+     render json: {patient_template: @patient_templates}, status: :ok
   end
 
   # GET /patient_templates/1
@@ -30,14 +29,14 @@ class PatientTemplatesController < ApplicationController
     if @patient_template.update(patient_template_params)
       render json: { patient_template: @patient_template, message: "Template updated successfully" }, status: :ok
     else
-      render json: { mesasage: "Template failed to update", errors: @patient_template.errors }, status: :unprocessable_entity
+      render json: { message: "Template failed to update", errors: @patient_template.errors }, status: :unprocessable_entity
     end
   end
 
   # DELETE /patient_templates/1
   def destroy
     if @patient_template.destroy
-    render json: { message: "Template deleted successfully" }, status: :ok   
+    render json: { message: "Template deleted successfully" }, status: :no_content   
     else
       render json: {message: "Failed to delete template", errors: @patient_template.errors}, status: :unprocessable_entity
     end

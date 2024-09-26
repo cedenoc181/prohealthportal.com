@@ -20,24 +20,28 @@ class DrTemplatesController < ApplicationController
     @dr_template = DrTemplate.new(dr_template_params)
 
     if @dr_template.save
-      render json: @dr_template, status: :created, location: @dr_template
-    else
-      render json: @dr_template.errors, status: :unprocessable_entity
-    end
+      render json: {dr_template: @dr_template, message: "Template successfully created"}, status: :created, location: @dr_template
+     else
+      render json: {message: "Unable to create template", errors: @dr_template.errors}, status: :unprocessable_entity
+     end
   end
 
   # PATCH/PUT /dr_templates/1
   def update
     if @dr_template.update(dr_template_params)
-      render json: @dr_template
+      render json: {dr_template: @dr_template, message: "Template successfully updated"}, status: :ok
     else
-      render json: @dr_template.errors, status: :unprocessable_entity
+     render json: {message: "Unable to update template", errors: @dr_template.errors}, status: :unprocessable_entity 
     end
   end
 
   # DELETE /dr_templates/1
   def destroy
-    @dr_template.destroy!
+    if @dr_template.destroy
+      render json: {message: 'Template was successfully deleted'}, status: :no_content
+    else 
+      render json: {message: 'Template failed to be deleted', errors: @dr_template.errors}, status: :unprocessable_entity
+    end
   end
 
   private
