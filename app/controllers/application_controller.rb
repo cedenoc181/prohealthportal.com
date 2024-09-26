@@ -5,18 +5,6 @@ class ApplicationController < ActionController::API
     include ActionController::Cookies
     before_action :authorized
     
-###################################################
-      #test
-    def hello_world
-        session[:count] = (session[:count] || 0) + 1
-        render json: { count: session[:count] }
-      end
-    
-      def yer 
-        render json: {Christian: "what up gansta"}
-      end
-
-###################################################
 
       def encode_token(payload)
         JWT.encode(payload, 'password') 
@@ -42,12 +30,13 @@ class ApplicationController < ActionController::API
     end
 
     def is_admin?
-      current_user.admin?
+      current_user&.admin?
     end
     
     def authorized
         unless !!current_user
         render json: { message: 'Please log in' }, status: :unauthorized
+        return
         end
     end
 

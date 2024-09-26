@@ -28,15 +28,6 @@ Rails.application.routes.draw do
 
     # route to test your configuration
 
-
-###################################################
-      #test
-  get '/hello', to: 'application#hello_world'
-  
-  get '/yer', to: "application#yer"
-
-###################################################
-
 #user controller custom actions 
 get "/my-account", to: "users#me"
 

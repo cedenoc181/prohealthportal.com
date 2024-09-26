@@ -1,6 +1,8 @@
 class MedifilesController < ApplicationController
+  before_action :authorized
+  before_action :check_admin, only:%i[create, update, destroy]
   before_action :set_medifile, only: %i[ show update destroy ]
-  skip_before_action :authorized, only: [:index, :show]
+  skip_before_action :authorized, only: [:index, :show] #this line might change depending on UI functionality
 
   # GET /medifiles
   def index
@@ -15,9 +17,6 @@ class MedifilesController < ApplicationController
 
   # POST /medifiles
   def create
-    unless is_admin?
-      return render json: { errors: "User is not authorized to create medical file" }, status: :forbidden
-    end
     @medifile = Medifile.new(medifile_params)
     if @medifile.save
       render json: @medifile, status: :created, location: @medifile
@@ -28,9 +27,6 @@ class MedifilesController < ApplicationController
 
   # PATCH/PUT /medifiles/1
   def update
-    unless is_admin?
-      return render json: { errors: "User is not authorized to update template" }, status: :forbidden
-    end
     if @medifile.update(medifile_params)
       render json: @medifile
     else 
@@ -40,9 +36,6 @@ class MedifilesController < ApplicationController
 
   # DELETE /medifiles/1
    def destroy
-     unless is_admin?
-       return render json: { errors: "User is not authorized to delete medical file" }, status: :forbidden
-     end
      if @medifile.destroy
        render json: { message: "medical file destroyed successfully" }, status: :no_content   
      else
@@ -59,6 +52,14 @@ class MedifilesController < ApplicationController
 
       # Only allow a list of trusted parameters through.
       def medifile_params
-        params.permit(:title, :description, :instructions, :language, :file_editable, :file_cover, :file_cover_alt, :file_link)
+        params.permit(:title, :description, :instructions, :language, :file_editable, :file_cover_alt)
       end
+
+      def check_admin
+        unless is_admin?
+          render json: { error: 'Unauthorized access' }, status: :forbidden
+        end
+      end
+
+
 end
