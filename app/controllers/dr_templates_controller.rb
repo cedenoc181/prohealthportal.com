@@ -6,12 +6,12 @@ class DrTemplatesController < ApplicationController
   # GET /dr_templates
   def index
     @dr_templates = DrTemplate.all
-    render json: {dr_template: @dr_templates}, status: :ok
+    render json: {dr_templates: @dr_templates}, status: :ok
   end
 
   # GET /dr_templates/1
   def show
-    render json: @dr_template, status: :ok
+    render json: @dr_template, serializer: DrTemplateSerializer, status: :ok
   end
 
   # POST /dr_templates
@@ -20,7 +20,7 @@ class DrTemplatesController < ApplicationController
     if @dr_template.save
       render json: {dr_template: @dr_template, message: "Template successfully created"}, status: :created, location: @dr_template
      else
-      render json: {message: "Unable to create template", errors: @dr_template.errors}, status: :unprocessable_entity
+      render json: {message: "Unable to create template", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity
      end
   end
 
@@ -29,7 +29,7 @@ class DrTemplatesController < ApplicationController
     if @dr_template.update(dr_template_params)
       render json: {dr_template: @dr_template, message: "Template successfully updated"}, status: :ok
     else
-     render json: {message: "Unable to update template", errors: @dr_template.errors}, status: :unprocessable_entity 
+     render json: {message: "Unable to update template", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity 
     end
   end
 
@@ -38,7 +38,7 @@ class DrTemplatesController < ApplicationController
     if @dr_template.destroy
       render json: {message: 'Template was successfully deleted'}, status: :no_content
     else 
-      render json: {message: 'Unable to delete template', errors: @dr_template.errors}, status: :unprocessable_entity
+      render json: {message: 'Unable to delete template', errors: @dr_template.errors.full_messages}, status: :unprocessable_entity
     end
   end
 

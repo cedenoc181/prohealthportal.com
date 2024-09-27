@@ -6,12 +6,12 @@ class PatientTemplatesController < ApplicationController
   # GET /patient_templates
   def index
     @patient_templates = PatientTemplate.all
-     render json: {patient_template: @patient_templates}, status: :ok
+     render json: {patient_templates: @patient_templates}, status: :ok
   end
 
   # GET /patient_templates/1
   def show
-    render json: @patient_template, status: :ok
+    render json: @patient_template, serializer: PatientTemplateSerializer, status: :ok
   end
 
   # POST /patient_templates
@@ -20,7 +20,7 @@ class PatientTemplatesController < ApplicationController
     if @patient_template.save
       render json: {patient_template: @patient_template, message: "Template successfully created"}, status: :created, location: @patient_template
      else
-      render json: {message: "Unable to create template", errors: @patient_template.errors}, status: :unprocessable_entity
+      render json: {message: "Unable to create template", errors: @patient_template.errors.full_messages}, status: :unprocessable_entity
      end
   end
 
@@ -29,7 +29,7 @@ class PatientTemplatesController < ApplicationController
     if @patient_template.update(patient_template_params)
       render json: { patient_template: @patient_template, message: "Template updated successfully" }, status: :ok
     else
-      render json: { message: "Template failed to update", errors: @patient_template.errors }, status: :unprocessable_entity
+      render json: { message: "Template failed to update", errors: @patient_template.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -38,7 +38,7 @@ class PatientTemplatesController < ApplicationController
     if @patient_template.destroy
     render json: { message: "Template deleted successfully" }, status: :no_content   
     else
-      render json: {message: "Failed to delete template", errors: @patient_template.errors}, status: :unprocessable_entity
+      render json: {message: "Failed to delete template", errors: @patient_template.errors.full_messages}, status: :unprocessable_entity
     end
   end
 

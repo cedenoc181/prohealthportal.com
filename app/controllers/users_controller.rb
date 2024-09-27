@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   
   # Callbacks to set user before show and destroy action method
-  before_action :find_user, only: %i[ show destroy update]
+  before_action :find_user, only: %i[ show destroy update ]
 
-  # Skip authorization(from App-controller) for users to create account and update forgotten passwords 
+  # before_action :set_user, only: %i[:forgot_password]
+
+  # Skip authorization(from App-controller) for users to create account and update forgotten passwords only 
   skip_before_action :authorized, only: [:index, :show, :create, :forgot_password]
 
 
@@ -11,8 +13,8 @@ class UsersController < ApplicationController
   #will like to modify in the future so that Admin is the only user 
   #able to use index all
   def index
-    users = User.all
-    render json: users, status: :ok
+    @users = User.all
+    render json: {users: @users}, status: :ok
   end
 
   # GET /users/1
@@ -25,27 +27,37 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  def create
-    user = User.create!(create_user_params)
-    token = encode_token({user_id: user.id})
-    render json: {user: UserSerializer.new(user), jwt: token}, status: :created
+  def create 
+    @user = User.new(create_user_params)
+    if @user.save 
+      token = encode_token({user_id: user.id})
+      render json: {user: UserSerializer.new(user), token: token}, status: :created
+    else
+      render json: { message: "Invalid user sign-up.", errors: @user.errors.full_messages }, status: :unprocessable_entity
+        end
   end
 
   # PATCH/ Will send email to to users email account with link to update password through route to verify user
   #user will also apply email account to system, if email is in database, then user will receive email 
 
-  def forgot_password  
-    if @user.present?
-      new_password = params[:new_password]  
-      if new_password.present? && @user.update(password: new_password)
-        render json: { message: "Password was updated" }, status: :ok
-      else
-        render json: { message: "Password update failed" }, status: :unprocessable_entity
-      end
-    else
-      render json: { message: "User not found" }, status: :not_found
-    end
-  end
+  # def forgot_password  
+
+  #   if @user.present?
+  #     new_password = params[:new_password]
+      
+  #     if new_password.present?  # Check for presence first
+  #       if @user.update(password: new_password)
+  #         render json: { message: "Password was updated successfully" }, status: :ok
+  #       else
+  #         render json: { message: "Password update failed", errors: @user.errors.full_messages }, status: :unprocessable_entity
+  #       end
+  #     else
+  #       render json: { message: "New password cannot be blank" }, status: :unprocessable_entity
+  #     end
+  #   else
+  #     render json: { message: "User not found" }, status: :not_found
+  #   end
+  # end
 
  # PATCH/PUT /users/:id
 def update
@@ -76,7 +88,7 @@ end
       render json: { error: "User account could not be deleted" }, status: :unprocessable_entity
     end
   else 
-    render json: { error: "You are not authorized to delete users account." }, status: :forbidden
+    render json: { error: "You are not authorized to delete users account." }, status: :unauthorized
   end
 
   end
@@ -87,6 +99,10 @@ end
     # Use callbacks to share common setup or constraints between actions.
     def find_user
       @user = User.find(params[:id])
+    end
+
+    def set_user 
+      @user = User.find_by(email: params[:email])
     end
 
     # Only allow a list of trusted parameters through.
