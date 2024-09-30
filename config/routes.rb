@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     resources :my_medifiles
   end
 
+    # Password reset routes
+    post 'password/forgot', to: 'password#forgot'
+    post 'password/reset', to: 'password#reset'
+
   #admin accoubt will be able to do full crud of these templates and files 
   # resources :my_templates, only: [:index, :show, :delete]
   # resources :my_medifiles, only: [:index, :show, :delete]

@@ -37,28 +37,6 @@ class UsersController < ApplicationController
         end
   end
 
-  # PATCH/ Will send email to to users email account with link to update password through route to verify user
-  #user will also apply email account to system, if email is in database, then user will receive email 
-
-  # def forgot_password  
-
-  #   if @user.present?
-  #     new_password = params[:new_password]
-      
-  #     if new_password.present?  # Check for presence first
-  #       if @user.update(password: new_password)
-  #         render json: { message: "Password was updated successfully" }, status: :ok
-  #       else
-  #         render json: { message: "Password update failed", errors: @user.errors.full_messages }, status: :unprocessable_entity
-  #       end
-  #     else
-  #       render json: { message: "New password cannot be blank" }, status: :unprocessable_entity
-  #     end
-  #   else
-  #     render json: { message: "User not found" }, status: :not_found
-  #   end
-  # end
-
  # PATCH/PUT /users/:id
 def update
   # Check if the user is an admin and updating another user

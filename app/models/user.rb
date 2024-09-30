@@ -28,9 +28,11 @@ after_create_commit :post_create_update, :update_insurance_network
 
       # Generates a new password reset token and sets the timestamp
   def generate_password_token!
-    self.reset_password_token = SecureRandom.hex(10)
-    self.reset_password_sent_at = Time.now
-    save!
+    token = SecureRandom.hex(10)
+    self.update_columns(
+      reset_password_token: token,
+      reset_password_sent_at: Time.now.utc
+    )
   end
 
   # Checks if the password reset token is expired (set to 2 hours)
