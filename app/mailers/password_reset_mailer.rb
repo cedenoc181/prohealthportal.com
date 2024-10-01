@@ -7,3 +7,5 @@ class PasswordResetMailer < ApplicationMailer
       mail(to: @user.email, subject: 'Password Reset Instructions')
     end
 end
+
+# admin user is cedenoc181 Bronco2527!
