@@ -1,6 +1,6 @@
 class DrTemplatesController < ApplicationController
   before_action :set_dr_template, only: %i[ show update destroy ]
-  skip_before_action :authorized, :is_admin?, only: %i[index show]
+  skip_before_action :is_admin?, only: %i[index show create]
   
   # GET /dr_templates
   def index
@@ -35,11 +35,14 @@ class DrTemplatesController < ApplicationController
   # DELETE /dr_templates/1
   def destroy
     if @dr_template.destroy
-      render json: {message: 'Template was successfully deleted'}, status: :no_content
-    else 
-      render json: {message: 'Unable to delete template', errors: @dr_template.errors.full_messages}, status: :unprocessable_entity
+      head :no_content
+    else
+      render json: { message: "Failed to delete, template is not found" }, status: :unprocessable_entity
     end
+  rescue ActiveRecord::InvalidForeignKey
+    render json: { message: "Failed to delete the template. The foreign key still exists, ensure that any related records in the 'my_template' table are removed first." }, status: :unprocessable_entity
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
