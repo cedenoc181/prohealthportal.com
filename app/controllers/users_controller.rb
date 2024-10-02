@@ -7,8 +7,7 @@ class UsersController < ApplicationController
   skip_before_action :is_admin?, only: %i[me update]
 
   # GET /users
-  #will like to modify in the future so that Admin is the only user 
-  #able to use index all
+  #Admin is the only user that can index and show
   def index
     @users = User.all
     render json: @users, each_serializer: UserSerializer, status: :ok
@@ -18,6 +17,8 @@ class UsersController < ApplicationController
     render json: @user, serializer: UserSerializer, status: :ok
   end
 
+  #  GET /my-account
+  # logged in users are able to use me action 
   def me 
     render json: current_user, status: :ok
   end

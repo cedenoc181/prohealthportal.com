@@ -24,7 +24,7 @@ after_update :post_create_update, :update_insurance_network
     # validations
     has_secure_password
 
-    validates :password, length: { in: 6..16 }
+    validates :password, length: { in: 6..16 }, allow_nil: true
 
     validates :full_name, presence: true 
 
