@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   # Callbacks to set user before show and destroy action method
-  before_action :find_user, only: %i[ show destroy update ]
+  before_action :find_user, only: %i[ show destroy]
 
   # before_action :set_user, only: %i[:forgot_password]
   skip_before_action :is_admin?, only: %i[me update]
@@ -38,10 +38,20 @@ class UsersController < ApplicationController
  # PATCH/PUT /users/:id
 # cant update user without being logged in(authorized)
 def update
+  if current_user.admin? 
+    @user = User.find(params[:id])
     if @user.update(user_editable_params)
       render json: @user
-  elsif current_user.update(user_editable_params)
-    render json: current_user
+    else
+      render json: @user.errors.full_messages, status: :unprocessable_entity
+    end
+  else
+    # Non-admin users can only update their own info
+    if current_user.update(user_editable_params)
+      render json: current_user
+    else
+      render json: current_user.errors.full_messages, status: :unprocessable_entity
+    end
   end
 end
 
@@ -57,10 +67,6 @@ end
     # Use callbacks to share common setup or constraints between actions.
     def find_user
       @user = User.find(params[:id])
-    end
-
-    def set_user 
-      @user = User.find_by(email: params[:email])
     end
 
     # Only allow a list of trusted parameters through.
