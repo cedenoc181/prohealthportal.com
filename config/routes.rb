@@ -16,10 +16,6 @@ Rails.application.routes.draw do
     post 'password/forgot', to: 'password#forgot'
     post 'password/reset', to: 'password#reset'
 
-  #admin accoubt will be able to do full crud of these templates and files 
-  # resources :my_templates, only: [:index, :show, :delete]
-  # resources :my_medifiles, only: [:index, :show, :delete]
-
     #admin will be only user to create instances of these models, 
   resources :dr_templates
   resources :patient_templates
@@ -29,7 +25,7 @@ Rails.application.routes.draw do
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "/up" => "rails/health#show", as: :rails_health_check
+  # get "/up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
   # root "posts#index"

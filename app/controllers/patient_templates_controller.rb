@@ -1,12 +1,12 @@
 class PatientTemplatesController < ApplicationController
   before_action :set_patient_template, only: %i[ show update destroy ]
-  skip_before_action :authorized, :is_admin?, only: %i[index show]
+  skip_before_action :is_admin?, only: %i[index show create]
 
 
   # GET /patient_templates
   def index
     @patient_templates = PatientTemplate.all
-     render json: {patient_templates: @patient_templates}, status: :ok
+     render json: @patient_templates,each_serializer: PatientTemplateSerializer, status: :ok
   end
 
   # GET /patient_templates/1
@@ -36,10 +36,12 @@ class PatientTemplatesController < ApplicationController
   # DELETE /patient_templates/1
   def destroy
     if @patient_template.destroy
-    render json: { message: "Template deleted successfully" }, status: :no_content   
+      head :no_content
     else
-      render json: {message: "Failed to delete template", errors: @patient_template.errors.full_messages}, status: :unprocessable_entity
+      render json: { message: "Failed to delete, template not found" }, status: :unprocessable_entity
     end
+  rescue ActiveRecord::InvalidForeignKey
+    render json: { message: "Failed to delete the template. The foreign key still exists, ensure that any related records in the 'my_template' table are removed first." }, status: :unprocessable_entity
   end
 
   private
@@ -52,6 +54,6 @@ class PatientTemplatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def patient_template_params
-      params.permit(:px_temp_title, :px_temp_content, :category, :language )
+      params.permit(:px_temp_title, :px_temp_subject, :px_temp_content, :category, :language )
     end
 end

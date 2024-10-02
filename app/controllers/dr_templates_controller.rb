@@ -37,7 +37,7 @@ class DrTemplatesController < ApplicationController
     if @dr_template.destroy
       head :no_content
     else
-      render json: { message: "Failed to delete, template is not found" }, status: :unprocessable_entity
+      render json: { message: "Failed to delete, template not found" }, status: :unprocessable_entity
     end
   rescue ActiveRecord::InvalidForeignKey
     render json: { message: "Failed to delete the template. The foreign key still exists, ensure that any related records in the 'my_template' table are removed first." }, status: :unprocessable_entity
