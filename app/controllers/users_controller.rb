@@ -4,10 +4,7 @@ class UsersController < ApplicationController
   before_action :find_user, only: %i[ show destroy update ]
 
   # before_action :set_user, only: %i[:forgot_password]
-  skip_before_action :is_admin?, only: %i[create me update]
-  # Skip authorization(from App-controller) for users to create account and update forgotten passwords only 
-  skip_before_action :authorized, only: [:create, :index, :show]
-
+  skip_before_action :is_admin?, only: %i[me update]
 
   # GET /users
   #will like to modify in the future so that Admin is the only user 
@@ -26,18 +23,19 @@ class UsersController < ApplicationController
   end
 
   # POST /users
+  # Only admin of appliacation are abled to create a new user to avoid random access, and must be authroized to do so 
   def create 
     @user = User.new(create_user_params)
     if @user.save 
-      token = encode_token({user_id: user.id})
-      render json: {user: UserSerializer.new(user), token: token}, status: :created
+      token = encode_token({user_id: @user.id})
+      render json: {user: UserSerializer.new(@user), token: token}, status: :created
     else
       render json: { message: "Invalid user sign-up.", errors: @user.errors.full_messages }, status: :unprocessable_entity
         end
   end
 
  # PATCH/PUT /users/:id
-
+# cant update user without being logged in(authorized)
 def update
     if @user.update(user_editable_params)
       render json: @user
@@ -47,6 +45,7 @@ def update
 end
 
   # DELETE method only for Admin /users/1
+  # cant destroy user without being logged in(authorized) and being a admin(is_admin?)
   def destroy
        @user.destroy!
   end
