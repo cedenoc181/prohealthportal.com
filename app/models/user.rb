@@ -22,9 +22,11 @@ after_create_commit :post_create_update, :update_insurance_network
     # validations
     has_secure_password
 
-    validates :password, length: { in: 6..16 }, strict: true
+    validates :password, length: { in: 6..16 }
 
-    validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }, strict: true
+    validates :full_name, presence: true 
+
+    validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, strict: true
 
       # Generates a new password reset token and sets the timestamp
   def generate_password_token!
@@ -53,6 +55,10 @@ def post_create_update
   self.update_column(:admin, self.role == 'Admin')
   
   self.update_column(:direct_access, self.role == "PT" || self.role == 'OT')
+
+  self.update_column(:email, self.email.downcase)
+
+  self.update_column(:full_name, self.full_name.downcase)
 end
 
 # could be temperary

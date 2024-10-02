@@ -1,7 +1,6 @@
 class DrTemplatesController < ApplicationController
-  before_action :check_admin, only:%i[create, update, destroy]
   before_action :set_dr_template, only: %i[ show update destroy ]
-  skip_before_action :authorized, only: %i[index show]
+  skip_before_action :authorized, :is_admin?, only: %i[index show]
   
   # GET /dr_templates
   def index

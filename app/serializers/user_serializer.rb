@@ -3,9 +3,11 @@ class UserSerializer < ActiveModel::Serializer
 
   def admin_templates
     if object.role == 'Admin'
-      object.patient_templates
-      object.dr_templates
-      object.medifiles
+      {
+        patient_templates: object.patient_templates,
+        dr_templates: object.dr_templates,
+        medifiles: object.medifiles
+      }
     else
       nil
     end

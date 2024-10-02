@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   before_action :find_user, only: %i[ show destroy update ]
 
   # before_action :set_user, only: %i[:forgot_password]
-
+  skip_before_action :is_admin?, only: %i[create me update]
   # Skip authorization(from App-controller) for users to create account and update forgotten passwords only 
-  skip_before_action :authorized, only: [:index, :show, :create, :forgot_password]
+  skip_before_action :authorized, only: [:create, :index, :show]
 
 
   # GET /users
@@ -14,9 +14,8 @@ class UsersController < ApplicationController
   #able to use index all
   def index
     @users = User.all
-    render json: {users: @users}, status: :ok
+    render json: @users, each_serializer: UserSerializer, status: :ok
   end
-
   # GET /users/1
   def show
     render json: @user, serializer: UserSerializer, status: :ok
@@ -38,37 +37,18 @@ class UsersController < ApplicationController
   end
 
  # PATCH/PUT /users/:id
+
 def update
-  # Check if the user is an admin and updating another user
-  if is_admin?
     if @user.update(user_editable_params)
       render json: @user
-    else
-      render json: @user.errors.full_messages, status: :unprocessable_entity
-    end
-
-  # Check if the current user is updating their own profile
   elsif current_user.update(user_editable_params)
     render json: current_user
-
-  # If neither, return errors
-  else
-    render json: current_user.errors.full_messages, status: :unprocessable_entity
   end
 end
 
   # DELETE method only for Admin /users/1
   def destroy
-    if is_admin?
-      if @user.destroy
-      render json: { message: "User successfully deleted." }, status: :ok
-    else 
-      render json: { error: "User account could not be deleted" }, status: :unprocessable_entity
-    end
-  else 
-    render json: { error: "You are not authorized to delete users account." }, status: :unauthorized
-  end
-
+       @user.destroy!
   end
 
 

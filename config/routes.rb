@@ -2,12 +2,16 @@ Rails.application.routes.draw do
 
     #user path to full crud of these models for nested routes
   #these models are specifically for users for personalized exp for nom-admins
-  resources :users do 
-    resources :my_templates
+  resources :users 
+  resources :my_templates
     # might nest dr and patient template to give user(Admin) crud capability
-    resources :my_medifiles
-  end
+  resources :my_medifiles
+  
 
+      #user controller custom actions 
+    get "/my-account", to: "users#me"
+
+    post 'auth/login', to: 'session#login'
     # Password reset routes
     post 'password/forgot', to: 'password#forgot'
     post 'password/reset', to: 'password#reset'
@@ -32,11 +36,9 @@ Rails.application.routes.draw do
 
     # route to test your configuration
 
-#user controller custom actions 
-get "/my-account", to: "users#me"
 
-#only to be used as link sent to users email address
-patch "/forgot-password", to: "users#forgot_password"
+
+
 
 
 
