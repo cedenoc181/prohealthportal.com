@@ -68,7 +68,7 @@ end
     end
 
     def user_editable_params 
-      params.permit(:clinic_location, :password, :email, :role, :insurance_network, :direct_access, :admin)
+      params.permit( :password, :email, :role, :credentials, :clinic_location, :insurance_network, :direct_access, :admin)
     end
 
 end

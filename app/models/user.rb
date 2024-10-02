@@ -1,6 +1,8 @@
 class User < ApplicationRecord
 
 after_create_commit :post_create_update, :update_insurance_network
+after_update :post_create_update, :update_insurance_network
+
 
 # relationships 
     has_many :my_medifiles, dependent: :destroy
@@ -66,6 +68,8 @@ def update_insurance_network
   insurance_accepted = ['United Health Care', 'Fidelis Care', 'Metroplus', 'BCBS', 'Atnea', 'Emblem Health', 'Oxford', 'Medicare', 'Cigna']
     if self.role == 'PT' || self.role == 'OT'
       self.update_column(:insurance_network, insurance_accepted.join(", "))
+    else
+      self.update_column(:insurance_network, "not provided")
     end
 end
 
