@@ -35,7 +35,7 @@ class DrTemplatesController < ApplicationController
   # DELETE /dr_templates/1
   def destroy
     if @dr_template.destroy
-      head :no_content
+      render json: { message: "Dr template has been deleted"}, status: :ok
     else
       render json: { message: "Failed to delete, template not found" }, status: :unprocessable_entity
     end

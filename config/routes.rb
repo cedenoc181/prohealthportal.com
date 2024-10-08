@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
     #user path to full crud of these models for nested routes
   #these models are specifically for users for personalized exp for nom-admins
-  resources :users 
+  resources :users  
   resources :my_templates
     # might nest dr and patient template to give user(Admin) crud capability
   resources :my_medifiles
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :dr_templates
   resources :patient_templates
   resources :medifiles
-
+   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

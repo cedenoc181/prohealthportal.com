@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     @user = User.new(create_user_params)
     if @user.save 
       token = encode_token({user_id: @user.id})
-      render json: {user: UserSerializer.new(@user), token: token}, status: :created
+      render json: {user: UserSerializer.new(@user), message: "User successfully created", token: token}, status: :created
     else
       render json: { message: "Invalid user sign-up.", errors: @user.errors.full_messages }, status: :unprocessable_entity
         end
@@ -41,7 +41,7 @@ def update
   if current_user.admin? 
     @user = User.find(params[:id])
     if @user.update(user_editable_params)
-      render json: @user
+      render json: {user: @user, message: "user attributes have been successfully updated"}, status: :ok
     else
       render json: @user.errors.full_messages, status: :unprocessable_entity
     end

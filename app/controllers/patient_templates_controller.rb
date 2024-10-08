@@ -1,12 +1,12 @@
 class PatientTemplatesController < ApplicationController
   before_action :set_patient_template, only: %i[ show update destroy ]
-  skip_before_action :is_admin?, only: %i[index show create]
+  skip_before_action :is_admin?, only: %i[index show create update]
 
 
   # GET /patient_templates
   def index
     @patient_templates = PatientTemplate.all
-     render json: @patient_templates,each_serializer: PatientTemplateSerializer, status: :ok
+     render json: @patient_templates, each_serializer: PatientTemplateSerializer, status: :ok
   end
 
   # GET /patient_templates/1
@@ -24,19 +24,33 @@ class PatientTemplatesController < ApplicationController
      end
   end
 
-  # PATCH/PUT /patient_templates/1
   def update
-    if @patient_template.update(patient_template_params)
-      render json: { patient_template: @patient_template, message: "Template updated successfully" }, status: :ok
+    if current_user.admin? 
+      if @patient_template.update(patient_template_params)
+        render json: { patient_template: @patient_template, message: "Template updated successfully" }, status: :ok
+      else
+        render json: { message: "Template failed to update", errors: @patient_template.errors.full_messages}, status: :unprocessable_entity
+      end
+      
+     elsif !current_user.admin? 
+      if @patient_template.id >= 23
+      if @patient_template.update(patient_template_params)
+        render json: { patient_template: @patient_template, message: "Template updated successfully" }, status: :ok
+      else
+        render json: { message: "Template failed to update", errors: @patient_template.errors.full_messages}, status: :unprocessable_entity
+      end
     else
-      render json: { message: "Template failed to update", errors: @patient_template.errors.full_messages}, status: :unprocessable_entity
+      render json: { message: "Template can only be modified by admins"}, status: :unprocessable_entity
+     end
     end
-  end
+    end
+  
+
 
   # DELETE /patient_templates/1
   def destroy
     if @patient_template.destroy
-      head :no_content
+      render json: { message: "Patient template has been deleted"}, status: :ok
     else
       render json: { message: "Failed to delete, template not found" }, status: :unprocessable_entity
     end
