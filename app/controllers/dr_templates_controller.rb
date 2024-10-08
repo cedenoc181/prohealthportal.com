@@ -1,11 +1,11 @@
 class DrTemplatesController < ApplicationController
   before_action :set_dr_template, only: %i[ show update destroy ]
-  skip_before_action :is_admin?, only: %i[index show create]
+  skip_before_action :is_admin?, only: %i[index show create update]
   
   # GET /dr_templates
   def index
     @dr_templates = DrTemplate.all
-    render json: {dr_templates: @dr_templates}, status: :ok
+    render json: @dr_templates, each_serializer: DrTemplateSerializer, status: :ok
   end
 
   # GET /dr_templates/1
@@ -25,11 +25,23 @@ class DrTemplatesController < ApplicationController
 
   # PATCH/PUT /dr_templates/1
   def update
-    if @dr_template.update(dr_template_params)
-      render json: {dr_template: @dr_template, message: "Template successfully updated"}, status: :ok
-    else
-     render json: {message: "Unable to update template", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity 
-    end
+      if current_user.admin?
+        if @dr_template.update(dr_template_params)
+          render json: {dr_template: @dr_template, message: "Template successfully updated"}, status: :ok
+        else
+         render json: {message: "Unable to update template", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity 
+        end
+      elsif !current_user.admin?
+          if @dr_template.id >= 11
+            if @dr_template.update(dr_template_params)
+              render json: {drTemplate: @dr_templates, message: "Template updated successfully"}, status: :ok
+            else 
+              render json: {meesage: "Template was unable to be updated", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity
+            end
+          end
+      else
+        render json: {message: "Template can only be modified by admin", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity
+      end
   end
 
   # DELETE /dr_templates/1

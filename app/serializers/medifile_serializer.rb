@@ -1,7 +1,7 @@
 class MedifileSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :title, :description, :instructions, :file_cover_alt, :language, :file_editable, :file_link_url, :file_cover_url
+  attributes :id, :title, :description, :instructions, :file_cover_alt, :language, :file_editable, :file_link_url, :file_cover_url, :created_at, :updated_at
 
 
 def file_link_url 
@@ -16,5 +16,12 @@ def file_cover_url
     end
 end
 
+def created_at 
+  object.created_at.strftime("%m/%d/%Y")
+end
+
+def updated_at 
+  object.updated_at.strftime("%m/%d/%Y")
+end
 
 end
