@@ -27,27 +27,28 @@ class DrTemplatesController < ApplicationController
   def update
       if current_user.admin?
         if @dr_template.update(dr_template_params)
-          render json: {dr_template: @dr_template, message: "Template successfully updated"}, status: :ok
+          render json: @dr_template, serializer: DrTemplateSerializer, message: "Template successfully updated", status: :ok
         else
-         render json: {message: "Unable to update template", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity 
+         render json: { message: "Unable to update template", errors: @dr_template.errors.full_messages }, status: :unprocessable_entity 
         end
       elsif !current_user.admin?
           if @dr_template.id >= 11
             if @dr_template.update(dr_template_params)
-              render json: {drTemplate: @dr_templates, message: "Template updated successfully"}, status: :ok
+              render json: @dr_template, serializer: DrTemplateSerializer, message: "Template updated successfully", status: :ok
             else 
-              render json: {meesage: "Template was unable to be updated", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity
+              render json: { meesage: "Template was unable to be updated", errors: @dr_template.errors.full_messages }, status: :unprocessable_entity
             end
-          end
       else
-        render json: {message: "Template can only be modified by admin", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity
+        render json: { message: "Template can only be modified by admin" }, status: :unprocessable_entity
       end
   end
+end
+
 
   # DELETE /dr_templates/1
   def destroy
     if @dr_template.destroy
-      render json: { message: "Dr template has been deleted"}, status: :ok
+      render json: { message: "Dr template has been deleted" }, status: :ok
     else
       render json: { message: "Failed to delete, template not found" }, status: :unprocessable_entity
     end

@@ -18,33 +18,32 @@ class PatientTemplatesController < ApplicationController
   def create
     @patient_template = PatientTemplate.new(patient_template_params)
     if @patient_template.save
-      render json: {patient_template: @patient_template, message: "Template successfully created"}, status: :created, location: @patient_template
+      render json: { patient_template: @patient_template, message: "Template successfully created" }, status: :created, location: @patient_template
      else
-      render json: {message: "Unable to create template", errors: @patient_template.errors.full_messages}, status: :unprocessable_entity
+      render json: { message: "Unable to create template", errors: @patient_template.errors.full_messages }, status: :unprocessable_entity
      end
   end
 
   def update
     if current_user.admin? 
       if @patient_template.update(patient_template_params)
-        render json: { patient_template: @patient_template, message: "Template updated successfully" }, status: :ok
+        render json: @patient_template, serializer: PatientTemplateSerializer, message: "Template updated successfully", status: :ok
       else
-        render json: { message: "Template failed to update", errors: @patient_template.errors.full_messages}, status: :unprocessable_entity
+        render json: { message: "Template failed to update", errors: @patient_template.errors.full_messages }, status: :unprocessable_entity
       end
       
-     elsif !current_user.admin? 
+    elsif !current_user.admin? 
       if @patient_template.id >= 23
-      if @patient_template.update(patient_template_params)
-        render json: { patient_template: @patient_template, message: "Template updated successfully" }, status: :ok
-      else
-        render json: { message: "Template failed to update", errors: @patient_template.errors.full_messages}, status: :unprocessable_entity
-      end
+       if @patient_template.update(patient_template_params)
+        render json: @patient_template, serializer: PatientTemplateSerializer, message: "Template updated successfully", status: :ok
+       else
+        render json: { message: "Template failed to update", errors: @patient_template.errors.full_messages }, status: :unprocessable_entity
+       end
     else
-      render json: { message: "Template can only be modified by admins"}, status: :unprocessable_entity
-     end
+      render json: { message: "Template can only be modified by admins" }, status: :unprocessable_entity
     end
-    end
-  
+  end
+end
 
 
   # DELETE /patient_templates/1
