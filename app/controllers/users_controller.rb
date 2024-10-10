@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   # Callbacks to set user before show and destroy action method
   before_action :find_user, only: %i[ show destroy]
-  # remove i s c from below
+  # remove index show create from admin restrictions
   skip_before_action :is_admin?, only: %i[me update]
   # will take skip before action authroized method off after development, bc admin will be only user avaiilable to perform CRUD
   # skip_before_action :authorized, only: %i[ index show create ]
