@@ -3,7 +3,8 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found
   rescue_from ActionController::ParameterMissing, with: :render_bad_request
     include ActionController::Cookies
-    before_action :authorized, :is_admin?
+    before_action :authorized
+    before_action :is_admin?
     
 
       def encode_token(payload)
@@ -30,8 +31,9 @@ class ApplicationController < ActionController::API
     end
 
     def is_admin?
-      unless current_user.role == "Admin"
+      unless current_user&.role == "Admin"
         render json: { message: "You must be an admin to perform this action."}, status: :unauthorized
+        return
       end
     end
     

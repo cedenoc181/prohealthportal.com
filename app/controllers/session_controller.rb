@@ -1,5 +1,6 @@
 class SessionController < ApplicationController
-     skip_before_action :authorized, :is_admin?
+     skip_before_action :authorized
+     skip_before_action :is_admin?
 
      rescue_from ActiveRecord::RecordNotFound, with: :invalid_email
      # if user render user else if pt render pt ?

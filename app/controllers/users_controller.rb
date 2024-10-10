@@ -2,15 +2,16 @@ class UsersController < ApplicationController
   
   # Callbacks to set user before show and destroy action method
   before_action :find_user, only: %i[ show destroy]
-
-  # before_action :set_user, only: %i[:forgot_password]
+  # remove i s c from below
   skip_before_action :is_admin?, only: %i[me update]
+  # will take skip before action authroized method off after development, bc admin will be only user avaiilable to perform CRUD
+  # skip_before_action :authorized, only: %i[ index show create ]
 
   # GET /users
   #Admin is the only user that can index and show
   def index
     @users = User.all
-    render json: @users, each_serializer: UserSerializer, status: :ok
+    render json: @users, status: :ok
   end
   # GET /users/1
   def show
@@ -41,7 +42,7 @@ def update
   if current_user.admin? 
     @user = User.find(params[:id])
     if @user.update(user_editable_params)
-      render json: {user: @user, message: "user attributes have been successfully updated"}, status: :ok
+      render json:  @user, serializer: UserSerializer, message: "user attributes have been successfully updated", status: :ok
     else
       render json: @user.errors.full_messages, status: :unprocessable_entity
     end

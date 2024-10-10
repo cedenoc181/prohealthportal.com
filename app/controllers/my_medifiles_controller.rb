@@ -1,5 +1,6 @@
 class MyMedifilesController < ApplicationController
   before_action :set_my_medifile, only: %i[ show update destroy ]
+  skip_before_action :is_admin?, only: [:index, :show]
 
   # GET /my_medifiles
   def index
@@ -46,6 +47,6 @@ class MyMedifilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def my_medifile_params
-      params.fetch(:my_medifile, {})
+      params.permit(:user_id, :coworker_id, :medifile_id, :my_file_title, :my_file_description)
     end
 end
