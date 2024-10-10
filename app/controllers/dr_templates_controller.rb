@@ -19,7 +19,7 @@ class DrTemplatesController < ApplicationController
     if @dr_template.save
       render json: {dr_template: @dr_template, message: "Template successfully created"}, status: :created, location: @dr_template
      else
-      render json: {message: "Unable to create template", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity
+      render json: {message: "Unable to create template, double check parameters have been met", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity
      end
   end
 

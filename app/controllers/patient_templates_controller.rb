@@ -20,7 +20,7 @@ class PatientTemplatesController < ApplicationController
     if @patient_template.save
       render json: { patient_template: @patient_template, message: "Template successfully created" }, status: :created, location: @patient_template
      else
-      render json: { message: "Unable to create template", errors: @patient_template.errors.full_messages }, status: :unprocessable_entity
+      render json: { message: "Unable to create template, double check parameters have been met", errors: @patient_template.errors.full_messages }, status: :unprocessable_entity
      end
   end
 

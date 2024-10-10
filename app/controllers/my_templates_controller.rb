@@ -1,41 +1,44 @@
 class MyTemplatesController < ApplicationController
   before_action :set_my_template, only: %i[ show update destroy ]
+  skip_before_action :is_admin?
 
   # GET /my_templates
   def index
     @my_templates = MyTemplate.all
-
-    render json: @my_templates
+    render json: @my_templates, each_serializer: MyTemplateSerializer, status: :ok
   end
 
   # GET /my_templates/1
   def show
-    render json: @my_template
+    render json: @my_template, serializer: MyTemplateSerializer, status: :ok
   end
 
   # POST /my_templates
   def create
     @my_template = MyTemplate.new(my_template_params)
-
     if @my_template.save
-      render json: @my_template, status: :created, location: @my_template
+      render json: {my_template: @my_template, messages: "template created successfully"}, status: :created, location: @my_template
     else
-      render json: @my_template.errors, status: :unprocessable_entity
+      render json: {my_template: @my_template.errors.full_messages, messages: "template was unable to be created, double check parameters have been met"}, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /my_templates/1
   def update
     if @my_template.update(my_template_params)
-      render json: @my_template
+      render json: {my_template: @my_template, messages: "template was updated successfully"} status: :ok
     else
-      render json: @my_template.errors, status: :unprocessable_entity
+      render json: {my_template: @my_template.errors.full_messages, messages: "template was unable to be updated, check if all parameters was met"}, status: :unprocessable_entity
     end
   end
 
   # DELETE /my_templates/1
   def destroy
-    @my_template.destroy!
+    if @my_template.destroy
+      render json: {messages: "template was successfully deleted"}, status: :ok
+    else 
+      render json: {messages: "template unable to be deleted", my_template: @my_template.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   private
@@ -46,6 +49,6 @@ class MyTemplatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def my_template_params
-      params.permit(:user_id, :notes)
+      params.permit(:user_id, :notes, :responded_counter, :no_response_counter)
     end
 end
