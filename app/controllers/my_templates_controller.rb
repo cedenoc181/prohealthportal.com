@@ -26,7 +26,7 @@ class MyTemplatesController < ApplicationController
   # PATCH/PUT /my_templates/1
   def update
     if @my_template.update(my_template_params)
-      render json: {my_template: @my_template, messages: "template was updated successfully"} status: :ok
+      render json: {my_template: @my_template, messages: "template was updated successfully"}, status: :ok
     else
       render json: {my_template: @my_template.errors.full_messages, messages: "template was unable to be updated, check if all parameters was met"}, status: :unprocessable_entity
     end
@@ -49,6 +49,6 @@ class MyTemplatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def my_template_params
-      params.permit(:user_id, :notes, :responded_counter, :no_response_counter)
+      params.permit(:user_id, :patient_template_id, :dr_template_id, :notes, :responded_counter, :no_response_counter)
     end
 end
