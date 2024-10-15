@@ -5,13 +5,13 @@ class MedifilesController < ApplicationController
 
   # GET /medifiles
   def index
-    medifiles = Medifile.all
-    render json: medifiles, status: :ok
+    @medifiles = Medifile.all
+    render json: @medifiles, each_serializer: MedifileSerializer, status: :ok
   end
 
   # GET /medifiles/1
   def show
-    render json: @medifile
+    render json: @medifile. serializer: MedifileSerializer, status: :ok
   end
 
   # POST /medifiles
