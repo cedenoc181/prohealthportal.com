@@ -9,6 +9,8 @@ class MyMedifile < ApplicationRecord
 
  private 
 
+#  sharing medifiles with other coworkers/ users
+
   def duplicate
 
     if self.coworker_id.present? && self.coworker_id > 0
