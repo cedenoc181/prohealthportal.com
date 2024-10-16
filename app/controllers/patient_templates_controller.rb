@@ -49,7 +49,7 @@ end
   # DELETE /patient_templates/1
   def destroy
     if @patient_template.destroy
-      render json: { message: "Patient template has been deleted"}, status: :ok
+      render json: { message: "#{@patient_template.px_temp_title} template has been deleted"}, status: :ok
     else
       render json: { message: "Failed to delete, template not found" }, status: :unprocessable_entity
     end

@@ -44,7 +44,7 @@ class MyMedifilesController < ApplicationController
   def destroy
     if current_user.role == "Admin"
       @my_medifile.destroy
-      render json: {my_medifile: @my_medifile, message: 'file deleted successfully'}, status: :ok
+      render json: {my_medifile: @my_medifile, message: "#{@my_medifile.title} file deleted successfully"}, status: :ok
     elsif current_user.role != "Admin"
         if @my_medifile.user_id == current_user.id
           @my_medifile.destroy

@@ -59,7 +59,11 @@ end
   # DELETE method only for Admin /users/1
   # cant destroy user without being logged in(authorized) and being a admin(is_admin?)
   def destroy
-       @user.destroy!
+       if @user.destroy!
+       render json: {message: "#{user.full_name} user account has been successfully deleted"}, status: :ok
+       else 
+        render json: {message: "Failed to delete #{user.full_name} user account, plesase ensure you are an admin to perform this action"}, status: :unprocessable_entity
+       end
   end
 
 

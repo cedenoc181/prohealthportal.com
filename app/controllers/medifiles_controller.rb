@@ -16,18 +16,30 @@ class MedifilesController < ApplicationController
 
   # POST /medifiles
   def create
+    Rails.logger.info "Creating Medifile with params: #{medifile_params}"
+
     @medifile = Medifile.new(medifile_params)
+  
+    # Attach files if they are provided
+    @medifile.file_cover.attach(params[:file_cover]) if params[:file_cover]
+    @medifile.file_link.attach(params[:file_link]) if params[:file_link]
+
+    p "#{@medifile.file_cover} and #{@medifile.file_link} has been attached"
+
     if @medifile.save
-      render json: {medifile: @medifile, message: "your file has been successfully created"}, status: :created, location: @medifile
+      render json: @medifile, status: :created, location: @medifile
+        Rails.logger.info "Medifile created successfully"
     else
-      render json: {medifile: @medifile.errors.full_messages, message: "medical file failed to create, double check all inputs"}, status: :unprocessable_entity
+       Rails.logger.error "Error creating Medifile: #{@medifile.errors.full_messages}"
+      render json: { medifile: @medifile.errors.full_messages, message: "Medical file failed to create, double check all inputs" }, status: :unprocessable_entity
     end
   end
+  
 
   # PATCH/PUT /medifiles/1
   def update
     if @medifile.update(medifile_params)
-      render json: {medifile: @medifile, message: "Medifile was updated successfully"}, status: :ok
+      render json:  @medifile, status: :ok
     else 
       render json: {medifile: @medifile.errors.full_messages, message: "medical file failed to update, double check inputs."}, status: :unprocessable_entity
     end
@@ -36,7 +48,7 @@ class MedifilesController < ApplicationController
   # DELETE /medifiles/1
    def destroy
      if @medifile.destroy
-       render json: { message: "medical file destroyed successfully" }, status: :no_content   
+    render json: {file: "#{@medifile.title} file has been deleted"}, status: :ok  
      else
        render json: {medifile: @medifile.errors.full_messages, error: "medical file failed be deleted"}, status: :unprocessable_entity
      end
@@ -51,7 +63,7 @@ class MedifilesController < ApplicationController
 
       # Only allow a list of trusted parameters through.
       def medifile_params
-        params.permit(:title, :description, :instructions, :language, :file_editable, :file_cover_alt, :file_cover, :file_link)
+        params.permit(:title, :description, :instructions, :language, :file_editable, :file_cover_alt)
       end
 
 end

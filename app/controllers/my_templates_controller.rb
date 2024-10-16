@@ -35,7 +35,7 @@ class MyTemplatesController < ApplicationController
   # DELETE /my_templates/1
   def destroy
     if @my_template.destroy
-      render json: {messages: "template was successfully deleted"}, status: :ok
+      render json: {messages: "template #{@my_templates.id}  was successfully deleted"}, status: :ok
     else 
       render json: {messages: "template unable to be deleted", my_template: @my_template.errors.full_messages}, status: :unprocessable_entity
     end

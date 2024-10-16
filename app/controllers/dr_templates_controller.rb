@@ -48,7 +48,7 @@ end
   # DELETE /dr_templates/1
   def destroy
     if @dr_template.destroy
-      render json: { message: "Dr template has been deleted" }, status: :ok
+      render json: { message: " #{@dr_template.dr_temp_title} template has been deleted" }, status: :ok
     else
       render json: { message: "Failed to delete, template not found" }, status: :unprocessable_entity
     end
