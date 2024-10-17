@@ -1,27 +1,30 @@
 class ApplicationController < ActionController::API
-  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
-  rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found
-  rescue_from ActionController::ParameterMissing, with: :render_bad_request
+
     include ActionController::Cookies
+
     before_action :authorized
     before_action :is_admin?
     
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+    rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found
+    rescue_from ActionController::ParameterMissing, with: :render_bad_request
+
 
       def encode_token(payload)
-        JWT.encode(payload, 'password') 
-    end
+        payload[:exp] = 3.hours.from_now.to_i 
+        JWT.encode(payload, 'password', 'HS256') 
+      end
 
-    def decoded_token
-        header = request.headers['Authorization']
-        if header
-            token = header.split(" ")[1]
-            begin
-                JWT.decode(token, 'password')
-            rescue JWT::DecodeError
-                nil
-            end
+      def decoded_token
+        if cookies.encrypted[:auth_token] || request.headers['Authorization']
+          token = cookies.encrypted[:auth_token] || request.headers['Authorization'].split(' ')[1]
+          begin
+            JWT.decode(token, 'password', true, { algorithm: 'HS256' })
+          rescue JWT::DecodeError
+            nil
+          end
         end
-    end
+      end
 
     def current_user 
         if decoded_token
@@ -38,9 +41,8 @@ class ApplicationController < ActionController::API
     end
     
     def authorized
-        unless !!current_user
+        unless current_user
         render json: { message: 'Please log in' }, status: :unauthorized
-        return
         end
     end
 

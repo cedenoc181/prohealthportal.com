@@ -8,10 +8,13 @@ Rails.application.routes.draw do
   resources :my_medifiles
   
 
-      #user controller custom actions 
+      #user account route post login
     get "/my-account", to: "users#me"
+#login route
+    post 'account/login', to: 'session#login'
+  #logout route
+    delete 'account/logout', to: 'session#logout'
 
-    post 'auth/login', to: 'session#login'
     # Password reset routes
     post 'password/forgot', to: 'password#forgot'
     post 'password/reset', to: 'password#reset'
