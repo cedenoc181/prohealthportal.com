@@ -4,15 +4,15 @@ import './App.css';
 function App() {
   
 
-  // useEffect(() => {
-  //   fetch("/hello")
-  //     .then((r) => r.json())
-  //     .then((data) => setCount(data.count));
-  // }, []);
-
   return (
     <div className="App">
       Hello world 
+
+
+
+
+
+      
     </div>
   );
 }
