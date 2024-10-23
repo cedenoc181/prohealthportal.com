@@ -1,0 +1,9 @@
+.LoginFormContainer {
+    margin: 4%;
+    border-radius: 5%;
+    border: solid 2px black;
+}
+
+.loginHeading {
+    font-size: 35px;
+}
