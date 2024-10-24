@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Input, Stack, Button } from "@chakra-ui/react";
+import { Input, InputGroup, InputRightElement, Stack, Button } from "@chakra-ui/react";
 import { ArrowForwardIcon, EmailIcon } from '@chakra-ui/icons'
 import GoogleButton from 'react-google-button'
 import logo from '../../images/prohealth-logo.png'
@@ -63,17 +63,25 @@ export const Login = (props) => {
         <div className="loginHeading">Login</div>
       <form className="formContainer" onSubmit={handleSubmit}>
       <Stack className="inputfield"  spacing={7}>
-            <Input className="" leftIcon={<EmailIcon />} variant='flushed' placeholder='Email' /> 
-            <Input className="" variant='flushed' placeholder='Password' />
+            <Input className="" size='lg' variant='flushed' placeholder='Email' _placeholder={{ opacity: 1, color: 'blue.500' }}/> 
+            <InputGroup>
+            <Input className="" size='lg' type={show ? 'text' : 'password'} variant='flushed' placeholder='Password' _placeholder={{ opacity: 1, color: 'blue.500' }}/>
+            <InputRightElement width='4.5rem'>
+             <Button className="showPW" colorScheme='blue' variant='outline' h='2rem' size='sm' onClick={handleClick} >
+                {show ? 'Hide' : 'Show'}
+             </Button>
+            </InputRightElement>
+
+            </InputGroup>
             <div className="forgotPassword"><a href="#">Forgot Password?</a></div>
-            <Button className="loginButton" rightIcon={<ArrowForwardIcon />} colorScheme='orange' variant='outline'>
+            <Button className="loginButton" rightIcon={<ArrowForwardIcon />} colorScheme='blue' variant='outline'>
                  Login
             </Button>      
             <div className="logDivider">
-       <span className="line1">line through text</span> or  <span className="line2">line through text</span> 
+       <span className="line1">line through</span> or  <span className="line2">line through</span> 
       </div>
       <GoogleButton
-            className="googleButton"
+            id="googleButton"
             label="Login with Google"
             type="light"
             // disabled // can also be written as disabled={true} for clarity
@@ -82,7 +90,7 @@ export const Login = (props) => {
       </Stack>
       </form>
       </div>
-      <img className="phf-logo" src={logo}/>
+      <img className="phf-logo col5" src={logo} alt="phf"/>
     </div>
   );
 };
