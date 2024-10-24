@@ -1,7 +1,14 @@
+#LoginPage {
+    background-color: #fcc076;
+    min-height: max-content;
+}
+
 .LoginFormContainer {
     margin: 4%;
+    margin-left: 10%;
     border-radius: 5%;
     border: solid 2px black;
+    background-color: white;
 }
 
 .loginHeading {
@@ -32,14 +39,26 @@
 
 }
 
-/* .logDivider {
-margin: 0 auto;
+.line1 {
+   color: white;
+    text-decoration: line-through black !important;
+    padding-inline-end: 15px;
+ 
 }
 
-.googleButton {
-    margin: 0 auto;
-} */
+.line2 {
+    color: white;
+     text-decoration: line-through black !important;
+     padding-inline-start: 15px;
+  
+ }
 
 input {
     width: 30px;
+}
+
+
+.phf-logo {
+    width: 500px;
+    height: 500px;
 }

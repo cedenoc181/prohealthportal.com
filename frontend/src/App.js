@@ -12,12 +12,6 @@ function App() {
     <Provider store={store}>
     <div className="App">
      <Login />
-
-
-
-
-
-
     </div>
     </Provider>
   );

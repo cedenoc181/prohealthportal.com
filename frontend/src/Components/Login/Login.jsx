@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Input, Stack, Button } from "@chakra-ui/react";
 import { ArrowForwardIcon, EmailIcon } from '@chakra-ui/icons'
 import GoogleButton from 'react-google-button'
+import logo from '../../images/prohealth-logo.png'
 
 import "./Login.css";
 import { connect } from "react-redux";
@@ -57,8 +58,8 @@ export const Login = (props) => {
 
 
   return (
-    <div>
-        <div className="LoginFormContainer col6">
+    <div id="LoginPage">
+        <div className="LoginFormContainer col5">
         <div className="loginHeading">Login</div>
       <form className="formContainer" onSubmit={handleSubmit}>
       <Stack className="inputfield"  spacing={7}>
@@ -69,7 +70,7 @@ export const Login = (props) => {
                  Login
             </Button>      
             <div className="logDivider">
-        or 
+       <span className="line1">line through text</span> or  <span className="line2">line through text</span> 
       </div>
       <GoogleButton
             className="googleButton"
@@ -79,10 +80,9 @@ export const Login = (props) => {
              onClick={() => { console.log('this will not run on click since it is disabled') }}
       />   
       </Stack>
-
-
       </form>
       </div>
+      <img className="phf-logo" src={logo}/>
     </div>
   );
 };
