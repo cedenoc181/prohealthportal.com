@@ -1,18 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  Input,
-  Spinner,
-  InputGroup,
-  InputRightElement,
-  Button
-} from "@chakra-ui/react";
-
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from "@chakra-ui/react";
+import { Input, Stack, Button } from "@chakra-ui/react";
+import { ArrowForwardIcon, EmailIcon } from '@chakra-ui/icons'
+import GoogleButton from 'react-google-button'
 
 import "./Login.css";
 import { connect } from "react-redux";
@@ -69,53 +58,29 @@ export const Login = (props) => {
 
   return (
     <div>
-        <div className="LoginFormContainer col2">
+        <div className="LoginFormContainer col6">
         <div className="loginHeading">Login</div>
       <form className="formContainer" onSubmit={handleSubmit}>
-        <FormControl isInvalid={isError}>
-          <FormLabel>Email</FormLabel>
-          <Input
-            type="email"
-            value={accnt}
-            placeholder="Enter Email"
-            onChange={handleInputChange}
-          />
-          {!isError ? (
-            <FormHelperText></FormHelperText>
-          ) : (
-            <FormErrorMessage>Email is required.</FormErrorMessage>
-          )}
-        </FormControl>
+      <Stack className="inputfield"  spacing={7}>
+            <Input className="" leftIcon={<EmailIcon />} variant='flushed' placeholder='Email' /> 
+            <Input className="" variant='flushed' placeholder='Password' />
+            <div className="forgotPassword"><a href="#">Forgot Password?</a></div>
+            <Button className="loginButton" rightIcon={<ArrowForwardIcon />} colorScheme='orange' variant='outline'>
+                 Login
+            </Button>      
+            <div className="logDivider">
+        or 
+      </div>
+      <GoogleButton
+            className="googleButton"
+            label="Login with Google"
+            type="light"
+            // disabled // can also be written as disabled={true} for clarity
+             onClick={() => { console.log('this will not run on click since it is disabled') }}
+      />   
+      </Stack>
 
-        <label>Password</label>
-        <InputGroup size="md">
-          <Input
-            value={pass}
-            onChange={handlePassChange}
-            pr="4.5rem"
-            type={show ? "text" : "password"}
-            placeholder="Enter password"
-          />
-          <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
-              {show ? "Hide" : "Show"}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-        <div className="forgotPassword">Forgot password?</div>
-      {submission ? (
-        <Spinner size='lg' color='orange.500' />
-      ) : 
-        ( <Button
-            id="submitButton"
-            onClick={submitClick}
-              loadingText='Submitting'
-              colorScheme='teal'
-              variant='outline'
-        > 
-             Login
-        </Button>)
-  }
+
       </form>
       </div>
     </div>

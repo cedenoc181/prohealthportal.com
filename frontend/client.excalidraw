@@ -167,15 +167,15 @@
     },
     {
       "type": "rectangle",
-      "version": 606,
-      "versionNonce": 941899393,
+      "version": 611,
+      "versionNonce": 225607343,
       "isDeleted": false,
       "id": "RFChtMBTAC_oGa2oyT3aD",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "solid",
       "roughness": 0,
-      "opacity": 70,
+      "opacity": 80,
       "angle": 0,
       "x": 1473.6381806300324,
       "y": 217.22651124351881,
@@ -190,7 +190,7 @@
         "type": 3
       },
       "boundElements": [],
-      "updated": 1729606492201,
+      "updated": 1729702406781,
       "link": null,
       "locked": false
     },
