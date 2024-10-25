@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Nav from './Nav.jsx';
-import Console from './Console.jsx';
-import MainView from './Main.jsx';
+// import Console from './Console.jsx';
+// import MainView from './Main.jsx';
 
 export const Dashboard = (props) => {
   return (
     <div>
         <Nav />
-        <Console />
-        <MainView />
+        {/* <Console />
+        <MainView /> */}
     </div>
   )
 }

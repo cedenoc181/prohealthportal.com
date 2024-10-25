@@ -1,0 +1,10 @@
+#nav {
+    background-color: #a5d8ff;
+    opacity: 70%;
+    height: 100vh;
+}
+
+.logo{
+    max-height: 50%;
+    max-width: 50%;
+}

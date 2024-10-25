@@ -6,15 +6,17 @@ import store from './Store.js';
 import Login from './Components/Login/Login.jsx';
 import Dashboard from './Components/Dashboard/Dashboard.jsx';
 
+
 function App() {
   
 
   return (
     <Provider store={store}>
     <div className="App">
+          {/* <Dashboard /> */}
          <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/Dashboard" element={ <Dashboard />}/>
+          <Route path="/dashboard" element={ <Dashboard />}/>
          </Routes>
     </div>
     </Provider>

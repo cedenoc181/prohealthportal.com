@@ -5,8 +5,8 @@
   "elements": [
     {
       "type": "rectangle",
-      "version": 2518,
-      "versionNonce": 522216847,
+      "version": 2519,
+      "versionNonce": 2019913583,
       "isDeleted": false,
       "id": "1qKvI-3LshHRQ9RtrgDx2",
       "fillStyle": "solid",
@@ -16,7 +16,7 @@
       "opacity": 70,
       "angle": 0,
       "x": 652.0693692594018,
-      "y": 1199.6405166141553,
+      "y": 1199.7982360914468,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#a5d8ff",
       "width": 123.20145285635326,
@@ -26,7 +26,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1729606492201,
+      "updated": 1729889211373,
       "link": null,
       "locked": false
     },

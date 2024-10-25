@@ -1,19 +1,44 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import Account from './Features/Account.jsx';
-import Email_Template from './Features/Email.jsx';
-import Inventory from './Features/Inventory.jsx';
-import Medical from './Features/Medical.jsx';
-import Overview from './Features/Overview.jsx';
-import Task from './Features/Task.jsx';
-
-
+import { NavLink } from "react-router-dom"
+import './Nav.css'
+import logo from '../../images/prohealth-logo.png'
 
 export const Nav = (props) => {
   return (
-    <div>
+    <div id='nav' className="col">
+        <div className="nav-header">
+          <header>
+            <img className="logo" src={logo} alt="proHealth and Fitness logo"/>
+            <h2 className="nave-title">PHF Portal</h2>
+            </header>
+        </div>
+        
+        <div className="nav-slot">
+        <NavLink
+        className="nav-link"
+        to="/overview"
+        style={({ isActive }) => ({
+            color: isActive
+                ? "orange"
+                : "white",
+        })}>
+            
+        </NavLink>
+        </div>
 
+        <NavLink>
+        </NavLink>
+
+        <NavLink>
+        </NavLink>
+
+        <NavLink>
+        </NavLink>
+
+        <NavLink>
+        </NavLink>
     </div>
   )
 }
