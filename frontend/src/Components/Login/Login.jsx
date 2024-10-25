@@ -60,12 +60,13 @@ export const Login = (props) => {
   return (
     <div id="LoginPage">
         <div className="LoginFormContainer col5">
-        <div className="loginHeading">Login</div>
+        <div className="loginHeading">Welcome!</div>
+        <p className="loginPrompt">Sign in to access ProHealth portal</p>
       <form className="formContainer" onSubmit={handleSubmit}>
-      <Stack className="inputfield"  spacing={7}>
-            <Input className="" size='lg' variant='flushed' placeholder='Email' _placeholder={{ opacity: 1, color: 'blue.500' }}/> 
+      <Stack className="inputfield"  spacing={10}>
+            <Input className="" size='lg' variant='flushed' placeholder='Email' _placeholder={{ opacity: 1, color: 'black.500' }}/> 
             <InputGroup>
-            <Input className="" size='lg' type={show ? 'text' : 'password'} variant='flushed' placeholder='Password' _placeholder={{ opacity: 1, color: 'blue.500' }}/>
+            <Input className="" size='lg' type={show ? 'text' : 'password'} variant='flushed' placeholder='Password' _placeholder={{ opacity: 1, color: 'black.500' }}/>
             <InputRightElement width='4.5rem'>
              <Button className="showPW" colorScheme='blue' variant='outline' h='2rem' size='sm' onClick={handleClick} >
                 {show ? 'Hide' : 'Show'}
@@ -78,7 +79,7 @@ export const Login = (props) => {
                  Login
             </Button>      
             <div className="logDivider">
-       <span className="line1">line through</span> or  <span className="line2">line through</span> 
+       <span className="line1">line through the text</span> or  <span className="line2">line through the text</span> 
       </div>
       <GoogleButton
             id="googleButton"
@@ -90,7 +91,11 @@ export const Login = (props) => {
       </Stack>
       </form>
       </div>
-      <img className="phf-logo col5" src={logo} alt="phf"/>
+      <figure className="figure col5">
+      <img className="phf-logo"  src={logo} alt="phf"/>
+      <figcaption className="phf-logo-caption">Improving Quality of Life Through Physical and Occupational Therapy</figcaption>
+      </figure>
+     
     </div>
   );
 };
