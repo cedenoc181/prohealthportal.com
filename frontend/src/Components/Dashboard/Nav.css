@@ -1,10 +1,28 @@
 #nav {
     background-color: #a5d8ff;
+    border-right: solid 2px black;
     opacity: 70%;
     height: 100vh;
 }
 
 .logo{
-    max-height: 50%;
-    max-width: 50%;
+    max-height: 60%;
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-header {
+display: inline-block;
+text-align: center;
+padding: 15%;
+}
+
+.nave-title {
+    padding-top: 10%;
+    font-size: 30px;
+    font-weight: 500;
+    color: black;
+    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif */
+    text-decoration: underline;
 }

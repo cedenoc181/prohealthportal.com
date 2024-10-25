@@ -9,10 +9,8 @@ export const Nav = (props) => {
   return (
     <div id='nav' className="col">
         <div className="nav-header">
-          <header>
             <img className="logo" src={logo} alt="proHealth and Fitness logo"/>
-            <h2 className="nave-title">PHF Portal</h2>
-            </header>
+            <h2 className="nave-title">_ProHealth Portal_</h2>
         </div>
         
         <div className="nav-slot">
