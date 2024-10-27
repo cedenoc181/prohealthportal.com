@@ -26,3 +26,26 @@ padding: 15%;
     /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif */
     text-decoration: underline;
 }
+
+.nav-link {
+    text-align: center;
+     position: relative; 
+     bottom: 18px; 
+}
+
+ div:last-of-type {
+    right: 20px;
+}
+
+ div:nth-of-type(4) {
+        left: 10px;
+}
+
+
+
+
+.nav-slot {
+   padding-left: 25%;
+}
+
+
