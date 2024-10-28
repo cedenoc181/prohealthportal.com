@@ -7,7 +7,7 @@ import logo from '../../images/prohealth-logo.png'
 
 export const Nav = (props) => {
   return (
-    <div id='nav' className="col">
+    <div id='nav'>
         <div className="nav-header">
             <img className="logo" src={logo} alt="proHealth and Fitness logo"/>
             <h2 className="nave-title">_ProHealth Portal_</h2>

@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './Store.js';
 import Login from './Components/Login/Login.jsx';
-import Dashboard from './Components/Dashboard/Dashboard.jsx';
+import Nav from './Components/Dashboard/Nav.jsx';
 
 // importing features 
 import Overview from "./Components/Dashboard/Features/Overview.jsx";
@@ -20,11 +20,16 @@ function App() {
 
   return (
     <Provider store={store}>
-    <div className="App">
-          <Dashboard />
+    <div id="dashboard" className="App">
+      <Nav />
+
+
+
+
+
+      
          <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={ <Dashboard />}/>
           {/* routes for features */}
           <Route path="/overview-console" element={<Overview />} />
           <Route path="/medical-forms" element={<Medifiles />} />

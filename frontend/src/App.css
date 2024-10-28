@@ -1,14 +1,20 @@
-.col { width: 25%; }
+.col { width: 20%; }
 .col2 { width: 50%; }
 .col3 { width: 75%; }
 .col4 { width: 100%; }
 
-.col5 {width: 35%}
+.col5 {width: 30%}
 .col6 {width: 40%}
 .col7 {width: 60%}
 .col8 {width: 80%}
 
-*{
+* {
   box-sizing: border-box;
+}
+
+#dashboard {
+  display: grid;
+  grid-template-columns: 25% 25% 50%; /* Set column widths */
+  gap: 5px; /* Optional: space between columns */
 }
 

@@ -3,7 +3,21 @@ import { connect } from 'react-redux'
 
 export const Overview = (props) => {
   return (
-    <div id="overview">Overview</div>
+    <div id="overview-console" className="console">
+        <h2>Overview</h2>
+    <div className="display-1">
+            testing 
+    </div>
+    
+     <div className="display-2">
+        testing
+    </div>
+    
+    <div className="display-3">
+        testing
+    </div>
+    
+    </div>
   )
 }
 
