@@ -1,9 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import "./Features.css"
+
 
 export const Task = (props) => {
   return (
-    <div id="task-list">Task</div>
+    <div id="task-list" className="console">Task</div>
   )
 }
 

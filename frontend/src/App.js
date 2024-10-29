@@ -21,15 +21,15 @@ function App() {
   return (
     <Provider store={store}>
     <div id="dashboard" className="App">
-      <Nav />
+     <div className="nav-display"><Nav /></div> 
+      {/* <div className="console-display">{""}</div>
+        <div className="main-display">{""}</div> */}
 
 
 
 
-
-      
          <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           {/* routes for features */}
           <Route path="/overview-console" element={<Overview />} />
           <Route path="/medical-forms" element={<Medifiles />} />

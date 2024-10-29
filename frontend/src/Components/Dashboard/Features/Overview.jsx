@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import "./Features.css"
+
 
 export const Overview = (props) => {
   return (

@@ -1,0 +1,17 @@
+.console {
+    height: 100vh;
+    border-right: solid 2px orange;
+    background: rgba(251, 176, 119, 0.481)
+}
+
+
+
+.console-title {
+    font-size: 20px;
+    text-align: center;
+    
+}
+
+span .sideMenuItems {
+    display: inline-block;
+}

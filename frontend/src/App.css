@@ -14,7 +14,10 @@
 
 #dashboard {
   display: grid;
-  grid-template-columns: 25% 25% 50%; /* Set column widths */
-  gap: 5px; /* Optional: space between columns */
+  grid-template-columns: 25% 30% 45%; /* Set column widths */
+   /* Optional: space between columns */
 }
 
+ul {
+   list-style-type: none;
+   }
