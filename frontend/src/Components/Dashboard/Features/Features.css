@@ -5,13 +5,53 @@
 }
 
 
-
 .console-title {
-    font-size: 20px;
+    font-size: 30px;
     text-align: center;
     
 }
 
+
+/* email templates css */
 span .sideMenuItems {
     display: inline-block;
+}
+
+.filter-li-container {
+    position: absolute;
+    left: 670px;
+    width: 8%;
+    border: solid 1.5px black;
+    background : rgba(251, 238, 238, 0.481);
+    border-radius: 5px;
+}
+
+
+.filter-li {
+    font-size: 14px;
+    color: black;
+    border-bottom: solid black 1px;
+}
+
+.filter-li:hover {
+    background: rgba(251, 238, 238, 0.881);
+}
+
+.selected-menu {
+    text-decoration: underline;
+    opacity: 0.5;
+    font-size: 19px;
+}
+
+.search-container {
+   text-align: center;
+}
+
+.searchBar {
+    width: 60%;
+    height: 30px;
+    border-radius: 15px;
+    border: solid 1px black;
+    margin-top: 25px;
+
 }

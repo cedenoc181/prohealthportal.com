@@ -20,28 +20,28 @@ const handleTemplate = () => setCollapse(!collapse);
     <div id="e-templates" className="console">
      <div className="console-title">Email Templates<span>
      <div className="sideMenuItems">
-     <svg className="svg" onClick={handleTemplate} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+     <svg className="svg" onClick={handleTemplate} xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
         <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
      </svg>
     </div>
    {collapse ? 
    ( 
     <ul className="filter-li-container">
-        <li className="filter-li">Patient Templates</li>
-        <li className="filter-li">Doctor Templates</li>
-        <li className="filter-li">Saved Templates</li>
+        <li className="filter-li">Patient</li>
+        <li className="filter-li">Doctor</li>
+        {/* <li className="filter-li">Saved Templates</li> */}
     </ul>
 
 )
    :
     (
-        " "
+        ""
     )
 }
 
 </span>
 </div>
-      
+      <br />
 <div className="selected-menu">{patientDefault ? "Patient Template" : "Dr Template"}</div>
 <button className="addTemplate"></button>
 
