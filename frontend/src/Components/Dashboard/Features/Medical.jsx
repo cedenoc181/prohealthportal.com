@@ -1,11 +1,104 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { connect } from 'react-redux'
+import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react'
+import {SearchIcon} from '@chakra-ui/icons'
 import "./Features.css"
 
 
 export const Medical = (props) => {
+
+  const [collapse, setCollapse] = useState(false);
+
+  const handleTemplate = () => setCollapse(!collapse);
+
+  const [defaultLanguage, setDefualtLanguage] = useState(true);
+
   return (
-    <div id="medical-forms" className="console">Medical</div>
+    <div id="medical-forms" className="console">
+     <div className="console-title">Medical Form<span>
+     <div className="sideMenuItems">
+     <svg className="svg" onClick={handleTemplate} xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+     </svg>
+    </div>
+   {collapse ? 
+   ( 
+    <ul className="filter-li-container">
+        <li className="filter-li">English Forms</li>
+        <li className="filter-li">Spanish Forms</li>
+        {/* <li className="filter-li">Saved Templates</li> */}
+    </ul>
+
+)
+   :
+    (
+        ""
+    )
+}
+
+</span>
+</div>
+      <br />
+<div className="selected-menu">{ defaultLanguage ? "English Forms" : "Spanish Forms"}</div>
+<button className="addTemplate"></button>
+
+          <div className="filter-Search">
+            <div className="search-container">  
+              <InputGroup className="inputGroup">
+                    <InputLeftElement pointerEvents='none'>
+                 <SearchIcon color='black.600' />
+                    </InputLeftElement>
+                  <Input className="searchBar" width="60%" focusBorderColor='orange.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
+              </InputGroup>
+             </div>
+
+            <div className="filter-buttons">
+     {/*filter by  */}
+     <div>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+
+        {/* sub filter buttons (categories) */}
+
+                <div className="categories-container">
+                <button className="categories">APOS</button>
+                <button className="categories">PT/OT</button>
+                <button className="categories">Authorization</button>
+                <button className="categories">All</button>
+                </div>
+ 
+                <div className="renderContainer">
+                <div className="renderMedical">
+                <div className="medical-title">Doc title</div>
+                    <img className="medical-cover" src={""} alt={""}/>
+                    <br />
+                     <div className="medical-category"><span className="key">Category:</span> Authorization</div>
+                </div>
+
+                <div className="renderMedical">
+                <div className="medical-title">Doc title 2</div>
+                    <img className="medical-cover" src={""} alt={""}/>
+                    <br />
+                     <div className="medical-category"><span className="key">Category:</span> Authorization</div>
+                </div>
+                
+                <div className="renderMedical">
+                <div className="medical-title">Doc title 2</div>
+                    <img className="medical-cover" src={""} alt={""}/>
+                    <br />
+                     <div className="medical-category"><span className="key">Category:</span> Authorization</div>
+                </div>
+                </div>
+            </div>
+       </div>
+
+
+    </div>
   )
 }
 

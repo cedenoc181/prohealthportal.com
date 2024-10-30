@@ -39,7 +39,7 @@ span .sideMenuItems {
 
 .selected-menu {
     text-decoration: underline;
-    opacity: 0.5;
+    opacity: 0.8;
     font-size: 19px;
     padding-left: 5px;
 }
@@ -87,4 +87,19 @@ left: 20%;
 
 .key {
     font-weight: bold;
+}
+
+
+/* Medifiles component CSS */
+
+.renderContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.renderMedical {
+border: black solid 1px;
+border-radius: 10px;
+width: 40%;
+margin: 5%;
 }
