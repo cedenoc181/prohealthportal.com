@@ -1,5 +1,7 @@
 import {React, useState} from 'react'
 import { connect } from 'react-redux'
+import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react'
+import {SearchIcon} from '@chakra-ui/icons'
 import "./Features.css"
 
 export const Email = (props) => {
@@ -42,12 +44,17 @@ const handleTemplate = () => setCollapse(!collapse);
 </span>
 </div>
       <br />
-<div className="selected-menu">{patientDefault ? "Patient Template" : "Dr Template"}</div>
+<div className="selected-menu">{patientDefault ? "Patient Template" : "Doctor Template"}</div>
 <button className="addTemplate"></button>
 
           <div className="filter-Search">
             <div className="search-container">  
-              <input className="searchBar" placeholder='Find email template' />
+              <InputGroup className="inputGroup">
+                    <InputLeftElement pointerEvents='none'>
+                 <SearchIcon color='black.600' />
+                    </InputLeftElement>
+                  <Input className="searchBar" width="60%" focusBorderColor='orange.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
+              </InputGroup>
              </div>
 
             <div className="filter-buttons">
@@ -62,15 +69,42 @@ const handleTemplate = () => setCollapse(!collapse);
             </div>
 
         {/* sub filter buttons (categories) */}
-        <div><h3>Categories filter</h3></div>
-                    <div><button>APOS</button></div>
-                    <div><button>PT/OT</button></div>
-                    <div><button>Outreach</button></div>
+
+        {
+            patientDefault ?
+            
+            (   
+                <div className="categories-container">
+                <button className="categories">APOS</button>
+                <button className="categories">PT/OT</button>
+                <button className="categories">Outreach</button>
+                <button className="categories">Billing</button>
+                </div>
+            ) 
+            
+            :
+            
+            (
+                <div className="categories-container">
+                <button className="categories">APOS</button>
+                <button className="categories">PT/OT</button>
+                <button className="categories">Outreach</button>
+                <button className="categories">Referral</button>
+                </div>
+            )
+        }
+                    
+                   
 
 
 
 
                 <div className="renderEmails">
+                <div className="email-title">Outreach Template</div>
+                    <div className="email-subject"><span className="key">Subject:</span> Schedule your following physical therapy appointemnt</div>
+                    <br />
+                    <div className="email-contents"><span className="key">Body:</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                     <div className="email-category"><span className="key">Category:</span> outreach</div>
                     {/* { patientDefault ? 
                     `
                     <div className="email-title">${patientTemp.title}</div>
