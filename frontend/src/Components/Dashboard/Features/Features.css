@@ -110,3 +110,28 @@ border-radius: 10px;
 width: 40%;
 margin: 5%;
 }
+
+
+/* Task component CSS */
+
+.task-previews {
+    border: solid 2.5px black;
+    border-radius: 20%;
+    height: 20%;
+    width: 75%;
+   margin: 0 auto;
+   margin-top: 10%;
+
+}
+
+.task-title {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.task-point {
+    text-decoration: underline;
+    
+}
