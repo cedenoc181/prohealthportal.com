@@ -45,23 +45,59 @@ export const Task = (props) => {
 
   <div className="task-previews">
     <h2 className="task-title">Daily Operations</h2>
-        <p className="task-point"></p>
-        <p className="task-point"></p>
-        <p className="task-point"></p>
+        <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+    </svg>
+      &nbsp;</p>
+        <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+    </svg>
+      &nbsp;</p>
+        <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+    </svg>
+      &nbsp;</p>
   </div>
   <br />
   <div className="task-previews">
     <h2 className="task-title">Authoriztions</h2>
-    <p className="task-point"></p>
-    <p className="task-point"></p>
-    <p className="task-point"></p>
+   <p className="task-point"> 
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+    </svg>
+      &nbsp;
+       do reminder calls 
+    </p>
+    <p className="task-point"> 
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+    </svg>
+      &nbsp;
+       do reminder calls 
+    </p>
+    <p className="task-point"> 
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+    </svg>
+      &nbsp;
+       do reminder calls 
+    </p>
   </div>
   <br />
   <div className="task-previews">
     <h2 className="task-title">APOS</h2>
-    <p className="task-point"></p>
-    <p className="task-point"></p>
-    <p className="task-point"></p>
+    <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+    </svg>
+      &nbsp;</p>
+    <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+    </svg>
+      &nbsp;</p>
+    <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+    </svg>
+      &nbsp;</p>
   </div>
       
     </div>
