@@ -125,10 +125,6 @@ margin: 5%;
    background: rgba(119, 246, 237, 0.256)
 }
 
-/* .task-previews:nth-of-type(1) {
-background: rgba(143, 218, 240, 0.76)
-} */
-
 
 .task-title {
     text-align: center;
@@ -150,3 +146,53 @@ background: rgba(143, 218, 240, 0.76)
     border-bottom-left-radius: 10px;
 }
 
+/* Inventory CSS */
+
+
+.low-inv-title, .inv-req-title, .inv-order-title {
+    font-size: 27px;
+    text-decoration: underline;
+    text-align: center;
+    padding-bottom: 3%;
+}
+
+.inventory-con {
+    border-bottom: solid 2.5px rgba(90, 89, 89, 0.381) ;
+   
+}
+
+.low-inv-list, .inv-order-list{
+    display: inline;
+ 
+}
+
+.low-item, .ordered-item {
+    display: flex;
+    text-align: center;
+    padding-bottom: 2%;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 4%;
+}
+
+.inv-cur-count, .item-name-quant {
+    padding-left: 10px;
+    padding-right: 10px;
+    color: red;
+}
+
+.item-name-quant {
+    color: rgb(95, 94, 94);
+}
+
+.inv-expand {
+    display: flex;
+    justify-content: end;
+    padding-right: 4%;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.inv-expand button {
+    border: solid 1.5px rgba(220, 244, 198, 0.481) ;
+}
