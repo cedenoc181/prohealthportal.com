@@ -25,9 +25,17 @@ ul {
 
    .main {
 border-right: solid 5px rgb(247, 225, 221); 
+border-bottom: 1px solid #ddd;
    }
 
    .main-title {
     font-size: 50px;
     color: black;
    }
+
+   .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f1f1f1;
+  }

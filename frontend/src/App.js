@@ -52,6 +52,11 @@ function App() {
     }
   }, [location]);
 
+  const today = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+     const formattedDate = today.toLocaleDateString('en-US', options); // e.g., "November 5, 2024"
+    console.log(formattedDate);
+
   return (
     <Provider store={store}>
       <div id="dashboard" className="App">
@@ -69,6 +74,10 @@ function App() {
           </Routes>
         </div>
         <div id="main" className="main">
+        <div className="header">
+            <div className="date-time">{formattedDate}</div>
+            <div className="user-info">Username</div>
+          </div>
           {mainContent}
         </div>
       </div>

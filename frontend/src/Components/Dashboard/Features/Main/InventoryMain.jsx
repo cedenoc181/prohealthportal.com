@@ -5,8 +5,7 @@ export const InventoryMain = (props) => {
   return (
 
         <div  className="main-title">
-            hello 
-            motherfuckers
+         inventory 
 
         </div>
    
