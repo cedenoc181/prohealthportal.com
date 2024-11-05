@@ -1,8 +1,8 @@
 import {React, useState} from 'react'
 import { connect } from 'react-redux'
 import "./Features.css"
-import { Input } from '@chakra-ui/react'
-
+import { Input, InputGroup, InputLeftElement, Stack, Button } from '@chakra-ui/react'
+import {LinkIcon, AddIcon, ChevronRightIcon } from '@chakra-ui/icons'
 export const Inventory = (props) => {
 
   const [collapse, setCollapse] = useState(false);
@@ -42,7 +42,7 @@ let count = Math.floor(Math.random() * 10) + 1;
 }
 </span>
 </div>
-{/* <br /> */}
+<br />
 <div className="selected-menu">West 180</div>
 
 <div className="inventory-con">
@@ -85,9 +85,7 @@ paper towels :
 available
   </li>
 </ul>
- <div className="inv-expand">
-    <button>Show more...</button>
-    </div>
+ <button className="inv-expand">Show more<span><ChevronRightIcon color='blue.600' /></span></button>
 </div>
 <br />
 
@@ -126,7 +124,7 @@ available
     </li>
    </ul>
    <div className="inv-expand">
-    <button>Show more...</button>
+    <button>Show more<span><ChevronRightIcon color='blue.600' /></span></button>
     </div>
 </div>
 <br />
@@ -134,32 +132,54 @@ available
 <div className="inventory-req">
 <h2 className="inv-req-title">Request form</h2>
 <form className="inv-form">
+<Stack spacing={4}>
+<InputGroup className="inv-input">
+<InputLeftElement pointerEvents='none'>
+<AddIcon color='gray.800'/>
+</InputLeftElement>
+<Input type="add" placeholder='Item' />
+</InputGroup>
 
-<Input className="inv-input"  placeholder='Item' />
-
-<Input className="inv-input"  placeholder='Item link' />
-
-    <div class="input-group mb-3 inv-menu">
-  <label class="input-group-text" for="inputGroupSelect01">Category</label>
+<InputGroup className="inv-input">
+<InputLeftElement pointerEvents='none'>
+<LinkIcon color='gray.800'/>
+</InputLeftElement>
+<Input type="link"  placeholder='Item link' />
+</InputGroup>
+</Stack>
+<br />
+    <div class="input-group mb-3 select-category">
+  <label class="input-group-text" for="inputGroupSelect01">Category:</label>
   <select class="form-select" id="inputGroupSelect01">
-    <option selected>Choose...</option>
+    <option selected className="placeholder-select">Choose...</option>
     <option value="1">Office</option>
     <option value="2">Cleaning</option>
     <option value="3">Equipment</option>
   </select>
 </div>
 
-    <div class="input-group mb-3 inv-menu">
-  <label class="input-group-text" for="inputGroupSelect01">Count per Box</label>
+    <div class="input-group mb-3 select-count">
+  <label class="input-group-text" for="inputGroupSelect01">Amount:</label>
   <select class="form-select" id="inputGroupSelect01">
-    <option selected>Count...</option>
+    <option selected className="placeholder-select">Count...</option>
     <option value="1">1-3</option>
     <option value="2">4-6</option>
     <option value="3">7-10</option>
   </select>
 </div>
 
-    <button className="inv-submission">Request</button> {/* submit */}
+    {/* <button className="inv-submission">Request</button> submit */}
+
+
+    <Button
+    // isLoading
+    // loadingText='Submitting'
+    className="inv-submission"
+    colorScheme='blue'
+    variant='outline'
+  >
+    Submit
+  </Button>
 </form>
 </div>
 

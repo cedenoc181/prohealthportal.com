@@ -1,7 +1,8 @@
 .console {
     height: 100vh;
     border-right: solid 2px orange;
-    background: rgba(251, 176, 119, 0.481)
+    background: rgba(251, 176, 119, 0.481);
+    overflow-y: scroll;
 }
 
 
@@ -150,15 +151,15 @@ margin: 5%;
 
 
 .low-inv-title, .inv-req-title, .inv-order-title {
-    font-size: 27px;
+    font-size: 25px;
     text-decoration: underline;
     text-align: center;
-    padding-bottom: 3%;
+    padding-bottom: 1%;
 }
 
 .inventory-con {
     border-bottom: solid 2.5px rgba(90, 89, 89, 0.381) ;
-   
+    padding-bottom: 8%;
 }
 
 .low-inv-list, .inv-order-list{
@@ -187,12 +188,77 @@ margin: 5%;
 
 .inv-expand {
     display: flex;
-    justify-content: end;
+    float: right;
     padding-right: 4%;
     text-decoration: underline;
     font-weight: 500;
 }
 
 .inv-expand button {
-    border: solid 1.5px rgba(220, 244, 198, 0.481) ;
+    padding-bottom: 2%;
+}
+
+.inv-expand:hover {
+color: rgb(16, 181, 236);
+text-decoration: none;
+}
+
+
+.inv-input {
+    width: 70% !important;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.inventory-req {
+    margin-bottom: 20%;
+}
+
+.select-count .input-group-text {
+    padding-left: 12px;
+}
+
+.input-group {
+    margin-bottom: 5%;
+}
+
+.inv-form {
+    padding: 2.5%;
+}
+
+.input-group {
+    display: block;
+    padding-left: 25%;
+ 
+}
+
+.input-group-text {
+    font-size: 20px;
+    padding-right: 5%;
+}
+
+
+.placeholder-select {
+ color: rgba(3, 94, 241, 0.774);
+}
+
+.form-select {
+    border: solid 2px rgba(244, 237, 237, 0.575);
+    border-radius: 10px;
+    height: 30px;
+    background: transparent;
+}
+
+.form-select:hover {
+    border-color: rgba(3, 94, 241, 0.774);
+}
+
+.form-select:target {
+    border-color: rgba(3, 94, 241, 0.774)
+}
+
+.inv-submission {
+    margin-left: 22.5%;
+    width: 55%;
 }
