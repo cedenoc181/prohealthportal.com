@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 
 export const InventoryMain = (props) => {
   return (
-    <div>InventoryMain
-        <div>
+
+        <div id="main" className="main-title">
             hello 
+            motherfuckers
+
         </div>
-    </div>
+   
   )
 }
 

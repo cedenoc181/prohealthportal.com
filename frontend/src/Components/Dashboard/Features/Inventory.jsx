@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import "./Features.css"
 import { Input, InputGroup, InputLeftElement, Stack, Button } from '@chakra-ui/react'
 import {LinkIcon, AddIcon, ChevronRightIcon } from '@chakra-ui/icons'
+import InventoryMain from './Main/InventoryMain'
+
+
 export const Inventory = (props) => {
 
   const [collapse, setCollapse] = useState(false);
@@ -14,7 +17,8 @@ let count = Math.floor(Math.random() * 10) + 1;
 
 
   return (
-    <div id="inventory" className="console"> 
+    <div id="inventory">
+      <div className="console"> 
 
 <div className="console-title">Inventory<span>
    <div className="sideMenuItems">
@@ -185,7 +189,7 @@ available
 
 
 
-
+</div>
     </div>
   )
 }

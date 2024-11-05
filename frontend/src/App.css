@@ -21,3 +21,13 @@
 ul {
    list-style-type: none;
    }
+
+
+   .main {
+border-right: solid 5px rgb(247, 225, 221); 
+   }
+
+   .main-title {
+    font-size: 50px;
+    color: black;
+   }

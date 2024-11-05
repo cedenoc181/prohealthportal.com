@@ -13,6 +13,7 @@ import Medifiles from "./Components/Dashboard/Features/Medical.jsx";
 import TasksList from "./Components/Dashboard/Features/Task.jsx";
 import Inventory from "./Components/Dashboard/Features/Inventory.jsx";
 import Account from "./Components/Dashboard/Features/Account.jsx";
+import InventoryMain from './Components/Dashboard/Features/Main/InventoryMain.jsx';
 
 
 function App() {
@@ -22,13 +23,8 @@ function App() {
     <Provider store={store}>
     <div id="dashboard" className="App">
      <div className="nav-display"><Nav /></div> 
-      {/* <div className="console-display">{""}</div>
-        <div className="main-display">{""}</div> */}
-
-
-
-
-         <Routes>
+      <div className="console-display">
+      <Routes>
           <Route path="/login" element={<Login />} />
           {/* routes for features */}
           <Route path="/overview-console" element={<Overview />} />
@@ -38,6 +34,16 @@ function App() {
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/account-settings" element={<Account />} />
          </Routes>
+
+      </div>
+        <div className="main">
+          {/* http://localhost:4000/ */}
+ {window.location.pathname === '/inventory' ? <InventoryMain /> : null}
+        
+        </div>
+
+
+  
     </div>
     </Provider>
   );
