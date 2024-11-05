@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 export const InventoryMain = (props) => {
   return (
 
-        <div id="main" className="main-title">
+        <div  className="main-title">
             hello 
             motherfuckers
 
