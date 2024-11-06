@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './InvMain.css';
 
 export const InventoryMain = (props) => {
-  // Existing inventory table state
+  // Existing inventory state
   const [inventoryItems, setInventoryItems] = useState([
     { type: 'Office Supply', item: 'Business Cards', count: 10, status: 'Insufficient' },
     { type: 'Medical Equipment', item: 'Electrodes', count: 15, status: 'Available' },
@@ -11,76 +11,117 @@ export const InventoryMain = (props) => {
     { type: 'Cleaning Supply', item: 'Paper Towels', count: 5, status: 'Low' },
   ]);
 
-  const [newItem, setNewItem] = useState({
-    type: '',
-    item: '',
-    count: '',
-    status: ''
-  });
-
-  // New state for ordered inventory items
+  // Ordered inventory state
   const [orderedItems, setOrderedItems] = useState([
-    { type: 'Medical Equipment', item: 'Bandages', count: 50, orderDate: '11-01-2024', status: 'Ordered' },
-    { type: 'Cleaning Supply', item: 'Disinfectant', count: 30, orderDate: '10-28-2024', status: 'Out for Delivery' },
-    { type: 'Office Supply', item: 'Ink Cartridges', count: 10, orderDate: '10-25-2024', status: 'Shipped' },
+    { type: 'Medical Equipment', item: 'Bandages', count: 50, orderDate: '2024-11-01' },
+    { type: 'Cleaning Supply', item: 'Disinfectant', count: 30, orderDate: '2024-10-28' },
+    { type: 'Office Supply', item: 'Ink Cartridges', count: 10, orderDate: '2024-10-25' },
   ]);
 
+  // State for new ordered item input
   const [newOrderedItem, setNewOrderedItem] = useState({
     type: '',
     item: '',
     count: '',
     orderDate: '',
-    expectedDelivery: '',
-    status: ''
   });
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [editIndex, setEditIndex] = useState(null);
+  // State for new inventory item input for available supplies
+  const [newInventoryItem, setNewInventoryItem] = useState({
+    type: '',
+    item: '',
+    count: '',
+    status: '',
+  });
 
-  // Handle changes for the first inventory table
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewItem({ ...newItem, [name]: value });
-  };
+  const [isEditingOrdered, setIsEditingOrdered] = useState(false);
+  const [editOrderedIndex, setEditOrderedIndex] = useState(null);
 
-  // Handle changes for the ordered inventory table
+  const [isEditingInventory, setIsEditingInventory] = useState(false);
+  const [editInventoryIndex, setEditInventoryIndex] = useState(null);
+
+  // Handle changes for ordered inventory input
   const handleOrderedChange = (e) => {
     const { name, value } = e.target;
     setNewOrderedItem({ ...newOrderedItem, [name]: value });
   };
 
-  const addNewItem = () => {
-    if (newItem.type && newItem.item && newItem.count && newItem.status) {
-      if (isEditing) {
-        // Update the existing item
-        const updatedItems = [...inventoryItems];
-        updatedItems[editIndex] = newItem;
-        setInventoryItems(updatedItems);
-        setIsEditing(false);
-        setEditIndex(null);
-      } else {
-        // Add a new item
-        setInventoryItems([...inventoryItems, newItem]);
-      }
-      setNewItem({ type: '', item: '', count: '', status: '' }); // Clear input fields
-    } else {
-      alert('Please fill out all fields before adding an item.');
-    }
+  // Handle changes for available inventory input
+  const handleInventoryChange = (e) => {
+    const { name, value } = e.target;
+    setNewInventoryItem({ ...newInventoryItem, [name]: value });
   };
 
-  const addNewOrderedItem = () => {
-    if (newOrderedItem.type && newOrderedItem.item && newOrderedItem.count && newOrderedItem.orderDate && newOrderedItem.expectedDelivery && newOrderedItem.status) {
-      setOrderedItems([...orderedItems, newOrderedItem]);
-      setNewOrderedItem({ type: '', item: '', count: '', orderDate: '', expectedDelivery: '', status: '' }); // Clear input fields
+  // Add or update ordered inventory item
+  const addOrUpdateOrderedItem = () => {
+    if (newOrderedItem.type && newOrderedItem.item && newOrderedItem.count && newOrderedItem.orderDate) {
+      if (isEditingOrdered) {
+        // Update the existing ordered item
+        const updatedOrderedItems = [...orderedItems];
+        updatedOrderedItems[editOrderedIndex] = newOrderedItem;
+        setOrderedItems(updatedOrderedItems);
+        setIsEditingOrdered(false);
+        setEditOrderedIndex(null);
+      } else {
+        // Add a new ordered item
+        setOrderedItems([...orderedItems, newOrderedItem]);
+      }
+      setNewOrderedItem({ type: '', item: '', count: '', orderDate: '' });
     } else {
       alert('Please fill out all fields before adding an ordered item.');
     }
   };
 
-  const handleEdit = (index) => {
-    setNewItem(inventoryItems[index]);
-    setIsEditing(true);
-    setEditIndex(index);
+  // Add or update available inventory item
+  const addOrUpdateInventoryItem = () => {
+    if (newInventoryItem.type && newInventoryItem.item && newInventoryItem.count && newInventoryItem.status) {
+      if (isEditingInventory) {
+        // Update the existing inventory item
+        const updatedInventoryItems = [...inventoryItems];
+        updatedInventoryItems[editInventoryIndex] = newInventoryItem;
+        setInventoryItems(updatedInventoryItems);
+        setIsEditingInventory(false);
+        setEditInventoryIndex(null);
+      } else {
+        // Add a new inventory item
+        setInventoryItems([...inventoryItems, newInventoryItem]);
+      }
+      setNewInventoryItem({ type: '', item: '', count: '', status: '' });
+    } else {
+      alert('Please fill out all fields before adding an inventory item.');
+    }
+  };
+
+  // Handle edit for ordered inventory
+  const handleEditOrdered = (index) => {
+    setNewOrderedItem(orderedItems[index]);
+    setIsEditingOrdered(true);
+    setEditOrderedIndex(index);
+  };
+
+  // Handle edit for available inventory
+  const handleEditInventory = (index) => {
+    setNewInventoryItem(inventoryItems[index]);
+    setIsEditingInventory(true);
+    setEditInventoryIndex(index);
+  };
+
+  // Handle marking an item as "Delivered"
+  const markAsDelivered = () => {
+    if (isEditingOrdered && editOrderedIndex !== null) {
+      const deliveredItem = newOrderedItem;
+      setInventoryItems([
+        ...inventoryItems,
+        { type: deliveredItem.type, item: deliveredItem.item, count: deliveredItem.count, status: 'Available' }
+      ]);
+      const updatedOrderedItems = orderedItems.filter((_, i) => i !== editOrderedIndex);
+      setOrderedItems(updatedOrderedItems);
+      setIsEditingOrdered(false);
+      setEditOrderedIndex(null);
+      setNewOrderedItem({ type: '', item: '', count: '', orderDate: '' });
+    } else {
+      alert('Please select an item to edit before marking as delivered.');
+    }
   };
 
   return (
@@ -105,45 +146,43 @@ export const InventoryMain = (props) => {
                 <td>{item.count}</td>
                 <td>{item.status}</td>
                 <td>
-                  <button onClick={() => handleEdit(index)}>Edit</button>
+                  <button onClick={() => handleEditInventory(index)}>Edit</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
 
-        <div className="add-item-form">
-          <h3>{isEditing ? 'Edit Item' : 'Add New Item'}</h3>
-          <input
-            type="text"
-            name="type"
-            placeholder="Type"
-            value={newItem.type}
-            onChange={handleChange}
-          />
+        <div className="add-inventory-item-form">
+          <h3>{isEditingInventory ? 'Edit Inventory Item' : 'Add Existing Inventory Item'}</h3>
+          <select name="type" value={newInventoryItem.type} onChange={handleInventoryChange}>
+            <option value="">Select Type</option>
+            <option value="Office Supply">Office Supply</option>
+            <option value="Medical Equipment">Medical Equipment</option>
+            <option value="Cleaning Supply">Cleaning Supply</option>
+          </select>
           <input
             type="text"
             name="item"
             placeholder="Item"
-            value={newItem.item}
-            onChange={handleChange}
+            value={newInventoryItem.item}
+            onChange={handleInventoryChange}
           />
           <input
             type="number"
             name="count"
             placeholder="Count"
-            value={newItem.count}
-            onChange={handleChange}
+            value={newInventoryItem.count}
+            onChange={handleInventoryChange}
           />
-          <input
-            type="text"
-            name="status"
-            placeholder="Status"
-            value={newItem.status}
-            onChange={handleChange}
-          />
-          <button onClick={addNewItem}>
-            {isEditing ? 'Update Item' : 'Add Item'}
+          <select name="status" value={newInventoryItem.status} onChange={handleInventoryChange}>
+            <option value="">Select Status</option>
+            <option value="Available">Available</option>
+            <option value="Insufficient">Insufficient</option>
+            <option value="Low">Low</option>
+          </select>
+          <button onClick={addOrUpdateInventoryItem}>
+            {isEditingInventory ? 'Update Inventory Item' : 'Add Inventory Item'}
           </button>
         </div>
       </div>
@@ -157,7 +196,7 @@ export const InventoryMain = (props) => {
               <th>Item</th>
               <th>Count</th>
               <th>Order Date</th>
-              <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -167,21 +206,22 @@ export const InventoryMain = (props) => {
                 <td>{item.item}</td>
                 <td>{item.count}</td>
                 <td>{item.orderDate}</td>
-                <td>{item.status}</td>
+                <td>
+                  <button onClick={() => handleEditOrdered(index)}>Edit</button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
 
         <div className="add-ordered-item-form">
-          <h3>Add New Ordered Item</h3>
-          <input
-            type="text"
-            name="type"
-            placeholder="Type"
-            value={newOrderedItem.type}
-            onChange={handleOrderedChange}
-          />
+          <h3>{isEditingOrdered ? 'Edit Ordered Item' : 'Add New Ordered Item'}</h3>
+          <select name="type" value={newOrderedItem.type} onChange={handleOrderedChange}>
+            <option value="">Select Type</option>
+            <option value="Office Supply">Office Supply</option>
+            <option value="Medical Equipment">Medical Equipment</option>
+            <option value="Cleaning Supply">Cleaning Supply</option>
+          </select>
           <input
             type="text"
             name="item"
@@ -203,14 +243,12 @@ export const InventoryMain = (props) => {
             value={newOrderedItem.orderDate}
             onChange={handleOrderedChange}
           />
-          <input
-            type="text"
-            name="status"
-            placeholder="Status"
-            value={newOrderedItem.status}
-            onChange={handleOrderedChange}
-          />
-          <button onClick={addNewOrderedItem}>Add Ordered Item</button>
+          <button onClick={addOrUpdateOrderedItem}>
+            {isEditingOrdered ? 'Update Ordered Item' : 'Add Ordered Item'}
+          </button>
+          {isEditingOrdered && (
+            <button onClick={markAsDelivered}>Mark as Delivered</button>
+          )}
         </div>
       </div>
     </div>

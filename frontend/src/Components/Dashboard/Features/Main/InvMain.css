@@ -1,13 +1,4 @@
 .inventory-container {
-    overflow-y: scroll;
-    height: 100vh;
-    padding-bottom: 10%;
-}
-
-
-
-
-.inventory-table {
     margin: 20px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -15,14 +6,17 @@
     background-color: #f9f9f9;
   }
   
-  .inventory-table h2 {
+  .main-title {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: bold;
   }
   
   table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 20px;
   }
   
   th, td {
@@ -34,59 +28,87 @@
   th {
     background-color: #4c84af;
     color: white;
+    font-weight: bold;
   }
   
   tr:hover {
     background-color: #f1f1f1;
   }
   
-  .add-item-form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .add-item-form input {
-    padding: 8px;
-    border: 1px solid #ddd;
+  button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
     border-radius: 4px;
-    width: 60%;
+    cursor: pointer;
   }
   
-  .add-item-form button {
+  button:hover {
+    opacity: 0.85;
+  }
+  
+  button.edit {
+    background-color: #ffc107; /* Yellow for Edit button */
+    color: #333;
+  }
+  
+  button.delivered {
+    background-color: #4CAF50; /* Green for Delivered button */
+    color: white;
+  }
+  
+  button.add-item {
     padding: 10px;
     background-color: #4c84af;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;
   }
   
-  .add-item-form button:hover {
-    background-color: #45a049;
+  button.add-item:hover {
+    background-color: #45a049; /* Green when hovered */
   }
   
-  .ordered-inventory-table {
-    margin: 20px;
-    padding: 20px;
+  .add-inventory-item-form,
+  .add-ordered-item-form {
+    margin-top: 20px;
+    padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  .ordered-inventory-table h2 {
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  
-  .add-ordered-item-form {
+    background-color: #f1f1f1;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 10px;
   }
-
+  
+  .add-inventory-item-form h3,
+  .add-ordered-item-form h3 {
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus,
+  select:focus {
+    border-color: #4c84af;
+    outline: none;
+  }
+  
+  .add-inventory-item-form button,
   .add-ordered-item-form button {
     padding: 10px;
     background-color: #4c84af;
@@ -94,9 +116,21 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;
   }
-
+  
+  .add-inventory-item-form button:hover,
   .add-ordered-item-form button:hover {
+    background-color: #45a049;
+  }
+  
+  .add-ordered-item-form .delivered-button {
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 5px;
+  }
+  
+  .add-ordered-item-form .delivered-button:hover {
     background-color: #45a049;
   }
   
