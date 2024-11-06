@@ -49,8 +49,8 @@ let count = Math.floor(Math.random() * 10) + 1;
 <br />
 <div className="selected-menu">West 180</div>
 
+<h2 className="low-inv-title">Insufficient Inventory</h2>
 <div className="inventory-con">
-  <h2 className="low-inv-title">Insufficient Inventory</h2>
   <table className="low-inv-table">
     <thead>
       <tr>
@@ -92,8 +92,8 @@ let count = Math.floor(Math.random() * 10) + 1;
   </table>
 </div>
 
+<h2 className="inv-order-title">Order Status</h2>
 <div className="inventory-con">
-  <h2 className="inv-order-title">Order Status</h2>
   <table className="order-status-table">
     <thead>
       <tr>

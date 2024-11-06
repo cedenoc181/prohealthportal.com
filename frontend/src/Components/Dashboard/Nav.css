@@ -1,6 +1,6 @@
 #nav {
   background-color: #6d9df6a7;
-  border-right: solid 2px black;
+  border-right: solid 2px rgb(2, 29, 56);
   opacity: 70%;
   height: 100vh;
 }
@@ -15,16 +15,9 @@
 .nav-header {
   text-align: center;
   padding: 15%;
+  padding-bottom: 30%;
 }
 
-.nave-title {
-  padding-top: 10%;
-  font-size: 30px;
-  font-weight: 500;
-  color: black;
-  /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif */
-  text-decoration: underline;
-}
 
 .nav-slot {
   display: flex;
@@ -36,4 +29,22 @@
   position: relative;
   bottom: 22px;
   left: 30px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.nav-link:active {
+  text-decoration: underline;
+}
+
+
+.copyright {
+  display: flex;
+  margin-top: 30%;;
+  font-size: 14px;
+  padding-left: 3%;
+}
+
+.bootIconFooter {
+  padding-right: 1%;
 }

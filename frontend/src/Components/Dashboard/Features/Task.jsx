@@ -43,8 +43,23 @@ export const Task = (props) => {
 <br />
 <div className="selected-menu">Daily operations</div>
 
+<h2 className="task-title">Daily Operations</h2>
   <div className="task-previews">
-    <h2 className="task-title">Daily Operations</h2>
+        <table className="">
+        <thead>
+          <tr>
+            <th>Daily Task</th>
+          </tr>
+        </thead>
+        </table>
+
+
+
+
+
+
+
+    {/* <h2 className="task-title">Daily Operations</h2>
         <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
     </svg>
@@ -57,9 +72,9 @@ export const Task = (props) => {
       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
     </svg>
       &nbsp;</p>
-  </div>
-  <br />
-  <div className="task-previews">
+  </div> */}
+
+  {/* <div className="task-previews">
     <h2 className="task-title">Authoriztions</h2>
    <p className="task-point"> 
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
@@ -98,8 +113,8 @@ export const Task = (props) => {
       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
     </svg>
       &nbsp;</p>
-  </div>
-      
+  </div> */}
+      </div> 
     </div>
   )
 }

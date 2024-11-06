@@ -4,6 +4,7 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
   
   .main-title {
@@ -11,6 +12,7 @@
     margin-bottom: 15px;
     color: #333;
     font-weight: bold;
+    padding-top: 3%;
   }
   
   table {
@@ -134,3 +136,18 @@
     background-color: #45a049;
   }
   
+
+  .status.insufficient {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .status.available {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .status.low {
+    color: rgb(213, 213, 75);
+    font-weight: bold;
+  }

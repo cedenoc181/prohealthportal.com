@@ -144,7 +144,7 @@ export const InventoryMain = (props) => {
                 <td>{item.type}</td>
                 <td>{item.item}</td>
                 <td>{item.count}</td>
-                <td>{item.status}</td>
+                <td className={`status ${item.status.toLowerCase()}`}>{item.status}</td>
                 <td>
                   <button onClick={() => handleEditInventory(index)}>Edit</button>
                 </td>
