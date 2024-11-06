@@ -1,7 +1,7 @@
 .console {
     height: 100vh;
-    border-right: solid 2px orange;
-    background: rgba(251, 176, 119, 0.481);
+    border-right: solid 2px rgb(70, 92, 126);
+    background: rgba(206, 226, 246, 0.481);
     overflow-y: scroll;
 }
 
@@ -181,89 +181,69 @@ margin: 5%;
     padding-left: 4%;
 }
 
-.inv-cur-count, .item-name-quant {
-    padding-left: 10px;
-    padding-right: 10px;
-    color: red;
-}
 
-.item-name-quant {
-    color: rgb(95, 94, 94);
-}
-
-.inv-expand {
-    display: flex;
-    float: right;
-    padding-right: 4%;
-    text-decoration: underline;
-    font-weight: 500;
-}
-
-.inv-expand button {
-    padding-bottom: 2%;
-}
-
-.inv-expand:hover {
-color: rgb(16, 181, 236);
-text-decoration: none;
-}
-
-
-.inv-input {
-    width: 70% !important;
-    display: block;
-    margin: 0 auto;
-
-}
 
 .inventory-req {
-    margin-bottom: 20%;
-}
-
-.select-count .input-group-text {
-    padding-left: 12px;
-}
-
-.input-group {
-    margin-bottom: 5%;
-}
-
-.inv-form {
-    padding: 2.5%;
-}
-
-.input-group {
-    display: block;
-    padding-left: 25%;
- 
-}
-
-.input-group-text {
-    font-size: 20px;
-    padding-right: 5%;
-}
-
-
-.placeholder-select {
- color: rgba(3, 94, 241, 0.774);
-}
-
-.form-select {
-    border: solid 2px rgba(244, 237, 237, 0.575);
-    border-radius: 10px;
-    height: 30px;
-    background: transparent;
-}
-
-.form-select:hover {
-    border-color: rgba(3, 94, 241, 0.774);
-}
-
-.form-select:target {
-    border-color: rgba(3, 94, 241, 0.774)
-}
-
-.inv-submission {
-    margin-left: 22.5%;
-    width: 55%;
-}
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .inv-req-title {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  
+  .inv-form {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-stack {
+    margin-bottom: 20px;
+  }
+  
+  .inv-input {
+    width: 100%;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .input-group-text {
+    background-color: #4c84af;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .form-select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: calc(100% - 120px);
+  }
+  
+  .form-select:focus {
+    border-color: #4c84af;
+    outline: none;
+  }
+  
+  .inv-submission {
+    padding: 10px;
+    background-color: #4c84af;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .inv-submission:hover {
+    background-color: #45a049;
+  }
