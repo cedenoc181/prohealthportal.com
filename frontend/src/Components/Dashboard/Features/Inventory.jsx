@@ -89,7 +89,6 @@ paper towels :
 available
   </li>
 </ul>
- <button className="inv-expand">Show more<span><ChevronRightIcon color='blue.600' /></span></button>
 </div>
 <br />
 
@@ -127,9 +126,6 @@ available
 <span className="item-name-quant"> item name: {count}</span>
     </li>
    </ul>
-   <div className="inv-expand">
-    <button>Show more<span><ChevronRightIcon color='blue.600' /></span></button>
-    </div>
 </div>
 <br />
 

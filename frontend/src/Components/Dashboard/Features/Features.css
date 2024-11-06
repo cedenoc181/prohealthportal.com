@@ -12,6 +12,11 @@
     
 }
 
+.main {
+    overflow-y: scroll;
+    height: 100vh;
+}
+
 
 /* email templates css */
 span .sideMenuItems {
