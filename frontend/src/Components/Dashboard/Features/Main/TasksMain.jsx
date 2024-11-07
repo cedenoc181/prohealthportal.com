@@ -7,7 +7,7 @@ export const TasksMain = (props) => {
 
 const [taskList, setTaskList] = useState(null);
 
-
+const [isEditingReminder, setIsEditingReminder] = useState(false);
   return (
     <div className="task-container">
  <div className="task-table">
@@ -32,6 +32,40 @@ const [taskList, setTaskList] = useState(null);
                </tr>
              </tbody>
           </table>
+
+          <div className="add-inventory-item-form">
+          <h3>{isEditingReminder ? 'Edit Appointment Remidner' : 'Add Appointment Remidner'}</h3>
+          <select name="type" value="" onChange={""}>
+            <option value="">Select Type</option>
+            <option value="Office Supply">pending</option>
+            <option value="Medical Equipment">pending</option>
+            <option value="Cleaning Supply">pending</option>
+          </select>
+          <input
+            type="text"
+            name="item"
+            placeholder="Item"
+            value=""
+            onChange={""}
+          />
+          <input
+          type="text"
+          name="item"
+          placeholder="Item"
+          value=""
+          onChange={""}
+          />
+          <select name="status" value="" onChange={""}>
+            <option value="">Select Status</option>
+            <option value="pending">pending</option>
+            <option value="pending">pending</option>
+            <option value="pending">pending</option>
+          </select>
+          <button onClick={""}>
+            {isEditingReminder ? 'Update Patient Reminder' : 'Add Patient Reminder'}
+          </button>
+        </div>
+
 
         <div className="app-reminder-form">
               
@@ -63,6 +97,40 @@ const [taskList, setTaskList] = useState(null);
                </tr>
              </tbody>
           </table>
+
+          <div className="add-inventory-item-form">
+          <h3>{isEditingReminder ? 'Edit Appointment Remidner' : 'Add Appointment Remidner'}</h3>
+          <select name="type" value="" onChange={""}>
+            <option value="">Select Type</option>
+            <option value="Office Supply">pending</option>
+            <option value="Medical Equipment">pending</option>
+            <option value="Cleaning Supply">pending</option>
+          </select>
+          <input
+            type="text"
+            name="item"
+            placeholder="Item"
+            value=""
+            onChange={""}
+          />
+          <input
+          type="text"
+          name="item"
+          placeholder="Item"
+          value=""
+          onChange={""}
+          />
+          <select name="status" value="" onChange={""}>
+            <option value="">Select Status</option>
+            <option value="pending">pending</option>
+            <option value="pending">pending</option>
+            <option value="pending">pending</option>
+          </select>
+          <button onClick={""}>
+            {isEditingReminder ? 'Update Patient Reminder' : 'Add Patient Reminder'}
+          </button>
+        </div>
+
           </div>
 
           <div className="task-table">
@@ -87,6 +155,39 @@ const [taskList, setTaskList] = useState(null);
                </tr>
              </tbody>
           </table>
+
+          <div className="add-inventory-item-form">
+          <h3>{isEditingReminder ? 'Edit Appointment Remidner' : 'Add Appointment Remidner'}</h3>
+          <select name="type" value="" onChange={""}>
+            <option value="">Select Type</option>
+            <option value="Office Supply">pending</option>
+            <option value="Medical Equipment">pending</option>
+            <option value="Cleaning Supply">pending</option>
+          </select>
+          <input
+            type="text"
+            name="item"
+            placeholder="Item"
+            value=""
+            onChange={""}
+          />
+          <input
+          type="text"
+          name="item"
+          placeholder="Item"
+          value=""
+          onChange={""}
+          />
+          <select name="status" value="" onChange={""}>
+            <option value="">Select Status</option>
+            <option value="pending">pending</option>
+            <option value="pending">pending</option>
+            <option value="pending">pending</option>
+          </select>
+          <button onClick={""}>
+            {isEditingReminder ? 'Update Patient Reminder' : 'Add Patient Reminder'}
+          </button>
+        </div>
           </div>
 
           <div className="task-table">
@@ -111,9 +212,41 @@ const [taskList, setTaskList] = useState(null);
                </tr>
              </tbody>
           </table>
+
+
+          <div className="add-inventory-item-form">
+          <h3>{isEditingReminder ? 'Edit Appointment Remidner' : 'Add Appointment Remidner'}</h3>
+          <select name="type" value="" onChange={""}>
+            <option value="">Select Type</option>
+            <option value="Office Supply">pending</option>
+            <option value="Medical Equipment">pending</option>
+            <option value="Cleaning Supply">pending</option>
+          </select>
+          <input
+            type="text"
+            name="item"
+            placeholder="Item"
+            value=""
+            onChange={""}
+          />
+          <input
+          type="text"
+          name="item"
+          placeholder="Item"
+          value=""
+          onChange={""}
+          />
+          <select name="status" value="" onChange={""}>
+            <option value="">Select Status</option>
+            <option value="pending">pending</option>
+            <option value="pending">pending</option>
+            <option value="pending">pending</option>
+          </select>
+          <button onClick={""}>
+            {isEditingReminder ? 'Update Patient Reminder' : 'Add Patient Reminder'}
+          </button>
+        </div>
           </div>
-
-
 
     </div>
   )
