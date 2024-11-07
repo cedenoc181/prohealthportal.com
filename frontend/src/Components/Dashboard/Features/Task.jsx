@@ -1,7 +1,8 @@
 import {React, useState} from 'react'
 import { connect } from 'react-redux'
 import "./Features.css"
-
+import waterJug from '../../../images/WaterJug.png'
+import cleaning from '../../../images/Cleaning.png'
 
 export const Task = (props) => {
 
@@ -9,6 +10,11 @@ export const Task = (props) => {
 
   const handleTemplate = () => setCollapse(!collapse);
 
+  const [dailyOps, setDailyOps] = useState(['Appointment reminders', "Patient retention outreach", "Direct Access management", "referral management", "sub-tasks" ]);
+
+  const [auth, setAuth] = useState(['Pending authorization', 'Denied authorization', 'Authorization extension']);
+
+  const [apos, setApos] = useState(['Schedule Int visit', 'Pending treatment',  'Follow ups schedueld', 'Source leads' ]);
 
 
   return (
@@ -45,76 +51,46 @@ export const Task = (props) => {
 
 <h2 className="task-title">Daily Operations</h2>
   <div className="task-previews">
-        <table className="">
+        <table>
         <thead>
           <tr>
-            <th>Daily Task</th>
+            <th >Daily Task</th>
           </tr>
         </thead>
+        <tbody>
+
+          {dailyOps.map((task)=> (
+          <tr>
+          <td> 
+        <p className="task-point">  
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+        </svg>
+         &nbsp;
+              {task}
+         </p>
+        </td>
+        </tr>
+          ))}
+
+        </tbody>
         </table>
-
-
-
-
-
-
-
-    {/* <h2 className="task-title">Daily Operations</h2>
-        <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-    </svg>
-      &nbsp;</p>
-        <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-    </svg>
-      &nbsp;</p>
-        <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-    </svg>
-      &nbsp;</p>
-  </div> */}
-
-  {/* <div className="task-previews">
-    <h2 className="task-title">Authoriztions</h2>
-   <p className="task-point"> 
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-    </svg>
-      &nbsp;
-       do reminder calls 
-    </p>
-    <p className="task-point"> 
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-    </svg>
-      &nbsp;
-       do reminder calls 
-    </p>
-    <p className="task-point"> 
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-    </svg>
-      &nbsp;
-       do reminder calls 
-    </p>
-  </div>
-  <br />
-  <div className="task-previews">
-    <h2 className="task-title">APOS</h2>
-    <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-    </svg>
-      &nbsp;</p>
-    <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-    </svg>
-      &nbsp;</p>
-    <p className="task-point">    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-    </svg>
-      &nbsp;</p>
-  </div> */}
       </div> 
+<h2 className="task-title"> Scheduled</h2>
+<br />
+<div className="opService">
+      <div className="WaterDelivery">
+          <h3>Water delivery</h3>
+              <img src={waterJug} alt="water delivery"/>
+              <p>Expected: 11/15/24</p>
+      </div>
+
+      <div className="cleaningService">
+      <h3>Cleaning Service</h3>
+            <img src={cleaning} alt="cleaning service"/>
+        <p>Expected: 11/07/24</p>
+      </div>
+  </div>
     </div>
   )
 }
