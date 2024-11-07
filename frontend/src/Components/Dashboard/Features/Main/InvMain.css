@@ -93,8 +93,10 @@
   }
   
   input[type="text"],
+  input[type="name"],
   input[type="number"],
   input[type="date"],
+  input[type="datetime-local"],
   select {
     padding: 8px;
     border: 1px solid #ddd;
