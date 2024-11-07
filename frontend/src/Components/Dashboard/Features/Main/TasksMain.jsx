@@ -16,10 +16,39 @@ const [isEditingReminder, setIsEditingReminder] = useState(false);
 
 
 const [apptReminders, setApptReminders] = useState([
-  {
-
-  }
+  { patient: "John Doe", scheduled: "11/10/2024, 9:00 AM", confirmation: "Yes"},
+  { patient: "Jane Smith", scheduled: "11/09/2024, 11:30 AM", confirmation: "No"},
+  { patient: "David Johnson", scheduled: "11/08/2024, 1:30 PM", confirmation: "Yes"},
+  { patient: "Emily Davis", scheduled: "11/12/2024, 5:00 PM", confirmation: "No"}
 ]);
+
+
+const [pxRetention, setPxRetention] = useState([
+  {
+    patient: "Michael Brown",
+    status: "Interested",
+    scheduled: "Yes",
+    outreach: "11/01/2024"
+  },
+  {
+    patient: "Sarah Thompson",
+    status: "Not Interested",
+    scheduled: "No",
+    outreach: "11/02/2024"
+  },
+  {
+    patient: "Olivia Wilson",
+    status: "Pending Insurance",
+    scheduled: "No",
+    outreach: "11/03/2024"
+  },
+  {
+    patient: "James Anderson",
+    status: "Pending Referral",
+    scheduled: "Yes",
+    outreach: "11/04/2024"
+  }
+])
 
 
 const [defaultDate, setDefaultDate] = useState('');
@@ -54,12 +83,15 @@ useEffect(() => {
             </tr>
           </thead>
              <tbody>
-               <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td><button>Edit</button></td>
-               </tr>
+              {apptReminders.map((appt, index) => (
+              <tr>
+              <td>{appt.patient}</td>
+              <td>{appt.scheduled}</td>
+              <td>{appt.confirmation}</td>
+              <td><button>Edit</button></td>
+            </tr>
+              ))}
+
              </tbody>
           </table>
 
