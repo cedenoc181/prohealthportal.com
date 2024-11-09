@@ -23,33 +23,44 @@ const [apptReminders, setApptReminders] = useState([
 ]);
 
 
-const [pxRetention, setPxRetention] = useState([
-  {
-    patient: "Michael Brown",
-    status: "Interested",
-    scheduled: "Yes",
-    outreach: "11/01/2024"
-  },
-  {
-    patient: "Sarah Thompson",
-    status: "Not Interested",
-    scheduled: "No",
-    outreach: "11/02/2024"
-  },
-  {
-    patient: "Olivia Wilson",
-    status: "Pending Insurance",
-    scheduled: "No",
-    outreach: "11/03/2024"
-  },
-  {
-    patient: "James Anderson",
-    status: "Pending Referral",
-    scheduled: "Yes",
-    outreach: "11/04/2024"
-  }
-])
+const [pxRetention, setPxRetention] = useState([  
+  {patient: "Michael Brown", status: "Interested", scheduled: "Yes", outreach: "11/01/2024"},
+  {patient: "Sarah Thompson", status: "Not Interested", scheduled: "No", outreach: "11/02/2024"},
+  {patient: "Olivia Wilson", status: "Pending Insurance", scheduled: "No", outreach: "11/03/2024"},
+  {patient: "James Anderson", status: "Pending Referral", scheduled: "Yes", outreach: "11/04/2024"}
+]);
 
+const [directAcc, setDirectAccess]= useState([
+  {patient: "William Garcia", initiated: "10/15/2024", visits: 3, referral: "Yes"},
+  {patient: "Sophia Martinez", initiated: "09/22/2024", visits: 5, referral: "Pending"},
+  {patient: "Liam Rodriguez", initiated: "11/01/2024", visits: 2, referral: "No"},
+  {patient: "Isabella Lee", initiated: "10/10/2024", visits: 7, referral: "Yes"}
+])
+ 
+// {
+//   patient: "Noah Walker",
+//   referred: "In",
+//   date: "11/05/2024",
+//   md: "Dr. Emily Harris"
+// },
+// {
+//   patient: "Ava Scott",
+//   referred: "Out",
+//   date: "10/20/2024",
+//   md: "Dr. Michael Johnson"
+// },
+// {
+//   patient: "Lucas Wright",
+//   referred: "In",
+//   date: "11/03/2024",
+//   md: "Dr. Sarah Thompson"
+// },
+// {
+//   patient: "Mia Turner",
+//   referred: "Out",
+//   date: "11/01/2024",
+//   md: "Dr. James Anderson"
+// }
 
 const [defaultDate, setDefaultDate] = useState('');
 
@@ -141,13 +152,18 @@ useEffect(() => {
             </tr>
           </thead>
           <tbody>
+
+            {pxRetention.map((px, index) => (
                <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td><button>Edit</button></td>
-               </tr>
+               <td>{px.patient}</td>
+               <td>{px.status}</td>
+               <td>{px.scheduled}</td>
+               <td>{px.outreach}</td>
+               <td><button>Edit</button></td>
+             </tr>
+
+            ))}
+
              </tbody>
           </table>
 
@@ -205,13 +221,15 @@ useEffect(() => {
             </tr>
           </thead>
           <tbody>
+            {directAcc.map((daRecord, index) => (
                <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td><button>Edit</button></td>
-               </tr>
+               <td>{daRecord.patient}</td>
+               <td>{daRecord.initiated}</td>
+               <td>{daRecord.visits}</td>
+               <td>{daRecord.referral}</td>
+               <td><button>Edit</button></td>
+             </tr>
+            ))}
              </tbody>
           </table>
 
