@@ -10,7 +10,7 @@ export const TasksMain = (props) => {
 
 
 
-const [taskList, setTaskList] = useState(null);
+// const [taskList, setTaskList] = useState(null);
 
 const [isEditingReminder, setIsEditingReminder] = useState(false);
 
@@ -37,32 +37,19 @@ const [directAcc, setDirectAccess]= useState([
   {patient: "Isabella Lee", initiated: "10/10/2024", visits: 7, referral: "Yes"}
 ])
  
-// {
-//   patient: "Noah Walker",
-//   referred: "In",
-//   date: "11/05/2024",
-//   md: "Dr. Emily Harris"
-// },
-// {
-//   patient: "Ava Scott",
-//   referred: "Out",
-//   date: "10/20/2024",
-//   md: "Dr. Michael Johnson"
-// },
-// {
-//   patient: "Lucas Wright",
-//   referred: "In",
-//   date: "11/03/2024",
-//   md: "Dr. Sarah Thompson"
-// },
-// {
-//   patient: "Mia Turner",
-//   referred: "Out",
-//   date: "11/01/2024",
-//   md: "Dr. James Anderson"
-// }
+const [referralList, setReferralList] = useState ([
+  {patient: "Noah Walker", referred: "In", date: "11/05/2024", md: "Dr. Emily Harris"},
+  {patient: "Ava Scott", referred: "Out", date: "10/20/2024", md: "Dr. Michael Johnson"},
+  {patient: "Lucas Wright", referred: "In", date: "11/03/2024", md: "Dr. Sarah Thompson"},
+  {patient: "Mia Turner", referred: "Out", date: "11/01/2024", md: "Dr. James Anderson"}  
+]);
 
 const [defaultDate, setDefaultDate] = useState('');
+
+
+let randomVariable = `${setReferralList}, ${setApptReminders}, ${setPxRetention}, ${setDirectAccess}, ${setIsEditingReminder}`
+
+console.log(randomVariable);
 
 useEffect(() => {
   // Create a new date instance for today
@@ -95,7 +82,7 @@ useEffect(() => {
           </thead>
              <tbody>
               {apptReminders.map((appt, index) => (
-              <tr>
+              <tr key={index}>
               <td>{appt.patient}</td>
               <td>{appt.scheduled}</td>
               <td>{appt.confirmation}</td>
@@ -154,7 +141,7 @@ useEffect(() => {
           <tbody>
 
             {pxRetention.map((px, index) => (
-               <tr>
+               <tr key={index}>
                <td>{px.patient}</td>
                <td>{px.status}</td>
                <td>{px.scheduled}</td>
@@ -222,7 +209,7 @@ useEffect(() => {
           </thead>
           <tbody>
             {directAcc.map((daRecord, index) => (
-               <tr>
+               <tr key={index}>
                <td>{daRecord.patient}</td>
                <td>{daRecord.initiated}</td>
                <td>{daRecord.visits}</td>
@@ -287,13 +274,15 @@ useEffect(() => {
             </tr>
           </thead>
           <tbody>
-               <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td><button>Edit</button></td>
-               </tr>
+            {referralList.map((ref, index) => (
+              <tr key={index}>
+              <td>{ref.patient}</td>
+              <td>{ref.referred}</td>
+              <td>{ref.date}</td>
+              <td>{ref.md}</td>
+              <td><button>Edit</button></td>
+            </tr>
+            ))}
              </tbody>
           </table>
 
