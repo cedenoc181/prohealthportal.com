@@ -3,13 +3,15 @@
   border-right: solid 2px rgb(2, 29, 56);
   opacity: 70%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo {
-  max-height: 60%;
-  max-width: 60%;
-  margin-left: auto;
-  margin-right: auto;
+  max-height: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .nav-header {
@@ -18,10 +20,21 @@
   padding-bottom: 30%;
 }
 
-
 .nav-slot {
-  display: inline;
-  /* padding-left: 25%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px; /* Add space between each link */
+}
+
+.nav-slot:hover {
+  background: rgba(240, 237, 237, 0.15);
+}
+
+.nav-slot:active {
+  border-left: solid 5px rgb(5, 74, 135);
 }
 
 svg {
@@ -29,25 +42,21 @@ svg {
   height: 30px !important; 
 }
 
-
-
 .nav-link {
   text-align: center;
-  position: relative;
-  bottom: 22px;
-  left: 30px;
+  margin-top: 5px; /* Space between icon and link */
   font-size: 18px;
   font-weight: 600;
 }
 
-.nav-link:active {
-  text-decoration: underline;
+.footer {
+  width: 100%;
+  margin-top: 100px; /* Adds gap between Inventory and Settings */
 }
-
 
 .copyright {
   display: flex;
-  margin-top: 30%;;
+  margin-top: 30%;
   font-size: 14px;
   padding-left: 3%;
 }

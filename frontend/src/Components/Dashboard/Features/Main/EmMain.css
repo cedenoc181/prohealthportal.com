@@ -1,0 +1,58 @@
+.email-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+
+.email-main-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight:700;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.emailCard {
+    border: solid 2px #badef7;
+    border-radius: 8px;
+    background-color: #eeeaea86;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 3%;
+    cursor: pointer;
+}
+
+.emailCard p:hover {
+    border: 1.5px solid rgba(14, 143, 241, 0.86);
+}
+
+.emailCard .key {
+    font-size: 18px;
+}
+
+.email-buttons {
+   margin-left: 85%;
+}
+
+.save-email-form {
+    margin-left: 5%;
+}
+
+.email-notes {
+    width: 70%;
+}
+
+.email-textarea {
+    height: 150px !important;
+}
+
+
+.email-category-selection {
+    width: 50%;
+}
+
+.email-category-selection:hover {
+    border: 1px solid rgba(14, 143, 241, 0.86)
+}

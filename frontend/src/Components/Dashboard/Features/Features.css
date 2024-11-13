@@ -26,8 +26,8 @@ span .sideMenuItems {
 
 .filter-li-container {
     position: absolute;
-    left: 46%;
-    width: 8%;
+    left: 32%;
+    width: 10%;
     border: solid 1.5px black;
     background : rgba(251, 238, 238, 0.481);
     border-radius: 5px;

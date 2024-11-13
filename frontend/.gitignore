@@ -21,3 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+
+# backend user accounts for testing/developmennt 
+
+# {
+#     "email": "christiancedenob.f@gmail.com",
+#     "password": "12345abc"
+# }

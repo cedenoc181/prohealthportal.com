@@ -60,7 +60,9 @@ function App() {
   return (
     <Provider store={store}>
       <div id="dashboard" className="App">
-        <div className="nav-display"><Nav /></div> 
+        
+        <div className="nav-display"><Nav /></div>
+
         <div className="console-display">
           <Routes>
             <Route path="/login" element={<Login />} />
