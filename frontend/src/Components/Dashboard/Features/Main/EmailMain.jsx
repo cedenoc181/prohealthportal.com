@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import './EmMain.css'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Textarea, Text } from '@chakra-ui/react'
+import {CopyIcon} from '@chakra-ui/icons'
 import EmailSenderUI from './Main-Functions/EmailUI.jsx'
 
 
@@ -23,6 +24,16 @@ let handleInputChange = (e) => {
   setValue(inputValue)
 }
 
+const copyToClipboard = (elementId) => {
+  const element = document.getElementById(elementId);
+  const textToCopy = element ? element.innerText : '';
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    alert('Text copied to clipboard');
+  }).catch((err) => {
+    console.error('Failed to copy: ', err);
+  });
+};
+
 
   return (
     <div className="email-main">
@@ -32,10 +43,40 @@ let handleInputChange = (e) => {
 
         <h2 className="email-main-title" contenteditable="true">Email template</h2>
         <br />
-        <div className="email-main-subject" ><span className="key" contenteditable="false">Subject:</span> <p className="email-main-text" contenteditable="true">Schedule your following physical therapy appointment</p> </div>
-        <br />
-        <div className="email-main-contents"><span className="key" contenteditable="false">Body:</span> <p className="email-main-text" contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
-        <br />
+        <div className="email-main-subject" id="subject-div">
+        <span className="key" contentEditable="false">Subject:</span>
+        <p className="email-main-text" contentEditable="true">
+          Schedule your following physical therapy appointment
+          <span className="copy-button-wrapper">
+            <button onClick={() => copyToClipboard('subject-div')}>  
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
+                <path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+              </svg>
+            </button>
+          </span>
+        </p>
+      </div>
+      <br />
+      <div className="email-main-contents" id="body-div">
+        <span className="key" contentEditable="false">Body:</span>
+        <p className="email-main-text" contentEditable="true">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <span className="copy-button-wrapper">
+            <button onClick={() => copyToClipboard('body-div')}>  
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
+                <path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+              </svg>
+            </button>
+          </span>
+        </p>
+        {/* <button onClick={() => copyToClipboard('body-div')}>
+          
+           <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+            </svg>
+        </button> */}
+      </div>
+      <br />
         <div className="email-main-category"><span className="key" contenteditable="false">Category:</span>
         <br/>
          <select name="category" className="email-category-selection">
