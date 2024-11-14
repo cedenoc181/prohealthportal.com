@@ -16,7 +16,7 @@
 }
 
 .emailCard {
-    border: solid 2px #badef7;
+    border: solid 2px #aaadb0;
     border-radius: 8px;
     background-color: #eeeaea86;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -33,7 +33,7 @@
 }
 
 .email-buttons {
-   margin-left: 85%;
+   margin-left: 73%;
 }
 
 .save-email-form {
@@ -55,4 +55,9 @@
 
 .email-category-selection:hover {
     border: 1px solid rgba(14, 143, 241, 0.86)
+}
+
+.email-submit-button {
+    display: flex;
+    justify-content: center;
 }

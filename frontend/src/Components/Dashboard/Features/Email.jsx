@@ -56,7 +56,7 @@ const handleTemplate = () => setCollapse(!collapse);
                     <InputLeftElement pointerEvents='none'>
                  <SearchIcon color='black.600' />
                     </InputLeftElement>
-                  <Input className="searchBar" width="60%" focusBorderColor='orange.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
+                  <Input className="searchBar" width="60%" focusBorderColor='blue.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
               </InputGroup>
              </div>
 

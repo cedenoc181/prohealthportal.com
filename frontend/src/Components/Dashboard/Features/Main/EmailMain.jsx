@@ -48,7 +48,7 @@ let handleInputChange = (e) => {
         <br />
       <div className="email-buttons"> 
       <ButtonGroup className="email-save" variant='outline' spacing='6'>
-          <Button colorScheme='blue' onClick={handleSaveTemplateDropMenu}>
+          <Button colorScheme='blue'  height='48px' width='200px' onClick={handleSaveTemplateDropMenu}>
             {
               saveTemplateDropMenu ? 
               "Template Info"
@@ -73,6 +73,12 @@ let handleInputChange = (e) => {
                placeholder='Note email info to optimize for patient or Dr. interaction, keep track and organized.'
                size='md'
             />
+            </div>
+            <br />
+            <div className="email-submit-button">
+            <Button  colorScheme='blue' variant='solid' size='lg'>
+                Save template
+            </Button>
             </div>
         </form>
         ) 

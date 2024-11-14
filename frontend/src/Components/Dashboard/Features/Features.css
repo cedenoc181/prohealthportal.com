@@ -57,6 +57,11 @@ span .sideMenuItems {
 left: 20%;
 }
 
+.searchBar {
+    border: solid 1px #4c84af;
+}
+
+
 .categories-container {
     display:flex;
     justify-content:space-evenly;
@@ -65,22 +70,26 @@ left: 20%;
 
 .categories {
     padding:5px;
-    border: solid 1px rgba(249, 111, 6, 0.481);
+    border: solid 1px rgba(6, 136, 249, 0.481);
     border-radius: 5px;
+    font-size: 20px;
+    font-weight: 500;
+
 }
 
 .categories:hover {
-    background: rgba(254, 229, 190, 0.881);
+    background: rgba(170, 218, 238, 0.881);
 }
 
 .renderEmails {
-    border: solid 2px black;
+    border: solid 2px #aaadb0;
     padding: 10px;
     width: 90%;
     margin: 0 auto;
     margin-top: 9%;
     font-size: 15px;
-    background: rgba(220, 244, 198, 0.481);
+    background-color: #eeeaea86;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 5px;
 }
 
