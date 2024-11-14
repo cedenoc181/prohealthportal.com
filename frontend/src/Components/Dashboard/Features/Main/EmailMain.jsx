@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import './EmMain.css'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Textarea, Text } from '@chakra-ui/react'
-import {CopyIcon} from '@chakra-ui/icons'
 import EmailSenderUI from './Main-Functions/EmailUI.jsx'
 
 
@@ -15,13 +14,6 @@ const [saveTemplateDropMenu, setSaveTemplateDropMenu] = useState(false);
 
 function handleSaveTemplateDropMenu() {
       setSaveTemplateDropMenu(!saveTemplateDropMenu)
-}
-
-let [value, setValue] = React.useState('')
-
-let handleInputChange = (e) => {
-  let inputValue = e.target.value
-  setValue(inputValue)
 }
 
 const copyToClipboard = (elementId) => {
@@ -108,14 +100,12 @@ const copyToClipboard = (elementId) => {
         (
         <form className="save-email-form">
             <div className="email-notes"> 
-            <Text mb='8px'>Notes:</Text>
-            <Textarea
-            className="email-textarea"
-               value={value}
-               onChange={handleInputChange}
-               placeholder='Note email info to optimize for patient or Dr. interaction, keep track and organized.'
-               size='md'
-            />
+                <Text mb='8px'>Notes:</Text>
+                <Textarea
+                className="email-textarea"
+                   placeholder='Note email info to optimize for patient or Dr. interaction, keep track and organized.'
+                   size='md'
+                />
             </div>
             <br />
             <div className="email-submit-button">

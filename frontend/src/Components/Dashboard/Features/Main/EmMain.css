@@ -66,6 +66,7 @@
 
 .email-textarea {
     height: 150px !important;
+    border: solid 1px gray;
 }
 
 
