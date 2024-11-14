@@ -7,6 +7,15 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
+/* .export-emails {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+} */
+
 
 .email-main-title {
     text-align: center;
@@ -33,7 +42,8 @@
 }
 
 .email-buttons {
-   margin-left: 73%;
+    display: flex;
+    justify-content: end;
 }
 
 .save-email-form {

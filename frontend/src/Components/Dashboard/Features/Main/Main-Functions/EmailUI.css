@@ -1,0 +1,74 @@
+/* EmailUI.css */
+
+.email-ui {
+    margin: 20px;
+    padding: 20px;
+    /* padding-bottom: 30px; */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+  
+  .email-title {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .email-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .email-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .email-form input,
+  .email-form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .email-form input {
+    height: 40px;
+    width: 100%;
+  }
+  
+  .email-form textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .sending-email {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  .send-button {
+    background-color: #4c84af;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .send-button:hover {
+    background-color: #3b6c8c;
+  }
+  
+  .current-datetime {
+    display: flex;
+    justify-content: end;
+    padding-top: 10px;
+    font-size: 0.9rem;
+    color: #999;
+  }
+  
