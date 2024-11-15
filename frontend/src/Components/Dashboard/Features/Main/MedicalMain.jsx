@@ -10,6 +10,7 @@ export const MedicalMain = (props) => {
 
       <div className="pdf-container">
         <h2 className="pdf-title">Auth Title</h2>
+        <p className="pdf-instruction"></p>
       <iframe
       title=""
       className="pdf-main"

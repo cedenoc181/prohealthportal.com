@@ -1,6 +1,6 @@
 .Medical-container {
     margin: 20px;
-    padding: 10px;
+    padding: 11px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
@@ -13,7 +13,6 @@
 }
 
 .pdf-main {
-    padding-right: 2%;
     width: 100%;
     height: 100%;
 }
@@ -33,6 +32,9 @@
     justify-content: center;
     margin-bottom: 3%;
     padding-right: 25px;
+    font-size: 30px;
+    font-weight: 700;
+
 }
 
 .medical-submit-button {

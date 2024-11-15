@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './EmMain.css'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Textarea, Text } from '@chakra-ui/react'
-import EmailSenderUI from './Main-Functions/EmailUI.jsx'
+import EmailSenderUI from './Main-Functions/SendEmail.jsx'
 
 
 export const EmailMain = (props) => {

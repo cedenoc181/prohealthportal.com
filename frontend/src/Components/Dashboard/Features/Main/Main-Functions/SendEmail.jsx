@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './EmailUI.css';
+import './SendEmail.css';
 
-export const EmailUI = () => {
+export const SendEmail = () => {
   const [formData, setFormData] = useState({
     receiver: '',
     subject: '',
@@ -74,4 +74,4 @@ export const EmailUI = () => {
   );
 };
 
-export default EmailUI;
+export default SendEmail;
