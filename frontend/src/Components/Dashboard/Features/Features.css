@@ -318,3 +318,89 @@ margin: 5%;
     padding-bottom: 1%;
     margin-top: 4%;
 }
+
+.account-card {
+    border: solid 1px #aaadb0;
+    border-radius: 8px;
+    background-color: #f8f5f5ce;;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 3px;
+    padding: 3%;
+    cursor: pointer;
+    width: 90%;
+    justify-self: center;
+    display: flex;
+}
+
+.card-img {
+    width: 25%;
+}
+
+.card-name {
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.card-role {
+    color: rgb(95, 94, 94);
+    font-weight: bold;
+    font-size: 18px;
+    padding-bottom: 5px;
+}
+
+.card-location {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.account-info, .account-settings {
+    border: solid 1px #aaadb0;
+    border-radius: 8px;
+    background-color: #f8f5f5ce;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 3px;
+    padding: 3%;
+    cursor: pointer;
+    width: 90%;
+    justify-self: center;
+}
+
+.account-card:hover, .account-info:hover {
+    background: #f6fafd;
+}
+
+.personal-info {
+    display: flex;
+    justify-content: space-around;
+    padding-right: 2%;
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-button {
+    border: 1px solid black;
+    border-radius: 6%;
+    padding: 1%;
+    width: 15%;
+}
+
+.info-button:hover {
+    background-color: #ddeef9;
+}
+
+.credentials .clinic-assc, p{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.credentials .clinic-assc, label {
+    font-size: 18px;
+    color: #7c7979;
+
+}
+
+.info-header-title, .settings-title {
+    font-weight: bold;
+    font-size: 22.5px;
+}
+
