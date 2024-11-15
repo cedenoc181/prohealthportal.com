@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { connect } from 'react-redux'
 import './EmMain.css'
+import './Main.css'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Textarea, Text } from '@chakra-ui/react'
 import EmailSenderUI from './Main-Functions/SendEmail.jsx'
@@ -30,7 +31,7 @@ const copyToClipboard = (elementId) => {
   return (
     <div className="email-main">
 
-    <div className="email-container">     
+    <div className="main-container">     
       <div className="emailCard">
 
         <h2 className="email-main-title" contenteditable="true">Email template</h2>

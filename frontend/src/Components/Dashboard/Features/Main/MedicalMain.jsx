@@ -2,11 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import dummyPDF from './Auth-Empire.pdf'
 import './MedicalMain.css'
+import './Main.css'
 import { Textarea, Text, Button } from '@chakra-ui/react'
 
 export const MedicalMain = (props) => {
   return (
-    <div className="Medical-container">
+    <div className="main-container">
 
       <div className="pdf-container">
         <h2 className="pdf-title">Auth Title</h2>

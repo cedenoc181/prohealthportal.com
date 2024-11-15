@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
-import './taskMain.css'
+import './Main.css'
 
 export const TasksMain = (props) => {
 
@@ -68,7 +68,7 @@ useEffect(() => {
 
 
   return (
-    <div className="task-container">
+    <div className="main-container">
  <div className="task-table">
         <h2 className="main-title">Appointment reminders</h2>
         <table>

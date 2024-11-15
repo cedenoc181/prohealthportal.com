@@ -5,7 +5,15 @@ import "./Features.css"
 
 export const Account = (props) => {
   return (
-    <div id="account-settings" className="console">Account</div>
+    <div id="account-console" className="console">
+
+    <h2 className="account-title">Account Settings</h2>
+
+      <ul>
+        <li>My profile</li>
+      </ul>
+
+    </div>
   )
 }
 

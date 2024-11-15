@@ -37,7 +37,7 @@ export const SendEmail = () => {
   };
 
   return (
-    <div className="email-ui">
+    <div className="main-container">
       <h2 className="email-title">Send an Email</h2>
       <form className="email-form" onSubmit={handleSubmit}>
         <label>To:</label>

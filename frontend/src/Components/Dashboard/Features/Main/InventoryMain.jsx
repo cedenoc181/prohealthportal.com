@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import './InvMain.css';
+import './Main.css'
 
 export const InventoryMain = (props) => {
   // Existing inventory state
@@ -125,7 +126,7 @@ export const InventoryMain = (props) => {
   };
 
   return (
-    <div className="inventory-container">
+    <div className="main-container">
       <div className="inventory-table">
         <h2 className="main-title">Supplies Available</h2>
         <table>
