@@ -45,7 +45,7 @@ export const AccountMain = (props) => {
        <label>Extension</label>
        <p>251</p>
        <label>Role</label>
-       <p>Office Manager</p>
+       <p>Admin</p>
        <label>Current Clinic</label>
        <p>Eastside</p>
        </div>
@@ -54,8 +54,31 @@ export const AccountMain = (props) => {
     </div>
     <br />
     <div className="account-settings">
+      <div className="info-header">
         <h2 className="settings-title">My Settings</h2>
-        
+        <button className="info-button">Edit</button>
+      </div>
+      <br />
+      <div className="settings">
+      <div className="settings-alerts">
+          <label>Theme</label>
+          <p>Light</p>
+          <label>Inventory Alerts</label>
+          <p>On</p>
+          <label>Task Alerts</label>
+          <p>On</p>
+      </div>
+
+      <div className="settings-">
+          <label></label>
+          <p></p>
+          <label></label>
+          <p></p>
+          <label></label>
+          <p></p>
+      </div>
+
+      </div>
     </div>
 
 

@@ -310,6 +310,7 @@ margin: 5%;
 }
 
 /* Account settings */
+/* make sure to create a new css filew for account main */
 
 .account-title {
     font-size: 25px;
@@ -329,6 +330,12 @@ margin: 5%;
     width: 90%;
     justify-self: center;
     display: flex;
+}
+
+.my-profile-heading {
+    font-size: 30px;
+    font-weight: 700;
+    padding-bottom: 2%;
 }
 
 .card-img {
@@ -362,11 +369,11 @@ margin: 5%;
     justify-self: center;
 }
 
-.account-card:hover, .account-info:hover {
+.account-card:hover, .account-info:hover, .account-settings:hover {
     background: #f6fafd;
 }
 
-.personal-info {
+.personal-info, .settings {
     display: flex;
     justify-content: space-around;
     padding-right: 2%;
@@ -388,12 +395,12 @@ margin: 5%;
     background-color: #ddeef9;
 }
 
-.credentials .clinic-assc, p{
+.credentials .clinic-assc .settings-alerts, p{
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.credentials .clinic-assc, label {
+.credentials .clinic-assc .settings-alerts, label {
     font-size: 18px;
     color: #7c7979;
 

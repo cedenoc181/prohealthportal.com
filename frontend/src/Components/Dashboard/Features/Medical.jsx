@@ -1,17 +1,32 @@
-import {React, useState} from 'react'
-import { connect } from 'react-redux'
-import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react'
-import {SearchIcon} from '@chakra-ui/icons'
-import "./Features.css"
+import React from 'react';
+import {useEffect, useState} from 'react';
+import { connect } from 'react-redux';
+import { fetchMedifiles } from '../../../ReduxActionsMain/medifilesActions.js';
+import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
+import {SearchIcon} from '@chakra-ui/icons';
+import "./Features.css";
 
 
-export const Medical = (props) => {
+export const Medical = ({ medifiles, loading, error, fetchMedifiles}) => {
+
+useEffect(() => {
+  fetchMedifiles();
+},[fetchMedifiles]);
+
 
   const [collapse, setCollapse] = useState(false);
 
   const handleTemplate = () => setCollapse(!collapse);
 
   const [defaultLanguage, setDefualtLanguage] = useState(true);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (error) {
+    return <div>Error: {error}</div>;
+  };
 
   return (
     <div id="medical-forms" className="console">
@@ -54,10 +69,10 @@ export const Medical = (props) => {
                   <Input className="searchBar" width="60%" focusBorderColor='orange.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
               </InputGroup>
              </div>
-
+         </div>
             <div className="filter-buttons">
      {/*filter by  */}
-     <div>
+            <div>
                 <ul>
                     <li></li>
                     <li></li>
@@ -74,39 +89,32 @@ export const Medical = (props) => {
                 <button className="categories">Authorization</button>
                 <button className="categories">All</button>
                 </div>
- 
+          </div>
+
                 <div className="renderContainer">
-                <div className="renderMedical">
-                <div className="medical-title">Doc title</div>
-                    <img className="medical-cover" src={""} alt={""}/>
-                    <br />
-                     <div className="medical-category"><span className="key">Category:</span> Authorization</div>
+                { medifiles && medifiles.map((file) => (
+                      <div className="renderMedical" key={file.id}>
+                      <div className="medical-title">{file.title}</div>
+                          <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>
+                          <br />
+                           <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
+                      </div>
+                ))}
                 </div>
-
-                <div className="renderMedical">
-                <div className="medical-title">Doc title 2</div>
-                    <img className="medical-cover" src={""} alt={""}/>
-                    <br />
-                     <div className="medical-category"><span className="key">Category:</span> Authorization</div>
-                </div>
-
-                <div className="renderMedical">
-                <div className="medical-title">Doc title 2</div>
-                    <img className="medical-cover" src={""} alt={""}/>
-                    <br />
-                     <div className="medical-category"><span className="key">Category:</span> Authorization</div>
-                </div>
-                </div>
-            </div>
-       </div>
 
 
     </div>
   )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  medifiles: state.medifiles.data,
+  loading: state.medifiles.loading,
+  error: state.medifiles.error,
+});
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  fetchMedifiles,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Medical)
+export default connect(mapStateToProps, mapDispatchToProps)(Medical);
