@@ -1,19 +1,62 @@
-import {React, useState} from 'react'
-import { connect } from 'react-redux'
-import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react'
-import {SearchIcon} from '@chakra-ui/icons'
-import "./Features.css"
+import React from 'react';
+import {useEffect, useState} from 'react';
+import { connect } from 'react-redux';
+import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
+import {SearchIcon} from '@chakra-ui/icons';
+import "./Features.css";
+import { fetchPatientEmails } from '../../../ReduxActionsMain/patientEmailActions.js';
+import { fetchDoctorEmails } from '../../../ReduxActionsMain/doctorEmailActions.js';
+ 
+export const Email = ({patient, doctor, loading, error, fetchPatientEmails, fetchDoctorEmails}) => {
 
-export const Email = (props) => {
-const [patientTemp, setPatientTemp] = useState(null);
-const [drTemp, setDrTemp] = useState(null);
+useEffect(() => { 
+    fetchDoctorEmails();
+     fetchPatientEmails();
+}, [fetchPatientEmails, fetchDoctorEmails]);
 
-const [patientDefault, setPatientDefualt] = useState(true);
 
+
+const [patientTemp, setPatientTemp] = useState([]);
+const [drTemp, setDrTemp] = useState([]);
+const [patientDefault, setPatientDefault] = useState(true);
 const [collapse, setCollapse] = useState(false);
 
 let filterCategories = ["response rate descending", "created on", "created by"] ;
 
+
+let patientEmailTemplate = patient.length > 0 ? patient.map((file) => (
+    <div className="renderEmails" key={file.id}> 
+      <div className="email-title">{file.px_temp_title}</div>
+      <div className="email-subject"><span className="key">Subject:</span> {file.px_temp_subject}</div>
+      <br />
+      <div className="email-contents"><span className="key">Body:</span> {file.px_temp_content}</div>
+      <div className="email-category"><span className="key">Category:</span> {file.category}</div>
+    </div>
+  )) : null;
+
+  let doctorEmailTemplate = doctor.length > 0 ? doctor.map((file) => (
+    <div className="renderEmails" key={file.id}> 
+      <div className="email-title">{file.dr_temp_title}</div>
+      <div className="email-subject"><span className="key">Subject:</span> {file.dr_temp_subject}</div>
+      <br />
+      <div className="email-contents"><span className="key">Body:</span> {file.dr_temp_content}</div>
+      <div className="email-category"><span className="key">Category:</span> {file.category}</div>
+    </div>
+  )) : null;
+
+
+
+
+
+
+
+if (loading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (error) {
+    return <div>Error: {error}</div>;
+  };
 
 const handleTemplate = () => setCollapse(!collapse);
        
@@ -97,41 +140,27 @@ const handleTemplate = () => setCollapse(!collapse);
             )
         }
                     
-                   
-
-
-
-
-                <div className="renderEmails">
-                <div className="email-title">Outreach Template</div>
-                    <div className="email-subject"><span className="key">Subject:</span> Schedule your following physical therapy appointemnt</div>
-                    <br />
-                    <div className="email-contents"><span className="key">Body:</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                     <div className="email-category"><span className="key">Category:</span> outreach</div>
-                    {/* { patientDefault ? 
-                    `
-                    <div className="email-title">${patientTemp.title}</div>
-                    <div className="email-subject"> ${patientTemp.subject} </div>
-                    <div className="email-contents">${patientTemp.content}</div>
-                     <div className="email-category">${patientTemp.category}</div>
-                     <div className="email-language">${patientTemp.language}</div>
-                     `
+                    { patientDefault ? 
+                        (patientEmailTemplate)
                      : 
-                     `
-                     <div className="email-title">${drTemp.title}</div>
-                    <div className="email-subject"> ${drTemp.subject} </div>
-                    <div className="email-contents">${drTemp.content}</div>
-                     <div className="email-category">${drTemp.category}</div>
-                     ` } */}
+                        (doctorEmailTemplate)
+                     }
                 </div>
             </div>
        </div>
-    </div>
   )
 }
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {}
+const mapStateToProps = (state) => ({
+    patient: state.patient.data,
+    doctor: state.doctor.data,
+    loading: state.patient.loading || state.doctor.loading,
+    error: state.patient.error || state.doctor.error,
+  });
+  
+  const mapDispatchToProps = {
+    fetchPatientEmails,
+    fetchDoctorEmails,
+  };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Email);

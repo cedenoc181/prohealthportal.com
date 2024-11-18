@@ -14,7 +14,7 @@ export const AccountMain = (props) => {
       <h2 className="my-profile-heading">My profile</h2>
 
       <div className="account-card">
-          <img className="card-img" alt="profile photo"/>
+          <img className="card-img" alt="profile"/>
           <div className="card-info">
           <h2 className="card-name">Christian Cedeno</h2>
           <div className="card-role">Admin</div>
