@@ -120,13 +120,34 @@ left: 20%;
 }
 
 .renderMedical {
-border: black solid 1px;
-border-radius: 10px;
 width: 40%;
 margin: 5%;
 }
 
+.medical-cover {
+    border: solid 1px black;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
 
+.medical-cover:hover {
+    border: solid 1.5px rgb(128, 169, 240);
+    box-shadow: rgba(13, 120, 241, 0.56) 0px 1px 4px;
+}
+
+
+.medical-title {
+    max-width: 200px;     /* Set a maximum width for the title */
+    white-space: nowrap;  /* Prevent the text from wrapping to the next line */
+    overflow: hidden;     /* Hide any overflow text */
+    text-overflow: ellipsis; /* Add an ellipsis (...) to indicate overflow */
+  }
+  
+  .medical-title:hover {
+    white-space: wrap;
+    overflow:visible; 
+    text-overflow:clip;
+  }
+  
 /* Task component CSS */
 
 .task-previews {
