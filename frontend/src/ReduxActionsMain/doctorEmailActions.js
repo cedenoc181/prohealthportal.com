@@ -12,6 +12,21 @@ export const fetchDoctorEmails = () => {
       }
     };
   };
+
+
+// select email and render on Main ui 
+
+export const setSelectedDoctorEmail = (file) => { 
+  console.log(file)
+  return  {
+    type: 'SET_SELECTED_DR_EMAIL',
+    payload: file,
+  };
+};
+
+
+
+
   
   // Action to create a doctor email template
   export const createDoctorEmail = (newEmail) => {

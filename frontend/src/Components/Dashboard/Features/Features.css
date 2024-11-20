@@ -24,9 +24,9 @@ span .sideMenuItems {
     cursor: pointer;
 }
 
-.filter-li-container {
+ .filter-li-container {
     position: absolute;
-    left: 32%;
+    left: 26.5%;
     width: 10%;
     border: solid 1.5px black;
     background : rgba(251, 238, 238, 0.481);
@@ -36,10 +36,13 @@ span .sideMenuItems {
 
 
 .filter-li {
+    position: relative;
+    z-index: 10;
     font-size: 14px;
     color: black;
     border-bottom: solid black 1px;
-    /* cursor: pointer; */
+    cursor: pointer;
+    
 }
 
 .filter-li:hover {
@@ -91,6 +94,7 @@ left: 20%;
     background-color: #eeeaea86;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .email-title {

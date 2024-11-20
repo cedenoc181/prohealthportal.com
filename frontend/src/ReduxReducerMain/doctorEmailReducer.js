@@ -4,6 +4,7 @@
     data: [],
     loading: false,
     error: null,
+    selectedDrEmail: null,
   };
   
   const doctorEmailReducer = (state = initialState, action) => {
@@ -52,6 +53,11 @@
           ...state,
           error: action.payload,
         };
+        case 'SET_SELECTED_DR_EMAIL':
+          return {
+            ...state,
+            selectedDrEmail: action.payload,
+          };
       default:
         return state;
     }

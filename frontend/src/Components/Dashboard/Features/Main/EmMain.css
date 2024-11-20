@@ -55,6 +55,7 @@
 
 .email-category-selection {
     width: 50%;
+    cursor: pointer;
 }
 
 .email-category-selection:hover {

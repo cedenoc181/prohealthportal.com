@@ -5,18 +5,24 @@ import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
 import "./Features.css";
 import { fetchPatientEmails, setSelectedPatientEmail } from '../../../ReduxActionsMain/patientEmailActions.js';
-import { fetchDoctorEmails } from '../../../ReduxActionsMain/doctorEmailActions.js';
+import { fetchDoctorEmails,  setSelectedDoctorEmail} from '../../../ReduxActionsMain/doctorEmailActions.js';
  
-export const Email = ({patient, doctor, loading, error, fetchPatientEmails, fetchDoctorEmails, setSelectedPatientEmail}) => {
+export const Email = ({patient, doctor, loading, error, fetchPatientEmails, fetchDoctorEmails, setSelectedPatientEmail, setSelectedDoctorEmail}) => {
 
 useEffect(() => { 
     fetchDoctorEmails();
      fetchPatientEmails();
 }, [fetchPatientEmails, fetchDoctorEmails]);
 
-const handleSelectedEmail = (file) => {
+const handleSelectedPxEmail = (file) => {
   setSelectedPatientEmail(file);
 }
+
+const handleSelectedDrEmail = (file) => {
+  setSelectedDoctorEmail(file);
+}
+
+
 
 const [patientTemp, setPatientTemp] = useState([]);
 const [drTemp, setDrTemp] = useState([]);
@@ -27,7 +33,7 @@ let filterCategories = ["response rate descending", "created on", "created by"] 
 
 
 let patientEmailTemplate = patient.length > 0 ? patient.map((file) => (
-    <div className="renderEmails" key={file.id} onClick={() => handleSelectedEmail(file)}> 
+    <div className="renderEmails" key={file.id} onClick={() => handleSelectedPxEmail(file)}> 
       <div className="email-title">{file.px_temp_title}</div>
       <div className="email-subject"><span className="key">Subject:</span> {file.px_temp_subject}</div>
       <br />
@@ -37,7 +43,7 @@ let patientEmailTemplate = patient.length > 0 ? patient.map((file) => (
   )) : null;
 
   let doctorEmailTemplate = doctor.length > 0 ? doctor.map((file) => (
-    <div className="renderEmails" key={file.id}> 
+    <div className="renderEmails" key={file.id} onClick={() => handleSelectedDrEmail(file)}> 
       <div className="email-title">{file.dr_temp_title}</div>
       <div className="email-subject"><span className="key">Subject:</span> {file.dr_temp_subject}</div>
       <br />
@@ -47,8 +53,14 @@ let patientEmailTemplate = patient.length > 0 ? patient.map((file) => (
   )) : null;
 
 
+  const handleDrClick = (event) => {
+    event.stopPropagation();
+    setPatientDefault(false);
+  }
 
-
+  const handlePxClick = () => {
+    setPatientDefault(true);
+  }
 
 
 
@@ -74,8 +86,12 @@ const handleTemplate = () => setCollapse(!collapse);
    {collapse ? 
    ( 
     <ul className="filter-li-container">
+        <div onClick={handlePxClick}>
         <li className="filter-li">Patient</li>
-        <li className="filter-li">Doctor</li>
+        </div>
+        <div onClick={handleDrClick}>
+        <li className="filter-li" >Doctor</li>
+        </div>
         {/* <li className="filter-li">Saved Templates</li> */}
     </ul>
 
@@ -164,6 +180,7 @@ const mapStateToProps = (state) => ({
     fetchPatientEmails,
     fetchDoctorEmails,
     setSelectedPatientEmail,
+    setSelectedDoctorEmail,
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Email);
