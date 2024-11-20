@@ -2,6 +2,7 @@ const initialMedifilesState = {
     data: [],
     loading: false,
     errror: null,
+    selectedMedifile: null,
 };
 
 const medifilesReducer = (state = initialMedifilesState, action) => {
@@ -23,6 +24,11 @@ const medifilesReducer = (state = initialMedifilesState, action) => {
           ...state,
           data: [...state.data, action.payload],
         };
+        case 'SET_SELECTED_MEDIFILE':
+          return {
+            ...state,
+            selectedMedifile: action.payload,
+          };
       // Add more actions here...
       default:
         return state;

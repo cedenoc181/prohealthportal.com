@@ -52,10 +52,10 @@ puts "All objects in the bucket '#{aws_bucket_name}' have been deleted."
 # After attachment, update the URLs to the S3 object URLs
     if @record.file_link.attached? && @record.file_cover.attached?
     # Generate the URL for file_link (PDF)
-    file_link_s3_url = Rails.application.routes.url_helpers.rails_blob_url(@record.file_link, host: "http://127.0.0.1:3000/medifiles")
+    file_link_s3_url = Rails.application.routes.url_helpers.rails_blob_url(@record.file_link, host: "http://127.0.0.1:3000")
 
     # Generate the URL for file_cover (Image)
-    file_cover_s3_url = Rails.application.routes.url_helpers.rails_blob_url(@record.file_cover, host: "http://127.0.0.1:3000/medifiles")
+    file_cover_s3_url = Rails.application.routes.url_helpers.rails_blob_url(@record.file_cover, host: "http://127.0.0.1:3000")
 
     # Update the record with the new S3 URLs
     @record.update_columns(file_link: file_link_s3_url, file_cover: file_cover_s3_url)

@@ -7,7 +7,7 @@ import { Textarea, Text } from '@chakra-ui/react'
 import EmailSenderUI from './Main-Functions/SendEmail.jsx'
 
 
-export const EmailMain = (props) => {
+export const EmailMain = ({selectedPxEmail}) => {
 
 
 
@@ -26,7 +26,9 @@ const copyToClipboard = (elementId) => {
     console.error('Failed to copy: ', err);
   });
 };
-
+if (!selectedPxEmail) {
+  return <div>Please select an item from the list.</div>;
+}
 
   return (
     <div className="email-main">
@@ -34,12 +36,12 @@ const copyToClipboard = (elementId) => {
     <div className="main-container">     
       <div className="emailCard">
 
-        <h2 className="email-main-title" contenteditable="true">Email template</h2>
+        <h2 className="email-main-title" contenteditable="true">{selectedPxEmail.px_temp_title}</h2>
         <br />
         <div className="email-main-subject" id="subject-div">
         <span className="key" contentEditable="false">Subject:</span>
         <p className="email-main-text" contentEditable="true">
-          Schedule your following physical therapy appointment
+            {selectedPxEmail.px_temp_subject}
           <span className="copy-button-wrapper">
             <button onClick={() => copyToClipboard('subject-div')}>  
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
@@ -53,7 +55,7 @@ const copyToClipboard = (elementId) => {
       <div className="email-main-contents" id="body-div">
         <span className="key" contentEditable="false">Body:</span>
         <p className="email-main-text" contentEditable="true">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  {selectedPxEmail.px_temp_content}
           <span className="copy-button-wrapper">
             <button onClick={() => copyToClipboard('body-div')}>  
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
@@ -73,7 +75,7 @@ const copyToClipboard = (elementId) => {
         <div className="email-main-category"><span className="key" contenteditable="false">Category:</span>
         <br/>
          <select name="category" className="email-category-selection">
-                <option >select category</option> {/* set as default value from API*/}
+                <option >{selectedPxEmail.category}</option> {/* set as default value from API*/}
                 <option value="Outreach">Outreach</option>
                 <option value="General Therapy">General Therapy</option>
                 <option value="APOS Therapy">APOS Therapy</option>
@@ -131,7 +133,10 @@ const copyToClipboard = (elementId) => {
   )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+
+  selectedPxEmail: state.patient.selectedPxEmail
+})
 
 const mapDispatchToProps = {}
 

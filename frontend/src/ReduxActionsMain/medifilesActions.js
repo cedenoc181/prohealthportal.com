@@ -13,6 +13,23 @@ export const fetchMedifiles = () => {
       }
     };
   };
+
+
+// load selected index on to Main UI
+
+export const setSelectedMedifile = (file) => { 
+  console.log(file)
+  return  {
+    type: 'SET_SELECTED_MEDIFILE',
+    payload: file,
+  };
+};
+
+
+
+
+
+
   
   // Action to create a medical file
   export const createMedifile = (newMedifile) => {

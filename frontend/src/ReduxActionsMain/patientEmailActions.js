@@ -12,6 +12,17 @@ export const fetchPatientEmails = () => {
       }
     };
   };
+
+// select email and render on Main ui 
+
+export const setSelectedPatientEmail = (file) => { 
+  console.log(file)
+  return  {
+    type: 'SET_SELECTED_PX_EMAIL',
+    payload: file,
+  };
+};
+
   
   // Action to create a patient email template
   export const createPatientEmail = (newEmail) => {
@@ -64,6 +75,4 @@ export const fetchPatientEmails = () => {
       }
     };
   };
-  
-
   

@@ -23,6 +23,15 @@ Rails.application.routes.draw do
   resources :dr_templates
   resources :patient_templates
   resources :medifiles
+
+      # Active Storage
+      direct :rails_blob do |blob|
+        route_for(:rails_blob, blob)
+      end
+    
+      direct :rails_blob_representation do |representation|
+        route_for(:rails_blob_representation, representation)
+      end
    
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

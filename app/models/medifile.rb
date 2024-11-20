@@ -1,5 +1,5 @@
 class Medifile < ApplicationRecord
-    validate :validate_files
+  after_create_commit :validate_files
 
     has_many :my_medifiles, inverse_of: :medifile
     has_many :users, through: :my_medifiles

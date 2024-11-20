@@ -4,17 +4,19 @@ import { connect } from 'react-redux';
 import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
 import "./Features.css";
-import { fetchPatientEmails } from '../../../ReduxActionsMain/patientEmailActions.js';
+import { fetchPatientEmails, setSelectedPatientEmail } from '../../../ReduxActionsMain/patientEmailActions.js';
 import { fetchDoctorEmails } from '../../../ReduxActionsMain/doctorEmailActions.js';
  
-export const Email = ({patient, doctor, loading, error, fetchPatientEmails, fetchDoctorEmails}) => {
+export const Email = ({patient, doctor, loading, error, fetchPatientEmails, fetchDoctorEmails, setSelectedPatientEmail}) => {
 
 useEffect(() => { 
     fetchDoctorEmails();
      fetchPatientEmails();
 }, [fetchPatientEmails, fetchDoctorEmails]);
 
-
+const handleSelectedEmail = (file) => {
+  setSelectedPatientEmail(file);
+}
 
 const [patientTemp, setPatientTemp] = useState([]);
 const [drTemp, setDrTemp] = useState([]);
@@ -25,7 +27,7 @@ let filterCategories = ["response rate descending", "created on", "created by"] 
 
 
 let patientEmailTemplate = patient.length > 0 ? patient.map((file) => (
-    <div className="renderEmails" key={file.id}> 
+    <div className="renderEmails" key={file.id} onClick={() => handleSelectedEmail(file)}> 
       <div className="email-title">{file.px_temp_title}</div>
       <div className="email-subject"><span className="key">Subject:</span> {file.px_temp_subject}</div>
       <br />
@@ -161,6 +163,7 @@ const mapStateToProps = (state) => ({
   const mapDispatchToProps = {
     fetchPatientEmails,
     fetchDoctorEmails,
+    setSelectedPatientEmail,
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Email);

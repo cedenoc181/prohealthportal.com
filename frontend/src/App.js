@@ -75,6 +75,7 @@ function App() {
             <Route path="/account-settings" element={<Account />} />
           </Routes>
         </div>
+         {/* main content */}
         <div id="main" className="main">
         <div className="header">
             <div className="date-time">{formattedDate}</div>

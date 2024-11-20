@@ -4,6 +4,7 @@
     data: [],
     loading: false,
     error: null,
+    selectedPxEmail: null,
   };
   
   const patientEmailReducer = (state = initialState, action) => {
@@ -52,6 +53,11 @@
           ...state,
           error: action.payload,
         };
+        case 'SET_SELECTED_PX_EMAIL':
+          return {
+            ...state,
+            selectedPxEmail: action.payload,
+          };
       default:
         return state;
     }

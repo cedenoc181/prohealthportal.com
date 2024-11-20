@@ -1,17 +1,21 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import { fetchMedifiles } from '../../../ReduxActionsMain/medifilesActions.js';
+import { fetchMedifiles, setSelectedMedifile } from '../../../ReduxActionsMain/medifilesActions.js';
 import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
 import "./Features.css";
 
 
-export const Medical = ({ medifiles, loading, error, fetchMedifiles}) => {
+export const Medical = ({ medifiles, loading, error, fetchMedifiles, setSelectedMedifile}) => {
 
 useEffect(() => {
   fetchMedifiles();
 },[fetchMedifiles]);
+
+const handleSelectedMedifile = (file) => {
+  setSelectedMedifile(file);
+};
 
 
   const [collapse, setCollapse] = useState(false);
@@ -93,7 +97,7 @@ useEffect(() => {
 
                 <div className="renderContainer">
                 { medifiles && medifiles.map((file) => (
-                      <div className="renderMedical" key={file.id}>
+                      <div className="renderMedical" key={file.id} onClick={() => handleSelectedMedifile(file)} >
                       <div className="medical-title"><span className="key">{file.title}</span></div>
                       <br />
                           <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>                           <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
@@ -115,6 +119,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   fetchMedifiles,
+  setSelectedMedifile,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Medical);

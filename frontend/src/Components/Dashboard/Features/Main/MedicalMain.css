@@ -1,12 +1,26 @@
 .pdf-container {
     width: 100%;
     height: 80vh;
+    margin-bottom: 5% !important;
 }
 
 .pdf-main {
-    width: 100%;
+    width: 85%;
     height: 100%;
+    border: 1.8px solid black;
+    justify-self: center;
+    /* margin-bottom: 5%; */
 }
+
+.pdf-description {
+    padding: 3%;
+}
+
+.pdf-instruction {
+ padding: 5%;
+ padding-top: 0%;
+}
+
 
 .medicalPublishDate {
     display: flex;
@@ -15,7 +29,7 @@
 }
 
 .pdf-info {
-    margin-top: 10%;
+    margin-top: 30%;
 }
 
 .pdf-title {
