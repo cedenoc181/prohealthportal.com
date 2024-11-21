@@ -26,7 +26,12 @@ yarn-error.log*
 
 # backend user accounts for testing/developmennt 
 
+# make sure Database hasn't be reseted, Ive been trying to fix a aws rendering bug 
+# 
 # {
 #     "email": "christiancedenob.f@gmail.com",
 #     "password": "12345abc"
+
+#     "email": "aryles001@yahoo.com",
+#  "password": "12345abc"
 # }

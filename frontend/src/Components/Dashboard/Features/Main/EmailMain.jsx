@@ -9,11 +9,33 @@ import EmailSenderUI from './Main-Functions/SendEmail.jsx'
 
 export const EmailMain = ({selectedPxEmail, selectedDrEmail}) => {
 
+const [myPatientTemplate, setMyPatientTemplate] = useState({
 
+      user_id: '',
+      patient_template_id: '',
+      notes: ''
+
+})
+
+const [myDoctorTemplate, setMyDoctorTemplate] = useState({
+
+  user_id: '',
+  dr_template_id: '',
+  notes: ''
+
+})
+
+
+const handlePatientTemplateChange = (e) => {
+  const { name, value } = e.target;
+  setMyPatientTemplate({ [name]: value});
+}
 
 const [saveTemplateDropMenu, setSaveTemplateDropMenu] = useState(false);
 
 const [renderPatientEmail, setRenderPatientEmail] = useState(true);
+
+// const [addition ]
 
 function handleSaveTemplateDropMenu() {
       setSaveTemplateDropMenu(!saveTemplateDropMenu)
@@ -43,6 +65,9 @@ const copyToClipboard = (elementId) => {
   });
 };
 
+
+
+
 if (!selectedPxEmail) {
   return <div>Please select an item from the list.</div>;
 } ;
@@ -58,7 +83,7 @@ if (!selectedPxEmail) {
 
       {renderPatientEmail ? (    
         
-        <div className="emailCard">
+        <div className="emailCard" key={selectedPxEmail.id}>
         <h2 className="email-main-title" contenteditable="true">{selectedPxEmail.px_temp_title}</h2>
         <br />
         <div className="email-main-subject" id="subject-div">
@@ -101,7 +126,7 @@ if (!selectedPxEmail) {
           </div> 
       </div> ) : (    
         
-        <div className="emailCard">
+        <div className="emailCard" key={selectedDrEmail.id}>
         <h2 className="email-main-title" contenteditable="true">{selectedDrEmail.dr_temp_title}</h2>
         <br />
         <div className="email-main-subject" id="subject-div">
@@ -170,6 +195,8 @@ if (!selectedPxEmail) {
                 className="email-textarea"
                    placeholder='Note email info to optimize for patient or Dr. interaction, keep track and organized.'
                    size='md'
+                   value={myPatientTemplate.notes}
+                  onChange={handlePatientTemplateChange}
                 />
             </div>
             <br />
