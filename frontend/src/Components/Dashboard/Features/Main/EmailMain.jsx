@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import './EmMain.css'
 import './Main.css'
@@ -19,6 +19,20 @@ function handleSaveTemplateDropMenu() {
       setSaveTemplateDropMenu(!saveTemplateDropMenu)
 }
 
+useEffect(() => {
+if (selectedDrEmail) {
+  setRenderPatientEmail(false);
+}
+}, [selectedDrEmail])
+
+
+useEffect(() => {
+  if (selectedPxEmail){
+    setRenderPatientEmail(true);
+  }
+}, [selectedPxEmail])
+
+
 const copyToClipboard = (elementId) => {
   const element = document.getElementById(elementId);
   const textToCopy = element ? element.innerText : '';
@@ -29,7 +43,7 @@ const copyToClipboard = (elementId) => {
   });
 };
 
-if (!selectedPxEmail && !selectedDrEmail) {
+if (!selectedPxEmail) {
   return <div>Please select an item from the list.</div>;
 } ;
 
@@ -85,7 +99,9 @@ if (!selectedPxEmail && !selectedDrEmail) {
                 <option value="Billing">Billing</option>
           </select>
           </div> 
-      </div> ) : (    <div className="emailCard">
+      </div> ) : (    
+        
+        <div className="emailCard">
         <h2 className="email-main-title" contenteditable="true">{selectedDrEmail.dr_temp_title}</h2>
         <br />
         <div className="email-main-subject" id="subject-div">

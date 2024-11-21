@@ -16,11 +16,11 @@ useEffect(() => {
 
 const handleSelectedPxEmail = (file) => {
   setSelectedPatientEmail(file);
-}
+};
 
 const handleSelectedDrEmail = (file) => {
   setSelectedDoctorEmail(file);
-}
+};
 
 
 
@@ -54,12 +54,13 @@ let patientEmailTemplate = patient.length > 0 ? patient.map((file) => (
 
 
   const handleDrClick = (event) => {
-    event.stopPropagation();
     setPatientDefault(false);
+    setCollapse(false);
   }
 
   const handlePxClick = () => {
     setPatientDefault(true);
+    setCollapse(false);
   }
 
 
