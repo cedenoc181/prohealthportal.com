@@ -28,7 +28,11 @@ const [myDoctorTemplate, setMyDoctorTemplate] = useState({
 
 const handlePatientTemplateChange = (e) => {
   const { name, value } = e.target;
-  setMyPatientTemplate({ [name]: value});
+  console.log("Textarea Value:", value); // Logs the current value of the textarea
+  setMyPatientTemplate((prevState) => ({
+    ...prevState,
+    [name]: value,
+  }));
 }
 
 const [saveTemplateDropMenu, setSaveTemplateDropMenu] = useState(false);
@@ -195,6 +199,7 @@ if (!selectedPxEmail) {
                 className="email-textarea"
                    placeholder='Note email info to optimize for patient or Dr. interaction, keep track and organized.'
                    size='md'
+                   name="notes"  // This is necessary to ensure the correct property is updated in your state
                    value={myPatientTemplate.notes}
                   onChange={handlePatientTemplateChange}
                 />

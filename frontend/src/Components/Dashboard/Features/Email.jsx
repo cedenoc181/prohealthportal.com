@@ -9,11 +9,24 @@ import { fetchDoctorEmails,  setSelectedDoctorEmail} from '../../../ReduxActions
  
 export const Email = ({patient, doctor, loading, error, fetchPatientEmails, fetchDoctorEmails, setSelectedPatientEmail, setSelectedDoctorEmail}) => {
 
+
+// states 
+const [searchTerm, setSearchTerm] = useState('');
+  const [patientDefault, setPatientDefault] = useState(true);
+  const [collapse, setCollapse] = useState(false);
+
+
+
+// fetches and renders emails from each patient and doctor actions method 
 useEffect(() => { 
     fetchDoctorEmails();
      fetchPatientEmails();
 }, [fetchPatientEmails, fetchDoctorEmails]);
 
+// this function manages the nav button extending and minimizing 
+const handleTemplate = () => setCollapse(!collapse);
+
+// following functions sends selected objects to Main components to be rendered on its own
 const handleSelectedPxEmail = (file) => {
   setSelectedPatientEmail(file);
 };
@@ -22,49 +35,69 @@ const handleSelectedDrEmail = (file) => {
   setSelectedDoctorEmail(file);
 };
 
+// changes fetched emails to Dr emails 
+const handleDrClick = (event) => {
+  setPatientDefault(false);
+  setCollapse(false);
+}
+
+// changes fetched emails to patient emails 
+const handlePxClick = () => {
+  setPatientDefault(true);
+  setCollapse(false);
+}
+
+// track input if search field 
+const handleSearchChange = (e) => {
+  setSearchTerm(e.target.value);
+};
 
 
-const [patientTemp, setPatientTemp] = useState([]);
-const [drTemp, setDrTemp] = useState([]);
-const [patientDefault, setPatientDefault] = useState(true);
-const [collapse, setCollapse] = useState(false);
+// Filter patient emails based on search term
+const filteredPatients = patient.filter((file) => {
+  return (
+    file.px_temp_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    file.px_temp_subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    file.px_temp_content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    file.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+});
 
-let filterCategories = ["response rate descending", "created on", "created by"] ;
+// Use filtered emails to create the template for rendering
+let patientEmailTemplate = filteredPatients.length > 0 ? filteredPatients.map((file) => (
+  <div className="renderEmails" key={file.id} onClick={() => handleSelectedPxEmail(file)}> 
+    <div className="email-title">{file.px_temp_title}</div>
+    <div className="email-subject"><span className="key">Subject:</span> {file.px_temp_subject}</div>
+    <br />
+    <div className="email-contents"><span className="key">Body:</span> {file.px_temp_content}</div>
+    <div className="email-category"><span className="key">Category:</span> {file.category}</div>
+  </div>
+)) : <div>Emails not found</div>;
 
+// Filter doctor emails based on search term
+const filteredDoctors = doctor.filter((file) => {
+  return (
+    file.dr_temp_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    file.dr_temp_subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    file.dr_temp_content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    file.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+});
 
-let patientEmailTemplate = patient.length > 0 ? patient.map((file) => (
-    <div className="renderEmails" key={file.id} onClick={() => handleSelectedPxEmail(file)}> 
-      <div className="email-title">{file.px_temp_title}</div>
-      <div className="email-subject"><span className="key">Subject:</span> {file.px_temp_subject}</div>
-      <br />
-      <div className="email-contents"><span className="key">Body:</span> {file.px_temp_content}</div>
-      <div className="email-category"><span className="key">Category:</span> {file.category}</div>
-    </div>
-  )) : null;
-
-  let doctorEmailTemplate = doctor.length > 0 ? doctor.map((file) => (
-    <div className="renderEmails" key={file.id} onClick={() => handleSelectedDrEmail(file)}> 
-      <div className="email-title">{file.dr_temp_title}</div>
-      <div className="email-subject"><span className="key">Subject:</span> {file.dr_temp_subject}</div>
-      <br />
-      <div className="email-contents"><span className="key">Body:</span> {file.dr_temp_content}</div>
-      <div className="email-category"><span className="key">Category:</span> {file.category}</div>
-    </div>
-  )) : null;
-
-
-  const handleDrClick = (event) => {
-    setPatientDefault(false);
-    setCollapse(false);
-  }
-
-  const handlePxClick = () => {
-    setPatientDefault(true);
-    setCollapse(false);
-  }
+// Use filtered emails to create the template for rendering
+let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file) => (
+  <div className="renderEmails" key={file.id} onClick={() => handleSelectedDrEmail(file)}> 
+    <div className="email-title">{file.dr_temp_title}</div>
+    <div className="email-subject"><span className="key">Subject:</span> {file.dr_temp_subject}</div>
+    <br />
+    <div className="email-contents"><span className="key">Body:</span> {file.dr_temp_content}</div>
+    <div className="email-category"><span className="key">Category:</span> {file.category}</div>
+  </div>
+)) : <div>Emails not found</div>;
 
 
 
+// renders alternative content if data is not available 
 if (loading) {
     return <div>Loading...</div>;
   }
@@ -73,7 +106,7 @@ if (loading) {
     return <div>Error: {error}</div>;
   };
 
-const handleTemplate = () => setCollapse(!collapse);
+
        
 
   return (
@@ -84,16 +117,19 @@ const handleTemplate = () => setCollapse(!collapse);
         <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
      </svg>
     </div>
+
    {collapse ? 
    ( 
     <ul className="filter-li-container">
         <div onClick={handlePxClick}>
-        <li className="filter-li">Patient</li>
+        <li className="filter-li">Patient Templates</li>
         </div>
         <div onClick={handleDrClick}>
-        <li className="filter-li" >Doctor</li>
+        <li className="filter-li" >Doctor Templates</li>
         </div>
-        {/* <li className="filter-li">Saved Templates</li> */}
+        <div onClick="">
+        <li className="filter-li">My Templates</li>
+        </div>
     </ul>
 
 )
@@ -112,26 +148,18 @@ const handleTemplate = () => setCollapse(!collapse);
   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
 </svg></button>
 
+{/* search bar */}
           <div className="filter-Search">
             <div className="search-container">  
               <InputGroup className="inputGroup">
                     <InputLeftElement pointerEvents='none'>
                  <SearchIcon color='black.600' />
                     </InputLeftElement>
-                  <Input className="searchBar" width="60%" focusBorderColor='blue.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
+                  <Input className="searchBar" onChange={handleSearchChange} width="60%" focusBorderColor='blue.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
               </InputGroup>
              </div>
 
             <div className="filter-buttons">
-     {/*filter by  */}
-     <div>
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
 
         {/* sub filter buttons (categories) */}
 

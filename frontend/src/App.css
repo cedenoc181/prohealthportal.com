@@ -14,7 +14,7 @@
 
 #dashboard {
   display: grid;
-  grid-template-columns: 7% 30% 63%; /* Set column widths */
+  grid-template-columns: 5% 30% 65%; /* Set column widths */
    /* Optional: space between columns */
 }
 
