@@ -37,12 +37,18 @@ const handlePatientTemplateChange = (e) => {
 
 const [saveTemplateDropMenu, setSaveTemplateDropMenu] = useState(false);
 
+const [createTemplateDropMenu, setCreateTemplateDropMenu] = useState(false);
+
 const [renderPatientEmail, setRenderPatientEmail] = useState(true);
 
 // const [addition ]
 
 function handleSaveTemplateDropMenu() {
       setSaveTemplateDropMenu(!saveTemplateDropMenu)
+}
+
+function handleCreateTemplateDropMenu() {
+  setCreateTemplateDropMenu(!createTemplateDropMenu)
 }
 
 useEffect(() => {
@@ -175,10 +181,22 @@ if (!selectedPxEmail) {
         <br />
       <div className="email-buttons"> 
       <ButtonGroup className="email-save" variant='outline' spacing='6'>
+          <Button colorScheme='blue'  height='48px' width='200px' onClick={handleCreateTemplateDropMenu}>
+            {
+              createTemplateDropMenu ? 
+              "Close"
+              :
+              "Create Template"
+            }
+        
+        </Button>
+      </ButtonGroup>
+
+      <ButtonGroup className="email-save" variant='outline' spacing='6'>
           <Button colorScheme='blue'  height='48px' width='200px' onClick={handleSaveTemplateDropMenu}>
             {
               saveTemplateDropMenu ? 
-              "Template Info"
+              "Close"
               :
               "Save Template"
             }
