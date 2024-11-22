@@ -14,6 +14,7 @@ export const Email = ({patient, doctor, loading, error, fetchPatientEmails, fetc
 const [searchTerm, setSearchTerm] = useState('');
   const [patientDefault, setPatientDefault] = useState(true);
   const [collapse, setCollapse] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
 
 
@@ -52,15 +53,21 @@ const handleSearchChange = (e) => {
   setSearchTerm(e.target.value);
 };
 
+const handleCategoryChange = (category) => {
+  setSelectedCategory(category);
+};
+
+
 
 // Filter patient emails based on search term
 const filteredPatients = patient.filter((file) => {
-  return (
-    file.px_temp_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    file.px_temp_subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    file.px_temp_content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    file.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const matchesCategory = selectedCategory ? file.category.toLowerCase() === selectedCategory.toLowerCase() : true;
+  const matchesSearch = file.px_temp_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        file.px_temp_subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        file.px_temp_content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        file.category.toLowerCase().includes(searchTerm.toLowerCase());
+
+  return matchesCategory && matchesSearch;
 });
 
 // Use filtered emails to create the template for rendering
@@ -72,17 +79,19 @@ let patientEmailTemplate = filteredPatients.length > 0 ? filteredPatients.map((f
     <div className="email-contents"><span className="key">Body:</span> {file.px_temp_content}</div>
     <div className="email-category"><span className="key">Category:</span> {file.category}</div>
   </div>
-)) : <div>Emails not found</div>;
+)) : <div className="emailsNotFound">Emails not found, try filter buttons above.</div>;
 
 // Filter doctor emails based on search term
 const filteredDoctors = doctor.filter((file) => {
-  return (
-    file.dr_temp_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    file.dr_temp_subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    file.dr_temp_content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    file.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const matchesCategory = selectedCategory ? file.category.toLowerCase() === selectedCategory.toLowerCase() : true;
+  const matchesSearch = file.dr_temp_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        file.dr_temp_subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        file.dr_temp_content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        file.category.toLowerCase().includes(searchTerm.toLowerCase());
+
+  return matchesCategory && matchesSearch;
 });
+
 
 // Use filtered emails to create the template for rendering
 let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file) => (
@@ -93,7 +102,7 @@ let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file
     <div className="email-contents"><span className="key">Body:</span> {file.dr_temp_content}</div>
     <div className="email-category"><span className="key">Category:</span> {file.category}</div>
   </div>
-)) : <div>Emails not found</div>;
+)) : <div className="emailsNotFound">Emails not found, try filter buttons above.</div>;
 
 
 
@@ -164,28 +173,24 @@ if (loading) {
         {/* sub filter buttons (categories) */}
 
         {
-            patientDefault ?
-            
-            (   
-                <div className="categories-container">
-                <button className="categories">APOS</button>
-                <button className="categories">PT/OT</button>
-                <button className="categories">Outreach</button>
-                <button className="categories">Billing</button>
-                </div>
-            ) 
-            
-            :
-            
-            (
-                <div className="categories-container">
-                <button className="categories">APOS</button>
-                <button className="categories">PT/OT</button>
-                <button className="categories">Outreach</button>
-                <button className="categories">Referral</button>
-                </div>
-            )
-        }
+    patientDefault ?
+    (
+        <div className="categories-container">
+            <button className="categories" onClick={() => handleCategoryChange('Insurance')}>Insurance</button>
+            <button className="categories" onClick={() => handleCategoryChange('Outreach')}>Outreach</button>
+            <button className="categories" onClick={() => handleCategoryChange('Billing')}>Billing</button>
+        </div>
+    ) :
+    (
+        <div className="categories-container">
+            <button className="categories" onClick={() => handleCategoryChange('Protocols')}>Protocols</button>
+            <button className="categories" onClick={() => handleCategoryChange('Outreach')}>Outreach</button>
+            <button className="categories" onClick={() => handleCategoryChange('Referral')}>Referral</button>
+            <button className="categories" onClick={() => handleCategoryChange('Other')}>Other</button>
+        </div>
+    )
+}
+
                     
                     { patientDefault ? 
                         (patientEmailTemplate)

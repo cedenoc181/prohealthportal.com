@@ -95,7 +95,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_022703) do
   create_table "patient_templates", force: :cascade do |t|
     t.string "px_temp_title"
     t.string "px_temp_subject"
-    t.text "selectedPxEmail"
+    t.text "px_temp_content"
     t.string "category"
     t.string "language", default: "english"
     t.datetime "created_at", null: false

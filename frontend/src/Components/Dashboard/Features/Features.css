@@ -116,6 +116,15 @@ left: 20%;
     margin-left: 1%;
 }
 
+.emailsNotFound {
+    text-align: center;
+    padding: 15%;
+    padding-top: 20%;
+    font-size: 25px;
+    font-weight: 600;
+
+}
+
 /* Medifiles component CSS */
 
 .renderContainer {
