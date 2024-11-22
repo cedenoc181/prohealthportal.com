@@ -118,14 +118,13 @@ if (!selectedPxEmail) {
         </p>
       </div>
       <br />
-        <div className="email-main-category"><span className="key" contenteditable="false">Category:</span>
+        <div className="email-main-category"><span className="key" contenteditable="false">Tag:</span>
         <br/>
          <select name="category" className="email-category-selection">
                 <option >{selectedPxEmail.category}</option> {/* set as default value from API*/}
                 <option value="Outreach">Outreach</option>
-                <option value="General Therapy">General Therapy</option>
-                <option value="APOS Therapy">APOS Therapy</option>
                 <option value="Billing">Billing</option>
+                <option value="Other">Insurance</option>
           </select>
           </div> 
       </div> ) : (    
@@ -161,14 +160,13 @@ if (!selectedPxEmail) {
         </p>
       </div>
       <br />
-        <div className="email-main-category"><span className="key" contenteditable="false">Category:</span>
+        <div className="email-main-category"><span className="key" contenteditable="false">Tag:</span>
         <br/>
          <select name="category" className="email-category-selection">
                 <option >{selectedDrEmail.category}</option> {/* set as default value from API*/}
-                <option value="Outreach">Outreach</option>
-                <option value="General Therapy">General Therapy</option>
-                <option value="APOS Therapy">APOS Therapy</option>
-                <option value="Billing">Billing</option>
+                <option value="Protocols">Protocols</option>
+                <option value="Referral">Referral</option>
+                <option value="Other">Other</option>
           </select>
           </div> 
       </div>)

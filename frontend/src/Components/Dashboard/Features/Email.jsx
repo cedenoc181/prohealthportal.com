@@ -15,7 +15,7 @@ const [searchTerm, setSearchTerm] = useState('');
   const [patientDefault, setPatientDefault] = useState(true);
   const [collapse, setCollapse] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
-
+  const [filter, setFilter] = useState(false);
 
 
 // fetches and renders emails from each patient and doctor actions method 
@@ -26,6 +26,8 @@ useEffect(() => {
 
 // this function manages the nav button extending and minimizing 
 const handleTemplate = () => setCollapse(!collapse);
+
+const handleFilter = () => { setFilter(!filter); console.log("clicked")};
 
 // following functions sends selected objects to Main components to be rendered on its own
 const handleSelectedPxEmail = (file) => {
@@ -70,6 +72,7 @@ const filteredPatients = patient.filter((file) => {
   return matchesCategory && matchesSearch;
 });
 
+
 // Use filtered emails to create the template for rendering
 let patientEmailTemplate = filteredPatients.length > 0 ? filteredPatients.map((file) => (
   <div className="renderEmails" key={file.id} onClick={() => handleSelectedPxEmail(file)}> 
@@ -77,7 +80,7 @@ let patientEmailTemplate = filteredPatients.length > 0 ? filteredPatients.map((f
     <div className="email-subject"><span className="key">Subject:</span> {file.px_temp_subject}</div>
     <br />
     <div className="email-contents"><span className="key">Body:</span> {file.px_temp_content}</div>
-    <div className="email-category"><span className="key">Category:</span> {file.category}</div>
+    <div className="email-category"><span className="key">Tag:</span> {file.category}</div>
   </div>
 )) : <div className="emailsNotFound">Emails not found, try filter buttons above.</div>;
 
@@ -89,8 +92,13 @@ const filteredDoctors = doctor.filter((file) => {
                         file.dr_temp_content.toLowerCase().includes(searchTerm.toLowerCase()) ||
                         file.category.toLowerCase().includes(searchTerm.toLowerCase());
 
+
   return matchesCategory && matchesSearch;
 });
+
+
+
+
 
 
 // Use filtered emails to create the template for rendering
@@ -100,7 +108,7 @@ let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file
     <div className="email-subject"><span className="key">Subject:</span> {file.dr_temp_subject}</div>
     <br />
     <div className="email-contents"><span className="key">Body:</span> {file.dr_temp_content}</div>
-    <div className="email-category"><span className="key">Category:</span> {file.category}</div>
+    <div className="email-category"><span className="key">Tag:</span> {file.category}</div>
   </div>
 )) : <div className="emailsNotFound">Emails not found, try filter buttons above.</div>;
 
@@ -152,11 +160,7 @@ if (loading) {
 </div>
       <br />
 <div className="selected-menu">{patientDefault ? "Patient Template" : "Doctor Template"}</div>
-<button className="addTemplate"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
-  <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5z"/>
-  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
-</svg></button>
-
+<br />
 {/* search bar */}
           <div className="filter-Search">
             <div className="search-container">  
@@ -168,29 +172,38 @@ if (loading) {
               </InputGroup>
              </div>
 
-            <div className="filter-buttons">
-
         {/* sub filter buttons (categories) */}
+<br />
+
+        <button className="filter-buttons" onClick={handleFilter}>Filter<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1z"/>
+</svg></span></button>
 
         {
-    patientDefault ?
-    (
-        <div className="categories-container">
-            <button className="categories" onClick={() => handleCategoryChange('Insurance')}>Insurance</button>
-            <button className="categories" onClick={() => handleCategoryChange('Outreach')}>Outreach</button>
-            <button className="categories" onClick={() => handleCategoryChange('Billing')}>Billing</button>
-        </div>
-    ) :
-    (
-        <div className="categories-container">
-            <button className="categories" onClick={() => handleCategoryChange('Protocols')}>Protocols</button>
-            <button className="categories" onClick={() => handleCategoryChange('Outreach')}>Outreach</button>
-            <button className="categories" onClick={() => handleCategoryChange('Referral')}>Referral</button>
-            <button className="categories" onClick={() => handleCategoryChange('Other')}>Other</button>
-        </div>
+  filter ? (
+    patientDefault ? (
+      <div className="categories-container">
+        <p className="tags">Tags:</p>
+        <br />
+        <button className="categories" onClick={() => handleCategoryChange('Insurance')}>Insurance</button>
+        <button className="categories" onClick={() => handleCategoryChange('Outreach')}>Outreach</button>
+        <button className="categories" onClick={() => handleCategoryChange('Billing')}>Billing</button>
+        <button className="categories" onClick={() => handleCategoryChange('')}>Show all</button>
+      </div>
+    ) : (
+      <div className="categories-container">
+         <p>Tags:</p>
+         <br />
+        <button className="categories" onClick={() => handleCategoryChange('Protocols')}>Protocols</button>
+        <button className="categories" onClick={() => handleCategoryChange('Referral')}>Referral</button>
+        <button className="categories" onClick={() => handleCategoryChange('Other')}>Other</button>
+        <button className="categories" onClick={() => handleCategoryChange('')}>Show all</button>
+      </div>
     )
+  ) : (
+    null
+  )
 }
-
                     
                     { patientDefault ? 
                         (patientEmailTemplate)
@@ -199,7 +212,7 @@ if (loading) {
                      }
                 </div>
             </div>
-       </div>
+      
   )
 }
 
