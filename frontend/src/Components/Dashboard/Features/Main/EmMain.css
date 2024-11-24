@@ -77,3 +77,12 @@
     font-weight: 600;
     text-align: center;
 }
+
+.input-label {
+    color: rgba(0, 0, 0, 0.986);
+    font-weight: 650;
+}
+
+.email-category-selection {
+    display: block;
+}

@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import './EmMain.css'
 import './Main.css'
 import { Button, ButtonGroup } from '@chakra-ui/react'
-import { Textarea, Text, Input, InputGroup } from '@chakra-ui/react'
+import { Textarea } from '@chakra-ui/react'
 import EmailSenderUI from './Main-Functions/SendEmail.jsx'
-
+import CreateEmailUI from './Main-Functions/CreateEmail.jsx'
 
 export const EmailMain = ({selectedPxEmail, selectedDrEmail}) => {
 
@@ -37,21 +37,13 @@ const handlePatientTemplateChange = (e) => {
 
 const [saveTemplateDropMenu, setSaveTemplateDropMenu] = useState(false);
 
-const [createTemplateDropMenu, setCreateTemplateDropMenu] = useState(false);
-
 const [renderPatientEmail, setRenderPatientEmail] = useState(true);
 
 // const [addition ]
 
 function handleSaveTemplateDropMenu() {
-  setCreateTemplateDropMenu(false)
       setSaveTemplateDropMenu(!saveTemplateDropMenu)
 }
-
-function handleCreateTemplateDropMenu() {
-  setSaveTemplateDropMenu(false)
-  setCreateTemplateDropMenu(!createTemplateDropMenu)
-};
 
 useEffect(() => {
 if (selectedDrEmail) {
@@ -77,70 +69,18 @@ const copyToClipboard = (elementId) => {
   });
 };
 
-
-
-
 if (!selectedPxEmail) {
   return <div>
-
-<div>
-<form className="create-email-form">
-        <div className="create-email-inputs">
-        <Text mb='8px'>Template Title:</Text>
-        {/* <InputGroup> */}
-        <Input
-           placeholder='Name your email for future searches'
-           size='md'
-           name="notes"  // This is necessary to ensure the correct property is updated in your state
-           value={myPatientTemplate.notes}
-          onChange={handlePatientTemplateChange}
-        />
-        <Text>Template Subject:</Text>
-        <Input 
-          placeholder='Input email subject here'
-        
-        /> 
-        <Text>Template Content:</Text>
-        <Textarea 
-          placeholder='Write your email contents here!'
-          
-          /> 
-        <Text>Template Tag:</Text>
-        <select name="Tags" className="email-category-selection" >
-        <option value="">--Please choose an option below--</option>
-        <option value="Outreach">Outreach</option>
-        <option value="Billing">Billing</option>
-        <option value="Other">Insurance</option>
-        </select>
-       
-        {/* </InputGroup> */}
-        </div>
-        <br />
-        <div className="email-submit-button">
-        <Button  colorScheme='blue' variant='solid' size='lg'>
-            Create template
-        </Button>
-        </div>
-  </form>
-</div>
+     <div>
+       <CreateEmailUI />
+     </div>
 
       <div className="export-emails">
           <EmailSenderUI />
       </div>
-    {/* </div> */}
-
-
-
-
-
-
 
   </div>;
 } ;
-
-// if (!selectedDrEmail){
-//   return <div>Please select an item from the list.</div>;
-// };
 
   return (
     <div className="email-main">
@@ -237,18 +177,6 @@ if (!selectedPxEmail) {
         <br />
       <div className="email-buttons"> 
       <ButtonGroup className="email-save" variant='outline' spacing='6'>
-          <Button colorScheme='blue'  height='48px' width='200px' onClick={handleCreateTemplateDropMenu}>
-            {
-              createTemplateDropMenu ? 
-              "Close"
-              :
-              "Create Template"
-            }
-        
-        </Button>
-      </ButtonGroup>
-
-      <ButtonGroup className="email-save" variant='outline' spacing='6'>
           <Button colorScheme='blue'  height='48px' width='200px' onClick={handleSaveTemplateDropMenu}>
             {
               saveTemplateDropMenu ? 
@@ -266,7 +194,7 @@ if (!selectedPxEmail) {
         (
         <form className="save-email-form">
             <div className="email-notes"> 
-                <Text mb='8px'>Notes:</Text>
+                <label mb='8px'>Notes:</label>
                 <Textarea
                 className="email-textarea"
                    placeholder='Note email info to optimize for patient or Dr. interaction, keep track and organized.'
@@ -293,51 +221,10 @@ if (!selectedPxEmail) {
       }
 </div>
 
-<div>
-<form className="create-email-form">
-      <div className="create-email-title">
-        <h2 className="createTitle">Create a new Email Template</h2>
+      <div>
+      <CreateEmailUI />
       </div>
-      <br />
-        <div className="create-email-inputs">
-        <Text mb='8px'>Template Title:</Text>
-        {/* <InputGroup> */}
-        <Input
-           placeholder='Name your email for future searches'
-           size='md'
-           name="notes"  // This is necessary to ensure the correct property is updated in your state
-           value={myPatientTemplate.notes}
-          onChange={handlePatientTemplateChange}
-        />
-        <Text>Template Subject:</Text>
-        <Input 
-          placeholder='Input email subject here'
-        
-        /> 
-        <Text>Template Content:</Text>
-        <Textarea 
-          placeholder='Write your email contents here!'
           
-          /> 
-        <Text>Template Tag:</Text>
-        <select name="Tags" className="email-category-selection" >
-        <option value="">--Please choose an option below--</option>
-        <option value="Outreach">Outreach</option>
-        <option value="Billing">Billing</option>
-        <option value="Other">Insurance</option>
-        </select>
-       
-        {/* </InputGroup> */}
-        </div>
-        <br />
-        <div className="email-submit-button">
-        <Button  colorScheme='blue' variant='solid' size='lg'>
-            Create template
-        </Button>
-        </div>
-  </form>
-</div>
-
       <div className="export-emails">
           <EmailSenderUI />
       </div>
