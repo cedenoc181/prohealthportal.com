@@ -66,3 +66,14 @@
     display: flex;
     justify-content: center;
 }
+
+.create-email-inputs {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.createTitle {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+}

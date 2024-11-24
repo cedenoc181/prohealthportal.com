@@ -185,19 +185,23 @@ if (loading) {
       <div className="categories-container">
         <p className="tags">Tags:</p>
         <br />
+        <div className="categorie-buttons">
         <button className="categories" onClick={() => handleCategoryChange('Insurance')}>Insurance</button>
         <button className="categories" onClick={() => handleCategoryChange('Outreach')}>Outreach</button>
         <button className="categories" onClick={() => handleCategoryChange('Billing')}>Billing</button>
         <button className="categories" onClick={() => handleCategoryChange('')}>Show all</button>
+        </div>
       </div>
     ) : (
       <div className="categories-container">
-         <p>Tags:</p>
+         <p className="tags">Tags:</p>
          <br />
+         <div className="categorie-buttons">
         <button className="categories" onClick={() => handleCategoryChange('Protocols')}>Protocols</button>
         <button className="categories" onClick={() => handleCategoryChange('Referral')}>Referral</button>
         <button className="categories" onClick={() => handleCategoryChange('Other')}>Other</button>
         <button className="categories" onClick={() => handleCategoryChange('')}>Show all</button>
+      </div>
       </div>
     )
   ) : (
