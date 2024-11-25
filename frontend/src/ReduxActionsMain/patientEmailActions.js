@@ -28,7 +28,7 @@ export const setSelectedPatientEmail = (file) => {
   export const createPatientEmail = (newEmail) => {
     return async (dispatch) => {
       try {
-        const response = await fetch('/api/patient-emails', {
+        const response = await fetch('http://127.0.0.1:3000/patient_templates', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ export const setSelectedPatientEmail = (file) => {
   export const updatePatientEmail = (emailId, updatedInfo) => {
     return async (dispatch) => {
       try {
-        const response = await fetch(`/api/patient-emails/${emailId}`, {
+        const response = await fetch(`http://127.0.0.1:3000/patient_templates/${emailId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export const setSelectedPatientEmail = (file) => {
   export const deletePatientEmail = (emailId) => {
     return async (dispatch) => {
       try {
-        await fetch(`/api/patient-emails/${emailId}`, {
+        await fetch(`http://127.0.0.1:3000/patient_templates/${emailId}`, {
           method: 'DELETE',
         });
         dispatch({ type: 'DELETE_PATIENT_EMAIL_SUCCESS', payload: emailId });
