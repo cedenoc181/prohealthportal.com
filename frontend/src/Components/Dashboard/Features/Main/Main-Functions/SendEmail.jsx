@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from '@chakra-ui/react'
+
 import './SendEmail.css';
 
 export const SendEmail = () => {
@@ -67,8 +69,12 @@ export const SendEmail = () => {
           required
         />
         <p className="sending-email">Sending from: sender@example.com</p>
-        <button type="submit" className="send-button">Send Email</button>
-      </form>
+        <div className="email-submit-button">
+        <Button  colorScheme='blue' type="submit" variant='solid' size='lg'>
+            Send Email
+        </Button>       
+        </div>
+         </form>
       <div className="current-datetime">{currentDateTime}</div>
     </div>
   );

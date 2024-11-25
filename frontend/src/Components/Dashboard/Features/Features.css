@@ -3,6 +3,7 @@
     border-right: solid 2px rgb(70, 92, 126);
     background: rgba(206, 226, 246, 0.481);
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 
@@ -19,6 +20,11 @@
 
 
 /* email templates css */
+
+#e-templates {
+    padding-bottom: 50px;
+}
+
 span .sideMenuItems {
     display: inline-block;
     cursor: pointer;
@@ -71,25 +77,35 @@ left: 20%;
 }
 
 .categories {
+    display: flex;
     font-size: 16px;
     font-weight: 600;
-    padding: 1.5%;
+    padding: 1%;
     padding-right: 3%;
     padding-left: 3%;
-    border: solid 1px rgba(12, 12, 12, 0.681);
-    border-right: 50%;
-    background: rgba(206, 226, 246, 0.481);
+    text-align: center;
+
 }
 
 .tags {
+    display: flex; 
     color: rgba(67, 67, 67, 0.863);
     padding-left: 4%;
+
 }
 
 
 .categorie-buttons {
     display: flex;
     justify-content: space-evenly;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.tags svg{
+    width: 20px !important;
+    height: 20px !important;
+    padding-top: 1%;
 }
 
 .filter-buttons {
