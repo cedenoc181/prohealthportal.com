@@ -83,6 +83,40 @@
     font-weight: 650;
 }
 
-.email-category-selection {
+.email-category-selection, .language-select {
     display: block;
+}
+ 
+.create-email-inputs Input, Textarea, select  {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.email-submit-button Button{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.toggler {
+    display: block;
+    padding-left: 80%;
+}
+
+#tog2 {
+    color: rgb(24, 125, 247);
+}
+.toggler button {
+    padding-left: 60%;
+    cursor: pointer;
+}
+
+.toggler button:hover {
+    color: rgb(24, 125, 247);
+}
+
+.toggler label {
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.language-select {
+    width: 50%;
 }

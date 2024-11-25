@@ -63,14 +63,22 @@ const handleCategoryChange = (category) => {
 
 // Filter patient emails based on search term
 const filteredPatients = patient.filter((file) => {
-  const matchesCategory = selectedCategory ? file.category.toLowerCase() === selectedCategory.toLowerCase() : true;
-  const matchesSearch = file.px_temp_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        file.px_temp_subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        file.px_temp_content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        file.category.toLowerCase().includes(searchTerm.toLowerCase());
+  // Check if the selectedCategory matches the category of the file (or if no category is selected, include all files)
+  const matchesCategory = selectedCategory 
+    ? file.category && file.category.toLowerCase() === selectedCategory.toLowerCase() 
+    : true;
 
+  // Check if the search term matches any of the fields
+  const matchesSearch = (file.px_temp_title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         file.px_temp_subject?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         file.px_temp_content?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         file.category?.toLowerCase().includes(searchTerm.toLowerCase())) 
+                         ?? false;
+
+  // Return true only if both matchesCategory and matchesSearch are true
   return matchesCategory && matchesSearch;
 });
+
 
 
 // Use filtered emails to create the template for rendering
@@ -86,15 +94,22 @@ let patientEmailTemplate = filteredPatients.length > 0 ? filteredPatients.map((f
 
 // Filter doctor emails based on search term
 const filteredDoctors = doctor.filter((file) => {
-  const matchesCategory = selectedCategory ? file.category.toLowerCase() === selectedCategory.toLowerCase() : true;
-  const matchesSearch = file.dr_temp_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        file.dr_temp_subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        file.dr_temp_content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        file.category.toLowerCase().includes(searchTerm.toLowerCase());
+  // Check if the selectedCategory matches the category of the file (or if no category is selected, include all files)
+  const matchesCategory = selectedCategory 
+    ? file.category && file.category.toLowerCase() === selectedCategory.toLowerCase() 
+    : true;
 
+  // Check if the search term matches any of the fields
+  const matchesSearch = (file.dr_temp_title?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                         file.dr_temp_subject?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                         file.dr_temp_content?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                         file.category?.toLowerCase().includes(searchTerm.toLowerCase())) 
+                         ?? false;
 
+  // Return true only if both matchesCategory and matchesSearch are true
   return matchesCategory && matchesSearch;
 });
+
 
 
 

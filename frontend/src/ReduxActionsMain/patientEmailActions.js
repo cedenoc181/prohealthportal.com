@@ -33,7 +33,14 @@ export const setSelectedPatientEmail = (file) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(newEmail),
+          body: JSON.stringify(
+             { 
+              px_temp_title: newEmail.px_temp_title,
+              px_temp_subject: newEmail.px_temp_subject,
+              px_temp_content: newEmail.px_temp_content,
+              category: newEmail.category,
+              language: newEmail.language
+              }),
         });
         const data = await response.json();
         dispatch({ type: 'CREATE_PATIENT_EMAIL_SUCCESS', payload: data });

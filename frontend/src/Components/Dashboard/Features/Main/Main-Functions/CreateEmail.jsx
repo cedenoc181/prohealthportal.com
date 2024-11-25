@@ -9,22 +9,22 @@ import { createDoctorEmail } from '../../../../../ReduxActionsMain/doctorEmailAc
 
 export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
 
-  // false is for patient email and true will be for Dr emails
+  // true is for patient email and false will be for Dr emails
   const [templateToggler, setTemplateToggler] = useState(true);
 
 
     const [newPatientTemplate, setNewPatientTemplate] = useState({
-      title: '',
-      subject: '',
-      content: '',
+      px_temp_title: '',
+      px_temp_subject: '',
+      px_temp_content: '',
       category: '',
       language: ''
   });
   
   const [newDoctorTemplate, setNewDoctorTemplate] = useState({
-    title: '',
-    subject: '',
-    content: '',
+    dr_temp_title: '',
+    dr_temp_subject: '',
+    dr_temp_content: '',
     category: ''
   });
 
@@ -34,12 +34,23 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
   }
   
   const handleCreate = () => {
-    if (newPatientTemplate) {
-      createPatientEmail(newPatientTemplate)
-    } else if (newDoctorTemplate) {
-      createDoctorEmail(newDoctorTemplate)
+    if (templateToggler) {
+      // Validate patient template fields before creating
+      if (newPatientTemplate.px_temp_title && newPatientTemplate.px_temp_subject && newPatientTemplate.px_temp_content && newPatientTemplate.category && newPatientTemplate.language) {
+        createPatientEmail(newPatientTemplate);
+      } else {
+        console.log("Please fill out all required patient email fields.");
+      }
+    } else {
+      // Validate doctor template fields before creating
+      if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.catefory) {
+        createDoctorEmail(newDoctorTemplate);
+      } else {
+        console.log("Please fill out all required doctor email fields.");
+      }
     }
-  }
+  };
+  
 
       
   return (
@@ -52,26 +63,34 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
         
         { templateToggler ? 
          ( 
-          // if false show patient 
-          <div>
+          // if true show patient 
+          <div className="toggler-container">
           <h2 className="createTitle">Create a new Email Template for Patients</h2>
+          <div className="toggler"> 
           <button onClick={handleToggle}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
               <path d="M11 4a4 4 0 0 1 0 8H8a5 5 0 0 0 2-4 5 5 0 0 0-2-4zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8M0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5"/>
             </svg>
           </button>
+          <br />
+          <label>Toggle for Doctor template</label>
+          </div>
           </div>
           )
           :
       (   
-      // if true show Dr
-      <div>
+      // if false show Dr
+      <div className="toggler-container">
       <h2 className="createTitle">Create a new Email Template for Doctors</h2>
-      <button onClick={handleToggle}>
+      <div className="toggler"> 
+      <button id="tog2" onClick={handleToggle}>
            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
               <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8"/>
           </svg>
       </button> 
+      <br />
+      <label>Toggle for patient template</label>
+      </div>
       </div>
      ) 
     
@@ -90,26 +109,28 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
            mb='12px'
            placeholder='Name your email for future searches'
            size='md'
-           name="notes"  
-          onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, title: e.target.value})}
+           name="px_temp_title"  
+          onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, px_temp_title: e.target.value})}
         />
         <br />
         <label className="input-label">Template Subject:</label>
         <Input 
           mb='12px'
           placeholder='Input email subject here'
-          onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, subject: e.target.value})}
+          name="px_temp_subject"
+          onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, px_temp_subject: e.target.value})}
         /> 
         <br />
         <label className="input-label">Template Content:</label>
         <Textarea 
           mb='12px'
           placeholder='Write your email contents here!'
-          onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, content: e.target.value})}
+          name="px_temp_content"
+          onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, px_temp_content: e.target.value})}
           /> 
           <br />
         <label className="input-label">Template Tag:</label>
-        <select name="Tags" className="email-category-selection" onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, category: e.target.value})} >
+        <select name="category" className="email-category-selection" onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, category: e.target.value})} >
         <option value="">--Please choose an option below--</option>
         <option value="Outreach">Outreach</option>
         <option value="Billing">Billing</option>
@@ -117,8 +138,8 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
         </select>
 
         <br />
-        <label>Language: </label>
-        <select className="" name="language" onChange={(e) => setNewPatientTemplate({...newPatientTemplate, language: e.target.value})}>
+        <label className="input-label">Language: </label>
+        <select className="language-select" name="language" onChange={(e) => setNewPatientTemplate({...newPatientTemplate, language: e.target.value})}>
           <option>--Select Language for email--</option>
           <option value="English">English</option>
           <option value="Spanish">Spanish</option>
@@ -136,26 +157,28 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
            mb='12px'
            placeholder='Name your email for future searches'
            size='md'
-           name="notes"  
-          onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, title: e.target.value})}
+           name="dr_temp_title"  
+          onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, dr_temp_title: e.target.value})}
         />
         <br />
         <label className="input-label">Template Subject:</label>
         <Input 
           mb='12px'
           placeholder='Input email subject here'
-          onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, subject: e.target.value})}
+          name="dr_temp_subject"
+          onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, dr_temp_subject: e.target.value})}
         /> 
         <br />
         <label className="input-label">Template Content:</label>
         <Textarea 
           mb='12px'
           placeholder='Write your email contents here!'
-          onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, content: e.target.value})}
+          name="dr_temp_content"
+          onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, dr_temp_content: e.target.value})}
           /> 
           <br />
         <label className="input-label">Template Tag:</label>
-        <select name="Tags" className="email-category-selection" onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, category: e.target.value})} >
+        <select name="category" className="email-category-selection" onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, category: e.target.value})} >
         <option value="">--Please choose an option below--</option>
         <option value="Outreach">Outreach</option>
         <option value="Billing">Billing</option>
