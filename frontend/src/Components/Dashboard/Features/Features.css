@@ -170,7 +170,17 @@ padding-top: 20%;
     margin-left: 1%;
 }
 
+.email-contents {
+    white-space: nowrap;  /* Prevent the text from wrapping to the next line */
+    overflow: hidden;     /* Hide any overflow text */
+    text-overflow: ellipsis; /* Add an ellipsis (...) to indicate overflow */
+}
 
+.email-contents:hover {
+    white-space: wrap;
+    overflow:visible; 
+    text-overflow:clip;
+}
 
 .emailsNotFound {
     text-align: center;
