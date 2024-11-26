@@ -16,13 +16,30 @@ useEffect(() => {
 const handleSelectedMedifile = (file) => {
   setSelectedMedifile(file);
 };
-
+// default language is english
+  const [defaultLanguage, setDefualtLanguage] = useState(true); 
 
   const [collapse, setCollapse] = useState(false);
 
+  const [filter, setFilter] = useState(false);
+
+
   const handleTemplate = () => setCollapse(!collapse);
 
-  const [defaultLanguage, setDefualtLanguage] = useState(true);
+  const handleFilter = () => { setFilter(!filter); console.log("clicked")};
+
+
+const handleLanguageE = () => {
+  setDefualtLanguage(true);
+  setCollapse(false);
+}
+
+const handleLanguageS = () => {
+  setDefualtLanguage(false);
+  setCollapse(false);
+}
+
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -40,12 +57,20 @@ const handleSelectedMedifile = (file) => {
         <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
      </svg>
     </div>
+    
    {collapse ? 
+
    ( 
     <ul className="filter-li-container">
+       <div onClick={handleLanguageE}>
         <li className="filter-li">English Forms</li>
+        </div>
+        <div onClick={handleLanguageS}>
         <li className="filter-li">Spanish Forms</li>
-        {/* <li className="filter-li">Saved Templates</li> */}
+        </div>
+        <div>
+        <li className="filter-li">Saved Templates</li>
+        </div>
     </ul>
 
 )
@@ -59,11 +84,7 @@ const handleSelectedMedifile = (file) => {
 </div>
       <br />
 <div className="selected-menu">{ defaultLanguage ? "English Forms" : "Spanish Forms"}</div>
-<button className="addTemplate"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
-  <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5z"/>
-  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
-</svg></button>
-
+  <br />
           <div className="filter-Search">
             <div className="search-container">  
               <InputGroup className="inputGroup">
@@ -74,26 +95,37 @@ const handleSelectedMedifile = (file) => {
               </InputGroup>
              </div>
          </div>
-            <div className="filter-buttons">
-     {/*filter by  */}
-            <div>
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
-
+  
         {/* sub filter buttons (categories) */}
+        <br />
+        
+    <button className="filter-buttons" onClick={handleFilter}>Filter<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1z"/>
+    </svg></span>
+    </button>
 
+    {          
+         filter ?  
+                (  
                 <div className="categories-container">
+                  <p className="tags">Tags <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+            <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+            <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043z"/>
+          </svg></p>
+          <br />
+          <div className="categorie-buttons">
                 <button className="categories">APOS</button>
                 <button className="categories">PT/OT</button>
                 <button className="categories">Authorization</button>
                 <button className="categories">All</button>
                 </div>
-          </div>
+                </div>
+                )
+                :
+                ("")
+    }
+
+ 
 
                 <div className="renderContainer">
                 { medifiles && medifiles.map((file) => (

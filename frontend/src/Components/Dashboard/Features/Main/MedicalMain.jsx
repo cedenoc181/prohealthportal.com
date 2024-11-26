@@ -22,14 +22,14 @@ export const MedicalMain = ({ selectedMedifile }) => {
         <h2 className="pdf-title">{selectedMedifile.title}</h2>
         <p className="pdf-description">{selectedMedifile.description}</p>
 
-        <iframe
+        {/* <iframe
            title={selectedMedifile.title}
            className="pdf-main"
            src={selectedMedifile.file_link_url} // Use the static S3 URL generated above
            frameborder="1"
-        />
+        /> */}
 
-          {/* <a
+          <a
           href={selectedMedifile.file_link_url}
           target="_blank"
           rel="noopener noreferrer"
@@ -41,7 +41,7 @@ export const MedicalMain = ({ selectedMedifile }) => {
       src={selectedMedifile.file_cover_url}
      alt={selectedMedifile.file_cover_alt}
       />
-        </a> */}
+        </a>
         <br />
       <div className="medicalPublishDate"><span>Published:&nbsp; </span> {selectedMedifile.created_at}</div>
       <br />
