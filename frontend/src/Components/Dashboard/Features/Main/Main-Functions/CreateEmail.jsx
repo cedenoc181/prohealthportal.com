@@ -31,6 +31,11 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
   const handleToggle = (e) => {
     e.preventDefault();
     setTemplateToggler(!templateToggler)
+    if (templateToggler == true ) {
+      alert("switching email template for doctors")
+    } else {
+      alert("switching email template for patients")
+    }
   }
   
   const handleCreate = () => {

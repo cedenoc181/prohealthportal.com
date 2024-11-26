@@ -222,14 +222,15 @@ if (!selectedPxEmail) {
         )
       }
 </div>
-
-      <div>
-      <CreateEmailUI />
-      </div>
           
       <div className="export-emails">
           <EmailSenderUI />
       </div>
+
+      <div>
+      <CreateEmailUI />
+      </div>
+      
     </div>
   )
 }
