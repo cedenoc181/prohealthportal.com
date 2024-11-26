@@ -92,12 +92,12 @@ if (!selectedPxEmail) {
         <div className="emailCard" key={selectedPxEmail.id}>
         <h2 className="email-main-title" contenteditable="true">{selectedPxEmail.px_temp_title}</h2>
         <br />
-        <div className="email-main-subject" id="subject-div">
+        <div className="email-main-subject">
         <span className="key" contentEditable="false">Subject:</span>
-        <p className="email-main-text" contentEditable="true">
+        <p className="email-main-text" contentEditable="true" id="subject-p">
             {selectedPxEmail.px_temp_subject}
           <span className="copy-button-wrapper">
-            <button onClick={() => copyToClipboard('subject-div')}>  
+            <button onClick={() => copyToClipboard('subject-p')}>  
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
                 <path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
               </svg>
@@ -106,12 +106,12 @@ if (!selectedPxEmail) {
         </p>
       </div>
       <br />
-      <div className="email-main-contents" id="body-div">
+      <div className="email-main-contents">
         <span className="key" contentEditable="false">Body:</span>
-        <p className="email-main-text" contentEditable="true">
+        <p className="email-main-text" contentEditable="true" id="body-p">
                   {selectedPxEmail.px_temp_content}
           <span className="copy-button-wrapper">
-            <button onClick={() => copyToClipboard('body-div')}>  
+            <button onClick={() => copyToClipboard('body-p')}>  
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
                 <path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
               </svg>
@@ -134,12 +134,12 @@ if (!selectedPxEmail) {
         <div className="emailCard" key={selectedDrEmail.id}>
         <h2 className="email-main-title" contenteditable="true">{selectedDrEmail.dr_temp_title}</h2>
         <br />
-        <div className="email-main-subject" id="subject-div">
+        <div className="email-main-subject">
         <span className="key" contentEditable="false">Subject:</span>
-        <p className="email-main-text" contentEditable="true">
+        <p className="email-main-text" contentEditable="true" id="subject-p">
             {selectedDrEmail.dr_temp_subject}
           <span className="copy-button-wrapper">
-            <button onClick={() => copyToClipboard('subject-div')}>  
+            <button onClick={() => copyToClipboard('subject-p')}>  
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
                 <path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
               </svg>
@@ -148,12 +148,12 @@ if (!selectedPxEmail) {
         </p>
       </div>
       <br />
-      <div className="email-main-contents" id="body-div">
+      <div className="email-main-contents">
         <span className="key" contentEditable="false">Body:</span>
-        <p className="email-main-text" contentEditable="true">
+        <p className="email-main-text" contentEditable="true"  id="body-p">
                   {selectedDrEmail.dr_temp_content}
           <span className="copy-button-wrapper">
-            <button onClick={() => copyToClipboard('body-div')}>  
+            <button onClick={() => copyToClipboard('body-p')}>  
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
                 <path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
               </svg>
@@ -175,6 +175,12 @@ if (!selectedPxEmail) {
       }   
   
         <br />
+        <p className="email-instructions"><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+</svg></span>Emails can be modified and copied to email send form, emails that are modified will not presist to maintain the templates origin.
+           You can create a email that will presist on to data base below in the create form.</p>
+           <br />
       <div className="email-buttons"> 
       <ButtonGroup className="email-save" variant='outline' spacing='6'>
           <Button colorScheme='blue'  height='48px' width='200px' onClick={handleSaveTemplateDropMenu}>
@@ -230,7 +236,7 @@ if (!selectedPxEmail) {
       <div>
       <CreateEmailUI />
       </div>
-      
+
     </div>
   )
 }

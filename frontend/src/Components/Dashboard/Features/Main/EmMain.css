@@ -52,6 +52,20 @@
     border: solid 1px gray;
 }
 
+.email-instructions {
+    display: flex;
+    font-size: 14px;
+    font-weight: 600;
+    padding-left: 5%;
+    padding-right: 5%;
+    color:rgba(59, 60, 61, 0.86)
+}
+
+.email-instructions span svg {
+    width: 20px !important;
+    height: 20px !important;
+    padding-right: 4px;
+}
 
 .email-category-selection {
     width: 50%;
