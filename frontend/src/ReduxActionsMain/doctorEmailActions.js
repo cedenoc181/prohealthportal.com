@@ -24,20 +24,21 @@ export const setSelectedDoctorEmail = (file) => {
   };
 };
 
-
-
-
-  
   // Action to create a doctor email template
   export const createDoctorEmail = (newEmail) => {
     return async (dispatch) => {
       try {
-        const response = await fetch('/api/dr-emails', {
+        const response = await fetch('http://127.0.0.1:3000/dr_templates', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(newEmail),
+          body: JSON.stringify({
+            dr_temp_title: newEmail.dr_temp_title,
+            dr_temp_subject: newEmail.dr_temp_subject,
+            dr_temp_content: newEmail.dr_temp_content,
+            category: newEmail.category,
+          }),
         });
         const data = await response.json();
         dispatch({ type: 'CREATE_DOCTOR_EMAIL_SUCCESS', payload: data });
@@ -51,7 +52,7 @@ export const setSelectedDoctorEmail = (file) => {
   export const updateDoctorEmail = (emailId, updatedInfo) => {
     return async (dispatch) => {
       try {
-        const response = await fetch(`/api/dr-emails/${emailId}`, {
+        const response = await fetch(`http://127.0.0.1:3000/dr_templates/${emailId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ export const setSelectedDoctorEmail = (file) => {
   export const deleteDoctorEmail = (emailId) => {
     return async (dispatch) => {
       try {
-        await fetch(`/api/dr-emails/${emailId}`, {
+        await fetch(`http://127.0.0.1:3000/dr_templates/${emailId}`, {
           method: 'DELETE',
         });
         dispatch({ type: 'DELETE_DOCTOR_EMAIL_SUCCESS', payload: emailId });

@@ -43,12 +43,14 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
       }
     } else {
       // Validate doctor template fields before creating
-      if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.catefory) {
+      if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.category) {
         createDoctorEmail(newDoctorTemplate);
       } else {
         console.log("Please fill out all required doctor email fields.");
       }
     }
+
+
   };
   
 
@@ -56,7 +58,6 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
   return (
 
 <div>
-<form className="create-email-form">
 <br />
 <div className="create-email-title">
         
@@ -89,7 +90,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
           </svg>
       </button> 
       <br />
-      <label>Toggle for patient template</label>
+      <label>Untoggle for patient template</label>
       </div>
       </div>
      ) 
@@ -98,10 +99,11 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
    
       </div>
       <br />
-
+      <form className="create-email-form" onSubmit={handleCreate}>
        { templateToggler ? 
        
        (
+        // patient template input
        <div className="create-email-inputs">
         <label className="input-label">Template Title:</label>
         {/* <InputGroup> */}
@@ -111,6 +113,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
            size='md'
            name="px_temp_title"  
           onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, px_temp_title: e.target.value})}
+          required
         />
         <br />
         <label className="input-label">Template Subject:</label>
@@ -119,6 +122,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
           placeholder='Input email subject here'
           name="px_temp_subject"
           onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, px_temp_subject: e.target.value})}
+          required
         /> 
         <br />
         <label className="input-label">Template Content:</label>
@@ -127,10 +131,11 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
           placeholder='Write your email contents here!'
           name="px_temp_content"
           onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, px_temp_content: e.target.value})}
+          required
           /> 
           <br />
         <label className="input-label">Template Tag:</label>
-        <select name="category" className="email-category-selection" onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, category: e.target.value})} >
+        <select name="category" className="email-category-selection" onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, category: e.target.value})} required>
         <option value="">--Please choose an option below--</option>
         <option value="Outreach">Outreach</option>
         <option value="Billing">Billing</option>
@@ -139,7 +144,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
 
         <br />
         <label className="input-label">Language: </label>
-        <select className="language-select" name="language" onChange={(e) => setNewPatientTemplate({...newPatientTemplate, language: e.target.value})}>
+        <select className="language-select" name="language" onChange={(e) => setNewPatientTemplate({...newPatientTemplate, language: e.target.value})} required>
           <option>--Select Language for email--</option>
           <option value="English">English</option>
           <option value="Spanish">Spanish</option>
@@ -150,7 +155,9 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
         
         : 
         
-        ( <div className="create-email-inputs">
+        ( 
+        // Dr template input 
+        <div className="create-email-inputs">
         <label className="input-label">Template Title:</label>
         {/* <InputGroup> */}
         <Input
@@ -159,6 +166,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
            size='md'
            name="dr_temp_title"  
           onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, dr_temp_title: e.target.value})}
+          required
         />
         <br />
         <label className="input-label">Template Subject:</label>
@@ -167,6 +175,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
           placeholder='Input email subject here'
           name="dr_temp_subject"
           onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, dr_temp_subject: e.target.value})}
+          required
         /> 
         <br />
         <label className="input-label">Template Content:</label>
@@ -175,10 +184,11 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
           placeholder='Write your email contents here!'
           name="dr_temp_content"
           onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, dr_temp_content: e.target.value})}
+          required
           /> 
           <br />
         <label className="input-label">Template Tag:</label>
-        <select name="category" className="email-category-selection" onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, category: e.target.value})} >
+        <select name="category" className="email-category-selection" onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, category: e.target.value})} required>
         <option value="">--Please choose an option below--</option>
         <option value="Outreach">Outreach</option>
         <option value="Billing">Billing</option>
@@ -186,14 +196,18 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
         </select>
        
         {/* </InputGroup> */}
-        </div>)}
+        </div>
+      )
+      }
+
         <br />
         <div className="email-submit-button">
-        <Button  colorScheme='blue' variant='solid' size='lg' onClick={handleCreate}>
+        <Button  colorScheme='blue' variant='solid' size='lg' type='submit'>
             Create template
         </Button>
         </div>
   </form>
+  <br />
 </div>
   )
 }

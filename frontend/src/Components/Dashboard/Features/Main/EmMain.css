@@ -94,10 +94,15 @@
 .email-submit-button Button{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
+.Save-email-title {
+    font-size: 25px;
+    font-weight: 600;
+   text-align: center;
+}
 
 .toggler {
     display: block;
-    padding-left: 80%;
+    padding-left: 75%;
 }
 
 #tog2 {

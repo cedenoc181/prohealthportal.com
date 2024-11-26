@@ -193,6 +193,8 @@ if (!selectedPxEmail) {
         saveTemplateDropMenu ? 
         (
         <form className="save-email-form">
+          <h2 className="Save-email-title">Add to your list of Template</h2>
+          <br />
             <div className="email-notes"> 
                 <label mb='8px'>Notes:</label>
                 <Textarea
