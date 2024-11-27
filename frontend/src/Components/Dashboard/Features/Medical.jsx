@@ -20,9 +20,10 @@ const handleSelectedMedifile = (file) => {
   const [defaultLanguage, setDefualtLanguage] = useState(true); 
 
   const [collapse, setCollapse] = useState(false);
-
+// sets filter from maps or query search parameters
   const [filter, setFilter] = useState(false);
-
+// selecting category to render based on button filters
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleTemplate = () => setCollapse(!collapse);
 
@@ -39,6 +40,35 @@ const handleLanguageS = () => {
   setCollapse(false);
 }
 
+const filterMedifilesCategory = medifiles.filter((file) => {
+
+})
+
+
+let englishMedifiles = medifiles.length > 0 ? medifiles.map((file) => (
+  file.language === "English" ? (
+        <div className="renderContainer">
+      <div className="renderMedical" key={file.id} onClick={() => handleSelectedMedifile(file)} >
+      <div className="medical-title"><span className="key">{file.title}</span></div>
+      <br />
+          <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>                           <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
+           <div className="medical-language"><span className="key">Language:</span> {file.language}</div>
+      </div>
+      </div>) : (<div></div>)
+)) : "";
+
+
+let spanishMedifiles = medifiles.length > 0 ? medifiles.map((file) => (
+  file.language === "Spanish" ? (
+  <div className="renderContainer">
+<div className="renderMedical" key={file.id} onClick={() => handleSelectedMedifile(file)} >
+<div className="medical-title"><span className="key">{file.title}</span></div>
+<br />
+    <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>                           <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
+     <div className="medical-language"><span className="key">Language:</span> {file.language}</div>
+</div>
+</div>) : (<div></div>)
+)) : "";
 
 
   if (loading) {
@@ -127,16 +157,11 @@ const handleLanguageS = () => {
 
  
 
-                <div className="renderContainer">
-                { medifiles && medifiles.map((file) => (
-                      <div className="renderMedical" key={file.id} onClick={() => handleSelectedMedifile(file)} >
-                      <div className="medical-title"><span className="key">{file.title}</span></div>
-                      <br />
-                          <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>                           <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
-                           <div className="medical-language"><span className="key">Language:</span> {file.language}</div>
-                      </div>
-                ))}
-                </div>
+        { defaultLanguage ? 
+             (englishMedifiles) 
+          :
+             (spanishMedifiles)  
+        }
 
 
     </div>
