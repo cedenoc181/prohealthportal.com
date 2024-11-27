@@ -196,10 +196,15 @@ padding-top: 20%;
 .renderContainer {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+}
+
+.medical-title {
+    text-align: center;
 }
 
 .renderMedical {
-width: 40%;
+width: 60%;
 margin: 5%;
 }
 
@@ -214,18 +219,18 @@ margin: 5%;
 }
 
 
-.medical-title {
-    max-width: 200px;     /* Set a maximum width for the title */
-    white-space: nowrap;  /* Prevent the text from wrapping to the next line */
-    overflow: hidden;     /* Hide any overflow text */
-    text-overflow: ellipsis; /* Add an ellipsis (...) to indicate overflow */
+/* .medical-title {
+    max-width: 200px;    
+    white-space: nowrap; 
+    overflow: hidden;    
+    text-overflow: ellipsis; 
   }
-  
-  .medical-title:hover {
+   */
+  /* .medical-title:hover {
     white-space: wrap;
     overflow:visible; 
     text-overflow:clip;
-  }
+  } */
   
 /* Task component CSS */
 

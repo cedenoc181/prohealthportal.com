@@ -18,12 +18,13 @@ const handleSelectedMedifile = (file) => {
 };
 // default language is english
   const [defaultLanguage, setDefualtLanguage] = useState(true); 
-
+  const [searchTerm, setSearchTerm] = useState('');
+  
   const [collapse, setCollapse] = useState(false);
 // sets filter from maps or query search parameters
   const [filter, setFilter] = useState(false);
 // selecting category to render based on button filters
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleTemplate = () => setCollapse(!collapse);
 
@@ -40,12 +41,29 @@ const handleLanguageS = () => {
   setCollapse(false);
 }
 
+// track input if search field 
+const handleSearchChange = (e) => {
+  setSearchTerm(e.target.value);
+};
+
+const handleCategoryChange = (category) => {
+  setSelectedCategory(category);
+};
+
+
 const filterMedifilesCategory = medifiles.filter((file) => {
+  const matchesCategory = selectedCategory 
+  ? file.file_cover_alt && file.file_cover_alt.toLowerCase() === selectedCategory.toLowerCase() 
+   : true;
 
-})
+   const matchesSearch = (file.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    file.file_cover_alt?.toLowerCase().includes(searchTerm.toLowerCase())
+   ) ?? false;
+   return matchesCategory && matchesSearch;
+});
 
 
-let englishMedifiles = medifiles.length > 0 ? medifiles.map((file) => (
+let englishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCategory.map((file) => (
   file.language === "English" ? (
         <div className="renderContainer">
       <div className="renderMedical" key={file.id} onClick={() => handleSelectedMedifile(file)} >
@@ -58,7 +76,7 @@ let englishMedifiles = medifiles.length > 0 ? medifiles.map((file) => (
 )) : "";
 
 
-let spanishMedifiles = medifiles.length > 0 ? medifiles.map((file) => (
+let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCategory.map((file) => (
   file.language === "Spanish" ? (
   <div className="renderContainer">
 <div className="renderMedical" key={file.id} onClick={() => handleSelectedMedifile(file)} >
@@ -121,7 +139,7 @@ let spanishMedifiles = medifiles.length > 0 ? medifiles.map((file) => (
                     <InputLeftElement pointerEvents='none'>
                  <SearchIcon color='black.600' />
                     </InputLeftElement>
-                  <Input className="searchBar" width="60%" focusBorderColor='orange.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
+                  <Input className="searchBar" onChange={handleSearchChange} width="60%" focusBorderColor='orange.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
               </InputGroup>
              </div>
          </div>
@@ -144,10 +162,10 @@ let spanishMedifiles = medifiles.length > 0 ? medifiles.map((file) => (
           </svg></p>
           <br />
           <div className="categorie-buttons">
-                <button className="categories">APOS</button>
-                <button className="categories">PT/OT</button>
-                <button className="categories">Authorization</button>
-                <button className="categories">All</button>
+                <button className="categories" onClick= {() => handleCategoryChange("APOS")}>APOS</button>
+                <button className="categories" onClick= {() => handleCategoryChange("PTOT")}>PT/OT</button>
+                <button className="categories" onClick= {() => handleCategoryChange("authorization")}>Authorization</button>
+                <button className="categories" onClick= {() => handleCategoryChange("")}>All</button>
                 </div>
                 </div>
                 )
