@@ -4,12 +4,13 @@ import { connect } from 'react-redux'
 import './MedicalMain.css'
 import './Main.css'
 import { Textarea, Text, Button } from '@chakra-ui/react'
+import CreateMedicalFile from './Main-Functions/CreateMedifile'
 
 
 export const MedicalMain = ({ selectedMedifile }) => {
 
   if (!selectedMedifile) {
-    return <div>Please select an item from the list.</div>;
+    return <div><CreateMedicalFile /></div>;
   }
 
   console.log("PDF URL:", selectedMedifile.file_link_url);
