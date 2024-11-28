@@ -1,7 +1,7 @@
 .pdf-container {
     width: 100%;
-    height: 80vh;
-    margin-bottom: 5% !important;
+    height: 90%;
+    /* margin-bottom: 5% !important; */
 }
 
 .pdf-main {
@@ -9,16 +9,19 @@
     height: 100%;
     border: 1.8px solid black;
     justify-self: center;
-    /* margin-bottom: 5%; */
 }
 
-.pdf-description {
-    padding: 3%;
+
+.subtitle-pdf-description, .subtitle-pdf-instruction, .pdf-info {
+    padding-left: 3%;
+    color: rgba(109, 106, 106, 0.983)
 }
 
-.pdf-instruction {
- padding: 5%;
- padding-top: 0%;
+
+.pdf-description, .pdf-instruction, .pdf-info {
+    padding-left: 3%;
+    padding-bottom: 1%;
+    padding-right: 2.5%;
 }
 
 
@@ -28,9 +31,9 @@
     padding-right: 5%;
 }
 
-.pdf-info {
+/* .pdf-info {
     margin-top: 30%;
-}
+} */
 
 .pdf-title {
     display: flex;

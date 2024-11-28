@@ -20,6 +20,7 @@ export const MedicalMain = ({ selectedMedifile }) => {
 
       <div className="pdf-container">
         <h2 className="pdf-title">{selectedMedifile.title}</h2>
+        <p className="subtitle-pdf-description">Document description:</p>
         <p className="pdf-description">{selectedMedifile.description}</p>
 
         {/* <iframe
@@ -45,13 +46,15 @@ export const MedicalMain = ({ selectedMedifile }) => {
         <br />
       <div className="medicalPublishDate"><span>Published:&nbsp; </span> {selectedMedifile.created_at}</div>
       <br />
+      <p className="subtitle-pdf-instruction">Instructions:</p>
       <p className="pdf-instruction">{selectedMedifile.instructions}</p>
       <br />
       </div>
       <br />
       <div className="pdf-info">
-        <br />
-      <Text mb='8px'>Notes:</Text>
+        {/* <br /> */}
+        {/* render template saving if document is related to auth? or any document that is redundant */}
+      <Text>Notes:</Text>
             <Textarea
             className="email-textarea"
                placeholder='Note email info to optimize for patient or Dr. interaction, keep track and organized.'
