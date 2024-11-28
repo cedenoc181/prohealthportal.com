@@ -82,7 +82,8 @@ let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
 <div className="renderMedical" key={file.id} onClick={() => handleSelectedMedifile(file)} >
 <div className="medical-title"><span className="key">{file.title}</span></div>
 <br />
-    <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>                           <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
+    <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>   
+     <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
      <div className="medical-language"><span className="key">Language:</span> {file.language}</div>
 </div>
 </div>) : (<div></div>)
@@ -139,7 +140,7 @@ let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
                     <InputLeftElement pointerEvents='none'>
                  <SearchIcon color='black.600' />
                     </InputLeftElement>
-                  <Input className="searchBar" onChange={handleSearchChange} width="60%" focusBorderColor='orange.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
+                  <Input className="searchBar" onChange={handleSearchChange} width="60%" focusBorderColor='blue.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
               </InputGroup>
              </div>
          </div>
@@ -167,6 +168,7 @@ let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
                 <button className="categories" onClick= {() => handleCategoryChange("authorization")}>Authorization</button>
                 <button className="categories" onClick= {() => handleCategoryChange("")}>All</button>
                 </div>
+                <br />
                 </div>
                 )
                 :
