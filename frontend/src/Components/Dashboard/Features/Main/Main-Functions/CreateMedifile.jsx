@@ -54,6 +54,14 @@ export const CreateMedifile = (props) => {
                    required
                 />  
                   <br />
+                  
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" />
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Editable File?</label>
+                </div>
+
+                <br />
+                  {/* the data below will be saved as category on frontend UI but on backend UI it will be saved under file cover ALT to kill two birds one stone */}
                <label className="input-label" >Medical file category:</label>
                <select name="category" className="medical-category-selection"  required>
                <option value="">--Please choose form category --</option>
@@ -63,6 +71,7 @@ export const CreateMedifile = (props) => {
                <option value="General">General</option>
                </select>
                 <br />
+
                <label className="input-label">Medical file language:</label>
                <select name="language" className="medical-language-selection"  required>
                <option value="">--Please choose form language --</option>

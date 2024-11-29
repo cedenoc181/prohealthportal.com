@@ -257,6 +257,15 @@ margin: 5%;
     padding-top: 2.5%;
 }
 
+
+.form-check {
+    float: right;
+    
+
+}
+
+
+
 /* Task component CSS */
 
 .task-previews {
