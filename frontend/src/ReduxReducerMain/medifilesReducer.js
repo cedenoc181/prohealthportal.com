@@ -23,13 +23,45 @@ const medifilesReducer = (state = initialMedifilesState, action) => {
         return {
           ...state,
           data: [...state.data, action.payload],
+          loading: false,
         };
+        case 'CREATE_MEDIFILE_ERROR':
+          return {
+            ...state,
+            error: action.payload,
+            loading: false,
+          };
+          case 'UPDATE_MEDIFILE_SUCCESS': 
+          return {
+            ...state,
+            data: state.data.map((medifile) =>
+              medifile.id === action.payload.id ? action.payload : medifile
+            ),
+            loading: false,
+          };
+          case 'UPDATE_MEDIFILE_ERROR': 
+          return {
+            ...state,
+            error: action.payload,
+            loading: false,
+          };
+          case 'DELETE_MEDIFILE_SUCCESS':
+            return {
+              ...state,
+              data: state.data.filter((medifile) => medifile.id !== action.payload),
+              loading: false,
+            };
+            case 'DELETE_MEDIFILE_ERROR':
+              return {
+                ...state,
+                error: action.payload,
+                loading: false,
+              }
         case 'SET_SELECTED_MEDIFILE':
           return {
             ...state,
             selectedMedifile: action.payload,
           };
-      // Add more actions here...
       default:
         return state;
     }
