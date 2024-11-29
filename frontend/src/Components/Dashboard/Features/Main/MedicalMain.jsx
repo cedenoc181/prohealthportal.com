@@ -10,14 +10,15 @@ import CreateMedicalFile from './Main-Functions/CreateMedifile'
 export const MedicalMain = ({ selectedMedifile }) => {
 
   if (!selectedMedifile) {
-    return <div><CreateMedicalFile /></div>;
+    return <div> <CreateMedicalFile /> </div>;
   }
 
   console.log("PDF URL:", selectedMedifile.file_link_url);
 
 
   return (
-    <div className="main-container">
+    <div className="medical-main">
+       <div className="main-container">
 
       <div className="pdf-container">
         <h2 className="pdf-title">{selectedMedifile.title}</h2>
@@ -68,6 +69,11 @@ export const MedicalMain = ({ selectedMedifile }) => {
         </div>
       </div>
     </div>
+
+<div>
+<CreateMedicalFile /> 
+</div>
+     </div>  
   )
 }
 

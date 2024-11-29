@@ -6,7 +6,6 @@ import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Textarea } from '@chakra-ui/react'
 import EmailSenderUI from './Main-Functions/SendEmail.jsx'
 import CreateEmailUI from './Main-Functions/CreateEmail.jsx'
-
 export const EmailMain = ({selectedPxEmail, selectedDrEmail}) => {
 
 const [myPatientTemplate, setMyPatientTemplate] = useState({

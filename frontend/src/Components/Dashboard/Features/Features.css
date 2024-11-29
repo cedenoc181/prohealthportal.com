@@ -235,6 +235,7 @@ margin: 5%;
 .medifiles-form {
     margin: 0 auto;
     padding: 5%;
+    padding-top: 3%;
 }
   
 .medifile-submit-button {
@@ -250,6 +251,10 @@ margin: 5%;
 .medical-category-selection, .medical-language-selection {
     display: block;
     width: 50%;
+}
+
+.createTitle {
+    padding-top: 2.5%;
 }
 
 /* Task component CSS */
