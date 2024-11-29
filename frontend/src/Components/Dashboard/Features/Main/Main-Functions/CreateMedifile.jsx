@@ -20,10 +20,18 @@ export const CreateMedifile = (props) => {
                    required
                 />
                  <br />
-                 <label className="input-label">Medical file description</label>
+                 <label className="input-label">Medical file description: </label>
                  <Textarea 
                      mb='12px'
-                     placeholder="what is this file used for"
+                     placeholder="Advise the purpose of the form."
+                     name="pdf-description"
+                     required
+                 />
+                  <br />
+                 <label className="input-label">Medical file instructions: </label>
+                 <Textarea 
+                     mb='12px'
+                     placeholder="Advise how file should be store and filed."
                      name="pdf-description"
                      required
                  />
@@ -46,7 +54,7 @@ export const CreateMedifile = (props) => {
                    required
                 />  
                   <br />
-               <label className="input-label">Medical file category:</label>
+               <label className="input-label" >Medical file category:</label>
                <select name="category" className="medical-category-selection"  required>
                <option value="">--Please choose form category --</option>
                <option value="APOS">APOS</option>

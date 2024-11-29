@@ -231,7 +231,27 @@ margin: 5%;
 .key {
     padding-right: 2.5%;
 }
+
+.medifiles-form {
+    margin: 0 auto;
+    padding: 5%;
+}
   
+.medifile-submit-button {
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+}
+
+.medical-category-selection {
+    margin-bottom: 1.5%;
+}
+
+.medical-category-selection, .medical-language-selection {
+    display: block;
+    width: 50%;
+}
+
 /* Task component CSS */
 
 .task-previews {
