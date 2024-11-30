@@ -104,7 +104,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
    
       </div>
       <br />
-      <form className="create-email-form" onSubmit={handleCreate}>
+      <form className="create-email-form" name="email-addition" onSubmit={handleCreate}>
        { templateToggler ? 
        
        (

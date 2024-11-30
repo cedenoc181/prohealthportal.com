@@ -34,7 +34,7 @@ const handleCreateMedifile = () => {
   return (
     <div className="create-medical-file">
         <h2 className="createTitle"> Add a New Medical file to database </h2>
-            <form className="medifiles-form" onSubmit={handleCreateMedifile}>
+            <form className="medifiles-form" name="medical-form -addition" onSubmit={handleCreateMedifile}>
                 <div className="create-email-inputs">
                 <label className="input-label">Medical file title: </label>
                 <Input 

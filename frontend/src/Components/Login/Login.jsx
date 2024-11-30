@@ -64,9 +64,9 @@ export const Login = (props) => {
         <p className="loginPrompt">Sign in to access ProHealth portal</p>
       <form className="formContainer" onSubmit={handleSubmit}>
       <Stack className="inputfield"  spacing={10}>
-            <Input className="" size='lg' variant='flushed' placeholder='Email' _placeholder={{ opacity: 1, color: 'black.500' }}/> 
+            <Input size='lg' variant='flushed' placeholder='Email' _placeholder={{ opacity: 1, color: 'black.500' }}/> 
             <InputGroup>
-            <Input className="" size='lg' type={show ? 'text' : 'password'} variant='flushed' placeholder='Password' _placeholder={{ opacity: 1, color: 'black.500' }}/>
+            <Input size='lg' type={show ? 'text' : 'password'} variant='flushed' placeholder='Password' _placeholder={{ opacity: 1, color: 'black.500' }}/>
             <InputRightElement width='4.5rem'>
              <Button className="showPW" colorScheme='blue' variant='outline' h='2rem' size='sm' onClick={handleClick} >
                 {show ? 'Hide' : 'Show'}
