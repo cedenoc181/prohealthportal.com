@@ -14,7 +14,7 @@ export const Nav = (props) => {
         <br />
         <div className="nav-slot">
         <NavLink
-        to="/overview-console"
+        to="/"
         style={({ isActive }) => ({
             color: isActive
                 ? "navy"

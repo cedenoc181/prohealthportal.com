@@ -32,7 +32,7 @@ function App() {
       case '/inventory':
         setMainContent(<InventoryMain />);
         break;
-      case '/overview-console':
+      case '/':
         setMainContent(<OverviewMain />);
         break;
       case '/e-templates':
@@ -67,7 +67,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             {/* Routes for features */}
-            <Route path="/overview-console" element={<Overview />} />
+            <Route path="/" element={<Overview />} />
             <Route path="/medical-forms" element={<Medifiles />} />
             <Route path="/e-templates" element={<ETemplates />} />
             <Route path="/task-list" element={<TasksList />} />
