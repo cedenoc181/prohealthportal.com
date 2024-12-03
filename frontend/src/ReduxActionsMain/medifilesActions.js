@@ -29,35 +29,43 @@ export const setSelectedMedifile = (file) => {
   // Action to create a medical file
 
   export const createMedifile = (newMedifile) => {
-
-    let formData = new FormData();
-
-    FormData.append('file', newMedifile.file_link);
-
-    FormData.append('imageData', newMedifile.file_cover);
-
-    formData.append('jsonData', JSON.stringify({
-       title: `${newMedifile.title}`,
-       description: `${newMedifile.description}`,
-       instructions: `${newMedifile.instructions}`,
-       language: `${newMedifile.language}`,
-       file_editable: `${newMedifile.file_editable}`,
-       category: `${newMedifile.file_cover_alt}`
-     }));
-
-
     return async (dispatch) => {
       try {
+        // Create a new FormData object
+        const formData = new FormData();
+  
+        // Append files to FormData
+        if (newMedifile.file_link instanceof File) {
+          formData.append('file_link', newMedifile.file_link);
+        }
+  
+        if (newMedifile.file_cover instanceof File) {
+          formData.append('file_cover', newMedifile.file_cover);
+        }
+  
+        // Append the rest of the data as fields
+        formData.append('title', newMedifile.title);
+        formData.append('description', newMedifile.description);
+        formData.append('instructions', newMedifile.instructions);
+        formData.append('language', newMedifile.language);
+        formData.append('file_editable', newMedifile.file_editable);
+        formData.append('file_cover_alt', newMedifile.category);
+  
+        // Make the POST request
         const response = await fetch('http://127.0.0.1:3000/medifiles', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'multipart/form-data' 
-          },
-          body:formData,
+          body: formData, // No Content-Type header manually set
         });
+  
+        // Error handling
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+  
         const data = await response.json();
         dispatch({ type: 'CREATE_MEDIFILE_SUCCESS', payload: data });
       } catch (error) {
+        console.error('Error creating medifile:', error);
         dispatch({ type: 'CREATE_MEDIFILE_ERROR', payload: error.message });
       }
     };

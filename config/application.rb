@@ -2,6 +2,7 @@ require_relative "boot"
 
 require "rails"
 # Pick the frameworks you want:
+require 'rack/cors'
 require "active_model/railtie"
 require "active_job/railtie"
 require "active_record/railtie"
@@ -47,5 +48,15 @@ module ProhealthportalCom
 
     # Use SameSite=Strict for all cookies to help protect against CSRF
     config.action_dispatch.cookies_same_site_protection = :strict
+
+    # Configure Rack::Cors middleware for handling CORS
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'  # Replace with your frontend's domain in production for better security
+        resource '*',
+                 headers: :any,
+                 methods: %i[get post put patch delete options head]
+      end
+    end
   end
 end
