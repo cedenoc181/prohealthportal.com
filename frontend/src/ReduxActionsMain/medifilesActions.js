@@ -27,25 +27,33 @@ export const setSelectedMedifile = (file) => {
 
   
   // Action to create a medical file
+
   export const createMedifile = (newMedifile) => {
+
+    let formData = new FormData();
+
+    FormData.append('file', newMedifile.file_link);
+
+    FormData.append('imageData', newMedifile.file_cover);
+
+    formData.append('jsonData', JSON.stringify({
+       title: `${newMedifile.title}`,
+       description: `${newMedifile.description}`,
+       instructions: `${newMedifile.instructions}`,
+       language: `${newMedifile.language}`,
+       file_editable: `${newMedifile.file_editable}`,
+       category: `${newMedifile.file_cover_alt}`
+     }));
+
+
     return async (dispatch) => {
       try {
         const response = await fetch('http://127.0.0.1:3000/medifiles', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data' 
           },
-          body: JSON.stringify(
-            {
-              title: newMedifile.title,
-              description: newMedifile.description,
-              instructions: newMedifile.instructions,
-              file_link: newMedifile.file_link,
-              file_cover: newMedifile.file_cover,
-              file_cover_alt: newMedifile.category,
-              language: newMedifile.language,
-              file_editable: newMedifile.file_editable
-}),
+          body:formData,
         });
         const data = await response.json();
         dispatch({ type: 'CREATE_MEDIFILE_SUCCESS', payload: data });

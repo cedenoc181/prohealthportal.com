@@ -63,7 +63,7 @@ class MedifilesController < ApplicationController
 
       # Only allow a list of trusted parameters through.
       def medifile_params
-        params.permit(:title, :description, :instructions, :language, :file_editable, :file_cover_alt)
+        params.permit(:title, :description, :instructions, :language, :file_editable, :file_cover_alt, :file_cover, :file_link)
       end
 
 end
