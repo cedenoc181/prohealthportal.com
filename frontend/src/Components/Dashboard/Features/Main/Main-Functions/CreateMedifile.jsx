@@ -36,10 +36,26 @@ export const CreateMedifile = ({ createMedifile }) => {
   };
 
   return (
-    <div className="create-medical-file">
+    <div className="main-container create-medical-file">
       <h2 className="createTitle"> Add a New Medical File to Database </h2>
       <form className="medifiles-form" name="medical-form-addition" onSubmit={handleCreateMedifile}>
         <div className="create-email-inputs">
+        <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="flexSwitchCheckChecked"
+              onChange={(e) =>
+                setNewMedifileObject({ ...newMedifileObject, file_editable: e.target.checked })
+              } // Use e.target.checked to get boolean
+            />
+            <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
+              Live Doc?
+            </label>
+          </div>
+
+          <br />
+
           <label className="input-label">Medical file title: </label>
           <Input
             mb="12px"
@@ -95,9 +111,9 @@ export const CreateMedifile = ({ createMedifile }) => {
               required
             />
           </div>
-          <br />
+          {/* <br /> */}
 
-          <div className="form-check form-switch">
+          {/* <div className="form-check form-switch">
             <input
               className="form-check-input"
               type="checkbox"
@@ -109,7 +125,7 @@ export const CreateMedifile = ({ createMedifile }) => {
             <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
               Editable File?
             </label>
-          </div>
+          </div> */}
 
           <br />
           <label className="input-label">Medical file category:</label>

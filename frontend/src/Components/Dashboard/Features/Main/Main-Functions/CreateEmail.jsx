@@ -7,7 +7,7 @@ import { createDoctorEmail } from '../../../../../ReduxActionsMain/doctorEmailAc
 
 
 
-export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
+export const CreateEmail = ({createPatientEmail, createDoctorEmail, templateObject}) => {
 
   // true is for patient email and false will be for Dr emails
   const [templateToggler, setTemplateToggler] = useState(true);
@@ -58,11 +58,11 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail}) => {
 
   };
   
-
+console.log(templateObject);
       
   return (
 
-<div>
+<div className="main-container">
 <br />
 <div className="create-email-title">
         

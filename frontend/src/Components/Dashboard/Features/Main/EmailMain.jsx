@@ -36,15 +36,20 @@ const handlePatientTemplateChange = (e) => {
 
 const [saveTemplateDropMenu, setSaveTemplateDropMenu] = useState(false);
 
+const [useTemplate, setUseTemplate] = useState(false);
+
 const [renderPatientEmail, setRenderPatientEmail] = useState(true);
 
 const [showCreateForm, setShowCreateForm] = useState(false);
+
+const [useTemplateHtml, setUseTemplateHtml] = useState(null);
 
 // const [addition ]
 
 function handleSaveTemplateDropMenu() {
       setSaveTemplateDropMenu(!saveTemplateDropMenu)
 }
+
 
 useEffect(() => {
 if (selectedDrEmail) {
@@ -72,6 +77,24 @@ const copyToClipboard = (elementId) => {
     console.error('Failed to copy: ', err);
   });
 };
+
+
+function handleUseTemplate() {
+  setUseTemplate(!useTemplate);
+  const getSubject = document.getElementById('subject-p');
+  const getBody = document.getElementById('body-p');
+
+  setUseTemplateHtml({
+    subject: getSubject.innerHTML,
+    body: getBody.innerHTML
+  })
+
+  console.log('Using template: ', useTemplateHtml);
+}
+
+setTimeout(() => {
+  setUseTemplate(false);
+ },1000)
 
   // Render the create form if `showCreateForm` is true
   if (showCreateForm) {
@@ -222,6 +245,20 @@ const copyToClipboard = (elementId) => {
            <br />
       <div className="email-buttons"> 
       <ButtonGroup className="email-save" variant='outline' spacing='6'>
+          <Button colorScheme='blue'  height='48px' width='200px' onClick={handleUseTemplate}>
+              {
+                  useTemplate ? 
+                 (
+                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                  <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
+                  <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                </svg>
+                )
+                :
+                "Use Template"
+                
+              }
+          </Button>
           <Button colorScheme='blue'  height='48px' width='200px' onClick={handleSaveTemplateDropMenu}>
             {
               saveTemplateDropMenu ? 
@@ -233,7 +270,6 @@ const copyToClipboard = (elementId) => {
         </Button>
       </ButtonGroup>
       </div>
-
       {
         saveTemplateDropMenu ? 
         (
@@ -269,7 +305,7 @@ const copyToClipboard = (elementId) => {
 </div>
           
       <div className="export-emails">
-          <EmailSenderUI />
+          <EmailSenderUI templateObject={useTemplateHtml}/>
       </div>
 
     </div>
