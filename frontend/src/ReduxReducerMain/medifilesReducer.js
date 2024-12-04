@@ -49,6 +49,7 @@ const medifilesReducer = (state = initialMedifilesState, action) => {
             return {
               ...state,
               data: state.data.filter((medifile) => medifile.id !== action.payload),
+              selectedMedifile: state.selectedMedifile?.id === action.payload ? null : state.selectedMedifile,
               loading: false,
             };
             case 'DELETE_MEDIFILE_ERROR':

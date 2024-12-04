@@ -2,10 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { deleteMedifile } from '../../../../../ReduxActionsMain/medifilesActions';
 
-export const MyVerticallyCenteredModal = ({ show, onHide, selectedMedifile }) => {
+export const MyVerticallyCenteredModal = ({ show, onHide, selectedMedifile, deleteMedifile }) => {
   // Log the selectedMedifile data for debugging
   console.log("Selected Medifile:", selectedMedifile);
+
+  const handleDelete = () => {
+    if (selectedMedifile && selectedMedifile.id) {
+        console.log("Deleting selected file");
+      deleteMedifile(selectedMedifile.id);
+      onHide(); // Close the modal after deletion
+    }
+  };
 
   return (
     <Modal
@@ -31,7 +40,7 @@ export const MyVerticallyCenteredModal = ({ show, onHide, selectedMedifile }) =>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>Close</Button>
-        <Button variant="danger">Delete</Button>
+        <Button variant="danger" onClick={handleDelete}>Delete</Button>
       </Modal.Footer>
     </Modal>
   );
@@ -41,4 +50,8 @@ const mapStateToProps = (state) => ({
   selectedMedifile: state.medifiles.selectedMedifile,
 });
 
-export default connect(mapStateToProps)(MyVerticallyCenteredModal);
+const mapDispatchToProps = {
+    deleteMedifile,
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyVerticallyCenteredModal);

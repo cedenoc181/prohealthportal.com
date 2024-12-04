@@ -105,13 +105,19 @@ export const setSelectedMedifile = (file) => {
   export const deleteMedifile = (medifileId) => {
     return async (dispatch) => {
       try {
-        await fetch(`http://127.0.0.1:3000/medifiles/${medifileId}`, {
+        const response = await fetch(`http://127.0.0.1:3000/medifiles/${medifileId}`, {
           method: 'DELETE',
         });
-        dispatch({ type: 'DELETE_MEDIFILE_SUCCESS', payload: medifileId });
+        if (response.ok) {
+          dispatch({ type: 'DELETE_MEDIFILE_SUCCESS', payload: medifileId });
+          console.log("selected file has been deleted");
+        } else {
+          throw new Error('Failed to delete the medifile');
+        }
       } catch (error) {
         dispatch({ type: 'DELETE_MEDIFILE_ERROR', payload: error.message });
       }
     };
   };
+
   

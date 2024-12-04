@@ -1,6 +1,6 @@
 class MedifilesController < ApplicationController
   before_action :set_medifile, only: %i[ show update destroy ]
-  skip_before_action :is_admin?, only: [:index, :show, :create] #this line might change depending on UI functionality
+  skip_before_action :is_admin?, only: [:index, :show, :create, :destroy] #this line might change depending on UI functionality
 
 
   # GET /medifiles
