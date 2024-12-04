@@ -3,12 +3,31 @@ import { Button } from '@chakra-ui/react'
 
 import './SendEmail.css';
 
-export const SendEmail = () => {
+export const SendEmail = (templateObject) => {
+  let useTemlplate = templateObject.templateObject;
+
   const [formData, setFormData] = useState({
     receiver: '',
     subject: '',
     content: '',
   });
+
+
+  console.log(useTemlplate);
+  
+useEffect(() => {
+  if (useTemlplate) {
+    setFormData({
+      receiver: '',
+      subject: useTemlplate.subject,
+      content: useTemlplate.body
+    })
+  };
+}, [useTemlplate])
+
+  
+
+
   const [currentDateTime, setCurrentDateTime] = useState('');
 
   useEffect(() => {
@@ -37,6 +56,7 @@ export const SendEmail = () => {
     // Logic to handle sending email, could be an API call here
     console.log('Email Sent:', formData);
   };
+
 
   return (
     <div className="main-container">

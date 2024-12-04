@@ -85,8 +85,8 @@ function handleUseTemplate() {
   const getBody = document.getElementById('body-p');
 
   setUseTemplateHtml({
-    subject: getSubject.innerHTML,
-    body: getBody.innerHTML
+    subject: getSubject.innerText,
+    body: getBody.innerText
   })
 
   console.log('Using template: ', useTemplateHtml);
@@ -270,6 +270,7 @@ setTimeout(() => {
         </Button>
       </ButtonGroup>
       </div>
+      <br />
       {
         saveTemplateDropMenu ? 
         (

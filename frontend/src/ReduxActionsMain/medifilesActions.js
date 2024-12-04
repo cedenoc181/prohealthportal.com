@@ -110,7 +110,7 @@ export const setSelectedMedifile = (file) => {
         });
         if (response.ok) {
           dispatch({ type: 'DELETE_MEDIFILE_SUCCESS', payload: medifileId });
-          console.log("selected file has been deleted");
+          console.log("selected file has been deleted:", medifileId);
         } else {
           throw new Error('Failed to delete the medifile');
         }
