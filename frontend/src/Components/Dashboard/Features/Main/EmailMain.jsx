@@ -113,6 +113,10 @@ function handleModifiedTemplate() {
   })
 
   setShowCreateForm(true);
+
+setTimeout(() => {
+  alert('Create a new template with the recent modifications you made!');
+}, 400)
 }
 
 
