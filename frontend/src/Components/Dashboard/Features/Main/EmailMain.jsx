@@ -4,7 +4,7 @@ import './EmMain.css'
 import './Main.css'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Textarea } from '@chakra-ui/react'
-import { ChevronLeftIcon, SmallAddIcon, DownloadIcon } from '@chakra-ui/icons'
+import { ChevronLeftIcon, SmallAddIcon } from '@chakra-ui/icons'
 import EmailSenderUI from './Main-Functions/SendEmail.jsx'
 import CreateEmailUI from './Main-Functions/CreateEmail.jsx'
 export const EmailMain = ({selectedPxEmail, selectedDrEmail}) => {
