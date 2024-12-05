@@ -40,7 +40,11 @@
     margin-bottom: 15px;
   }
   
-  
+  .sending-email-button {
+    display: flex;
+    justify-content: center;
+  }
+
   .send-button:hover {
     background-color: #85c7f7;
   }

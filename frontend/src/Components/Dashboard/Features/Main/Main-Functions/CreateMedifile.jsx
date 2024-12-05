@@ -111,21 +111,6 @@ export const CreateMedifile = ({ createMedifile }) => {
               required
             />
           </div>
-          {/* <br /> */}
-
-          {/* <div className="form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="flexSwitchCheckChecked"
-              onChange={(e) =>
-                setNewMedifileObject({ ...newMedifileObject, file_editable: e.target.checked })
-              } // Use e.target.checked to get boolean
-            />
-            <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
-              Editable File?
-            </label>
-          </div> */}
 
           <br />
           <label className="input-label">Medical file category:</label>

@@ -14,7 +14,7 @@ export const SendEmail = (templateObject) => {
 
 
   console.log(useTemlplate);
-  
+
 useEffect(() => {
   if (useTemlplate) {
     setFormData({
@@ -89,7 +89,7 @@ useEffect(() => {
           required
         />
         <p className="sending-email">Sending from: sender@example.com</p>
-        <div className="email-submit-button">
+        <div className="sending-email-button">
         <Button  colorScheme='blue' type="submit" variant='solid' size='lg'>
             Send Email
         </Button>       

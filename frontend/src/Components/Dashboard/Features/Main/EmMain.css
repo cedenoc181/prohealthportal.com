@@ -108,7 +108,17 @@
 
 .email-submit-button Button{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+   padding-right: 50px;
 }
+
+.downloadIcon {
+    width: 8px !important;
+    height: 8px !important;
+    padding-bottom: 35px;
+    padding-left: 8px;
+}
+
+
 .Save-email-title {
     font-size: 25px;
     font-weight: 600;
@@ -140,3 +150,4 @@
 .language-select {
     width: 50%;
 }
+
