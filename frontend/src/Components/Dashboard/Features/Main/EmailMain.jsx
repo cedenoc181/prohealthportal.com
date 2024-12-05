@@ -111,17 +111,8 @@ function handleModifiedTemplate() {
     body: getBody.innerText,
     category: getCategory.innerText
   })
-  return (
-    <div>
-    <div className="createUI-button">
-      <button onClick={handleUIClick}>
-      <ChevronLeftIcon />
-        Back
-      </button>
-    </div>
-    <CreateEmailUI templateObject={useTempToCreate}/>
-  </div>
-);
+
+  setShowCreateForm(true);
 }
 
 
