@@ -45,6 +45,8 @@ const [showCreateForm, setShowCreateForm] = useState(false);
 
 const [useTemplateHtml, setUseTemplateHtml] = useState(null);
 
+const [useTempToCreate, setUseTempToCreate] = useState(null);
+
 // const [addition ]
 
 function handleSaveTemplateDropMenu() {
@@ -95,7 +97,35 @@ function handleUseTemplate() {
 
 setTimeout(() => {
   setUseTemplate(false);
- },1000)
+ },1000);
+
+
+function handleModifiedTemplate() {
+ 
+  const getSubject = document.getElementById('subject-p');
+  const getBody = document.getElementById('body-p');
+  const getCategory = document.getElementById('category');
+
+  setUseTempToCreate({
+    subject: getSubject.innerText,
+    body: getBody.innerText,
+    category: getCategory.innerText
+  })
+  return (
+    <div>
+    <div className="createUI-button">
+      <button onClick={handleUIClick}>
+      <ChevronLeftIcon />
+        Back
+      </button>
+    </div>
+    <CreateEmailUI templateObject={useTempToCreate}/>
+  </div>
+);
+}
+
+
+
 
   // Render the create form if `showCreateForm` is true
   if (showCreateForm) {
@@ -107,7 +137,7 @@ setTimeout(() => {
             Back
           </button>
         </div>
-        <CreateEmailUI />
+        <CreateEmailUI templateObject={useTempToCreate}/>
       </div>
     );
   }
@@ -116,7 +146,7 @@ setTimeout(() => {
   if (!selectedPxEmail) {
     return (
       <div>
-        <CreateEmailUI />
+        <CreateEmailUI templateObject={useTempToCreate}/>
       </div>
     );
   }
@@ -168,12 +198,19 @@ setTimeout(() => {
         <div className="email-main-category"><span className="key" contenteditable="false">Tag:</span>
         <br/>
          <select name="category" className="email-category-selection">
-                <option >{selectedPxEmail.category}</option> {/* set as default value from API*/}
+                <option id="category">{selectedPxEmail.category}</option> {/* set as default value from API*/}
                 <option value="Outreach">Outreach</option>
                 <option value="Billing">Billing</option>
                 <option value="Other">Insurance</option>
           </select>
           </div> 
+          <br />
+          <button className="addToCreateEmailButton" onClick={handleModifiedTemplate}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+              <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5"/>
+              <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+          </svg>
+          </button>
       </div> ) : (    
         
         <div className="emailCard" key={selectedDrEmail.id}>
@@ -210,12 +247,19 @@ setTimeout(() => {
         <div className="email-main-category"><span className="key" contenteditable="false">Tag:</span>
         <br/>
          <select name="category" className="email-category-selection">
-                <option >{selectedDrEmail.category}</option> {/* set as default value from API*/}
+                <option id="category">{selectedDrEmail.category}</option> {/* set as default value from API*/}
                 <option value="Protocols">Protocols</option>
                 <option value="Referral">Referral</option>
                 <option value="Other">Other</option>
           </select>
           </div> 
+          <br />
+          <button className="addToCreateEmailButton" onClick={handleModifiedTemplate}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+              <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5"/>
+              <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+          </svg>
+          </button>
       </div>)
       }   
   

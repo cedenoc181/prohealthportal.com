@@ -151,3 +151,13 @@
     width: 50%;
 }
 
+.addToCreateEmailButton {
+  margin-left: 95%;
+}
+
+.addToCreateEmailButton:hover {
+    color: rgb(3, 114, 250);
+}
+.addToCreateEmailButton svg:active {
+    box-shadow: rgba(80, 166, 228, 0.593) 3px 1px 3px;
+}

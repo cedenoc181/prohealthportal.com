@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import { Button } from '@chakra-ui/react'
 import { Textarea, Input } from '@chakra-ui/react'
@@ -8,6 +8,8 @@ import { createDoctorEmail } from '../../../../../ReduxActionsMain/doctorEmailAc
 
 
 export const CreateEmail = ({createPatientEmail, createDoctorEmail, templateObject}) => {
+
+
 
   // true is for patient email and false will be for Dr emails
   const [templateToggler, setTemplateToggler] = useState(true);
@@ -58,7 +60,23 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail, templateObje
 
   };
   
-console.log(templateObject);
+  useEffect(() => {
+    if (templateObject) {
+      setNewPatientTemplate({
+        px_temp_subject: templateObject.subject,
+          px_temp_content: templateObject.body,
+          category: templateObject.category,
+      }) && setNewDoctorTemplate ({
+        dr_temp_subject: templateObject.subject,
+        dr_temp_content: templateObject.body,
+        category: templateObject.category,
+      })
+    }
+    }, [templateObject])
+    
+    console.log('patient template:', newPatientTemplate)
+    
+    console.log('doctor template:', newDoctorTemplate)
       
   return (
 
@@ -126,6 +144,7 @@ console.log(templateObject);
           mb='12px'
           placeholder='Input email subject here'
           name="px_temp_subject"
+          value={newPatientTemplate.px_temp_subject}
           onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, px_temp_subject: e.target.value})}
           required
         /> 
@@ -135,13 +154,14 @@ console.log(templateObject);
           mb='12px'
           placeholder='Write your email contents here!'
           name="px_temp_content"
+          value={newPatientTemplate.px_temp_content}
           onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, px_temp_content: e.target.value})}
           required
           /> 
           <br />
         <label className="input-label">Template Tag:</label>
         <select name="category" className="email-category-selection" onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, category: e.target.value})} required>
-        <option value="">--Please choose an option below--</option>
+        <option value={newPatientTemplate.category}>{newPatientTemplate.category}</option>
         <option value="Outreach">Outreach</option>
         <option value="Billing">Billing</option>
         <option value="Other">Insurance</option>
