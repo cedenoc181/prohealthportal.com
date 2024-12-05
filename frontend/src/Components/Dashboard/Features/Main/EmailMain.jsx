@@ -92,6 +92,12 @@ function handleUseTemplate() {
     body: getBody.innerText
   })
 
+  setTimeout(() => {
+    alert('template copied onto to mailer below')
+  }, 100)
+
+
+
   console.log('Using template: ', useTemplateHtml);
 }
 

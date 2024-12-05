@@ -107,7 +107,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail, templateObje
          ( 
           // if true show patient 
           <div className="toggler-container">
-          <h2 className="createTitle">Create a new Email Template for Patients</h2>
+          <h2 className="createTitle">Create New Patient Email Template</h2>
           <div className="toggler"> 
           <button onClick={handleToggle}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
@@ -123,7 +123,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail, templateObje
       (   
       // if false show Dr
       <div className="toggler-container">
-      <h2 className="createTitle">Create a new Email Template for Doctors</h2>
+      <h2 className="createTitle">Create New Doctor Email Template</h2>
       <div className="toggler"> 
       <button id="tog2" onClick={handleToggle}>
            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
