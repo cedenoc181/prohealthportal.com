@@ -191,7 +191,18 @@ padding-top: 20%;
     padding-top: 20%;
     font-size: 25px;
     font-weight: 600;
+}
 
+
+#loader {
+    display: flex;
+    margin-left: 45% !important;
+}
+
+#loader .spin {
+    padding-top: 30%;
+    height: 500px !important;
+    width: 500px !important;
 }
 
 /* Medifiles component CSS */

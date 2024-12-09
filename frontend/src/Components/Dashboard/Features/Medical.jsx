@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchMedifiles, setSelectedMedifile } from '../../../ReduxActionsMain/medifilesActions.js';
 import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
+import ReactLoading from 'react-loading';
 import "./Features.css";
 
 
@@ -26,19 +27,32 @@ const handleSelectedMedifile = (file) => {
 // selecting category to render based on button filters
   const [selectedCategory, setSelectedCategory] = useState('');
 
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
+
+
   const handleTemplate = () => setCollapse(!collapse);
 
   const handleFilter = () => { setFilter(!filter); console.log("clicked")};
 
 
 const handleLanguageE = () => {
-  setDefualtLanguage(true);
-  setCollapse(false);
+  setLoadingSpinner(true);
+  setTimeout(() => {
+    setLoadingSpinner(false);
+    setDefualtLanguage(true);
+    setCollapse(false);
+  }, 1250);
+
 }
 
 const handleLanguageS = () => {
-  setDefualtLanguage(false);
-  setCollapse(false);
+  setLoadingSpinner(true);
+  setTimeout(() => {
+    setLoadingSpinner(false);
+    setDefualtLanguage(false);
+    setCollapse(false);
+  }, 1250);
+
 }
 
 // track input if search field 
@@ -176,7 +190,7 @@ let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
     }
 
  
-
+<div id="loader">{loadingSpinner ? (<ReactLoading className="spin" type={"spinningBubbles"} color={"black"} height={'20%'} width={'20%'}/>) : ''} </div> 
         { defaultLanguage ? 
              (englishMedifiles) 
           :

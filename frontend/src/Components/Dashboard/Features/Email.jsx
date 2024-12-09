@@ -48,7 +48,7 @@ const handleDrClick = () => {
     setLoadingSpinner(false);
     setCollapse(false);
     setPatientDefault(false);
-  }, 1500);
+  }, 1250);
 
 }
 
@@ -59,7 +59,7 @@ const handlePxClick = () => {
     setLoadingSpinner(false);
   setCollapse(false);
   setPatientDefault(true);
-  }, 1500);
+  }, 1250);
  
 }
 
@@ -103,7 +103,7 @@ let patientEmailTemplate = filteredPatients.length > 0 ? filteredPatients.map((f
     <div className="email-contents"><span className="key">Body:</span> {file.px_temp_content}</div>
     <div className="email-category"><span className="key">Tag:</span> {file.category}</div>
   </div>
-)) : <div className="emailsNotFound">Emails not found, try filter buttons above.</div>;
+)) : <div className="emailsNotFound"><ReactLoading type={"spinningBubbles"} color={"black"} height={667} width={375} /></div>;
 
 // Filter doctor emails based on search term
 const filteredDoctors = doctor.filter((file) => {
@@ -138,7 +138,7 @@ let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file
     <div className="email-contents"><span className="key">Body:</span> {file.dr_temp_content}</div>
     <div className="email-category"><span className="key">Tag:</span> {file.category}</div>
   </div>
-)) : <div className="emailsNotFound">Emails not found, try filter buttons above.</div>;
+)) : <div className="emailsNotFound"><ReactLoading type={"spinningBubbles"} color={"black"} height={667} width={375} /></div>;
 
 
 
@@ -242,7 +242,7 @@ if (loading) {
     null
   )
 }
-                  <div id="loader">{loadingSpinner ? (<ReactLoading type={"spinningBubbles"} color={"black"} height={667} width={375} />) : ''} </div>  
+                  <div id="loader">{loadingSpinner ? (<ReactLoading className="spin" type={"spinningBubbles"} color={"black"} height={'20%'} width={'20%'}/>) : ''} </div>  
                     { patientDefault ? 
                         (patientEmailTemplate)
                      : 
