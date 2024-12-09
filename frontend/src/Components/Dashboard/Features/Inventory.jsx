@@ -2,7 +2,7 @@ import {React, useState} from 'react'
 import { connect } from 'react-redux'
 import "./Features.css"
 import { Input, InputGroup, InputLeftElement, Stack, Button } from '@chakra-ui/react'
-import {LinkIcon, AddIcon, ChevronRightIcon } from '@chakra-ui/icons'
+import {LinkIcon } from '@chakra-ui/icons'
 // import InventoryMain from './Main/InventoryMain'
 
 

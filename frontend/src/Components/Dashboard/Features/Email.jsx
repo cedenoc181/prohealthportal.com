@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
+import ReactLoading from 'react-loading';
 import "./Features.css";
 import { fetchPatientEmails, setSelectedPatientEmail } from '../../../ReduxActionsMain/patientEmailActions.js';
 import { fetchDoctorEmails,  setSelectedDoctorEmail} from '../../../ReduxActionsMain/doctorEmailActions.js';
@@ -16,6 +17,7 @@ const [searchTerm, setSearchTerm] = useState('');
   const [collapse, setCollapse] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [filter, setFilter] = useState(false);
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
 
 
 // fetches and renders emails from each patient and doctor actions method 
@@ -38,16 +40,27 @@ const handleSelectedDrEmail = (file) => {
   setSelectedDoctorEmail(file);
 };
 
+
 // changes fetched emails to Dr emails 
-const handleDrClick = (event) => {
-  setPatientDefault(false);
-  setCollapse(false);
+const handleDrClick = () => {
+  setLoadingSpinner(true);
+  setTimeout(() => {
+    setLoadingSpinner(false);
+    setCollapse(false);
+    setPatientDefault(false);
+  }, 1500);
+
 }
 
 // changes fetched emails to patient emails 
 const handlePxClick = () => {
-  setPatientDefault(true);
+  setLoadingSpinner(true);
+  setTimeout(() => {
+    setLoadingSpinner(false);
   setCollapse(false);
+  setPatientDefault(true);
+  }, 1500);
+ 
 }
 
 // track input if search field 
@@ -131,7 +144,7 @@ let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file
 
 // renders alternative content if data is not available 
 if (loading) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
   
   if (error) {
@@ -229,7 +242,7 @@ if (loading) {
     null
   )
 }
-                    
+                  <div id="loader">{loadingSpinner ? (<ReactLoading type={"spinningBubbles"} color={"black"} height={667} width={375} />) : ''} </div>  
                     { patientDefault ? 
                         (patientEmailTemplate)
                      : 
