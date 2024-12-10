@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # remove index show create from admin restrictions
   skip_before_action :is_admin?, only: %i[me update]
   # will take skip before action authroized method off after development, bc admin will be only user avaiilable to perform CRUD
-  # skip_before_action :authorized, only: %i[ index show create ]
+
 
   # GET /users
   #Admin is the only user that can index and show

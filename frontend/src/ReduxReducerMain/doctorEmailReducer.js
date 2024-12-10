@@ -18,8 +18,8 @@
       case 'FETCH_DOCTOR_EMAILS_ERROR':
         return {
           ...state,
-          loading: false,
           error: action.payload,
+          loading: false,
         };
       case 'CREATE_DOCTOR_EMAIL_SUCCESS':
         return {

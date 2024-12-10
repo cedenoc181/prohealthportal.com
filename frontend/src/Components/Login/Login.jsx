@@ -1,107 +1,129 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Input, InputGroup, InputRightElement, Stack, Button } from "@chakra-ui/react";
-import { ArrowForwardIcon, EmailIcon } from '@chakra-ui/icons'
-import GoogleButton from 'react-google-button'
-import logo from '../../images/prohealth-logo.png'
-
+import { ArrowForwardIcon } from "@chakra-ui/icons";
+import GoogleButton from "react-google-button";
+import logo from "../../images/prohealth-logo.png";
 import "./Login.css";
 import { connect } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { loginUser } from "../../ReduxActionsMain/userActions.js";
 
-// const navigate = useNavigate();
-
-export const Login = (props) => {
-
+export const Login = ({ loginUser, onLogin }) => {
   const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
-
-  const [accnt, setAccnt] = useState("");
-  const [pass, setPass] = useState("");
-
-  const handleInputChange = (e) => setAccnt(e.target.value);
-  const handlePassChange = (e) => setPass(e.target.value);
-  const isError = accnt === "";
-
+  const [accnt, setAccnt] = useState(""); // Email input state
+  const [pass, setPass] = useState("");  // Password input state
   const [submission, setSubmission] = useState(false);
 
-  
-  const handleSubmit = (e) => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleClick = () => setShow(!show);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch('/account/login', {
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/json'
-    },   
-    body: JSON.stringify({
-        email: accnt,
-        password: pass,
-      })
-    })
-    setSubmission(false)
-    .then((res) => res.json())
-    .then((data) => {
-        console.log(`you logged in ${accnt}`, data);
-        localStorage.setItem("jwt", data.token);
+    setSubmission(true);
+  
+    try {
+      const user = await loginUser({ email: accnt, password: pass });
+      if (user) {
+        localStorage.setItem("jwt", user.token);
+        onLogin(); // Trigger App's isAuthenticated update
         // navigate("/overview");
-        // onLogin(data.user); //pass in onlogin function
-      });
-}
-
-
-        function submitClick(){
-            setTimeout(() => {
-                setSubmission(!submission)
-            console.log("loading submission ... ")
-          }, 100)
-        };
-
-
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+      alert("Login failed. Please check your credentials.");
+    } finally {
+      setSubmission(false);
+    }
+  };
 
   return (
     <div id="LoginPage">
-        <div className="LoginFormContainer col5">
+      <div className="LoginFormContainer col5">
         <div className="loginHeading">Welcome!</div>
         <p className="loginPrompt">Sign in to access ProHealth portal</p>
-      <form className="formContainer" onSubmit={handleSubmit}>
-      <Stack className="inputfield"  spacing={10}>
-            <Input size='lg' variant='flushed' placeholder='Email' _placeholder={{ opacity: 1, color: 'black.500' }}/> 
+        <form className="formContainer" onSubmit={handleSubmit}>
+          <Stack className="inputfield" spacing={10}>
+            {/* Email Input */}
+            <Input
+              size="lg"
+              variant="flushed"
+              placeholder="Email"
+              _placeholder={{ opacity: 1, color: "black.500" }}
+              value={accnt}
+              onChange={(e) => setAccnt(e.target.value)} // Controlled input
+            />
+            {/* Password Input */}
             <InputGroup>
-            <Input size='lg' type={show ? 'text' : 'password'} variant='flushed' placeholder='Password' _placeholder={{ opacity: 1, color: 'black.500' }}/>
-            <InputRightElement width='4.5rem'>
-             <Button className="showPW" colorScheme='blue' variant='outline' h='2rem' size='sm' onClick={handleClick} >
-                {show ? 'Hide' : 'Show'}
-             </Button>
-            </InputRightElement>
-
+              <Input
+                size="lg"
+                type={show ? "text" : "password"}
+                variant="flushed"
+                placeholder="Password"
+                _placeholder={{ opacity: 1, color: "black.500" }}
+                value={pass}
+                onChange={(e) => setPass(e.target.value)} // Controlled input
+              />
+              <InputRightElement width="4.5rem">
+                <Button
+                  className="showPW"
+                  colorScheme="blue"
+                  variant="outline"
+                  h="2rem"
+                  size="sm"
+                  onClick={handleClick}
+                >
+                  {show ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
             </InputGroup>
-            <div className="forgotPassword"><a href="#">Forgot Password?</a></div>
-            <Button className="loginButton" rightIcon={<ArrowForwardIcon />} colorScheme='blue' variant='outline'>
-                 Login
-            </Button>      
+            <div className="forgotPassword">
+              <a href="#">Forgot Password?</a>
+            </div>
+            {/* Login Button */}
+            <Button
+              className="loginButton"
+              rightIcon={<ArrowForwardIcon />}
+              colorScheme="blue"
+              variant="outline"
+              type="submit"
+              isDisabled={submission} 
+            >
+              {submission ? "Loading..." : "Login"}
+            </Button>
             <div className="logDivider">
-       <span className="line1">line through the text</span> or  <span className="line2">line through the text</span> 
-      </div>
-      <GoogleButton
-            id="googleButton"
-            label="Login with Google"
-            type="light"
-            // disabled // can also be written as disabled={true} for clarity
-             onClick={() => { console.log('this will not run on click since it is disabled') }}
-      />   
-      </Stack>
-      </form>
+              <span className="line1">line through the text</span> or{" "}
+              <span className="line2">line through the text</span>
+            </div>
+            {/* Google Login Button */}
+            <GoogleButton
+              id="googleButton"
+              label="Login with Google"
+              type="light"
+              onClick={() => {
+                console.log("Google login clicked");
+              }}
+            />
+          </Stack>
+        </form>
       </div>
       <figure className="figure col5">
-      <img className="phf-logo"  src={logo} alt="phf"/>
-      <figcaption className="phf-logo-caption">Improving Quality of Life Through Physical and Occupational Therapy</figcaption>
+        <img className="phf-logo" src={logo} alt="phf" />
+        <figcaption className="phf-logo-caption">
+          Improving Quality of Life Through Physical and Occupational Therapy
+        </figcaption>
       </figure>
-     
     </div>
   );
 };
 
+// Map Redux state to component props
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {};
+// Map Redux actions to component props
+const mapDispatchToProps = {
+  loginUser,
+};
 
+// Connect Redux to the component
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,6 +1,6 @@
 class DrTemplatesController < ApplicationController
   before_action :set_dr_template, only: %i[ show update destroy ]
-  skip_before_action :is_admin?, only: %i[index show create update]
+  skip_before_action :is_admin?
   
   # GET /dr_templates
   def index
