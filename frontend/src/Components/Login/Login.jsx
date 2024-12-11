@@ -26,8 +26,9 @@ export const Login = ({ loginUser, onLogin }) => {
       const user = await loginUser({ email: accnt, password: pass });
       if (user) {
         localStorage.setItem("jwt", user.token);
+        console.log(user.user)
         onLogin(); // Trigger App's isAuthenticated update
-        // navigate("/overview");
+        navigate("/overview");
       }
     } catch (error) {
       console.error("Login failed", error);

@@ -60,11 +60,13 @@ const userReducer = (state = initialState, action) => {
                 };
                 // user account login
         case 'FETCH_USER_DATA_SUCCESS':
+            console.log(action.payload);
             return {
-                ...state, 
-                data: action.payload, 
+                ...state,
+                data: action.payload, // Ensure this updates the `user` data correctly
                 loading: false,
-            };  
+              };
+             
         case 'FETCH_USER_DATA_FAILURE':
             return {
                 ...state,

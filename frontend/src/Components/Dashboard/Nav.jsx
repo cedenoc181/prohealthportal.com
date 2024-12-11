@@ -6,7 +6,7 @@ import './Nav.css'
 import logo from '../../images/prohealth-logo.png'
 import { useNavigate } from "react-router-dom";
 
-export const Nav = ({ setIsAuthenticated }) => {
+export const Nav = ({user, setIsAuthenticated }) => {
   const navigate = useNavigate();
 
 
@@ -15,14 +15,6 @@ export const Nav = ({ setIsAuthenticated }) => {
     setIsAuthenticated(false); // Update state to unauthenticated
     navigate("/login");
   };
-
-
-
-
-
-
-
-
 
 
   return (
@@ -34,7 +26,7 @@ export const Nav = ({ setIsAuthenticated }) => {
 
         <div className="nav-slot">
         <NavLink
-        to="/"
+        to="/overview"
         style={({ isActive }) => ({
             color: isActive
                 ? "navy"

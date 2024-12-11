@@ -100,22 +100,34 @@ export const fetchUsers = () => {
 
 
 // Action to log out a user
-export const logoutUser = () => ({
-  type: 'LOGOUT',
-});
+export const logoutUser = () => {
+  localStorage.removeItem("jwt"); // Clear the JWT on logout
+  return { type: 'LOGOUT' };
+};
 
 // my account 
 
 // Action to fetch user data (optional if needed later)
-export const fetchMyAccount = () => {
+export const fetchMyAccount = (token) => {
   return async (dispatch) => {
+    if (!token) {
+      dispatch({ type: "FETCH_USER_DATA_FAILURE", payload: "Missing token" });
+      return;
+    }
+
     try {
       const response = await fetch(`http://127.0.0.1:3000/my-account`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`, // Include the JWT in the request
+          Authorization: `Bearer ${token}`, // Include the JWT
         },
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch account data");
+      }
+
       const data = await response.json();
+      console.log(data);
       dispatch({ type: "FETCH_USER_DATA_SUCCESS", payload: data });
     } catch (error) {
       dispatch({ type: "FETCH_USER_DATA_FAILURE", payload: error.message });

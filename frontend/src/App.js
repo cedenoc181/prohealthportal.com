@@ -22,21 +22,24 @@ import MedicalMain from "./Components/Dashboard/Features/Main/MedicalMain.jsx";
 import TasksMain from "./Components/Dashboard/Features/Main/TasksMain.jsx";
 import AccountMain from "./Components/Dashboard/Features/Main/AccountMain.jsx";
 
-function App({ fetchMyAccount, user }) {
+function App({ user, loading, error, fetchMyAccount }) {
+
   const location = useLocation();
   const [mainContent, setMainContent] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("jwt"));
 
   // Fetch user account when authenticated
   useEffect(() => {
-    if (isAuthenticated && !user) {
-      console.log(isAuthenticated, user)
-      fetchMyAccount();
+    const token = localStorage.getItem("jwt");
+    if (isAuthenticated && token && !user) {
+      console.log(isAuthenticated,token, user)
+      fetchMyAccount(token);
 
     }
   }, [isAuthenticated, fetchMyAccount, user]);
 
-  console.log(isAuthenticated, user);
+  console.log(isAuthenticated);
+  console.log(user);
   // Update main content based on the route
   useEffect(() => {
     switch (location.pathname) {
@@ -77,6 +80,15 @@ function App({ fetchMyAccount, user }) {
     );
   }
 
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (error) {
+    return <div>Error: {error}</div>;
+  };
+
   return (
     <div id="dashboard" className="App">
       <div className="nav-display">
@@ -97,7 +109,7 @@ function App({ fetchMyAccount, user }) {
       <div id="main" className="main">
         <div className="header">
           <div className="date-time">{formattedDate}</div>
-          <div className="user-info">{user?.name || "Username"}</div>
+          <div className="user-info">{"Username"}</div>    {/* user.full_name || */}
         </div>
         {mainContent}
       </div>
@@ -107,7 +119,9 @@ function App({ fetchMyAccount, user }) {
 
 // Map Redux state to props
 const mapStateToProps = (state) => ({
-  user: state.user?.data || null, // Use optional chaining to avoid errors
+  user: state.user?.data || null, // Ensure `user` points to the correct data
+  loading: state.user?.loading, // Track loading state for user fetch
+  error: state.user?.error, // Track error state for user fetch
 });
 
 // Map Redux actions to props

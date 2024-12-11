@@ -16,7 +16,7 @@ const store = configureStore({
   reducer: {
     medifiles: medifilesReducer,
     myMedifiles : myMedifilesReducer,
-    users: userReducer,
+    user: userReducer,
     task: taskReducer,
     myEmail: myEmailTemplateReducer,
     patient: patientEmailReducer,
