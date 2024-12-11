@@ -5,14 +5,23 @@ import { fetchMedifiles, setSelectedMedifile } from '../../../ReduxActionsMain/m
 import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
 import ReactLoading from 'react-loading';
+import { Navigate } from 'react-router-dom'; 
 import "./Features.css";
 
 
-export const Medical = ({ medifiles, loading, error, fetchMedifiles, setSelectedMedifile}) => {
+export const Medical = ({ user, medifiles, loading, error, fetchMedifiles, setSelectedMedifile}) => {
 
-useEffect(() => {
-  fetchMedifiles();
-},[fetchMedifiles]);
+const token = localStorage.getItem("jwt");
+  console.log(token)
+
+  useEffect(() => {
+    if (user) {
+      const token = localStorage.getItem("jwt"); // Retrieve the token
+      fetchMedifiles(token); // Pass the token to the fetchMedifiles function
+    }
+  }, [fetchMedifiles, user]);
+
+
 
 const handleSelectedMedifile = (file) => {
   setSelectedMedifile(file);
@@ -65,6 +74,9 @@ const handleCategoryChange = (category) => {
 };
 
 
+console.log(medifiles);
+
+
 const filterMedifilesCategory = medifiles.filter((file) => {
   const matchesCategory = selectedCategory 
   ? file.file_cover_alt && file.file_cover_alt.toLowerCase() === selectedCategory.toLowerCase() 
@@ -103,6 +115,11 @@ let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
 </div>) : (<div></div>)
 )) : "";
 
+console.log(user);
+
+if (!user) {
+  return <Navigate to="/login" replace />;
+};
 
   if (loading) {
     return <div>Loading...</div>;
@@ -203,6 +220,7 @@ let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user.data,
   medifiles: state.medifiles.data,
   loading: state.medifiles.loading,
   error: state.medifiles.error,

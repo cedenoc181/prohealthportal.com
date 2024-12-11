@@ -1,15 +1,30 @@
 // medifilesActions.js
 
 // Action to fetch medical files
-export const fetchMedifiles = () => {
+export const fetchMedifiles = (token) => {
     return async (dispatch) => {
       try {
-        const response = await fetch('http://127.0.0.1:3000/medifiles');
+        if (!token) {
+          throw new Error("No token provided");
+        }
+  
+        const response = await fetch("http://127.0.0.1:3000/medifiles", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
+        });
+  
+        if (response.status === 401) {
+          localStorage.removeItem("jwt"); // Clear the token
+          window.location.href = "/login"; // Redirect to login
+          throw new Error("Unauthorized");
+        }
+  
         const data = await response.json();
-        console.log(data);
-        dispatch({ type: 'FETCH_MEDIFILES_SUCCESS', payload: data });
+        dispatch({ type: "FETCH_MEDIFILES_SUCCESS", payload: data });
       } catch (error) {
-        dispatch({ type: 'FETCH_MEDIFILES_ERROR', payload: error.message });
+        console.error("Error fetching medifiles:", error);
+        dispatch({ type: "FETCH_MEDIFILES_FAILURE", payload: error.message });
       }
     };
   };
