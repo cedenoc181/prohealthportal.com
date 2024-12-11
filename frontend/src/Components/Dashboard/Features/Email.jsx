@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
 import ReactLoading from 'react-loading';
+import { Navigate } from 'react-router-dom'; 
 import "./Features.css";
 import { fetchPatientEmails, setSelectedPatientEmail } from '../../../ReduxActionsMain/patientEmailActions.js';
 import { fetchDoctorEmails,  setSelectedDoctorEmail} from '../../../ReduxActionsMain/doctorEmailActions.js';
  
-export const Email = ({patient, doctor, loading, error, fetchPatientEmails, fetchDoctorEmails, setSelectedPatientEmail, setSelectedDoctorEmail}) => {
+export const Email = ({user, patient, doctor, loading, error, fetchPatientEmails, fetchDoctorEmails, setSelectedPatientEmail, setSelectedDoctorEmail}) => {
 
+  const token = localStorage.getItem("jwt");
+  console.log(token)
 
 // states 
 const [searchTerm, setSearchTerm] = useState('');
@@ -22,9 +25,12 @@ const [searchTerm, setSearchTerm] = useState('');
 
 // fetches and renders emails from each patient and doctor actions method 
 useEffect(() => { 
-    fetchDoctorEmails();
-     fetchPatientEmails();
-}, [fetchPatientEmails, fetchDoctorEmails]);
+  if (user) {
+    const token = localStorage.getItem("jwt"); // Retrieve the token
+    fetchDoctorEmails(token);
+    fetchPatientEmails(token); // Pass the token to the fetchMedifiles function
+  }
+}, [fetchPatientEmails, fetchDoctorEmails, user]);
 
 // this function manages the nav button extending and minimizing 
 const handleTemplate = () => setCollapse(!collapse);
@@ -142,7 +148,12 @@ let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file
 
 
 
-// renders alternative content if data is not available 
+// renders alternative content if data is not available
+
+if (!user) {
+  return <Navigate to="/login" replace />;
+};
+
 if (loading) {
     return <div></div>;
   }
@@ -255,6 +266,7 @@ if (loading) {
 }
 
 const mapStateToProps = (state) => ({
+    user: state.user.data,
     patient: state.patient.data,
     doctor: state.doctor.data,
     loading: state.patient.loading || state.doctor.loading,

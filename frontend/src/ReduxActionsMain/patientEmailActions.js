@@ -1,10 +1,23 @@
 // patientEmailActions.js
 
 // Action to fetch patient email templates
-export const fetchPatientEmails = () => {
+export const fetchPatientEmails = (token) => {
     return async (dispatch) => {
       try {
-        const response = await fetch('http://127.0.0.1:3000/patient_templates');
+        if (!token) {
+          throw new Error("No token provided");
+        }
+
+        const response = await fetch('http://127.0.0.1:3000/patient_templates', {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
+        });
+        if (response.status === 401) {
+          localStorage.removeItem("jwt"); // Clear the token
+          window.location.href = "/login"; // Redirect to login
+          throw new Error("Unauthorized");
+        }
         const data = await response.json();
         dispatch({ type: 'FETCH_PATIENT_EMAILS_SUCCESS', payload: data });
       } catch (error) {
