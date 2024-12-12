@@ -74,16 +74,15 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
   console.log(user);
 
 
+useEffect(() => {
   function capitalizeWords(str) {
     return str
       .split(' ') // Split the string into an array of words
       .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
       .join(' '); // Join the array back into a single string
   }
-
-
-useEffect(() => {
-  let name = user ? user.full_name : "loading user..."
+  
+  let name = user ? user.full_name : "loading user...";
   setUserName(capitalizeWords(name));
   console.log(userName);
 }, user)
