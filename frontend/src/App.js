@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Login from "./Components/Login/Login.jsx";
 import Nav from "./Components/Dashboard/Nav.jsx";
 import { fetchMyAccount } from "./ReduxActionsMain/userActions.js";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 // Importing features
 import Overview from "./Components/Dashboard/Features/Overview.jsx";
@@ -26,16 +26,17 @@ import AccountMain from "./Components/Dashboard/Features/Main/AccountMain.jsx";
 function App({ user, loading, error, fetchMyAccount }) {
 
   const location = useLocation();
+  // const navigate = useNavigate();
   const [mainContent, setMainContent] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("jwt"));
-
+  const [userName, setUserName] = useState("");
  // Fetch user account when authenticated
 useEffect(() => {
   const token = localStorage.getItem("jwt");
   let logoutTimeout;
 
   if (isAuthenticated && token && !user) {
-    console.log(isAuthenticated, token, user);
+    console.log(isAuthenticated);
     fetchMyAccount(token);
 
     // Decode the token to get the expiration time
@@ -43,18 +44,20 @@ useEffect(() => {
     const expirationTime = decodedToken.exp * 1000; // Convert seconds to milliseconds
     const currentTime = Date.now();
     const timeUntilExpiration = expirationTime - currentTime;
-
+console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
     if (timeUntilExpiration > 0) {
       // Set a timeout to log the user out when the token expires
       logoutTimeout = setTimeout(() => {
         localStorage.removeItem("jwt");
         setIsAuthenticated(false); // Ensure the app knows the user is logged out
+        // navigate("/login");
         console.log("Token expired. User logged out.");
       }, timeUntilExpiration);
     } else {
       // If the token is already expired, log the user out immediately
       localStorage.removeItem("jwt");
       setIsAuthenticated(false);
+      // navigate("/login");
     }
   }
 
@@ -66,8 +69,26 @@ useEffect(() => {
   };
 }, [isAuthenticated, fetchMyAccount, user]);
 
+
   console.log(isAuthenticated);
   console.log(user);
+
+
+  function capitalizeWords(str) {
+    return str
+      .split(' ') // Split the string into an array of words
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+      .join(' '); // Join the array back into a single string
+  }
+
+
+useEffect(() => {
+  let name = user ? user.full_name : "loading user..."
+  setUserName(capitalizeWords(name));
+  console.log(userName);
+}, user)
+
+
   // Update main content based on the route
   useEffect(() => {
     switch (location.pathname) {
@@ -107,18 +128,6 @@ useEffect(() => {
       </Routes>
     );
   }
-
-  function capitalizeWords(str) {
-    return str
-      .split(' ') // Split the string into an array of words
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-      .join(' '); // Join the array back into a single string
-  }
-  
-  // const userName = capitalizeWords(user.full_name || null);
-
-  const userName = "christian";
-
 
   if (loading) {
     return <div>Loading...</div>;
