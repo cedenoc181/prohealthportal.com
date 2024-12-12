@@ -79,7 +79,8 @@ export const Login = ({ loginUser, onLogin }) => {
               </InputRightElement>
             </InputGroup>
             <div className="forgotPassword">
-              <a href="#">Forgot Password?</a>
+              {/* p element below will hold the forgot password functionality */}
+              <p>Forgot Password?</p>
             </div>
             {/* Login Button */}
             <Button

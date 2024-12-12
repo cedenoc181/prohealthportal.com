@@ -14,6 +14,8 @@ export const Email = ({user, patient, doctor, loading, error, fetchPatientEmails
   const token = localStorage.getItem("jwt");
   console.log(token)
 
+  console.log(user)
+
 // states 
 const [searchTerm, setSearchTerm] = useState('');
   const [patientDefault, setPatientDefault] = useState(true);

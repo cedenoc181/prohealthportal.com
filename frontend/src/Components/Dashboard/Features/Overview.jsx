@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import "./Features.css"
 
 
-export const Overview = (props) => {
+export const Overview = ({ user }) => {
 
   const entities = [
     {
@@ -34,7 +34,7 @@ export const Overview = (props) => {
   ];
   
 
-  const [dailyOps, setDailyOps] = useState(['Appointment reminders', "Patient retention outreach", "Direct Access management", "referral management" ]);
+  const [dailyOps, setDailyOps] = useState(['Appointment reminders', "Patient retention outreach", "Direct Access management", "referral management"]);
 
   let count = Math.floor(Math.random() * 10) + 1;
 
@@ -146,7 +146,9 @@ export const Overview = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  user: state.user.data,
+})
 
 const mapDispatchToProps = {}
 

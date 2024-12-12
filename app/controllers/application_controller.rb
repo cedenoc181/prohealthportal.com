@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
 
 
       def encode_token(payload)
-        payload[:exp] = 3.hours.from_now.to_i 
+        payload[:exp] = 1.hours.from_now.to_i 
         JWT.encode(payload, 'password', 'HS256') 
       end
 

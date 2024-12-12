@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Login from "./Components/Login/Login.jsx";
 import Nav from "./Components/Dashboard/Nav.jsx";
 import { fetchMyAccount } from "./ReduxActionsMain/userActions.js";
+import jwtDecode from "jwt-decode";
 
 // Importing features
 import Overview from "./Components/Dashboard/Features/Overview.jsx";
@@ -28,15 +29,42 @@ function App({ user, loading, error, fetchMyAccount }) {
   const [mainContent, setMainContent] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("jwt"));
 
-  // Fetch user account when authenticated
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (isAuthenticated && token && !user) {
-      console.log(isAuthenticated,token, user)
-      fetchMyAccount(token);
+ // Fetch user account when authenticated
+useEffect(() => {
+  const token = localStorage.getItem("jwt");
+  let logoutTimeout;
 
+  if (isAuthenticated && token && !user) {
+    console.log(isAuthenticated, token, user);
+    fetchMyAccount(token);
+
+    // Decode the token to get the expiration time
+    const decodedToken = jwtDecode(token);
+    const expirationTime = decodedToken.exp * 1000; // Convert seconds to milliseconds
+    const currentTime = Date.now();
+    const timeUntilExpiration = expirationTime - currentTime;
+
+    if (timeUntilExpiration > 0) {
+      // Set a timeout to log the user out when the token expires
+      logoutTimeout = setTimeout(() => {
+        localStorage.removeItem("jwt");
+        setIsAuthenticated(false); // Ensure the app knows the user is logged out
+        console.log("Token expired. User logged out.");
+      }, timeUntilExpiration);
+    } else {
+      // If the token is already expired, log the user out immediately
+      localStorage.removeItem("jwt");
+      setIsAuthenticated(false);
     }
-  }, [isAuthenticated, fetchMyAccount, user]);
+  }
+
+  // Cleanup the timeout on component unmount or re-render
+  return () => {
+    if (logoutTimeout) {
+      clearTimeout(logoutTimeout);
+    }
+  };
+}, [isAuthenticated, fetchMyAccount, user]);
 
   console.log(isAuthenticated);
   console.log(user);
@@ -80,6 +108,17 @@ function App({ user, loading, error, fetchMyAccount }) {
     );
   }
 
+  function capitalizeWords(str) {
+    return str
+      .split(' ') // Split the string into an array of words
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+      .join(' '); // Join the array back into a single string
+  }
+  
+  // const userName = capitalizeWords(user.full_name || null);
+
+  const userName = "christian";
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -109,7 +148,7 @@ function App({ user, loading, error, fetchMyAccount }) {
       <div id="main" className="main">
         <div className="header">
           <div className="date-time">{formattedDate}</div>
-          <div className="user-info">{"Username"}</div>    {/* user.full_name || */}
+          <div className="user-info">{userName}</div> 
         </div>
         {mainContent}
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import './OverviewMain.css'
 import './Main.css'
@@ -7,6 +7,7 @@ import EmailMain from './EmailMain.jsx'
 
 
 export const OverviewMain = (props) => {
+  // console.log(user)
   return (
     <div className="main-container">
       <h1 className="welcome">Hello Christian!</h1>
@@ -19,16 +20,13 @@ export const OverviewMain = (props) => {
         <MedicalMain />
         </div>
         <br />
-
-
-
-
-
     </div>
   )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  // user: state.user.data,
+})
 
 const mapDispatchToProps = {}
 

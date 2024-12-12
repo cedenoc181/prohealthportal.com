@@ -10,12 +10,15 @@ export const Task = (props) => {
 
   const handleTemplate = () => setCollapse(!collapse);
 
-  const [dailyOps, setDailyOps] = useState(['Appointment reminders', "Patient retention outreach", "Direct Access management", "referral management" ]);
+  const [dailyOps, setDailyOps] = useState(["Appointment reminders", "Patient retention outreach", "Direct Access management", "referral management" ]);
 
-  const [auth, setAuth] = useState(['Pending authorization', 'Denied authorization', 'Authorization extension']);
+  // const [auth, setAuth] = useState(['Pending authorization', 'Denied authorization', 'Authorization extension']);
 
-  const [apos, setApos] = useState(['Schedule Int visit', 'Pending treatment',  'Follow ups schedueld', 'Source leads' ]);
+  // const [apos, setApos] = useState(['Schedule Int visit', 'Pending treatment',  'Follow ups schedueld', 'Source leads' ]);
 
+
+  // const opsArr = ["Appointment reminders", "Patient retention outreach", "Direct Access management", "referral management" ];
+  // setDailyOps(opsArr);
 
   return (
     <div id="task-list" className="console">

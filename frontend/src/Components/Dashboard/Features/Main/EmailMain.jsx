@@ -9,6 +9,8 @@ import EmailSenderUI from './Main-Functions/SendEmail.jsx'
 import CreateEmailUI from './Main-Functions/CreateEmail.jsx'
 export const EmailMain = ({selectedPxEmail, selectedDrEmail}) => {
 
+
+  // consider making this univeral for both patient and doctor
 const [myPatientTemplate, setMyPatientTemplate] = useState({
 
       user_id: '',
@@ -17,13 +19,13 @@ const [myPatientTemplate, setMyPatientTemplate] = useState({
 
 })
 
-const [myDoctorTemplate, setMyDoctorTemplate] = useState({
+// const [myDoctorTemplate, setMyDoctorTemplate] = useState({
 
-  user_id: '',
-  dr_template_id: '',
-  notes: ''
+//   user_id: '',
+//   dr_template_id: '',
+//   notes: ''
 
-})
+// })
 
 
 const handlePatientTemplateChange = (e) => {

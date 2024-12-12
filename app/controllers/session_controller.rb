@@ -13,7 +13,7 @@ class SessionController < ApplicationController
         # session[:user_id] = @user.id
         cookies.encrypted[:auth_token] = {
           value: @token,
-          expires: 1.week.from_now,
+          expires: 1.hours.from_now,
           httponly: true # Prevents JS access to the cookie (for security)
         }
   
