@@ -73,26 +73,6 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
   console.log(isAuthenticated);
   console.log(user);
 
-
-useEffect(() => {
-  function capitalizeWords(str) {
-    if (str) {
-      return str
-      .split(' ') // Split the string into an array of words
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-      .join(' '); // Join the array back into a single string
-    } else {
-      return '';
-    }
-
-  }
-  
-  let name = user ? user.full_name : "loading user...";
-  setUserName(capitalizeWords(name));
-  console.log(userName);
-}, [user]);
-
-
   // Update main content based on the route
   useEffect(() => {
     switch (location.pathname) {
@@ -122,6 +102,23 @@ useEffect(() => {
   const today = new Date();
   const options = { year: "numeric", month: "long", day: "numeric" };
   const formattedDate = today.toLocaleDateString("en-US", options); // e.g., "November 5, 2024"
+
+  useEffect(() => {
+    function capitalizeWords(str) {
+      if (str) {
+        return str
+        .split(' ') // Split the string into an array of words
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+        .join(' '); // Join the array back into a single string
+      } else {
+        return '';
+      }
+  
+    }
+    const name = user ? user.full_name : "loading user...";
+    setUserName(capitalizeWords(name));
+    console.log(userName);
+  }, [user]);
 
   // Conditionally render login or the main app
   if (!isAuthenticated) {

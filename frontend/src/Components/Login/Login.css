@@ -54,17 +54,15 @@
 }
 
 .line1 {
-   color: rgba(255, 255, 255, .0);
+    color: rgba(255, 255, 255, .0);
     text-decoration: line-through black !important;
     padding-inline-end: 15px;
- 
 }
 
 .line2 {
-    color: rgba(255, 255, 255, .0);
+     color: rgba(255, 255, 255, .0);
      text-decoration: line-through black !important;
      padding-inline-start: 15px;
-  
  }
 
 input {

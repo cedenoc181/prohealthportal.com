@@ -91,8 +91,8 @@ const filterMedifilesCategory = medifiles.filter((file) => {
 
 let englishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCategory.map((file) => (
   file.language === "English" ? (
-        <div className="renderContainer">
-      <div className="renderMedical" key={file.id} onClick={() => handleSelectedMedifile(file)} >
+        <div className="renderContainer" key={file.id} >
+      <div className="renderMedical" onClick={() => handleSelectedMedifile(file)} >
       <div className="medical-title"><span className="key">{file.title}</span></div>
       <br />
           <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>                           <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
@@ -104,8 +104,8 @@ let englishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
 
 let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCategory.map((file) => (
   file.language === "Spanish" ? (
-  <div className="renderContainer">
-<div className="renderMedical" key={file.id} onClick={() => handleSelectedMedifile(file)} >
+  <div className="renderContainer" key={file.id} >
+<div className="renderMedical" onClick={() => handleSelectedMedifile(file)} >
 <div className="medical-title"><span className="key">{file.title}</span></div>
 <br />
     <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>   

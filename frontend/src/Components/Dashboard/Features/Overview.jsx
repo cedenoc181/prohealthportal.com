@@ -100,8 +100,8 @@ export const Overview = ({ user }) => {
       </tr>
     </thead>
     <tbody>
-      {entities.map((ent) => (
-      <tr>
+      {entities.map((ent, index) => (
+      <tr key={index}>
       <td>{ent.Entity}</td>
       <td>{ent.Address}</td>
       <td>{ent.Phone}</td>
@@ -124,8 +124,8 @@ export const Overview = ({ user }) => {
         </thead>
         <tbody>
 
-          {dailyOps.map((task)=> (
-          <tr>
+          {dailyOps.map((task, index)=> (
+          <tr key={index}>
           <td> 
         <p className="task-point">  
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">

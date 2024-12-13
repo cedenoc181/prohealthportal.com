@@ -94,8 +94,8 @@ export const Login = ({ loginUser, onLogin }) => {
               {submission ? "Loading..." : "Login"}
             </Button>
             <div className="logDivider">
-              <span className="line1">line through the text</span> or{" "}
-              <span className="line2">line through the text</span>
+              <span className="line1">line through text</span> or{" "}
+              <span className="line2">line through text</span>
             </div>
             {/* Google Login Button */}
             <GoogleButton
