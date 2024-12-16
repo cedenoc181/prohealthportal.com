@@ -168,6 +168,22 @@ const fetchWithAuth = async (url, options = {}) => {
   return response.json();
 };
 
+// Action to fetch user account
+export const fetchMyAccount = (token) => async (dispatch) => {
+  dispatch({ type: "FETCH_USER_DATA_REQUEST" });
+  try {
+    const response = await fetch(`http://127.0.0.1:3000/my-account`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    dispatch({ type: "FETCH_USER_DATA_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({ type: "FETCH_USER_DATA_FAILURE", payload: error.message });
+  }
+};
+
 // Action to fetch users
 export const fetchUsers = () => {
   return async (dispatch) => {
@@ -259,14 +275,16 @@ export const logoutUser = () => {
 };
 
 // Action to fetch user account
-export const fetchMyAccount = () => {
-  return async (dispatch) => {
-    try {
-      const data = await fetchWithAuth("http://127.0.0.1:3000/my-account");
-      dispatch({ type: "FETCH_USER_DATA_SUCCESS", payload: data });
-      console.log(data);
-    } catch (error) {
-      dispatch({ type: "FETCH_USER_DATA_FAILURE", payload: error.message });
-    }
-  };
-};
+// export const fetchMyAccount = () => {
+//   return async (dispatch) => {
+//     try {
+//       const data = await fetchWithAuth("http://127.0.0.1:3000/my-account");
+//       dispatch({ type: "FETCH_USER_DATA_SUCCESS", payload: data });
+//       console.log(data);
+//     } catch (error) {
+//       dispatch({ type: "FETCH_USER_DATA_FAILURE", payload: error.message });
+//     }
+//   };
+// };
+
+

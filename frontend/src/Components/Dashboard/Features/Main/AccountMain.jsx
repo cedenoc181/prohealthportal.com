@@ -4,9 +4,11 @@ import "./AccMain.css"
 import { connect } from 'react-redux'
 import './Main.css'
 
-export const AccountMain = ({user}) => {
+export const AccountMain = ({ user }) => {
   
-const [currentUser, setCurrentUser] = useState(false);
+
+  console.log(user)
+const [currentUser, setCurrentUser] = useState('');
 
 
 useEffect(() => {
@@ -15,10 +17,8 @@ useEffect(() => {
 
 console.log(currentUser);
 
-if (currentUser) {
-console.log(true);
-} else {
-  console.log(false);
+if (!user) {
+  return <div>Loading user data...</div>;
 }
 
   return (
@@ -169,9 +169,7 @@ console.log(true);
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user.data,
-})
+const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = {}
 

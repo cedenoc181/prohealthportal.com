@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Input, InputGroup, InputRightElement, Stack, Button } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import GoogleButton from "react-google-button";
+// import GoogleButton from "react-google-button";
 import logo from "../../images/prohealth-logo.png";
 import "./Login.css";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { loginUser } from "../../ReduxActionsMain/userActions.js";
+import { fetchMyAccount } from "../../ReduxActionsMain/userActions.js";
 
-export const Login = ({ loginUser, onLogin }) => {
+
+export const Login = ({ loginUser, onLogin, fetchMyAccount }) => {
   const [show, setShow] = useState(false);
   const [accnt, setAccnt] = useState(""); // Email input state
   const [pass, setPass] = useState("");  // Password input state
@@ -26,6 +28,8 @@ export const Login = ({ loginUser, onLogin }) => {
       const user = await loginUser({ email: accnt, password: pass });
       if (user) {
         localStorage.setItem("jwt", user.token);
+         // Fetch user account when authenticated
+        await fetchMyAccount(user.token);
         console.log(user.user)
         onLogin(); // Trigger App's isAuthenticated update
         navigate("/overview");
@@ -125,6 +129,7 @@ const mapStateToProps = (state) => ({});
 // Map Redux actions to component props
 const mapDispatchToProps = {
   loginUser,
+  fetchMyAccount,
 };
 
 // Connect Redux to the component

@@ -4,7 +4,7 @@ import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import Login from "./Components/Login/Login.jsx";
 import Nav from "./Components/Dashboard/Nav.jsx";
-import { fetchMyAccount } from "./ReduxActionsMain/userActions.js";
+// import { fetchMyAccount } from "./ReduxActionsMain/userActions.js";
 import { jwtDecode } from "jwt-decode";
 
 // Importing features
@@ -23,13 +23,14 @@ import MedicalMain from "./Components/Dashboard/Features/Main/MedicalMain.jsx";
 import TasksMain from "./Components/Dashboard/Features/Main/TasksMain.jsx";
 import AccountMain from "./Components/Dashboard/Features/Main/AccountMain.jsx";
 
-function App({ user, loading, error, fetchMyAccount }) {
+function App({ user, loading, error }) {
 
   const location = useLocation();
   // const navigate = useNavigate();
   const [mainContent, setMainContent] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("jwt"));
   const [userName, setUserName] = useState("");
+
  // Fetch user account when authenticated
 useEffect(() => {
   const token = localStorage.getItem("jwt");
@@ -37,7 +38,7 @@ useEffect(() => {
 
   if (isAuthenticated && token && !user) {
     console.log(isAuthenticated);
-    fetchMyAccount(token);
+    // fetchMyAccount(token);
 
     // Decode the token to get the expiration time
     const decodedToken = jwtDecode(token);
@@ -67,11 +68,33 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
       clearTimeout(logoutTimeout);
     }
   };
-}, [isAuthenticated, fetchMyAccount, user]);
+}, [isAuthenticated, user]);
 
 
   console.log(isAuthenticated);
   console.log(user);
+
+
+  useEffect(() => {
+    function capitalizeWords(str) {
+      if (str) {
+        return str
+          .split(" ") // Split the string into an array of words
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+          .join(" "); // Join the array back into a single string
+      }
+      return ""; // Return an empty string if no input
+    }
+  
+    if (user) {
+      const name = capitalizeWords(user.full_name);
+      setUserName(name);
+    } else {
+      setUserName("loading user...");
+    }
+  }, [user]);
+  
+
 
   // Update main content based on the route
   useEffect(() => {
@@ -92,32 +115,33 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
         setMainContent(<TasksMain />);
         break;
       case "/account-settings":
-        setMainContent(<AccountMain />);
+        setMainContent(<AccountMain user={user}/>);
         break;
       default:
         setMainContent(null);
     }
-  }, [location]);
+  }, [location, user]);
 
   const today = new Date();
   const options = { year: "numeric", month: "long", day: "numeric" };
   const formattedDate = today.toLocaleDateString("en-US", options); // e.g., "November 5, 2024"
 
-  useEffect(() => {
-    function capitalizeWords(str) {
-      if (str) {
-        return str
-        .split(' ') // Split the string into an array of words
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-        .join(' '); // Join the array back into a single string
-      } else {
-        return '';
-      }
+  // useEffect(() => {
+  //   function capitalizeWords(str) {
+  //     if (str) {
+  //       return str
+  //       .split(' ') // Split the string into an array of words
+  //       .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+  //       .join(' '); // Join the array back into a single string
+  //     } else {
+  //       return '';
+  //     }
   
-    }
-    const name = user ? user.full_name : "loading user...";
-    setUserName(capitalizeWords(name));
-  }, [user]);
+  //   }
+  //   const name = user ? user.full_name : "loading user...";
+  //   setUserName(capitalizeWords(name));
+  // }, [user]);
+  
 
   console.log(userName);
 
@@ -152,7 +176,7 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
           <Route path="/e-templates" element={<ETemplates />} />
           <Route path="/task-list" element={<TasksList />} />
           <Route path="/inventory" element={<Inventory />} />
-          <Route path="/account-settings" element={<Account />} />
+          <Route path="/account-settings" element={<Account user={user}/>} />
         </Routes>
       </div>
 
@@ -169,15 +193,13 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
 
 // Map Redux state to props
 const mapStateToProps = (state) => ({
-  user: state.user?.data || null, // Ensure `user` points to the correct data
+  user: state.user.data, // Ensure `user` points to the correct data
   loading: state.user?.loading, // Track loading state for user fetch
   error: state.user?.error, // Track error state for user fetch
 });
 
 // Map Redux actions to props
-const mapDispatchToProps = {
-  fetchMyAccount,
-};
+const mapDispatchToProps = {};
 
 // Connect Redux to App
 export default connect(mapStateToProps, mapDispatchToProps)(App);
