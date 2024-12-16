@@ -117,8 +117,9 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
     }
     const name = user ? user.full_name : "loading user...";
     setUserName(capitalizeWords(name));
-    console.log(userName);
   }, [user]);
+
+  console.log(userName);
 
   // Conditionally render login or the main app
   if (!isAuthenticated) {

@@ -1,0 +1,31 @@
+.card-img {
+    max-width: 40% !important;
+    max-height: 40% !important;
+}
+
+.account-card {
+    border: solid 1px #aaadb0;
+    border-radius: 8px;
+    background-color: #f8f5f5ce;;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 3px;
+    padding: 3%;
+    cursor: pointer;
+    width: 90%;
+    justify-self: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card-name {
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.card-role, .card-location {
+    color: rgb(95, 94, 94);
+    font-weight: bold;
+    font-size: 18px;
+    padding-bottom: 5px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

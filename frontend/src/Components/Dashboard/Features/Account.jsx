@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import "./Features.css"
 
 
-export const Account = (props) => {
+export const Account = ({user}) => {
+  console.log(user)
   return (
     <div id="account-console" className="console">
 
@@ -17,7 +18,9 @@ export const Account = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  user: state.user.data,
+})
 
 const mapDispatchToProps = {}
 

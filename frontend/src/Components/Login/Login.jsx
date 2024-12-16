@@ -80,7 +80,7 @@ export const Login = ({ loginUser, onLogin }) => {
             </InputGroup>
             <div className="forgotPassword">
               {/* p element below will hold the forgot password functionality */}
-              <p>Forgot Password?</p>
+              {/* <p>Forgot Password?</p> */}
             </div>
             {/* Login Button */}
             <Button
@@ -93,19 +93,19 @@ export const Login = ({ loginUser, onLogin }) => {
             >
               {submission ? "Loading..." : "Login"}
             </Button>
-            <div className="logDivider">
+            {/* <div className="logDivider">
               <span className="line1">line through text</span> or{" "}
               <span className="line2">line through text</span>
-            </div>
+            </div> */}
             {/* Google Login Button */}
-            <GoogleButton
+            {/* <GoogleButton
               id="googleButton"
               label="Login with Google"
               type="light"
               onClick={() => {
                 console.log("Google login clicked");
               }}
-            />
+            /> */}
           </Stack>
         </form>
       </div>

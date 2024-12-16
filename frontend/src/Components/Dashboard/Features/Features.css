@@ -473,42 +473,11 @@ margin: 5%;
     margin-top: 4%;
 }
 
-.account-card {
-    border: solid 1px #aaadb0;
-    border-radius: 8px;
-    background-color: #f8f5f5ce;;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 3px;
-    padding: 3%;
-    cursor: pointer;
-    width: 90%;
-    justify-self: center;
-    display: flex;
-}
 
 .my-profile-heading {
     font-size: 30px;
     font-weight: 700;
     padding-bottom: 2%;
-}
-
-.card-img {
-    width: 25%;
-}
-
-.card-name {
-    font-size: 23px;
-    font-weight: 500;
-}
-
-.card-role {
-    color: rgb(95, 94, 94);
-    font-weight: bold;
-    font-size: 18px;
-    padding-bottom: 5px;
-}
-
-.card-location {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .account-info, .account-settings {
