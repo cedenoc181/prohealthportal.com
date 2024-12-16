@@ -9,6 +9,7 @@ export const AccountMain = ({ user }) => {
 
   console.log(user)
 const [currentUser, setCurrentUser] = useState('');
+const [editActive, setEditActive] = useState(true);
 
 
 useEffect(() => {
@@ -16,6 +17,23 @@ useEffect(() => {
 }, [user]);
 
 console.log(currentUser);
+
+
+
+const handleEdit = () => {
+  const editableElements = document.getElementsByClassName('user-value');
+  
+  Array.from(editableElements).forEach(element => {
+    const isEditable = element.getAttribute('contenteditable') === 'true';
+    element.setAttribute('contenteditable', !isEditable); // Toggle between true and false
+    setEditActive(!editActive);
+    console.log(editActive);
+  });
+};
+
+
+
+
 
 if (!user) {
   return <div>Loading user data...</div>;
@@ -45,27 +63,27 @@ if (!user) {
     <div className="account-info">
       <div className="info-header">
        <h2 className="info-header-title">Personal Information</h2>
-      <button className="info-button">Edit</button>
+      <button className="info-button" onClick={handleEdit}>Edit</button>
       </div>
    <br />
        <div className="personal-info">
 
         <div className="credentials"> 
        <label>Full Name</label>
-       <p>{currentUser.full_name}</p>
+       <p className="user-value" contenteditable="false">{currentUser.full_name}</p>
        <label>Email</label>
-       <p>{currentUser.email}</p>
+       <p className="user-value" contenteditable="false">{currentUser.email}</p>
        <label>Tenure</label>
-       <p>2 years, 3 Months</p>
+       <p className="user-value" contenteditable="false">2 years, 3 Months</p>
        </div>
 
        <div className="clinic-assc">
        <label>Extension</label>
-       <p>251</p>
+       <p className="user-value" contenteditable="false">251</p>
        <label>Role</label>
-       <p>{currentUser.role}</p>
+       <p className="user-value" contenteditable="false">{currentUser.role}</p>
        <label>Current Clinic</label>
-       <p>{currentUser.clinic_location}</p>
+       <p className="user-value" contenteditable="false">{currentUser.clinic_location}</p>
        </div>
 
        </div>
@@ -128,8 +146,8 @@ if (!user) {
        <p>loading...</p>
        <label>Role</label>
        <p>loading...</p>
-       <label>loading...</label>
-       <p></p>
+       <label>Current Clinic</label>
+       <p>loading...</p>
        </div>
        </div>
     </div>
