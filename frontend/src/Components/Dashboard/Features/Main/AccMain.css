@@ -29,3 +29,12 @@
     padding-bottom: 5px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+
+.edit-value {
+    border: 1.5px solid rgb(14, 77, 237);
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 3px;
+    padding: 5px 10px;
+
+}

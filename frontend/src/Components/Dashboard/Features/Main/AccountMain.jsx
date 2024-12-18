@@ -9,8 +9,7 @@ export const AccountMain = ({ user }) => {
 
   console.log(user)
 const [currentUser, setCurrentUser] = useState('');
-const [editActive, setEditActive] = useState(true);
-
+const [isEditable, setIsEditable] = useState(false);
 
 useEffect(() => {
   setCurrentUser(user);
@@ -21,17 +20,8 @@ console.log(currentUser);
 
 
 const handleEdit = () => {
-  const editableElements = document.getElementsByClassName('user-value');
-  
-  Array.from(editableElements).forEach(element => {
-    const isEditable = element.getAttribute('contenteditable') === 'true';
-    element.setAttribute('contenteditable', !isEditable); // Toggle between true and false
-    setEditActive(!editActive);
-    console.log(editActive);
-  });
+  setIsEditable((prev) => !prev); // Toggle editable state
 };
-
-
 
 
 
@@ -63,27 +53,27 @@ if (!user) {
     <div className="account-info">
       <div className="info-header">
        <h2 className="info-header-title">Personal Information</h2>
-      <button className="info-button" onClick={handleEdit}>Edit</button>
+      <button className="info-button" onClick={handleEdit}>{isEditable ? "save" : "edit"}</button>
       </div>
    <br />
        <div className="personal-info">
 
         <div className="credentials"> 
        <label>Full Name</label>
-       <p className="user-value" contenteditable="false">{currentUser.full_name}</p>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{currentUser.full_name}</p>
        <label>Email</label>
-       <p className="user-value" contenteditable="false">{currentUser.email}</p>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{currentUser.email}</p>
        <label>Tenure</label>
-       <p className="user-value" contenteditable="false">2 years, 3 Months</p>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>2 years, 3 Months</p>
        </div>
 
        <div className="clinic-assc">
        <label>Extension</label>
-       <p className="user-value" contenteditable="false">251</p>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>251</p>
        <label>Role</label>
-       <p className="user-value" contenteditable="false">{currentUser.role}</p>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{currentUser.role}</p>
        <label>Current Clinic</label>
-       <p className="user-value" contenteditable="false">{currentUser.clinic_location}</p>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{currentUser.clinic_location}</p>
        </div>
 
        </div>
