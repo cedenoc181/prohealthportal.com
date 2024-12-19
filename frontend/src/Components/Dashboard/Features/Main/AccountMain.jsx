@@ -53,7 +53,8 @@ if (!user) {
     <div className="account-info">
       <div className="info-header">
        <h2 className="info-header-title">Personal Information</h2>
-      <button className="info-button" onClick={handleEdit}>{isEditable ? "save" : "edit"}</button>
+      {/* <button className="info-button" onClick={handleEdit}>{isEditable ? "save" : "edit"}</button> */}
+      <button type="button" class="btn btn-light" onClick={handleEdit}>{isEditable ? "save" : "edit"}</button>
       </div>
    <br />
        <div className="personal-info">
@@ -79,10 +80,10 @@ if (!user) {
        </div>
     </div>
     <br />
-    <div className="account-settings">
+    {/* <div className="account-settings">
       <div className="info-header">
         <h2 className="settings-title">My Settings</h2>
-        <button className="info-button">Edit</button>
+        <button type="button" class="btn btn-light">edit</button>
       </div>
       <br />
       <div className="settings">
@@ -95,7 +96,7 @@ if (!user) {
           <p>On</p>
       </div>
     </div> 
- </div> 
+ </div>  */}
 </div> 
         ) 
         : 

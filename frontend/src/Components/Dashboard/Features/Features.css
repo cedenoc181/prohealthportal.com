@@ -533,3 +533,22 @@ margin: 5%;
     font-size: 22.5px;
 }
 
+
+
+.clinical-operations {
+    display: block;
+    margin-top: 70%;
+    text-align: center;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.clinical-operations label {
+    padding-top: 5px;
+    font-size: 25px;
+    text-decoration: underline;
+}
+
+.web-links:hover {
+color: rgba(239, 87, 32, 0.558);
+}
