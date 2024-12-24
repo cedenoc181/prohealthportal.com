@@ -16,11 +16,28 @@ console.log("all users with account", allUsers);
 
 
   console.log("only current user", user);
-  
+
   return (
     <div id="account-console" className="console">
 
     <h2 className="account-title">Account Settings</h2>
+    <h4 className="staffCardHeader">Clinical Staff</h4>
+    <div className="staffCardContainer">
+         { allUsers?.map((staffUser, index) => (
+          <div className="staffCard" key={index}>
+            <label>Name</label>
+            <p>{staffUser.full_name}</p>
+            <label>Current Clinic</label>
+            <p>{staffUser.clinic_location}</p>
+            {/* <label>Email</label>
+            <p>{staffUser.email}</p> */}
+            <label>Role</label>
+            <p>{staffUser.role}</p>
+            {/* <label>Insurance Network</label>
+            <p>{staffUser.insurance_network}</p> */}
+          </div>
+          ))}
+    </div>
     
     <div className="clinical-operations">
     <label>Hours of operation</label>

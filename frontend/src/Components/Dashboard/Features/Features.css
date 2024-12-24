@@ -537,8 +537,9 @@ margin: 5%;
 
 .clinical-operations {
     display: block;
-    margin-top: 80%;
+    margin-top: 5%;
     text-align: center;
+    margin-bottom: 5%;
     margin-left: 3%;
     margin-right: 3%;
 }
@@ -551,4 +552,35 @@ margin: 5%;
 
 .web-links:hover {
 color: rgba(239, 87, 32, 0.558);
+}
+
+.staffCard {
+    margin: 0 auto;
+    height: 50%;
+    width: 80%;
+    border: 1px black solid;
+    border-radius: 10%;
+    margin-bottom: 3%;
+    background: #6d9df6a7;
+    opacity: 55%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    padding: 0.5%;
+}
+
+.staffCard p {
+    margin-bottom: 0.5%;
+}
+
+.staffCard:hover {
+    background: rgba(251, 238, 238, 0.516)
+}
+
+.staffCard label {
+    font-size: 16px;
+    color:rgba(0, 0, 0, 0.951)
+}
+
+.staffCardContainer {
+    display: flex;
 }
