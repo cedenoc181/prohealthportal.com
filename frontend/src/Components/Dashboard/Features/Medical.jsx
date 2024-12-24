@@ -14,12 +14,14 @@ export const Medical = ({ user, medifiles, loading, error, fetchMedifiles, setSe
 const token = localStorage.getItem("jwt");
   console.log(token)
 
+
+  
   useEffect(() => {
-    if (user) {
-      const token = localStorage.getItem("jwt"); // Retrieve the token
+    const token = localStorage.getItem("jwt"); // Retrieve the token
+    if (token) {
       fetchMedifiles(token); // Pass the token to the fetchMedifiles function
     }
-  }, [fetchMedifiles, user]);
+  }, [fetchMedifiles]);
 
 
 

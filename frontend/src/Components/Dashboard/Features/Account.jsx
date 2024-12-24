@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { fetchUsers } from '../../../ReduxActionsMain/userActions'
 import "./Features.css"
 
 
-export const Account = ({user}) => {
-  console.log(user)
+export const Account = ({user, fetchUsers, allUsers}) => {
+
+
+useEffect(() => {
+  fetchUsers();
+}, [fetchUsers])
+
+
+console.log("all users with account", allUsers);
+
+
+  console.log("only current user", user);
+  
   return (
     <div id="account-console" className="console">
 
@@ -28,8 +40,11 @@ export const Account = ({user}) => {
 
 const mapStateToProps = (state) => ({
   user: state.user.data,
+  allUsers: state.user.allUserData,
 })
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  fetchUsers,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account)

@@ -189,7 +189,7 @@ export const fetchUsers = () => {
   return async (dispatch) => {
     try {
       const data = await fetchWithAuth("http://127.0.0.1:3000/users");
-      console.log("Fetched data:", data);
+      // console.log("Fetched data:", data);
       dispatch({ type: "FETCH_USERS_SUCCESS", payload: data });
     } catch (error) {
       dispatch({ type: "FETCH_USERS_ERROR", payload: error.message });
