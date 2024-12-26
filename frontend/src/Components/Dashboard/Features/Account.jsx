@@ -29,12 +29,6 @@ console.log("all users with account", allUsers);
             <p>{staffUser.full_name}</p>
             <label>Clinic</label>
             <p>{staffUser.clinic_location}</p>
-            {/* <label>Email</label>
-            <p>{staffUser.email}</p> */}
-            <label>Role</label>
-            <p>{staffUser.role}</p>
-            {/* <label>Insurance Network</label>
-            <p>{staffUser.insurance_network}</p> */}
           </div>
           ))}
     </div>
