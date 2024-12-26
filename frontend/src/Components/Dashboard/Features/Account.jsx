@@ -25,9 +25,9 @@ console.log("all users with account", allUsers);
     <div className="staffCardContainer">
          { allUsers?.map((staffUser, index) => (
           <div className="staffCard" key={index}>
-            <label>Name</label>
+            <label>Name:</label>
             <p>{staffUser.full_name}</p>
-            <label>Clinic</label>
+            <label>Clinic:</label>
             <p>{staffUser.clinic_location}</p>
           </div>
           ))}

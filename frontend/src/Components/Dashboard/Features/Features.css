@@ -560,27 +560,29 @@ color: rgba(239, 87, 32, 0.558);
 }
 
 .staffCard {
-    /* margin: 0 auto; */
-    /* height: 50%; */
-    min-width: 60% !important;
-    border: 1px black solid;
-    border-radius: 10%;
+    min-width: 40% !important;
+    border: 1.5px black solid;
+    border-radius: 1.5%;
     margin-bottom: 3%;
     background: #6d9df6a7;
-    opacity: 55%;
+    opacity: 80%;
     margin-right: 2.5%;
     margin-left: 2.5%;
-    padding: 0.5%;
+    padding: 1%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 3px;
 }
 
 .staffCard p {
     margin-bottom: 0.5%;
+    color:rgba(0, 0, 0);
+    opacity: 100;
 }
 
 .staffCard:hover {
-    background: rgba(251, 238, 238, 0.516);
+    background: rgba(247, 193, 193, 0.516);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 3px;
+    transform: scale(1.01, 1.01);
+    border: 2px black solid;
 }
 
 .staffCard label {
