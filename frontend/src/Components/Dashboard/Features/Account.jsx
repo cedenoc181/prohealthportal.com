@@ -27,7 +27,7 @@ console.log("all users with account", allUsers);
           <div className="staffCard" key={index}>
             <label>Name</label>
             <p>{staffUser.full_name}</p>
-            <label>Current Clinic</label>
+            <label>Clinic</label>
             <p>{staffUser.clinic_location}</p>
             {/* <label>Email</label>
             <p>{staffUser.email}</p> */}
