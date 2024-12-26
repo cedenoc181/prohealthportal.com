@@ -97,10 +97,13 @@ let englishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
       <div className="renderMedical" onClick={() => handleSelectedMedifile(file)} >
       <div className="medical-title"><span className="key">{file.title}</span></div>
       <br />
-          <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>                           <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
+          <img className="medical-cover" src={file.file_cover_url} alt={file.file_cover_alt}/>
+              <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
            <div className="medical-language"><span className="key">Language:</span> {file.language}</div>
       </div>
-      </div>) : (<div></div>)
+      </div>) 
+      : 
+      (<div></div>)
 )) : "";
 
 
@@ -114,7 +117,9 @@ let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
      <div className="medical-category"><span className="key">Category:</span>{file.file_cover_alt}</div>
      <div className="medical-language"><span className="key">Language:</span> {file.language}</div>
 </div>
-</div>) : (<div></div>)
+</div>) 
+: 
+(<div></div>)
 )) : "";
 
 console.log(user);

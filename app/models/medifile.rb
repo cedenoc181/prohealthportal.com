@@ -19,7 +19,8 @@ class Medifile < ApplicationRecord
          end
     end
 
-
-
-
 end
+
+
+
+
