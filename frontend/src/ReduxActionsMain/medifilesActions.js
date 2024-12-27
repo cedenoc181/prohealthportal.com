@@ -31,7 +31,6 @@ export const fetchMedifiles = (token) => {
 
 
 // load selected index on to Main UI
-
 export const setSelectedMedifile = (file) => { 
   console.log(file)
   return  {

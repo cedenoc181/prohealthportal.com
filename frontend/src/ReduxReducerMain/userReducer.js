@@ -4,6 +4,7 @@ const initialState = {
     data: null,
     loading: false,
     error: null,
+    selectedUser: null,
 }
 
 const userReducer = (state = initialState, action) => {
@@ -89,6 +90,11 @@ const userReducer = (state = initialState, action) => {
                 return {
                     ...initialState, // Reset to initial state
                 };
+                case 'SET_SELECTED_USER':
+                    return {
+                      ...state,
+                      selectedUser: action.payload,
+                    };
             
     default:
         return state;
