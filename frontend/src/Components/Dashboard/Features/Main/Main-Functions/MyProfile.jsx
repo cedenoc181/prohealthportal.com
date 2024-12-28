@@ -18,7 +18,7 @@ export const MyProfile = ({ user }) => {
           };
 
   return (
-    <div className="my-profile-container">
+    <div className="main-container">
       
       { currentUser ? 
 

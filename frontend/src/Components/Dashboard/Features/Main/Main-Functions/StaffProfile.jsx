@@ -1,21 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import MyProfile from './MyProfile.jsx'
+import logo from "../../../../../images/prohealth-logo.png"
 
-export const StaffProfile = ({staffUser}) => {
-    console.log(staffUser);
+export const StaffProfile = ({ staffUser}) => {
+
+    const [isEditable, setIsEditable] = useState(false);
+    const [selectedStaff, setSelectedStaff] = useState('');
+
+
+    useEffect(() => {
+        setSelectedStaff(staffUser);
+        console.log(selectedStaff);
+    }, [staffUser]);
+
+    const handleEdit = () => {
+        setIsEditable((prev) => !prev); // Toggle editable state
+      };
+
+ 
   return (
-    <div>
-        <p>{staffUser.full_name}</p>
-        <p>{staffUser.email}</p>
-        <p>{staffUser.clinic_location.to_string}</p>
-        <p>{staffUser.direct_access}</p>
-        <p>{staffUser.credentials}</p>
-        <p>{staffUser.insurance_network}</p>
-        <p>{staffUser.role}</p>
-    <div className="my-medifiles">
-        <div>{staffUser.my_medifiles}</div>
+<div className="main-container">
+       <h2 className="my-profile-heading">Staff profile</h2>
+        <div className="account-card">
+            <img className="card-img" src={logo} alt="profile"/>
+            <div className="card-info">
+              <label>User</label>
+            <h2 className="card-name">{staffUser.full_name}</h2>
+            <label>Role</label>
+            <div className="card-role">{staffUser.role}</div>
+            <label>Clinic Location</label>
+            <div className="card-location">{staffUser.clinic_location}</div>
+            </div>
+        </div>
+        <br />
+    <div className="account-info">
+      <div className="info-header">
+       <h2 className="info-header-title">Personal Information</h2>
+      {/* <button className="info-button" onClick={handleEdit}>{isEditable ? "save" : "edit"}</button> */}
+      <button type="button" class="btn btn-light" onClick={handleEdit}>{isEditable ? "save" : "edit"}</button>
+      </div>
+   <br />
+       <div className="personal-info">
+
+        <div className="credentials"> 
+       <label>Full Name</label>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.full_name}</p>
+       <label>Email</label>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.email}</p>
+       <label>Tenure</label>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>2 years, 3 Months</p>
+       </div>
+
+       <div className="clinic-assc">
+       <label>Extension</label>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>251</p>
+       <label>Role</label>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.role}</p>
+       <label>Current Clinic</label>
+       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.clinic_location}</p>
+       </div>
+
+       </div>
     </div>
-    </div>
+    <br />
+</div> 
   )
 }
 
