@@ -1,16 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./MedicalMain.css";
 import "./Main.css";
 import { Textarea, Text, Button } from "@chakra-ui/react";
 import { ChevronLeftIcon, SmallAddIcon } from '@chakra-ui/icons'
 import CreateMedifile from "./Main-Functions/CreateMedifile";
+import { createMyMedifile } from "../../../../ReduxActionsMain/myMedifilesActions"
 import { setSelectedMedifile } from "../../../../ReduxActionsMain/medifilesActions";
 import MyVerticallyCenteredModal from './Main-Functions/MyVerticallyCenteredModal';
 
-export const MedicalMain = ({ selectedMedifile, setSelectedMedifile }) => {
+export const MedicalMain = ({ user, selectedMedifile, setSelectedMedifile, createMyMedifile, allUsers }) => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [createMyMedifileValues, setCreateMyMedifileValues] = useState({
+    user_id: '',
+    coworker_id: '',
+    medifile_id: '',
+    my_file_title: '',
+    my_file_description: '',
+  });
+
+
+  useEffect(() => {
+    console.log({allUsers});
+    console.log(user);
+  }, [allUsers, user]);
+  
+
+console.log(createMyMedifileValues);
+console.log({allUsers});
+console.log(user);
 
   const handleUIClick = () => {
     setShowCreateForm(!showCreateForm);
@@ -86,7 +105,38 @@ export const MedicalMain = ({ selectedMedifile, setSelectedMedifile }) => {
                 className="email-textarea"
                 placeholder="Using this medical document often? Create a note to optimize your ability to keep track and organized. Documents saved onto your template will be easier to find."
                 size="md"
+                onChange={(e) => 
+                setCreateMyMedifileValues({ ...createMyMedifileValues, my_file_description: e.target.value})}
+                required
               />
+        <br />
+        <label className="share-label">Share document</label>
+          <select
+            name="coworker"
+            className="medical-coworker-selection"
+            onChange={(e) => 
+            setCreateMyMedifileValues({ ...createMyMedifileValues, coworker_id: e.target.value })}
+            required
+          >
+            <option value="">--Select user to share with--</option>
+
+            { 
+                allUsers.length > 0 ? allUsers.map((coworker) => (
+                  coworker.id !== user.id ? (
+                    <option value={coworker.id}>{coworker.full_name}</option>
+              ) 
+              : 
+              (
+                <div></div>
+              )
+            ))
+            : 
+            ""
+            }
+          </select> 
+
+          <br />
+
               <div className="medical-submit-button">
                 <Button colorScheme="blue" variant="solid" size="lg">
                   Save template
@@ -115,10 +165,13 @@ export const MedicalMain = ({ selectedMedifile, setSelectedMedifile }) => {
 
 const mapStateToProps = (state) => ({
   selectedMedifile: state.medifiles.selectedMedifile,
+  user: state.user.data,
+  allUsers: state.user.allUserData,
 });
 
 const mapDispatchToProps = {
   setSelectedMedifile,
+  createMyMedifile,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MedicalMain);

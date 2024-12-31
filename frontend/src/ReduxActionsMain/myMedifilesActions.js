@@ -30,13 +30,25 @@ export const setSelectedMyMedifile = (file) => {
   export const createMyMedifile = (newMyMedifile) => {
     return async (dispatch) => {
       try {
+
+    // Create a new FormData object
+    const formData = new FormData();
+        formData.append('user_id',newMyMedifile.user_id);
+        formData.append('medifile_id',newMyMedifile.medifile_id);
+        formData.append('coworker_id',newMyMedifile.coworker_id ? newMyMedifile.coworker_id : null);
+        formData.append('my_file_title', newMyMedifile.my_file_title);
+        formData.append('my_file_description',newMyMedifile.my_file_description);
+
         const response = await fetch('http://127.0.0.1:3000/my_medifiles', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newMyMedifile),
+          body: formData,
         });
+
+          // Error handling
+          if (!response.ok) {
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
+          }
+
         const data = await response.json();
         dispatch({ type: 'CREATE_MY_MEDIFILE_SUCCESS', payload: data });
       } catch (error) {
@@ -50,7 +62,7 @@ export const setSelectedMyMedifile = (file) => {
     return async (dispatch) => {
       try {
         const response = await fetch(`http://127.0.0.1:3000/my_medifiles${myMedifileId}`, {
-          method: 'PUT',
+          method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
