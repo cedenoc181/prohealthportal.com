@@ -1,10 +1,19 @@
 // myMedifilesActions.js
 
 // Action to fetch medical files
-export const fetchMyMedifiles = () => {
+export const fetchMyMedifiles = (token) => {
     return async (dispatch) => {
       try {
-        const response = await fetch('http://127.0.0.1:3000/my_medifiles');
+
+        if (!token) {
+          throw new Error("No token provided");
+        }
+
+        const response = await fetch('http://127.0.0.1:3000/my_medifiles', {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
+        });
         const data = await response.json();
         console.log(data);
         dispatch({ type: 'FETCH_MY_MEDIFILES_SUCCESS', payload: data });

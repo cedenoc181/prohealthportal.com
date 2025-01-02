@@ -1,16 +1,23 @@
 import {React, useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import { fetchUsers } from "../../../ReduxActionsMain/userActions.js";
+import { fetchMedifiles } from '../../../ReduxActionsMain/medifilesActions.js';
 import "./Features.css"
 
 
-export const Overview = ({ fetchUsers }) => {
+export const Overview = ({ fetchUsers, fetchMedifiles }) => {
 
   useEffect(() => {
     fetchUsers();
-  }, [fetchUsers]);
+    const token = localStorage.getItem("jwt"); // Retrieve the token
+    if (token) {
+      fetchMedifiles(token); // Pass the token to the fetchMedifiles function
+    }
+  }, [fetchUsers, fetchMedifiles]);
 
-  console.log("Overview:", fetchUsers)
+  console.log("Overview:", fetchUsers);
+
+  console.log("overview:", fetchMedifiles);
 
   const entities = [
     {
@@ -159,6 +166,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   fetchUsers,
+  fetchMedifiles,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Overview)

@@ -1,7 +1,8 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import { fetchMedifiles, setSelectedMedifile } from '../../../ReduxActionsMain/medifilesActions.js';
+import { setSelectedMedifile } from '../../../ReduxActionsMain/medifilesActions.js';
+import { fetchMyMedifiles } from '../../../ReduxActionsMain/myMedifilesActions.js';
 import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
 import ReactLoading from 'react-loading';
@@ -9,20 +10,14 @@ import { Navigate } from 'react-router-dom';
 import "./Features.css";
 
 
-export const Medical = ({ user, medifiles, loading, error, fetchMedifiles, setSelectedMedifile}) => {
+export const Medical = ({ user, medifiles, myMedifiles, loading, error, fetchMedifiles, setSelectedMedifile, fetchMyMedifiles}) => {
 
-const token = localStorage.getItem("jwt");
-  console.log(token)
-
-
-  
   useEffect(() => {
     const token = localStorage.getItem("jwt"); // Retrieve the token
     if (token) {
-      fetchMedifiles(token); // Pass the token to the fetchMedifiles function
+      fetchMyMedifiles(token);
     }
-  }, [fetchMedifiles]);
-
+  }, [fetchMyMedifiles]);
 
 
 const handleSelectedMedifile = (file) => {
@@ -77,6 +72,8 @@ const handleCategoryChange = (category) => {
 
 
 console.log(medifiles);
+
+console.log("fetch my saved medifiles", myMedifiles);
 
 
 const filterMedifilesCategory = medifiles.filter((file) => {
@@ -229,12 +226,13 @@ if (!user) {
 const mapStateToProps = (state) => ({
   user: state.user.data,
   medifiles: state.medifiles.data,
+  myMedifiles: state.myMedifiles.data,
   loading: state.medifiles.loading,
   error: state.medifiles.error,
 });
 
 const mapDispatchToProps = {
-  fetchMedifiles,
+  fetchMyMedifiles,
   setSelectedMedifile,
 };
 
