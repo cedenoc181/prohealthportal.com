@@ -1,9 +1,16 @@
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import { connect } from 'react-redux'
+import { fetchUsers } from "../../../ReduxActionsMain/userActions.js";
 import "./Features.css"
 
 
-export const Overview = ({ user }) => {
+export const Overview = ({ user, fetchUsers }) => {
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  console.log("Overview:", fetchUsers)
 
   const entities = [
     {
@@ -150,6 +157,8 @@ const mapStateToProps = (state) => ({
   user: state.user.data,
 })
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  fetchUsers,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Overview)

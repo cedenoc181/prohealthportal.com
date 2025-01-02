@@ -4,7 +4,6 @@ import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import Login from "./Components/Login/Login.jsx";
 import Nav from "./Components/Dashboard/Nav.jsx";
-// import { fetchMyAccount } from "./ReduxActionsMain/userActions.js";
 import { jwtDecode } from "jwt-decode";
 
 // Importing features
@@ -23,7 +22,7 @@ import MedicalMain from "./Components/Dashboard/Features/Main/MedicalMain.jsx";
 import TasksMain from "./Components/Dashboard/Features/Main/TasksMain.jsx";
 import AccountMain from "./Components/Dashboard/Features/Main/AccountMain.jsx";
 
-function App({ user, loading, error }) {
+function App({ user, loading, error, fetchUsers }) {
 
   const location = useLocation();
   // const navigate = useNavigate();
@@ -61,7 +60,6 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
       // navigate("/login");
     }
   }
-
   // Cleanup the timeout on component unmount or re-render
   return () => {
     if (logoutTimeout) {
@@ -122,26 +120,11 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
     }
   }, [location, user]);
 
+
   const today = new Date();
   const options = { year: "numeric", month: "long", day: "numeric" };
   const formattedDate = today.toLocaleDateString("en-US", options); // e.g., "November 5, 2024"
 
-  // useEffect(() => {
-  //   function capitalizeWords(str) {
-  //     if (str) {
-  //       return str
-  //       .split(' ') // Split the string into an array of words
-  //       .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-  //       .join(' '); // Join the array back into a single string
-  //     } else {
-  //       return '';
-  //     }
-  
-  //   }
-  //   const name = user ? user.full_name : "loading user...";
-  //   setUserName(capitalizeWords(name));
-  // }, [user]);
-  
 
   console.log(userName);
 
@@ -199,7 +182,9 @@ const mapStateToProps = (state) => ({
 });
 
 // Map Redux actions to props
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+
+};
 
 // Connect Redux to App
 export default connect(mapStateToProps, mapDispatchToProps)(App);

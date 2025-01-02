@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { fetchUsers, setSelectedUser } from '../../../ReduxActionsMain/userActions'
+import { setSelectedUser } from '../../../ReduxActionsMain/userActions'
 import "./Features.css"
 
 
-export const Account = ({user, fetchUsers, allUsers, setSelectedUser}) => {
+export const Account = ({user, allUsers, setSelectedUser}) => {
 
 
-useEffect(() => {
-  fetchUsers();
-}, [fetchUsers])
+// useEffect(() => {
+//   fetchUsers();
+// }, [fetchUsers])
 
 
 
@@ -62,7 +62,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  fetchUsers,
+  // fetchUsers,
   setSelectedUser,
 }
 
