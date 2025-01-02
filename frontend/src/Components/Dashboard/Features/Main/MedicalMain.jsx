@@ -24,6 +24,7 @@ export const MedicalMain = ({
     medifile_id: "",
     my_file_title: "",
     my_file_description: "",
+    token: ""
   });
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export const MedicalMain = ({
         user_id:user.id,
         my_file_title: selectedMedifile.title,
         medifile_id: selectedMedifile.id,
-        coworker_id: parseInt(createMyMedifileValues.coworker_id)
+        token: localStorage.getItem('jwt'),
       })
     }
   }, [allUsers, user, selectedMedifile]);
@@ -41,13 +42,19 @@ export const MedicalMain = ({
   console.log(allUsers);
   console.log(user);
 
+
   const handleUIClick = () => {
     setShowCreateForm(!showCreateForm);
   };
 
-  const handleTemplateSubmission = () => {
-    if (createMyMedifileValues) {
-      
+  const handleTemplateSubmission = (e) => {
+    e.preventDefault();
+    if (createMyMedifileValues.medifile_id && createMyMedifileValues.my_file_description && createMyMedifileValues.user_id && createMyMedifileValues.my_file_title) {
+      // console.log(createMyMedifileValues)
+      createMyMedifile(createMyMedifileValues);
+      console.log("object passed into createMyMedifile"); 
+    } else {
+      alert("please log note for template file");
     }
   }
 
@@ -160,7 +167,7 @@ export const MedicalMain = ({
             <br />
 
             <div className="medical-submit-button">
-              <Button colorScheme="blue" variant="solid" size="lg">
+              <Button colorScheme="blue" variant="solid" size="lg" type='submit'>
                 Save template
               </Button>
             </div>

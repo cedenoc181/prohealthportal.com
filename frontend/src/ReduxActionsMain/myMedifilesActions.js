@@ -30,18 +30,21 @@ export const setSelectedMyMedifile = (file) => {
   export const createMyMedifile = (newMyMedifile) => {
     return async (dispatch) => {
       try {
-
-    // Create a new FormData object
-    const formData = new FormData();
-        formData.append('user_id',newMyMedifile.user_id);
-        formData.append('medifile_id',newMyMedifile.medifile_id);
-        formData.append('coworker_id',newMyMedifile.coworker_id ? newMyMedifile.coworker_id : null);
-        formData.append('my_file_title', newMyMedifile.my_file_title);
-        formData.append('my_file_description',newMyMedifile.my_file_description);
+        console.log(newMyMedifile);
 
         const response = await fetch('http://127.0.0.1:3000/my_medifiles', {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${newMyMedifile.token}`,
+          },
           method: 'POST',
-          body: formData,
+          body: JSON.stringify({
+            user_id: newMyMedifile.user_id,
+            medifile_id: newMyMedifile.medifile_id,
+            coworker_id: newMyMedifile.coworker_id,
+            my_file_title: newMyMedifile.my_file_title,
+            my_file_description: newMyMedifile.my_file_description
+          }),
         });
 
           // Error handling

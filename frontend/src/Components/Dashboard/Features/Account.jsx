@@ -1,16 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { setSelectedUser } from '../../../ReduxActionsMain/userActions'
 import "./Features.css"
 
 
 export const Account = ({user, allUsers, setSelectedUser}) => {
-
-
-// useEffect(() => {
-//   fetchUsers();
-// }, [fetchUsers])
-
 
 
 const handleSelectedUser = (profile) => {

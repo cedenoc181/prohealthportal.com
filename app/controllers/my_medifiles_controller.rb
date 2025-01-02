@@ -15,6 +15,7 @@ class MyMedifilesController < ApplicationController
 
   # POST /my_medifiles
   def create
+    Rails.logger.info "creating my medifiles template .... #{my_medifile_params}"
     @my_medifile = MyMedifile.new(my_medifile_params)
     if @my_medifile.save
       render json: {my_medifile: @my_medifile, message: "your file has been created"}, status: :created, location: @my_medifile

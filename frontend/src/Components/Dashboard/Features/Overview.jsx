@@ -4,7 +4,7 @@ import { fetchUsers } from "../../../ReduxActionsMain/userActions.js";
 import "./Features.css"
 
 
-export const Overview = ({ user, fetchUsers }) => {
+export const Overview = ({ fetchUsers }) => {
 
   useEffect(() => {
     fetchUsers();
@@ -154,7 +154,7 @@ export const Overview = ({ user, fetchUsers }) => {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user.data,
+  // user: state.user.data,
 })
 
 const mapDispatchToProps = {
