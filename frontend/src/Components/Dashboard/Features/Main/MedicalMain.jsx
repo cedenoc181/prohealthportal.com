@@ -56,6 +56,15 @@ export const MedicalMain = ({
     } else {
       alert("please log note for template file");
     }
+    setCreateMyMedifileValues({
+      user_id: "",
+      coworker_id: "",
+      medifile_id: "",
+      my_file_title: "",
+      my_file_description: "",
+      token: ""
+    });
+    alert("Your medifile template has been saved!");
   }
 
   const handleModalOpen = (medifile) => {
@@ -129,6 +138,7 @@ export const MedicalMain = ({
               className="email-textarea"
               placeholder="Using this medical document often? Create a note to optimize your ability to keep track and organized. Documents saved onto your template will be easier to find."
               size="md"
+              value={createMyMedifileValues.my_file_description}
               onChange={(e) =>
                 setCreateMyMedifileValues({
                   ...createMyMedifileValues,
@@ -149,6 +159,7 @@ export const MedicalMain = ({
                 })
                 console.log(typeof num)
               }}
+              value={createMyMedifileValues.coworker_id}
               required
             >
               <option value="">--Select user to share with--</option>
