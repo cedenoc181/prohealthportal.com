@@ -48,13 +48,9 @@ export const StaffProfile = ({ staffUser}) => {
        <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.full_name}</p>
        <label>Email</label>
        <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.email}</p>
-       <label>Tenure</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>2 years, 3 Months</p>
-       </div>
+     </div>
 
        <div className="clinic-assc">
-       <label>Extension</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>251</p>
        <label>Role</label>
        <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.role}</p>
        <label>Current Clinic</label>

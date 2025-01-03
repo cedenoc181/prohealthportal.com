@@ -27,20 +27,6 @@ export const AccountMain = ({ user, selectedUser }) => {
   };
 
 
-  // if (staffInfo) {
-  //   return (
-  //   <div className="acc-ui">
-  //   <div className="createUI-button">
-  //     <button onClick={handleUIClick}>
-  //     <ChevronLeftIcon />
-  //     My profile
-  //     </button>
-  //   </div>
-  //   <StaffProfile staffUser={selectedUser}/>
-  // </div>
-  // );
-  // }
-
 if (!selectedUser) {
   // setStaffInfo(false);
   return  (   
