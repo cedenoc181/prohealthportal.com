@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { Button } from '@chakra-ui/react'
 import { connect } from 'react-redux'
 import './SendEmail.css';
 
 
 export const SendEmail = (templateObject) => {
+  const form = useRef();
 
   let useTemlplate = templateObject.templateObject;
 
@@ -25,6 +27,29 @@ export const SendEmail = (templateObject) => {
       })
     };
   }, [useTemlplate])
+
+
+
+
+// email sender function 
+
+const sendEmail = (e) => {
+  e.preventDefault();
+
+  emailjs
+    .sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, {
+      publicKey: 'YOUR_PUBLIC_KEY',
+    })
+    .then(
+      () => {
+        console.log('SUCCESS!');
+      },
+      (error) => {
+        console.log('FAILED...', error.text);
+      },
+    );
+};
+
 
 
   const [currentDateTime, setCurrentDateTime] = useState('');
