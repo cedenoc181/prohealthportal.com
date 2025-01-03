@@ -185,9 +185,6 @@ if (loading) {
         <div onClick={handleDrClick}>
         <li className="filter-li" >Doctor Templates</li>
         </div>
-        <div onClick="">
-        <li className="filter-li">My Templates</li>
-        </div>
     </ul>
 
 )

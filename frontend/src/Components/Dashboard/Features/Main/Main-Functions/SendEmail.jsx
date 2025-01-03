@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@chakra-ui/react'
-
+import { connect } from 'react-redux'
 import './SendEmail.css';
 
+
 export const SendEmail = (templateObject) => {
+
   let useTemlplate = templateObject.templateObject;
 
   const [formData, setFormData] = useState({
@@ -12,20 +14,17 @@ export const SendEmail = (templateObject) => {
     content: '',
   });
 
-
   console.log(useTemlplate);
 
-useEffect(() => {
-  if (useTemlplate) {
-    setFormData({
-      receiver: '',
-      subject: useTemlplate.subject,
-      content: useTemlplate.body
-    })
-  };
-}, [useTemlplate])
-
-  
+  useEffect(() => {
+    if (useTemlplate) {
+      setFormData({
+        receiver: '',
+        subject: useTemlplate.subject,
+        content: useTemlplate.body
+      })
+    };
+  }, [useTemlplate])
 
 
   const [currentDateTime, setCurrentDateTime] = useState('');
@@ -57,47 +56,52 @@ useEffect(() => {
     console.log('Email Sent:', formData);
   };
 
-
   return (
     <div className="main-container">
-      <h2 className="email-title">Send an Email</h2>
-      <form className="email-form" onSubmit={handleSubmit}>
-        <label>To:</label>
-        <input
-          type="email"
-          name="receiver"
-          value={formData.receiver}
-          onChange={handleChange}
-          placeholder="Receiver's Email"
-          required
-        />
-        <label>Subject:</label>
-        <input
-          type="text"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          placeholder="Email Subject"
-          required
-        />
-        <label>Content:</label>
-        <textarea
-          name="content"
-          value={formData.content}
-          onChange={handleChange}
-          placeholder="Write your message here..."
-          required
-        />
-        <p className="sending-email">Sending from: sender@example.com</p>
-        <div className="sending-email-button">
-        <Button  colorScheme='blue' type="submit" variant='solid' size='lg'>
-            Send Email
-        </Button>       
-        </div>
-         </form>
-      <div className="current-datetime">{currentDateTime}</div>
-    </div>
-  );
-};
+    <h2 className="email-title">Send an Email</h2>
+    <form className="email-form" onSubmit={handleSubmit}>
+      <label>To:</label>
+      <input
+        type="email"
+        name="receiver"
+        value={formData.receiver}
+        onChange={handleChange}
+        placeholder="Receiver's Email"
+        required
+      />
+      <label>Subject:</label>
+      <input
+        type="text"
+        name="subject"
+        value={formData.subject}
+        onChange={handleChange}
+        placeholder="Email Subject"
+        required
+      />
+      <label>Content:</label>
+      <textarea
+        name="content"
+        value={formData.content}
+        onChange={handleChange}
+        placeholder="Write your message here..."
+        required
+      />
+      <p className="sending-email"></p>
+      <div className="sending-email-button">
+      <Button  colorScheme='blue' type="submit" variant='solid' size='lg'>
+          Send Email
+      </Button>       
+      </div>
+       </form>
+    <div className="current-datetime">{currentDateTime}</div>
+  </div>
+  )
+}
 
-export default SendEmail;
+const mapStateToProps = (state) => ({
+})
+
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SendEmail)
+

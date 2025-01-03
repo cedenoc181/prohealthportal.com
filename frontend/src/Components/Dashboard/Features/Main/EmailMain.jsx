@@ -3,41 +3,11 @@ import { connect } from 'react-redux'
 import './EmMain.css'
 import './Main.css'
 import { Button, ButtonGroup } from '@chakra-ui/react'
-import { Textarea } from '@chakra-ui/react'
 import { ChevronLeftIcon, SmallAddIcon } from '@chakra-ui/icons'
 import EmailSenderUI from './Main-Functions/SendEmail.jsx'
 import CreateEmailUI from './Main-Functions/CreateEmail.jsx'
 export const EmailMain = ({selectedPxEmail, selectedDrEmail}) => {
 
-
-  // consider making this univeral for both patient and doctor
-const [myPatientTemplate, setMyPatientTemplate] = useState({
-
-      user_id: '',
-      patient_template_id: '',
-      notes: ''
-
-})
-
-// const [myDoctorTemplate, setMyDoctorTemplate] = useState({
-
-//   user_id: '',
-//   dr_template_id: '',
-//   notes: ''
-
-// })
-
-
-const handlePatientTemplateChange = (e) => {
-  const { name, value } = e.target;
-  console.log("Textarea Value:", value); // Logs the current value of the textarea
-  setMyPatientTemplate((prevState) => ({
-    ...prevState,
-    [name]: value,
-  }));
-}
-
-const [saveTemplateDropMenu, setSaveTemplateDropMenu] = useState(false);
 
 const [useTemplate, setUseTemplate] = useState(false);
 
@@ -49,11 +19,6 @@ const [useTemplateHtml, setUseTemplateHtml] = useState(null);
 
 const [useTempToCreate, setUseTempToCreate] = useState(null);
 
-// const [addition ]
-
-function handleSaveTemplateDropMenu() {
-      setSaveTemplateDropMenu(!saveTemplateDropMenu)
-}
 
 
 useEffect(() => {
@@ -168,7 +133,7 @@ setTimeout(() => {
       {renderPatientEmail ? (    
         
         <div className="emailCard" key={selectedPxEmail.id}>
-        <h2 className="email-main-title" contenteditable="true">{selectedPxEmail.px_temp_title}</h2>
+        <h2 className="email-main-title" contentEditable="true">{selectedPxEmail.px_temp_title}</h2>
         <br />
         <div className="email-main-subject">
         <span className="key" contentEditable="false">Subject:</span>
@@ -198,7 +163,7 @@ setTimeout(() => {
         </p>
       </div>
       <br />
-        <div className="email-main-category"><span className="key" contenteditable="false">Tag:</span>
+        <div className="email-main-category"><span className="key" contentEditable="false">Tag:</span>
         <br/>
          <select name="category" className="email-category-selection">
                 <option id="category">{selectedPxEmail.category}</option> {/* set as default value from API*/}
@@ -247,7 +212,7 @@ setTimeout(() => {
         </p>
       </div>
       <br />
-        <div className="email-main-category"><span className="key" contenteditable="false">Tag:</span>
+        <div className="email-main-category"><span className="key" contentEditable="false">Tag:</span>
         <br/>
          <select name="category" className="email-category-selection">
                 <option id="category">{selectedDrEmail.category}</option> {/* set as default value from API*/}
@@ -303,7 +268,6 @@ setTimeout(() => {
 }
 
 const mapStateToProps = (state) => ({
-
   selectedPxEmail: state.patient.selectedPxEmail,
   selectedDrEmail : state.doctor.selectedDrEmail
 })
