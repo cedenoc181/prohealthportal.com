@@ -10,10 +10,11 @@ import { Navigate } from 'react-router-dom';
 import "./Features.css";
 
 
-export const Medical = ({ user, medifiles, myMedifiles, loading, error, fetchMedifiles, setSelectedMedifile, fetchMyMedifiles}) => {
+export const Medical = ({ user, medifiles, myMedifiles, loading, error, setSelectedMedifile, fetchMyMedifiles}) => {
 
   useEffect(() => {
     const token = localStorage.getItem("jwt"); // Retrieve the token
+    console.log("token on medical jsx is now true")
     if (token) {
       fetchMyMedifiles(token);
     }
@@ -34,6 +35,11 @@ const handleSelectedMedifile = (file) => {
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const [loadingSpinner, setLoadingSpinner] = useState(false);
+
+  const [loadMyMedifiles, setLoadMyMedifiles] = useState({
+    document: "",
+    relationship: "",
+  })
 
 
   const handleTemplate = () => setCollapse(!collapse);
@@ -119,7 +125,6 @@ let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
 (<div></div>)
 )) : "";
 
-console.log(user);
 
 if (!user) {
   return <Navigate to="/login" replace />;
@@ -151,9 +156,6 @@ if (!user) {
         </div>
         <div onClick={handleLanguageS}>
         <li className="filter-li">Spanish Forms</li>
-        </div>
-        <div>
-        <li className="filter-li">Saved Templates</li>
         </div>
     </ul>
 

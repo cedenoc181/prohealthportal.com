@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./MedicalMain.css";
 import "./Main.css";
-import { Textarea, Text, Button } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { ChevronLeftIcon, SmallAddIcon } from "@chakra-ui/icons";
 import CreateMedifile from "./Main-Functions/CreateMedifile";
 import { createMyMedifile } from "../../../../ReduxActionsMain/myMedifilesActions";
@@ -47,25 +47,25 @@ export const MedicalMain = ({
     setShowCreateForm(!showCreateForm);
   };
 
-  const handleTemplateSubmission = (e) => {
-    e.preventDefault();
-    if (createMyMedifileValues.medifile_id && createMyMedifileValues.my_file_description && createMyMedifileValues.user_id && createMyMedifileValues.my_file_title) {
-      // console.log(createMyMedifileValues)
-      createMyMedifile(createMyMedifileValues);
-      console.log("object passed into createMyMedifile"); 
-    } else {
-      alert("please log note for template file");
-    }
-    setCreateMyMedifileValues({
-      user_id: "",
-      coworker_id: "",
-      medifile_id: "",
-      my_file_title: "",
-      my_file_description: "",
-      token: ""
-    });
-    alert("Your medifile template has been saved!");
-  }
+  // const handleTemplateSubmission = (e) => {
+  //   e.preventDefault();
+  //   if (createMyMedifileValues.medifile_id && createMyMedifileValues.my_file_description && createMyMedifileValues.user_id && createMyMedifileValues.my_file_title) {
+  //     // console.log(createMyMedifileValues)
+  //     createMyMedifile(createMyMedifileValues);
+  //     console.log("object passed into createMyMedifile"); 
+  //   } else {
+  //     alert("please log note for template file");
+  //   }
+  //   setCreateMyMedifileValues({
+  //     user_id: "",
+  //     coworker_id: "",
+  //     medifile_id: "",
+  //     my_file_title: "",
+  //     my_file_description: "",
+  //     token: ""
+  //   });
+  //   alert("Your medifile template has been saved!");
+  // }
 
   const handleModalOpen = (medifile) => {
     setSelectedMedifile(medifile); // Set the selected medifile in Redux state
@@ -130,7 +130,7 @@ export const MedicalMain = ({
           <p className="subtitle-pdf-instruction">Instructions:</p>
           <p className="pdf-instruction">{selectedMedifile.instructions}</p>
 
-          <br />
+          {/* <br />
           <form className="pdf-info" onSubmit={handleTemplateSubmission}>
             <Text>Notes:</Text>
             <Textarea
@@ -182,7 +182,7 @@ export const MedicalMain = ({
                 Save template
               </Button>
             </div>
-          </form>
+          </form> */}
         </div>
         <div className="delete-medifile-container">
           <Button
