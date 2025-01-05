@@ -1,18 +1,52 @@
 class MedifilesController < ApplicationController
+
+  include Rails.application.routes.url_helpers
+
   before_action :set_medifile, only: %i[ show update destroy ]
   skip_before_action :is_admin?, only: [:index, :show, :create] #this line might change depending on UI functionality
 
 
-  # GET /medifiles
-  def index
-    @medifiles = Medifile.all
-    render json: @medifiles, each_serializer: MedifileSerializer, status: :ok
+# GET /medifiles
+def index
+  @medifiles = Medifile.all
+
+  medifiles_with_urls = @medifiles.map do |medifile|
+    {
+      id: medifile.id,
+      title: medifile.title,
+      description: medifile.description,
+      instructions: medifile.instructions,
+      language: medifile.language,
+      file_editable: medifile.file_editable,
+      file_cover_alt: medifile.file_cover_alt,
+      created_at: medifile.created_at,
+      file_link_url: medifile.file_link.attached? ? url_for(medifile.file_link) : nil,
+      file_cover_url: medifile.file_cover.attached? ? url_for(medifile.file_cover) : nil
+    }
   end
 
-  # GET /medifiles/1
-  def show
-    render json: @medifile, serializer: MedifileSerializer, status: :ok
-  end
+  render json: medifiles_with_urls, status: :ok
+end
+
+
+ # GET /medifiles/1
+def show
+  medifile_with_urls = {
+    id: @medifile.id,
+    title: @medifile.title,
+    description: @medifile.description,
+    instructions: @medifile.instructions,
+    language: @medifile.language,
+    file_editable: @medifile.file_editable,
+    file_cover_alt: @medifile.file_cover_alt,
+    created_at: @medifile.created_at,
+    file_link_url: @medifile.file_link.attached? ? url_for(@medifile.file_link) : nil,
+    file_cover_url: @medifile.file_cover.attached? ? url_for(@medifile.file_cover) : nil
+  }
+
+  render json: medifile_with_urls, status: :ok
+end
+
 
   # POST /medifiles
   def create
@@ -27,7 +61,20 @@ class MedifilesController < ApplicationController
     p "#{@medifile.file_cover} and #{@medifile.file_link} has been attached"
 
     if @medifile.save
-      render json: @medifile, status: :created, location: @medifile
+      medifile_with_urls = {
+        id: @medifile.id,
+        title: @medifile.title,
+        description: @medifile.description,
+        instructions: @medifile.instructions,
+        language: @medifile.language,
+        file_editable: @medifile.file_editable,
+        file_cover_alt: @medifile.file_cover_alt,
+        created_at: @medifile.created_at,
+        file_link_url: @medifile.file_link.attached? ? url_for(@medifile.file_link) : nil,
+        file_cover_url: @medifile.file_cover.attached? ? url_for(@medifile.file_cover) : nil
+      }
+    
+      render json: medifile_with_urls, status: :created
         Rails.logger.info "Medifile created successfully"
     else
        Rails.logger.error "Error creating Medifile: #{@medifile.errors.full_messages}"

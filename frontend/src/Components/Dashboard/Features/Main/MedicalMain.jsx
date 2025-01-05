@@ -69,7 +69,7 @@ export const MedicalMain = ({
           <p className="subtitle-pdf-description">Document description:</p>
           <p className="pdf-description">{selectedMedifile.description}</p>
           <a
-            href={selectedMedifile.file_link}
+            href={selectedMedifile.file_link_url}
             target="_blank"
             rel="noopener noreferrer"
             className="pdf-main-link"
