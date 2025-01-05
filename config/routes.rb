@@ -19,6 +19,11 @@ Rails.application.routes.draw do
     post 'password/forgot', to: 'password#forgot'
     post 'password/reset', to: 'password#reset'
 
+
+    # api end point for email sender 
+
+    get '/email_config', to: 'email_config#index'
+
     #admin will be only user to create instances of these models, 
   resources :dr_templates
   resources :patient_templates

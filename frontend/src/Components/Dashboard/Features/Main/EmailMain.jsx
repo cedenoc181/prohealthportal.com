@@ -54,10 +54,11 @@ function handleUseTemplate() {
   const getSubject = document.getElementById('subject-p');
   const getBody = document.getElementById('body-p');
 
+
   setUseTemplateHtml({
-    subject: getSubject.innerText,
-    body: getBody.innerText
-  })
+    subject: getSubject ? getSubject.innerText : 'Default Subject',
+    body: getBody ? getBody.innerText : 'Default Body',
+  });
 
   setTimeout(() => {
     alert('template copied onto to mailer below')
@@ -258,10 +259,15 @@ setTimeout(() => {
       </div>
       <br />
 </div>
-          
-      <div className="export-emails">
-          <EmailSenderUI templateObject={useTemplateHtml}/>
-      </div>
+
+<div className="export-emails">
+  {useTemplateHtml ? (
+    <EmailSenderUI templateObject={useTemplateHtml} />
+  ) : (
+    <p></p>
+  )}
+</div>
+
 
     </div>
   )

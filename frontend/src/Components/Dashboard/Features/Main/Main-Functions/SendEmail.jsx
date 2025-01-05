@@ -5,40 +5,42 @@ import { connect } from 'react-redux'
 import './SendEmail.css';
 
 
-export const SendEmail = (templateObject) => {
+export const SendEmail = ({ templateObject = {}, user }) => {
   const form = useRef();
 
-  let useTemlplate = templateObject.templateObject;
-
+  
   const [formData, setFormData] = useState({
     receiver: '',
-    subject: '',
-    content: '',
+    subject: templateObject.subject || '',
+    content: templateObject.body || '',
   });
 
-  console.log(useTemlplate);
-
   useEffect(() => {
-    if (useTemlplate) {
+    if (templateObject) {
       setFormData({
         receiver: '',
-        subject: useTemlplate.subject,
-        content: useTemlplate.body
-      })
-    };
-  }, [useTemlplate])
+        subject: templateObject.subject || '',
+        content: templateObject.body || '',
+      });
+    }
+  }, [templateObject]);
 
-
-
+console.log(user)
+console.log(templateObject)
 
 // email sender function 
 
 const sendEmail = (e) => {
   e.preventDefault();
 
+    // Fetch EmailJS config from the backend
+    fetch('http://127.0.0.1:3000/email_config') // Adjust the URL if needed
+    .then((response) => response.json())
+    .then((config) => {
+
   emailjs
-    .sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, {
-      publicKey: 'YOUR_PUBLIC_KEY',
+    .sendForm(config.service_id, config.template_id, form.current, {
+      publicKey: config.public_key,
     })
     .then(
       () => {
@@ -48,9 +50,9 @@ const sendEmail = (e) => {
         console.log('FAILED...', error.text);
       },
     );
+});
+
 };
-
-
 
   const [currentDateTime, setCurrentDateTime] = useState('');
 
@@ -75,20 +77,16 @@ const sendEmail = (e) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Logic to handle sending email, could be an API call here
-    console.log('Email Sent:', formData);
-  };
+
 
   return (
     <div className="main-container">
     <h2 className="email-title">Send an Email</h2>
-    <form className="email-form" onSubmit={handleSubmit}>
+    <form className="email-form" ref={form} onSubmit={sendEmail}>
       <label>To:</label>
       <input
         type="email"
-        name="receiver"
+        name="to_email"
         value={formData.receiver}
         onChange={handleChange}
         placeholder="Receiver's Email"
@@ -105,7 +103,8 @@ const sendEmail = (e) => {
       />
       <label>Content:</label>
       <textarea
-        name="content"
+        type="text"
+        name="message"
         value={formData.content}
         onChange={handleChange}
         placeholder="Write your message here..."
@@ -124,6 +123,7 @@ const sendEmail = (e) => {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user.data,
 })
 
 const mapDispatchToProps = {}
