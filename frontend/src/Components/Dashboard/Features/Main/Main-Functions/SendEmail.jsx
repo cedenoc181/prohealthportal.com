@@ -59,7 +59,7 @@ const sendEmail = (e) => {
     .then(
       () => {
         console.log('SUCCESS!');
-        alert("Email sent successfully")
+        alert("Email sent successfully");
         setFormData({
           to_name: '',
           to_email: '',
@@ -69,6 +69,7 @@ const sendEmail = (e) => {
       },
       (error) => {
         console.log('FAILED...', error.text);
+        alert("Email was not sent, please try again later");
       },
     );
 });
