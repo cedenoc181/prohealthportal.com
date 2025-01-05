@@ -10,6 +10,7 @@ export const SendEmail = ({ templateObject = {}, user }) => {
 
   
   const [formData, setFormData] = useState({
+    to_name: '',
     to_email: '',
     subject: templateObject.subject || '',
     content: templateObject.body || '',
@@ -18,6 +19,7 @@ export const SendEmail = ({ templateObject = {}, user }) => {
   useEffect(() => {
     if (templateObject) {
       setFormData({
+        to_name: '',
         to_email: '',
         subject: templateObject.subject || '',
         content: templateObject.body || '',
@@ -49,7 +51,6 @@ const sendEmail = (e) => {
     })
     .then((config) => {
 
-      console.log(config.service_id, config.public_key, config.template_id, config.private_key)
   emailjs
     .sendForm(config.service_id, config.template_id, form.current, {
       publicKey: config.public_key,
@@ -58,6 +59,13 @@ const sendEmail = (e) => {
     .then(
       () => {
         console.log('SUCCESS!');
+        alert("Email sent successfully")
+        setFormData({
+          to_name: '',
+          to_email: '',
+          subject: '',
+          content: '',
+        });
       },
       (error) => {
         console.log('FAILED...', error.text);
@@ -96,7 +104,17 @@ const sendEmail = (e) => {
     <div className="main-container">
     <h2 className="email-title">Send an Email</h2>
     <form className="email-form" ref={form} onSubmit={sendEmail}>
-      <label>To:</label>
+
+      <label>Full Name </label>
+      <input 
+              type="name"
+              name="to_name"
+              value={formData.to_name}
+              onChange={handleChange}
+              placeholder="Receiver's name"
+              required
+      />
+      <label>Email:</label>
       <input
         type="email"
         name="to_email"
@@ -123,9 +141,8 @@ const sendEmail = (e) => {
         placeholder="Write your message here..."
         required
       />
-      <label>From:</label>
-      <input class="sender-input" type='name' name='user_full_name' value={user.full_name} />
       <input class="sender-input" type='email' name='user_email' value={user.email} />
+      <input class="sender-input1" type='name' name='user_full_name' value={user.full_name} />
       <div className="sending-email-button"> 
       <Button  colorScheme='blue' type="submit" variant='solid' size='lg'>
           Send Email

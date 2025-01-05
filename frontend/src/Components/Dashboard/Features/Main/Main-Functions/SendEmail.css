@@ -63,3 +63,7 @@
     background: none;
     margin-bottom: 0 !important;
   }
+
+  .sender-input1{
+    opacity: 0;
+  }
