@@ -1,11 +1,11 @@
 import React, {useEffect, useState}  from 'react'
 import { connect } from 'react-redux'
 import logo from "../../../../../images/prohealth-logo.png"
-
 export const MyProfile = ({ user }) => {
 
     const [currentUser, setCurrentUser] = useState('');
     const [isEditable, setIsEditable] = useState(false);
+
 
         useEffect(() => {
           setCurrentUser(user);
@@ -13,9 +13,10 @@ export const MyProfile = ({ user }) => {
 
         console.log(currentUser);
 
-        const handleEdit = () => {
+        const toggleEdit = () => {
             setIsEditable((prev) => !prev); // Toggle editable state
           };
+
 
   return (
     <div className="main-container">
@@ -40,8 +41,7 @@ export const MyProfile = ({ user }) => {
     <div className="account-info">
       <div className="info-header">
        <h2 className="info-header-title">Personal Information</h2>
-      {/* <button className="info-button" onClick={handleEdit}>{isEditable ? "save" : "edit"}</button> */}
-      <button type="button" class="btn btn-light" onClick={handleEdit}>{isEditable ? "save" : "edit"}</button>
+      <button type="button" class="btn btn-light" onClick={toggleEdit}>{isEditable ? "save" : "edit"}</button>
       </div>
    <br />
        <div className="personal-info">
@@ -112,36 +112,17 @@ export const MyProfile = ({ user }) => {
        </div>
        </div>
     </div>
-    {/* <br />
-    <div className="account-settings">
-      <div className="info-header">
-        <h2 className="settings-title">My Settings</h2>
-        <button className="info-button">Edit</button>
-      </div>
-      <br />
-      <div className="settings">
-      <div className="settings-alerts">
-          <label>Theme</label>
-          <p>Light</p>
-          <label>Inventory Alerts</label>
-          <p>On</p>
-          <label>Task Alerts</label>
-          <p>On</p>
-      </div>
-    </div> 
- </div>  */}
 </div> 
         )
     }
-
-
-
       </div>
   )
 }
 
 const mapStateToProps = (state) => ({})
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyProfile)

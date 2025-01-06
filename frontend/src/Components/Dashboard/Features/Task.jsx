@@ -12,13 +12,7 @@ export const Task = (props) => {
 
   const [dailyOps, setDailyOps] = useState(["Appointment reminders", "Patient retention outreach", "Direct Access management", "referral management" ]);
 
-  // const [auth, setAuth] = useState(['Pending authorization', 'Denied authorization', 'Authorization extension']);
 
-  // const [apos, setApos] = useState(['Schedule Int visit', 'Pending treatment',  'Follow ups schedueld', 'Source leads' ]);
-
-
-  // const opsArr = ["Appointment reminders", "Patient retention outreach", "Direct Access management", "referral management" ];
-  // setDailyOps(opsArr);
 
   return (
     <div id="task-list" className="console">
@@ -82,6 +76,7 @@ export const Task = (props) => {
 <h2 className="task-title"> Scheduled</h2>
 <br />
 <div className="opService">
+  
       <div className="WaterDelivery">
           <h3>Water delivery</h3>
               <img src={waterJug} alt="water delivery"/>

@@ -85,11 +85,19 @@ export const createUser = (newUser) => {
 
 // Action to update a user
 export const updateUser = (userId, updatedInfo) => {
+  const token = localStorage.getItem("jwt");
+
+  if (!token) {
+    throw new Error("Authorization token is missing.");
+  }
   return async (dispatch) => {
     try {
       const data = await fetchWithAuth(`http://127.0.0.1:3000/users/${userId}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json", 
+          Authorization: `Bearer ${token}`
+         },
         body: JSON.stringify(updatedInfo),
       });
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: data });
