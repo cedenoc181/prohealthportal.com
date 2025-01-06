@@ -45,14 +45,18 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail, templateObje
       // Validate patient template fields before creating
       if (newPatientTemplate.px_temp_title && newPatientTemplate.px_temp_subject && newPatientTemplate.px_temp_content && newPatientTemplate.category && newPatientTemplate.language) {
         createPatientEmail(newPatientTemplate);
+        alert("patiient email created successfully");
       } else {
+        alert("Please fill out all required patient email fields.");
         console.log("Please fill out all required patient email fields.");
       }
     } else {
       // Validate doctor template fields before creating
       if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.category) {
         createDoctorEmail(newDoctorTemplate);
+        alert("doctor email created successfully");
       } else {
+        alert("Please fill out all required patient email fields.");
         console.log("Please fill out all required doctor email fields.");
       }
     }
@@ -232,7 +236,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail, templateObje
           <br />
         <label className="input-label">Template Tag:</label>
         <select name="category" className="email-category-selection" onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, category: e.target.value})} required>
-        <option value="">--Please choose an option below--</option>
+        <option value="--Please choose an option below--">--Please choose an option below--</option>
         <option value="Outreach">Outreach</option>
         <option value="Billing">Billing</option>
         <option value="Other">Insurance</option>

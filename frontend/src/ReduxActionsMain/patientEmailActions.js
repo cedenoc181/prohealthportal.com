@@ -1,5 +1,5 @@
 // patientEmailActions.js
-
+const token = localStorage.getItem("jwt");
 // Action to fetch patient email templates
 export const fetchPatientEmails = (token) => {
     return async (dispatch) => {
@@ -44,6 +44,7 @@ export const setSelectedPatientEmail = (file) => {
         const response = await fetch('http://127.0.0.1:3000/patient_templates', {
           method: 'POST',
           headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(
@@ -70,6 +71,7 @@ export const setSelectedPatientEmail = (file) => {
         const response = await fetch(`http://127.0.0.1:3000/patient_templates/${emailId}`, {
           method: 'PUT',
           headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(updatedInfo),
@@ -88,6 +90,9 @@ export const setSelectedPatientEmail = (file) => {
       try {
         await fetch(`http://127.0.0.1:3000/patient_templates/${emailId}`, {
           method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
         });
         dispatch({ type: 'DELETE_PATIENT_EMAIL_SUCCESS', payload: emailId });
       } catch (error) {

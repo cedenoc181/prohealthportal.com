@@ -1,5 +1,5 @@
 // doctorEmailActions.js
-
+const token = localStorage.getItem("jwt");
 // Action to fetch doctor email templates
 export const fetchDoctorEmails = (token) => {
     return async (dispatch) => {
@@ -43,6 +43,7 @@ export const setSelectedDoctorEmail = (file) => {
         const response = await fetch('http://127.0.0.1:3000/dr_templates', {
           method: 'POST',
           headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -67,6 +68,7 @@ export const setSelectedDoctorEmail = (file) => {
         const response = await fetch(`http://127.0.0.1:3000/dr_templates/${emailId}`, {
           method: 'PUT',
           headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(updatedInfo),
@@ -85,6 +87,9 @@ export const setSelectedDoctorEmail = (file) => {
       try {
         await fetch(`http://127.0.0.1:3000/dr_templates/${emailId}`, {
           method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
         });
         dispatch({ type: 'DELETE_DOCTOR_EMAIL_SUCCESS', payload: emailId });
       } catch (error) {
