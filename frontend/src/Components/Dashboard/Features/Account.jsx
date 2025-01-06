@@ -1,10 +1,19 @@
-import React from 'react'
+ import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
 import { setSelectedUser } from '../../../ReduxActionsMain/userActions'
+import { fetchUsers } from '../../../ReduxActionsMain/userActions'
 import "./Features.css"
 
 
-export const Account = ({user, allUsers, setSelectedUser}) => {
+export const Account = ({user, allUsers, setSelectedUser, fetchUsers}) => {
+
+const token = localStorage.getItem('jwt');
+
+useEffect(() => {
+if (!allUsers) {
+fetchUsers(token);
+}
+}, [fetchUsers, allUsers]);
 
 
 const handleSelectedUser = (profile) => {
@@ -56,7 +65,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  // fetchUsers,
+  fetchUsers,
   setSelectedUser,
 }
 

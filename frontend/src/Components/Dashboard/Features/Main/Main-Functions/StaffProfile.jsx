@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import MyProfile from './MyProfile.jsx'
 import logo from "../../../../../images/prohealth-logo.png"
 
 export const StaffProfile = ({ staffUser}) => {
