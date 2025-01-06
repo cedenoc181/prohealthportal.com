@@ -10,6 +10,7 @@ import "./Features.css";
 
 
 export const Medical = ({ user, medifiles, loading, error, setSelectedMedifile, fetchMedifiles}) => {
+
   const token = localStorage.getItem("jwt"); // Retrieve the token
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export const Medical = ({ user, medifiles, loading, error, setSelectedMedifile, 
     if (token) {
       fetchMedifiles(token);
     }
-  }, [fetchMedifiles]);
+  }, [fetchMedifiles, token]);
 
 
 const handleSelectedMedifile = (file) => {
@@ -34,11 +35,6 @@ const handleSelectedMedifile = (file) => {
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const [loadingSpinner, setLoadingSpinner] = useState(false);
-
-  const [loadMyMedifiles, setLoadMyMedifiles] = useState({
-    document: "",
-    relationship: "",
-  })
 
 
   const handleTemplate = () => setCollapse(!collapse);

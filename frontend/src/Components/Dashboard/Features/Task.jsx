@@ -10,7 +10,7 @@ export const Task = (props) => {
 
   const handleTemplate = () => setCollapse(!collapse);
 
-  const [dailyOps, setDailyOps] = useState(["Appointment reminders", "Patient retention outreach", "Direct Access management", "referral management" ]);
+  const dailyOps = [    "Appointment reminders", "Patient retention outreach", "Direct Access management", "referral management"];
 
 
 
@@ -76,7 +76,7 @@ export const Task = (props) => {
 <h2 className="task-title"> Scheduled</h2>
 <br />
 <div className="opService">
-  
+
       <div className="WaterDelivery">
           <h3>Water delivery</h3>
               <img src={waterJug} alt="water delivery"/>

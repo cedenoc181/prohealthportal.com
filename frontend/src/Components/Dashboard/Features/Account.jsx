@@ -10,10 +10,11 @@ export const Account = ({user, allUsers, setSelectedUser, fetchUsers}) => {
 const token = localStorage.getItem('jwt');
 
 useEffect(() => {
+
 if (!allUsers) {
 fetchUsers(token);
 }
-}, [fetchUsers, allUsers]);
+}, [fetchUsers, token, allUsers]);
 
 
 const handleSelectedUser = (profile) => {

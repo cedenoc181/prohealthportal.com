@@ -35,7 +35,7 @@ function App({ user, loading, error, fetchMyAccount }) {
 
  // Fetch user account when authenticated
 useEffect(() => {
-
+  // const token = localStorage.getItem("jwt");
   let logoutTimeout;
 
   if (isAuthenticated && token && !user) {
@@ -69,7 +69,7 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
       clearTimeout(logoutTimeout);
     }
   };
-}, [isAuthenticated, user]);
+}, [isAuthenticated, token, fetchMyAccount, user]);
 
 
   console.log(isAuthenticated);

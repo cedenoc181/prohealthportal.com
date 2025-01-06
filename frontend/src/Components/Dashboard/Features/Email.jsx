@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
 import ReactLoading from 'react-loading';
-import { Navigate } from 'react-router-dom'; 
 import "./Features.css";
 import { fetchPatientEmails, setSelectedPatientEmail } from '../../../ReduxActionsMain/patientEmailActions.js';
 import { fetchDoctorEmails,  setSelectedDoctorEmail} from '../../../ReduxActionsMain/doctorEmailActions.js';
@@ -31,7 +30,7 @@ useEffect(() => {
     fetchDoctorEmails(token);
     fetchPatientEmails(token); // Pass the token to the fetchMedifiles function
   }
-}, [fetchPatientEmails, fetchDoctorEmails, user]);
+}, [fetchPatientEmails, fetchDoctorEmails, user, token]);
 
 // this function manages the nav button extending and minimizing 
 const handleTemplate = () => setCollapse(!collapse);
@@ -148,13 +147,6 @@ let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file
 )) : <div className="emailsNotFound"><ReactLoading type={"spinningBubbles"} color={"black"} height={667} width={375} /></div>;
 
 
-
-// renders alternative content if data is not available
-
-// if (!user) {
-//   return <Navigate to="/login" replace />;
-// };
-
 if (loading) {
     return <div></div>;
   }
@@ -163,8 +155,6 @@ if (loading) {
     return <div>Error: {error}</div>;
   };
 
-
-       
 
   return (
     <div id="e-templates" className="console">

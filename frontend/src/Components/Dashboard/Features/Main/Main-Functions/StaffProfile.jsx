@@ -11,7 +11,7 @@ export const StaffProfile = ({ staffUser}) => {
     useEffect(() => {
         setSelectedStaff(staffUser);
         console.log(selectedStaff);
-    }, [staffUser]);
+    }, [staffUser, selectedStaff]);
 
     const handleEdit = () => {
         setIsEditable((prev) => !prev); // Toggle editable state
