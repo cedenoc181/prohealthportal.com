@@ -76,7 +76,7 @@ end
 
     # Only allow a list of trusted parameters through.
     def create_user_params
-      params.permit(:full_name, :email, :password, :clinic_location, :role)
+      params.permit(:full_name, :email, :password, :clinic_location, :credentials, :role, :insurance_network, :direct_access)
     end
 
     def user_editable_params 

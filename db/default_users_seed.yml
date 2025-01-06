@@ -1,0 +1,80 @@
+
+  - full_name: "Alexandra Burdo"
+    email: "alexb@prohealthptot.com"
+    role: "OT"
+    clinic_location: "West"
+    credentials: "MS, OTR/L, OT Supervisor"
+    insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
+    direct_access: true
+    admin: false
+    password: "123456abc"
+
+  - full_name: "James Nussbaum"
+    email: "jnussbaum@prohealthptot.com"
+    role: "Admin"
+    clinic_location: "West"
+    credentials: "PT, PhD, SCS, EMT, Owner"
+    insurance_network: "not provided"
+    direct_access: false
+    admin: true
+    password: "123456abc"
+
+  - full_name: "Joy Ko"
+    email: "joyk@prohealthptot.com"
+    role: "OT"
+    clinic_location: "West"
+    credentials: "OTD, OTR/L"
+    insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
+    direct_access: true
+    admin: false
+    password: "123456abc"
+
+  - full_name: "Howard Wurzel"
+    email: "howard@prohealthptot.com"
+    role: "Admin"
+    clinic_location: "Remote"
+    credentials: "CPA, CFP, CGMA. Executive Vice President"
+    insurance_network: "not provided"
+    direct_access: false
+    admin: true
+    password: "123456abc"
+
+  - full_name: "Oscar Moises"
+    email: "oscarm@prohealthptot.com"
+    role: "PT"
+    clinic_location: "East"
+    credentials: "PT, DPT"
+    insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
+    direct_access: true
+    admin: false
+    password: "123456abc"
+
+  - full_name: "Colin McGowan"
+    email: "colinm@prohealthptot.com"
+    role: "PT"
+    clinic_location: "UWS"
+    credentials: "PT, DPT, Cert. MDT"
+    insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
+    direct_access: true
+    admin: false
+    password: "123456abc"
+
+  - full_name: "Sabrina Yakubovich"
+    email: "sabrinay@prohealthptot.com"
+    role: "PT"
+    clinic_location: "West"
+    credentials: "PT, DPT, CSCS"
+    insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
+    direct_access: true
+    admin: false
+    password: "123456abc"
+
+  - full_name: "Nadia"
+    email: "nadia@prohealthptot.com"
+    role: "Billing"
+    clinic_location: "Remote"
+    credentials: ""
+    insurance_network: "not provided"
+    direct_access: false
+    admin: false
+    password: "123456abc"

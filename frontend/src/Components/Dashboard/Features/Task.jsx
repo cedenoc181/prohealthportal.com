@@ -10,7 +10,7 @@ export const Task = (props) => {
 
   const handleTemplate = () => setCollapse(!collapse);
 
-  const dailyOps = [    "Appointment reminders", "Patient retention outreach", "Direct Access management", "referral management"];
+  const dailyOps = [ "Appointment reminders", "Patient retention outreach", "Direct Access management", "referral management"];
 
 
 
