@@ -27,8 +27,7 @@ const [searchTerm, setSearchTerm] = useState('');
 
 // fetches and renders emails from each patient and doctor actions method 
 useEffect(() => { 
-  if (user) {
-    const token = localStorage.getItem("jwt"); // Retrieve the token
+  if (token) {
     fetchDoctorEmails(token);
     fetchPatientEmails(token); // Pass the token to the fetchMedifiles function
   }
@@ -152,9 +151,9 @@ let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file
 
 // renders alternative content if data is not available
 
-if (!user) {
-  return <Navigate to="/login" replace />;
-};
+// if (!user) {
+//   return <Navigate to="/login" replace />;
+// };
 
 if (loading) {
     return <div></div>;

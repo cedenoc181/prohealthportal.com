@@ -2,23 +2,22 @@ import React from 'react';
 import {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { setSelectedMedifile } from '../../../ReduxActionsMain/medifilesActions.js';
-import { fetchMyMedifiles } from '../../../ReduxActionsMain/myMedifilesActions.js';
+import { fetchMedifiles } from '../../../ReduxActionsMain/medifilesActions.js';
 import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
 import ReactLoading from 'react-loading';
-import { Navigate } from 'react-router-dom'; 
 import "./Features.css";
 
 
-export const Medical = ({ user, medifiles, myMedifiles, loading, error, setSelectedMedifile, fetchMyMedifiles}) => {
+export const Medical = ({ user, medifiles, loading, error, setSelectedMedifile, fetchMedifiles}) => {
+  const token = localStorage.getItem("jwt"); // Retrieve the token
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt"); // Retrieve the token
     console.log("token on medical jsx is now true")
     if (token) {
-      fetchMyMedifiles(token);
+      fetchMedifiles(token);
     }
-  }, [fetchMyMedifiles]);
+  }, [fetchMedifiles]);
 
 
 const handleSelectedMedifile = (file) => {
@@ -76,11 +75,8 @@ const handleCategoryChange = (category) => {
   setSelectedCategory(category);
 };
 
-
+console.log(user)
 console.log(medifiles);
-
-console.log("fetch my saved medifiles", myMedifiles);
-
 
 const filterMedifilesCategory = medifiles.filter((file) => {
   const matchesCategory = selectedCategory 
@@ -126,9 +122,9 @@ let spanishMedifiles = filterMedifilesCategory.length > 0 ? filterMedifilesCateg
 )) : "";
 
 
-if (!user) {
-  return <Navigate to="/login" replace />;
-};
+// if (!user) {
+//   return <Navigate to="/login" replace />;
+// };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -228,13 +224,12 @@ if (!user) {
 const mapStateToProps = (state) => ({
   user: state.user.data,
   medifiles: state.medifiles.data,
-  myMedifiles: state.myMedifiles.data,
   loading: state.medifiles.loading,
   error: state.medifiles.error,
 });
 
 const mapDispatchToProps = {
-  fetchMyMedifiles,
+  fetchMedifiles,
   setSelectedMedifile,
 };
 

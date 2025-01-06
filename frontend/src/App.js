@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Login from "./Components/Login/Login.jsx";
 import Nav from "./Components/Dashboard/Nav.jsx";
 import { jwtDecode } from "jwt-decode";
+import { fetchMyAccount } from "./ReduxActionsMain/userActions.js"
 
 // Importing features
 import Overview from "./Components/Dashboard/Features/Overview.jsx";
@@ -22,22 +23,24 @@ import MedicalMain from "./Components/Dashboard/Features/Main/MedicalMain.jsx";
 import TasksMain from "./Components/Dashboard/Features/Main/TasksMain.jsx";
 import AccountMain from "./Components/Dashboard/Features/Main/AccountMain.jsx";
 
-function App({ user, loading, error, fetchUsers }) {
+function App({ user, loading, error, fetchMyAccount }) {
+
+  const token = localStorage.getItem("jwt");
 
   const location = useLocation();
-  // const navigate = useNavigate();
+
   const [mainContent, setMainContent] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("jwt"));
   const [userName, setUserName] = useState("");
 
  // Fetch user account when authenticated
 useEffect(() => {
-  const token = localStorage.getItem("jwt");
+
   let logoutTimeout;
 
   if (isAuthenticated && token && !user) {
     console.log(isAuthenticated);
-    // fetchMyAccount(token);
+    fetchMyAccount(token);
 
     // Decode the token to get the expiration time
     const decodedToken = jwtDecode(token);
@@ -50,14 +53,14 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
       logoutTimeout = setTimeout(() => {
         localStorage.removeItem("jwt");
         setIsAuthenticated(false); // Ensure the app knows the user is logged out
-        // navigate("/login");
+  
         console.log("Token expired. User logged out.");
       }, timeUntilExpiration);
     } else {
       // If the token is already expired, log the user out immediately
       localStorage.removeItem("jwt");
       setIsAuthenticated(false);
-      // navigate("/login");
+    
     }
   }
   // Cleanup the timeout on component unmount or re-render
@@ -183,7 +186,7 @@ const mapStateToProps = (state) => ({
 
 // Map Redux actions to props
 const mapDispatchToProps = {
-
+  fetchMyAccount,
 };
 
 // Connect Redux to App
