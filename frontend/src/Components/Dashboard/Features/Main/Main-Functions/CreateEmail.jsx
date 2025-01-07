@@ -4,10 +4,10 @@ import { Button } from '@chakra-ui/react'
 import { Textarea, Input } from '@chakra-ui/react'
 import { createPatientEmail } from '../../../../../ReduxActionsMain/patientEmailActions.js'
 import { createDoctorEmail } from '../../../../../ReduxActionsMain/doctorEmailActions.js'
+import { createMyEmail } from '../../../../../ReduxActionsMain/myEmailTemplateAction.js'
 
 
-
-export const CreateEmail = ({createPatientEmail, createDoctorEmail, templateObject}) => {
+export const CreateEmail = ({createPatientEmail, createDoctorEmail, createMyEmail, templateObject}) => {
 
 
 
@@ -53,6 +53,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail, templateObje
     } else {
       // Validate doctor template fields before creating
       if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.category) {
+        console.log("dr temp is selected")
         createDoctorEmail(newDoctorTemplate);
         alert("doctor email created successfully");
       } else {
@@ -237,9 +238,9 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail, templateObje
         <label className="input-label">Template Tag:</label>
         <select name="category" className="email-category-selection" onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, category: e.target.value})} required>
         <option value="--Please choose an option below--">--Please choose an option below--</option>
-        <option value="Outreach">Outreach</option>
-        <option value="Billing">Billing</option>
-        <option value="Other">Insurance</option>
+        <option value="Protocols">Protocols</option>
+        <option value="Referral">Referral</option>
+        <option value="Other">Other</option>
         </select>
        
         {/* </InputGroup> */}
@@ -279,6 +280,7 @@ const mapStateToProps = (state) => ({})
 const mapDispatchToProps = {
   createPatientEmail,
   createDoctorEmail,
+  createMyEmail,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateEmail)

@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     post 'password/forgot', to: 'password#forgot'
     post 'password/reset', to: 'password#reset'
 
+    post '/create-patient-template', to: 'users#user_create_patient_template'
+
+    post '/create-doctor-template', to: 'users#user_create_dr_template'
 
     # api end point for email sender 
 

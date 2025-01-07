@@ -22,6 +22,7 @@ const [useTempToCreate, setUseTempToCreate] = useState(null);
 
 
 useEffect(() => {
+  
 if (selectedDrEmail) {
   setRenderPatientEmail(false);
 }
@@ -33,6 +34,7 @@ useEffect(() => {
     setRenderPatientEmail(true);
   }
 }, [selectedPxEmail])
+
 
 const handleUIClick = () => {
   setShowCreateForm(!showCreateForm);
@@ -112,7 +114,7 @@ setTimeout(() => {
   }
 
 
-  if (!selectedPxEmail) {
+  if (!selectedPxEmail && !selectedDrEmail) {
     return (
       <div>
         <CreateEmailUI templateObject={useTempToCreate}/>

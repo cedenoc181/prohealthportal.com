@@ -36,6 +36,18 @@ class UsersController < ApplicationController
         end
   end
 
+  def user_create_patient_template
+    new_patient_temp = current_user.patient_templates.create!(patient_template_params)
+     render json: { message: "User patient template successfully created", patient_temp: new_patient_temp}, status: :created
+  end
+
+  def user_create_dr_template
+    new_dr_temp = current_user.dr_templates.create!(dr_template_params)
+      render json: { message: "User doctor template successfully created", dr_temp: new_dr_temp}, status: :created
+  end
+
+  
+
  # PATCH/PUT /users/:id
 # cant update user without being logged in(authorized)
 def update
@@ -81,6 +93,14 @@ end
 
     def user_editable_params 
       params.permit( :password, :email, :role, :credentials, :clinic_location, :insurance_network, :direct_access, :admin)
+    end
+
+    def patient_template_params
+      params.permit(:px_temp_title, :px_temp_subject, :px_temp_content, :category, :language)
+    end
+
+    def dr_template_params
+      params.permit(:dr_temp_title, :dr_temp_subject, :dr_temp_content, :category)
     end
 
 end

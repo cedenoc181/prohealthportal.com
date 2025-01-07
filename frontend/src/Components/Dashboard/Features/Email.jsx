@@ -130,11 +130,6 @@ const filteredDoctors = doctor.filter((file) => {
 });
 
 
-
-
-
-
-
 // Use filtered emails to create the template for rendering
 let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file) => (
   <div className="renderEmails" key={file.id} onClick={() => handleSelectedDrEmail(file)}> 
