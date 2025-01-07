@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import { Button } from '@chakra-ui/react'
 import { Textarea, Input } from '@chakra-ui/react'
-import { createPatientEmail } from '../../../../../ReduxActionsMain/patientEmailActions.js'
-import { createDoctorEmail } from '../../../../../ReduxActionsMain/doctorEmailActions.js'
-import { createMyEmail } from '../../../../../ReduxActionsMain/myEmailTemplateAction.js'
+import { createPatientTemplates } from '../../../../../ReduxActionsMain/userActions.js'
+// import { createDoctorEmail } from '../../../../../ReduxActionsMain/doctorEmailActions.js'
+// import { createMyEmail } from '../../../../../ReduxActionsMain/myEmailTemplateAction.js'
 
 
-export const CreateEmail = ({createPatientEmail, createDoctorEmail, createMyEmail, templateObject}) => {
+export const CreateEmail = ({createPatientTemplates, templateObject}) => {
 
 
 
@@ -44,7 +44,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail, createMyEmai
     if (templateToggler) {
       // Validate patient template fields before creating
       if (newPatientTemplate.px_temp_title && newPatientTemplate.px_temp_subject && newPatientTemplate.px_temp_content && newPatientTemplate.category && newPatientTemplate.language) {
-        createPatientEmail(newPatientTemplate);
+        createPatientTemplates(newPatientTemplate);
         alert("patiient email created successfully");
       } else {
         alert("Please fill out all required patient email fields.");
@@ -54,7 +54,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail, createMyEmai
       // Validate doctor template fields before creating
       if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.category) {
         console.log("dr temp is selected")
-        createDoctorEmail(newDoctorTemplate);
+        createPatientTemplates(newDoctorTemplate);
         alert("doctor email created successfully");
       } else {
         alert("Please fill out all required patient email fields.");
@@ -278,9 +278,7 @@ export const CreateEmail = ({createPatientEmail, createDoctorEmail, createMyEmai
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = {
-  createPatientEmail,
-  createDoctorEmail,
-  createMyEmail,
+  createPatientTemplates,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateEmail)

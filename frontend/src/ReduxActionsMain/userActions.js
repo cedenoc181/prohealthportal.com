@@ -70,10 +70,17 @@ export const setSelectedUser = (profile) => {
 // Action to create a user
 export const createUser = (newUser) => {
   return async (dispatch) => {
+    const token = localStorage.getItem("jwt");
+
+    if (!token) {
+      throw new Error("Authorization token is missing.");
+    }
     try {
       const data = await fetchWithAuth("http://127.0.0.1:3000/users", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" , 
+            Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify(newUser),
       });
       dispatch({ type: "CREATE_USER_SUCCESS", payload: data });
@@ -82,6 +89,42 @@ export const createUser = (newUser) => {
     }
   };
 };
+
+
+// create patient template 
+
+export const createPatientTemplates = (px_temp) => {
+  return async (dispatch) => {
+
+    const token = localStorage.getItem("jwt");
+
+    if (!token) {
+      throw new Error("Authorization token is missing.");
+    }
+
+    try {
+      const data = await fetchWithAuth("http://127.0.0.1:3000/create-patient-template", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json", 
+            Authorization: `Bearer ${token}`
+         },
+        body: JSON.stringify(px_temp),
+      });
+      dispatch({ type: "CREATE_USER_PATIENT_TEMP_SUCCESS", payload: data });
+    } catch (error) {
+      dispatch({ type: "CREATE_USER_PATIENT_TEMP_ERROR", payload: error.message });
+    }
+  };
+};
+
+// create doctor template 
+
+
+
+
+
+
 
 // Action to update a user
 export const updateUser = (userId, updatedInfo) => {
@@ -152,17 +195,5 @@ export const logoutUser = () => {
   return { type: "LOGOUT" };
 };
 
-// Action to fetch user account
-// export const fetchMyAccount = () => {
-//   return async (dispatch) => {
-//     try {
-//       const data = await fetchWithAuth("http://127.0.0.1:3000/my-account");
-//       dispatch({ type: "FETCH_USER_DATA_SUCCESS", payload: data });
-//       console.log(data);
-//     } catch (error) {
-//       dispatch({ type: "FETCH_USER_DATA_FAILURE", payload: error.message });
-//     }
-//   };
-// };
 
 

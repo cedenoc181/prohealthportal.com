@@ -33,6 +33,18 @@ const userReducer = (state = initialState, action) => {
                      error: action.payload,
                      loading: false,
                  };
+        case 'CREATE_USER_PATIENT_TEMP_SUCCESS':
+            return {
+                ...state, 
+                error: action.payload,
+                loading: false,
+            };
+            case 'CREATE_USER_PATIENT_TEMP_ERROR':
+                return {
+                    ...state,
+                    error: action.payload,
+                    laoding: false,
+                }
         case 'UPDATE_USER_SUCCESS':
                 return {
                     ...state,
