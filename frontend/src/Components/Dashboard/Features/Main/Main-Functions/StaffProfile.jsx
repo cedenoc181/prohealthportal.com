@@ -4,7 +4,6 @@ import logo from "../../../../../images/prohealth-logo.png"
 
 export const StaffProfile = ({ staffUser}) => {
 
-    const [isEditable, setIsEditable] = useState(false);
     const [selectedStaff, setSelectedStaff] = useState('');
 
 
@@ -13,9 +12,6 @@ export const StaffProfile = ({ staffUser}) => {
         console.log(selectedStaff);
     }, [staffUser, selectedStaff]);
 
-    const handleEdit = () => {
-        setIsEditable((prev) => !prev); // Toggle editable state
-      };
 
  
   return (
@@ -36,24 +32,22 @@ export const StaffProfile = ({ staffUser}) => {
     <div className="account-info">
       <div className="info-header">
        <h2 className="info-header-title">Personal Information</h2>
-      {/* <button className="info-button" onClick={handleEdit}>{isEditable ? "save" : "edit"}</button> */}
-      <button type="button" class="btn btn-light" onClick={handleEdit}>{isEditable ? "save" : "edit"}</button>
       </div>
    <br />
        <div className="personal-info">
 
         <div className="credentials"> 
        <label>Full Name</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.full_name}</p>
+       <p>{staffUser.full_name}</p>
        <label>Email</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.email}</p>
+       <p>{staffUser.email}</p>
      </div>
 
        <div className="clinic-assc">
        <label>Role</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.role}</p>
+       <p>{staffUser.role}</p>
        <label>Current Clinic</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{staffUser.clinic_location}</p>
+       <p>{staffUser.clinic_location}</p>
        </div>
 
        </div>

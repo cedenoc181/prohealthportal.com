@@ -57,7 +57,7 @@ export const Nav = ({user, setIsAuthenticated }) => {
 
         <div className="nav-slot">
         <NavLink
-        to="/e-templates"
+        to="/email-templates"
         style={({ isActive }) => ({
             color: isActive
                 ? "navy"

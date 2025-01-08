@@ -7,8 +7,9 @@ import ReactLoading from 'react-loading';
 import "./Features.css";
 import { fetchPatientEmails, setSelectedPatientEmail } from '../../../ReduxActionsMain/patientEmailActions.js';
 import { fetchDoctorEmails,  setSelectedDoctorEmail} from '../../../ReduxActionsMain/doctorEmailActions.js';
+import { fetchUsers } from '../../../ReduxActionsMain/userActions.js'
  
-export const Email = ({user, patient, doctor, loading, error, fetchPatientEmails, fetchDoctorEmails, setSelectedPatientEmail, setSelectedDoctorEmail}) => {
+export const Email = ({user, patient, doctor, fetchUsers, fetchPatientEmails, fetchDoctorEmails, setSelectedPatientEmail, setSelectedDoctorEmail}) => {
 
   const token = localStorage.getItem("jwt");
   console.log(token)
@@ -27,10 +28,11 @@ const [searchTerm, setSearchTerm] = useState('');
 // fetches and renders emails from each patient and doctor actions method 
 useEffect(() => { 
   if (token) {
+    fetchUsers();
     fetchDoctorEmails(token);
     fetchPatientEmails(token); // Pass the token to the fetchMedifiles function
   }
-}, [fetchPatientEmails, fetchDoctorEmails, user, token]);
+}, [fetchPatientEmails, fetchUsers, fetchDoctorEmails, user, token]);
 
 // this function manages the nav button extending and minimizing 
 const handleTemplate = () => setCollapse(!collapse);
@@ -111,6 +113,7 @@ let patientEmailTemplate = filteredPatients.length > 0 ? filteredPatients.map((f
   </div>
 )) : <div className="emailsNotFound"><ReactLoading type={"spinningBubbles"} color={"black"} height={667} width={375} /></div>;
 
+
 // Filter doctor emails based on search term
 const filteredDoctors = doctor.filter((file) => {
   // Check if the selectedCategory matches the category of the file (or if no category is selected, include all files)
@@ -140,15 +143,6 @@ let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file
     <div className="email-category"><span className="key">Tag:</span> {file.category}</div>
   </div>
 )) : <div className="emailsNotFound"><ReactLoading type={"spinningBubbles"} color={"black"} height={667} width={375} /></div>;
-
-
-if (loading) {
-    return <div></div>;
-  }
-  
-  if (error) {
-    return <div>Error: {error}</div>;
-  };
 
 
   return (
@@ -236,6 +230,7 @@ if (loading) {
     null
   )
 }
+
                   <div id="loader">{loadingSpinner ? (<ReactLoading className="spin" type={"spinningBubbles"} color={"black"} height={'20%'} width={'20%'}/>) : ''} </div>  
                     { patientDefault ? 
                         (patientEmailTemplate)
@@ -252,8 +247,6 @@ const mapStateToProps = (state) => ({
     user: state.user.data,
     patient: state.patient.data,
     doctor: state.doctor.data,
-    loading: state.patient.loading || state.doctor.loading,
-    error: state.patient.error || state.doctor.error,
   });
   
   const mapDispatchToProps = {
@@ -261,6 +254,7 @@ const mapStateToProps = (state) => ({
     fetchDoctorEmails,
     setSelectedPatientEmail,
     setSelectedDoctorEmail,
+    fetchUsers,
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Email);

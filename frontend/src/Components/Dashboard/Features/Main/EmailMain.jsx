@@ -22,10 +22,9 @@ const [useTempToCreate, setUseTempToCreate] = useState(null);
 
 
 useEffect(() => {
-  
 if (selectedDrEmail) {
   setRenderPatientEmail(false);
-}
+} 
 }, [selectedDrEmail])
 
 
@@ -34,6 +33,8 @@ useEffect(() => {
     setRenderPatientEmail(true);
   }
 }, [selectedPxEmail])
+
+
 
 
 const handleUIClick = () => {
@@ -132,16 +133,14 @@ setTimeout(() => {
       </div>
 
     <div className="main-container"> 
-
-      {renderPatientEmail ? (    
         
-        <div className="emailCard" key={selectedPxEmail.id}>
-        <h2 className="email-main-title" contentEditable="true">{selectedPxEmail.px_temp_title}</h2>
+        <div className="emailCard" key={renderPatientEmail ? selectedPxEmail.id : selectedDrEmail.id}>
+        <h2 className="email-main-title" contentEditable="true">{renderPatientEmail ? selectedPxEmail.px_temp_title : selectedDrEmail.dr_temp_title}</h2>
         <br />
         <div className="email-main-subject">
         <span className="key" contentEditable="false">Subject:</span>
         <p className="email-main-text" contentEditable="true" id="subject-p">
-            {selectedPxEmail.px_temp_subject}
+            {renderPatientEmail ? selectedPxEmail.px_temp_subject : selectedDrEmail.dr_temp_subject}
           <span className="copy-button-wrapper">
             <button onClick={() => copyToClipboard('subject-p')}>  
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
@@ -155,7 +154,7 @@ setTimeout(() => {
       <div className="email-main-contents">
         <span className="key" contentEditable="false">Body:</span>
         <p className="email-main-text" contentEditable="true" id="body-p">
-                  {selectedPxEmail.px_temp_content}
+                  {renderPatientEmail ? selectedPxEmail.px_temp_content : selectedDrEmail.dr_temp_content}
           <span className="copy-button-wrapper">
             <button onClick={() => copyToClipboard('body-p')}>  
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
@@ -169,7 +168,7 @@ setTimeout(() => {
         <div className="email-main-category"><span className="key" contentEditable="false">Tag:</span>
         <br/>
          <select name="category" className="email-category-selection">
-                <option id="category">{selectedPxEmail.category}</option> {/* set as default value from API*/}
+                <option id="category">{renderPatientEmail ? selectedPxEmail.category : selectedDrEmail.category}</option> 
                 <option value="Outreach">Outreach</option>
                 <option value="Billing">Billing</option>
                 <option value="Other">Insurance</option>
@@ -182,57 +181,7 @@ setTimeout(() => {
               <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
           </svg>
           </button>
-      </div> ) : (    
-        
-        <div className="emailCard" key={selectedDrEmail.id}>
-        <h2 className="email-main-title" contenteditable="true">{selectedDrEmail.dr_temp_title}</h2>
-        <br />
-        <div className="email-main-subject">
-        <span className="key" contentEditable="false">Subject:</span>
-        <p className="email-main-text" contentEditable="true" id="subject-p">
-            {selectedDrEmail.dr_temp_subject}
-          <span className="copy-button-wrapper">
-            <button onClick={() => copyToClipboard('subject-p')}>  
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
-                <path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
-              </svg>
-            </button>
-          </span>
-        </p>
-      </div>
-      <br />
-      <div className="email-main-contents">
-        <span className="key" contentEditable="false">Body:</span>
-        <p className="email-main-text" contentEditable="true"  id="body-p">
-                  {selectedDrEmail.dr_temp_content}
-          <span className="copy-button-wrapper">
-            <button onClick={() => copyToClipboard('body-p')}>  
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-copy" >
-                <path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
-              </svg>
-            </button>
-          </span>
-        </p>
-      </div>
-      <br />
-        <div className="email-main-category"><span className="key" contentEditable="false">Tag:</span>
-        <br/>
-         <select name="category" className="email-category-selection">
-                <option id="category">{selectedDrEmail.category}</option> {/* set as default value from API*/}
-                <option value="Protocols">Protocols</option>
-                <option value="Referral">Referral</option>
-                <option value="Other">Other</option>
-          </select>
-          </div> 
-          <br />
-          <button className="addToCreateEmailButton" onClick={handleModifiedTemplate} data-toggle="tooltip" data-placement="top" title="Create this template">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
-              <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5"/>
-              <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
-          </svg>
-          </button>
-      </div>)
-      }   
+      </div> 
   
         <br />
         <p className="email-instructions"><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">

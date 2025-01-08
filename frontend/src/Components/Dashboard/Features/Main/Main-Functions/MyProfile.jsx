@@ -4,7 +4,7 @@ import logo from "../../../../../images/prohealth-logo.png"
 export const MyProfile = ({ user }) => {
 
     const [currentUser, setCurrentUser] = useState('');
-    const [isEditable, setIsEditable] = useState(false);
+    // const [isEditable, setIsEditable] = useState(false);
 
 
         useEffect(() => {
@@ -13,9 +13,9 @@ export const MyProfile = ({ user }) => {
 
         console.log(currentUser);
 
-        const toggleEdit = () => {
-            setIsEditable((prev) => !prev); // Toggle editable state
-          };
+        // const toggleEdit = () => {
+        //     setIsEditable((prev) => !prev); // Toggle editable state
+        //   };
 
 
   return (
@@ -41,27 +41,27 @@ export const MyProfile = ({ user }) => {
     <div className="account-info">
       <div className="info-header">
        <h2 className="info-header-title">Personal Information</h2>
-      <button type="button" class="btn btn-light" onClick={toggleEdit}>{isEditable ? "save" : "edit"}</button>
+      {/* <button type="button" class="btn btn-light" onClick={toggleEdit}>{isEditable ? "save" : "edit"}</button> */}
       </div>
    <br />
        <div className="personal-info">
 
         <div className="credentials"> 
        <label>Full Name</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{currentUser.full_name}</p>
+       <p>{currentUser.full_name}</p>
        <label>Email</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{currentUser.email}</p>
+       <p>{currentUser.email}</p>
        <label>Tenure</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>2 years, 3 Months</p>
+       <p>2 years, 3 Months</p>
        </div>
 
        <div className="clinic-assc">
        <label>Extension</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>251</p>
+       <p>251</p>
        <label>Role</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{currentUser.role}</p>
+       <p>{currentUser.role}</p>
        <label>Current Clinic</label>
-       <p className={isEditable ? "edit-value" : "user-value"} contentEditable={isEditable}>{currentUser.clinic_location}</p>
+       <p>{currentUser.clinic_location}</p>
        </div>
 
        </div>

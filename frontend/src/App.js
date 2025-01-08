@@ -9,7 +9,7 @@ import { fetchMyAccount } from "./ReduxActionsMain/userActions.js"
 
 // Importing features
 import Overview from "./Components/Dashboard/Features/Overview.jsx";
-import ETemplates from "./Components/Dashboard/Features/Email.jsx";
+import Email from "./Components/Dashboard/Features/Email.jsx";
 import Medifiles from "./Components/Dashboard/Features/Medical.jsx";
 import TasksList from "./Components/Dashboard/Features/Task.jsx";
 import Inventory from "./Components/Dashboard/Features/Inventory.jsx";
@@ -106,7 +106,7 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
       case "/overview":
         setMainContent(<OverviewMain />);
         break;
-      case "/e-templates":
+      case "/email-templates":
         setMainContent(<EmailMain />);
         break;
       case "/medical-forms":
@@ -159,7 +159,7 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
         <Routes>
           <Route path="/overview" element={<Overview />} />
           <Route path="/medical-forms" element={<Medifiles />} />
-          <Route path="/e-templates" element={<ETemplates />} />
+          <Route path="/email-templates" element={<Email />} />
           <Route path="/task-list" element={<TasksList />} />
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/account-settings" element={<Account user={user}/>} />
