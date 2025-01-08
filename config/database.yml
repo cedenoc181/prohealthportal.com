@@ -19,18 +19,13 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+# using peer authentication
+
 development:
   <<: *default
   database: pro_health_portal_com_development
   userame: christiancedeno
 
-
-
-  # commandes that helped me access PSQL 
-
-# to login into the database
-# psql -d pro_health_portal_com_development -U christiancedeno
-# psql -l
 
 
   # The specified database role being used to connect to PostgreSQL.
@@ -65,7 +60,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: prohealthportal_com_test
+  database: pro_health_portal_com_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -90,6 +85,6 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  database: prohealthportal_com_production
-  username: prohealthportal_com
+  database: pro_health_portal_com_production
+  username: christiancedeno
   password: <%= ENV["PROHEALTHPORTAL_COM_DATABASE_PASSWORD"] %>

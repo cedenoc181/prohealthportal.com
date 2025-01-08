@@ -1,5 +1,6 @@
 
-  - full_name: "Alexandra Burdo"
+  - first_name: "Alexandra"
+    last_name: "Burdo"
     email: "alexb@prohealthptot.com"
     role: "OT"
     clinic_location: "West"
@@ -7,9 +8,11 @@
     insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
     direct_access: true
     admin: false
+    phone_ext: '' 
     password: "123456abc"
 
-  - full_name: "James Nussbaum"
+  - first_name: "James" 
+    last_name: "Nussbaum"
     email: "jnussbaum@prohealthptot.com"
     role: "Admin"
     clinic_location: "West"
@@ -17,9 +20,11 @@
     insurance_network: "not provided"
     direct_access: false
     admin: true
+    phone_ext: ''
     password: "123456abc"
 
-  - full_name: "Joy Ko"
+  - first_name: "Joy"
+    last_name: "Ko"
     email: "joyk@prohealthptot.com"
     role: "OT"
     clinic_location: "West"
@@ -27,9 +32,11 @@
     insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
     direct_access: true
     admin: false
+    phone_ext: ''
     password: "123456abc"
 
-  - full_name: "Howard Wurzel"
+  - first_name: "Howard"
+    last_name: "Wurzel"
     email: "howard@prohealthptot.com"
     role: "Admin"
     clinic_location: "Remote"
@@ -37,9 +44,11 @@
     insurance_network: "not provided"
     direct_access: false
     admin: true
+    phone_ext: ''
     password: "123456abc"
 
-  - full_name: "Oscar Moises"
+  - first_name: "Oscar" 
+    last_name: "Moises"
     email: "oscarm@prohealthptot.com"
     role: "PT"
     clinic_location: "East"
@@ -47,9 +56,11 @@
     insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
     direct_access: true
     admin: false
+    phone_ext: '251'
     password: "123456abc"
 
-  - full_name: "Colin McGowan"
+  - first_name: "Colin"
+    last_name: "McGowan"
     email: "colinm@prohealthptot.com"
     role: "PT"
     clinic_location: "UWS"
@@ -57,9 +68,11 @@
     insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
     direct_access: true
     admin: false
+    phone_ext: ''
     password: "123456abc"
 
-  - full_name: "Sabrina Yakubovich"
+  - first_name: "Sabrina"
+    last_name: "Yakubovich"
     email: "sabrinay@prohealthptot.com"
     role: "PT"
     clinic_location: "West"
@@ -67,13 +80,16 @@
     insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
     direct_access: true
     admin: false
+    phone_ext: '' 
     password: "123456abc"
 
-  - full_name: "Nadia"
+  - first_name: "Nadia"
+    last_name: "missing"
     email: "nadia@prohealthptot.com"
     role: "Billing"
     clinic_location: "Remote"
     credentials: ""
+    phone_ext: '' 
     insurance_network: "not provided"
     direct_access: false
     admin: false

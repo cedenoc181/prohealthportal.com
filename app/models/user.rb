@@ -60,7 +60,7 @@ def post_create_update
 
   self.update_column(:email, self.email.downcase)
 
-  self.update_column(:full_name, self.full_name.downcase)
+  self.update_column(:first_name, self.first_name.downcase && :last_name, self.last_name.downcase)
 end
 
 # could be temperary
