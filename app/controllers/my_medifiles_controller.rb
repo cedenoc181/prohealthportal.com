@@ -66,6 +66,6 @@ class MyMedifilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def my_medifile_params
-      params.permit(:user_id, :coworker_id, :medifile_id, :my_file_title, :my_file_description)
+      params.permit(:user_id, :coworker_id, :medifile_id)
     end
 end

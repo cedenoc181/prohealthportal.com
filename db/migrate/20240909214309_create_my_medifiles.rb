@@ -4,8 +4,6 @@ class CreateMyMedifiles < ActiveRecord::Migration[7.1]
       t.references :user, foreign_key: { to_table: :users }
       t.references :coworker, null: true, foreign_key: { to_table: :users }
       t.references :medifile, foreign_key: true
-      t.string :my_file_title
-      t.text :my_file_description
       t.timestamps
     end
   end
