@@ -120,7 +120,30 @@ export const createPatientTemplates = (px_temp) => {
 
 // create doctor template 
 
+export const createDrTemplates = (dr_temp) => {
+  return async (dispatch) => {
 
+    const token = localStorage.getItem("jwt");
+
+    if (!token) {
+      throw new Error("Authorization token is missing.");
+    }
+
+    try {
+      const data = await fetchWithAuth("http://127.0.0.1:3000/create-doctor-template", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json", 
+            Authorization: `Bearer ${token}`
+         },
+        body: JSON.stringify(dr_temp),
+      });
+      dispatch({ type: "CREATE_USER_DOCTOR_TEMP_SUCCESS", payload: data });
+    } catch (error) {
+      dispatch({ type: "CREATE_USER_DOCTOR_TEMP_ERROR", payload: error.message });
+    }
+  };
+};
 
 
 

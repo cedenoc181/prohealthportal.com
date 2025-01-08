@@ -3,11 +3,10 @@ import { connect } from 'react-redux'
 import { Button } from '@chakra-ui/react'
 import { Textarea, Input } from '@chakra-ui/react'
 import { createPatientTemplates } from '../../../../../ReduxActionsMain/userActions.js'
-// import { createDoctorEmail } from '../../../../../ReduxActionsMain/doctorEmailActions.js'
-// import { createMyEmail } from '../../../../../ReduxActionsMain/myEmailTemplateAction.js'
+import { createDrTemplates } from '../../../../../ReduxActionsMain/userActions.js'
 
 
-export const CreateEmail = ({createPatientTemplates, templateObject}) => {
+export const CreateEmail = ({createPatientTemplates, createDrTemplates, templateObject}) => {
 
 
 
@@ -54,7 +53,7 @@ export const CreateEmail = ({createPatientTemplates, templateObject}) => {
       // Validate doctor template fields before creating
       if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.category) {
         console.log("dr temp is selected")
-        createPatientTemplates(newDoctorTemplate);
+        createDrTemplates(newDoctorTemplate);
         alert("doctor email created successfully");
       } else {
         alert("Please fill out all required patient email fields.");
@@ -279,6 +278,7 @@ const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = {
   createPatientTemplates,
+  createDrTemplates,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateEmail)
