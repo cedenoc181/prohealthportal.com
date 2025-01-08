@@ -21,7 +21,17 @@ default: &default
 
 development:
   <<: *default
-  database: prohealthportal_com_development
+  database: pro_health_portal_com_development
+  userame: christiancedeno
+
+
+
+  # commandes that helped me access PSQL 
+
+# to login into the database
+# psql -d pro_health_portal_com_development -U christiancedeno
+# psql -l
+
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
