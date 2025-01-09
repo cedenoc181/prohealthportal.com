@@ -1,5 +1,4 @@
 class MyTemplate < ApplicationRecord
-  after_update :counter_effectiveness
 
   belongs_to :user
   belongs_to :patient_template, optional: true
@@ -15,14 +14,5 @@ class MyTemplate < ApplicationRecord
    end
  end
 
- def counter_effectiveness 
-   total = responded_counter + no_response_counter
-   
-   # Ensure no division by zero.
-   return unless total > 0 
-   
-   conversion = (responded_counter.to_f / total.to_f) * 100 
-   update_column(:effectiveness, conversion.round(0))
- end
  
 end

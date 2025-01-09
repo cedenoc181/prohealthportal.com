@@ -49,6 +49,6 @@ class MyTemplatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def my_template_params
-      params.permit(:user_id, :patient_template_id, :dr_template_id, :notes, :responded_counter, :no_response_counter)
+      params.permit(:user_id, :patient_template_id, :dr_template_id)
     end
 end
