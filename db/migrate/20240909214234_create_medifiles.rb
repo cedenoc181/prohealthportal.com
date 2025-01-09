@@ -8,7 +8,9 @@ class CreateMedifiles < ActiveRecord::Migration[7.1]
       t.string :file_cover
       t.string :file_cover_alt
       t.string :language
-      t.boolean :file_editable, default: false
+      t.integer :file_owner_id
+      t.integer :file_receiver_id
+
       t.timestamps
     end
   end

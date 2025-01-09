@@ -17,7 +17,8 @@ def index
       description: medifile.description,
       instructions: medifile.instructions,
       language: medifile.language,
-      file_editable: medifile.file_editable,
+      file_owner_id: medifile.file_owner_id,
+      file_receiver_id: medifile.file_receiver_id,
       file_cover_alt: medifile.file_cover_alt,
       created_at: medifile.created_at,
       file_link_url: medifile.file_link.attached? ? url_for(medifile.file_link) : nil,
@@ -37,7 +38,8 @@ def show
     description: @medifile.description,
     instructions: @medifile.instructions,
     language: @medifile.language,
-    file_editable: @medifile.file_editable,
+    file_owner_id: medifile.file_owner_id,
+    file_receiver_id: medifile.file_receiver_id,
     file_cover_alt: @medifile.file_cover_alt,
     created_at: @medifile.created_at,
     file_link_url: @medifile.file_link.attached? ? url_for(@medifile.file_link) : nil,
@@ -67,7 +69,8 @@ end
         description: @medifile.description,
         instructions: @medifile.instructions,
         language: @medifile.language,
-        file_editable: @medifile.file_editable,
+        file_owner_id: @medifile.file_owner_id,
+        file_receiver_id: @medifile.file_receiver_id,
         file_cover_alt: @medifile.file_cover_alt,
         created_at: @medifile.created_at,
         file_link_url: @medifile.file_link.attached? ? url_for(@medifile.file_link) : nil,
@@ -110,7 +113,7 @@ end
 
       # Only allow a list of trusted parameters through.
       def medifile_params
-        params.permit(:title, :description, :instructions, :language, :file_editable, :file_cover_alt, :file_cover, :file_link)
+        params.permit(:title, :description, :instructions, :language, :file_owner_id, :file_receiver_id, :file_cover_alt, :file_cover, :file_link)
       end
 
 end
