@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
     post '/create-doctor-template', to: 'users#user_create_dr_template'
 
+    post '/create-medfiles-template', to: 'users#user_create_medifile_template'
     # api end point for email sender 
 
     get '/email_config', to: 'email_config#index'

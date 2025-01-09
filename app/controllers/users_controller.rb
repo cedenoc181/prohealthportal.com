@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   
+  include Rails.application.routes.url_helpers
+
   # Callbacks to set user before show and destroy action method
   before_action :find_user, only: %i[ show destroy]
   # remove index show create from admin restrictions
@@ -46,7 +48,39 @@ class UsersController < ApplicationController
       render json: { message: "User doctor template successfully created"}, status: :created
   end
 
+  def user_create_medifile_template
+    Rails.logger.info "Creating Medifile with params from current_user_account: #{medifile_template_params}"
+
+    @medifile = current_user.medifiles.new(medifile_template_params)
   
+    # Attach files if they are provided
+    @medifile.file_cover.attach(params[:file_cover]) if params[:file_cover]
+    @medifile.file_link.attach(params[:file_link]) if params[:file_link]
+
+    p "#{@medifile.file_cover} and #{@medifile.file_link} has been attached"
+
+    if @medifile.save
+      medifile_with_urls = {
+        id: @medifile.id,
+        title: @medifile.title,
+        description: @medifile.description,
+        instructions: @medifile.instructions,
+        language: @medifile.language,
+        file_owner_id: @medifile.file_owner_id,
+        file_receiver_id: @medifile.file_receiver_id,
+        file_cover_alt: @medifile.file_cover_alt,
+        created_at: @medifile.created_at,
+        file_link_url: @medifile.file_link.attached? ? url_for(@medifile.file_link) : nil,
+        file_cover_url: @medifile.file_cover.attached? ? url_for(@medifile.file_cover) : nil
+      }
+    
+      render json: medifile_with_urls, status: :created
+        Rails.logger.info "Medifile created successfully"
+    else
+       Rails.logger.error "Error creating Medifile: #{@medifile.errors.full_messages}"
+      render json: { medifile: @medifile.errors.full_messages, message: "Medical file failed to create, double check all inputs" }, status: :unprocessable_entity
+    end
+  end
 
  # PATCH/PUT /users/:id
 # cant update user without being logged in(authorized)
@@ -101,6 +135,10 @@ end
 
     def dr_template_params
       params.permit(:dr_temp_title, :dr_temp_subject, :dr_temp_content, :category)
+    end
+
+    def medifile_template_params 
+      params.permit(:title, :description, :instructions, :language, :file_owner_id, :file_receiver_id, :file_cover_alt, :file_cover, :file_link)
     end
 
 end
