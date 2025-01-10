@@ -74,27 +74,13 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
 
   console.log(isAuthenticated);
   console.log(user);
-
-
-  useEffect(() => {
-    function capitalizeWords(str) {
-      if (str) {
-        return str
-          .split(" ") // Split the string into an array of words
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-          .join(" "); // Join the array back into a single string
-      }
-      return ""; // Return an empty string if no input
-    }
   
-    if (user) {
-      const name = capitalizeWords(user.full_name);
-      setUserName(name);
-    } else {
-      setUserName("loading user...");
-    }
-  }, [user]);
-  
+useEffect(() => {
+  if (user) {
+    let full_name = user.first_name + ' ' + user.last_name
+    setUserName(full_name);
+  }
+}, [user])
 
 
   // Update main content based on the route

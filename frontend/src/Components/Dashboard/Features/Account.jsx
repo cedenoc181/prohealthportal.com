@@ -35,7 +35,7 @@ console.log("all users with account", allUsers);
          { allUsers?.map((staffUser, index) => (
           <div className="staffCard" onClick={() => handleSelectedUser(staffUser)} key={index}>
             <label>Name:</label>
-            <p>{staffUser.full_name}</p>
+            <p>{staffUser.first_name} {staffUser.last_name}</p>
             <label>Clinic:</label>
             <p>{staffUser.clinic_location}</p>
           </div>
