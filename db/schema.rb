@@ -59,7 +59,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_022703) do
     t.string "file_cover"
     t.string "file_cover_alt"
     t.string "language"
-    t.boolean "file_editable", default: false
+    t.integer "file_owner_id"
+    t.integer "file_receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -68,8 +69,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_022703) do
     t.bigint "user_id"
     t.bigint "coworker_id"
     t.bigint "medifile_id"
-    t.string "my_file_title"
-    t.text "my_file_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["coworker_id"], name: "index_my_medifiles_on_coworker_id"
@@ -81,10 +80,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_022703) do
     t.bigint "user_id", null: false
     t.bigint "patient_template_id"
     t.bigint "dr_template_id"
-    t.text "notes"
-    t.integer "responded_counter", default: 0, null: false
-    t.integer "no_response_counter", default: 0, null: false
-    t.float "effectiveness", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dr_template_id"], name: "index_my_templates_on_dr_template_id"
@@ -103,15 +98,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_022703) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "full_name"
+    t.string "first_name"
+    t.string "last_name"
     t.string "email"
     t.string "password_digest"
     t.string "role"
     t.string "credentials"
     t.string "clinic_location"
-    t.string "phone", default: "212-600-4781"
-    t.string "phone_ext"
-    t.string "fax", default: "800-655-3780"
+    t.integer "phone_ext"
     t.string "insurance_network", default: "Not Provided"
     t.boolean "direct_access"
     t.boolean "admin", default: false
@@ -119,6 +113,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_022703) do
     t.datetime "updated_at", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

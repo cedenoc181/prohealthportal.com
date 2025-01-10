@@ -35,7 +35,7 @@ puts "All objects in the bucket '#{aws_bucket_name}' have been deleted."
             instructions: medi['instructions'],
             file_cover_alt: medi['file_cover_alt'],
             language: medi['language'],
-            file_editable: medi['file_editable']
+
         )
 
         @record.file_link.attach(

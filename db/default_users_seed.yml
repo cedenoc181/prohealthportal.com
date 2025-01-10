@@ -8,7 +8,7 @@
     insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
     direct_access: true
     admin: false
-    phone_ext: '' 
+    phone_ext: int
     password: "123456abc"
 
   - first_name: "James" 
@@ -20,7 +20,7 @@
     insurance_network: "not provided"
     direct_access: false
     admin: true
-    phone_ext: ''
+    phone_ext: int
     password: "123456abc"
 
   - first_name: "Joy"
@@ -32,7 +32,7 @@
     insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
     direct_access: true
     admin: false
-    phone_ext: ''
+    phone_ext: int
     password: "123456abc"
 
   - first_name: "Howard"
@@ -44,7 +44,7 @@
     insurance_network: "not provided"
     direct_access: false
     admin: true
-    phone_ext: ''
+    phone_ext: int
     password: "123456abc"
 
   - first_name: "Oscar" 
@@ -56,7 +56,7 @@
     insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
     direct_access: true
     admin: false
-    phone_ext: '251'
+    phone_ext: 251
     password: "123456abc"
 
   - first_name: "Colin"
@@ -68,7 +68,7 @@
     insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
     direct_access: true
     admin: false
-    phone_ext: ''
+    phone_ext: int
     password: "123456abc"
 
   - first_name: "Sabrina"
@@ -80,7 +80,7 @@
     insurance_network: "United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna"
     direct_access: true
     admin: false
-    phone_ext: '' 
+    phone_ext: int 
     password: "123456abc"
 
   - first_name: "Nadia"
@@ -89,7 +89,7 @@
     role: "Billing"
     clinic_location: "Remote"
     credentials: ""
-    phone_ext: '' 
+    phone_ext: int 
     insurance_network: "not provided"
     direct_access: false
     admin: false
