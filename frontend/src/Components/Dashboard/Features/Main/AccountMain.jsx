@@ -23,7 +23,6 @@ export const AccountMain = ({ user, selectedUser }) => {
   const handleUIClick = () => {
     setStaffInfo(false);
     console.log("set staff info:", staffInfo);
-    // staffUser = false;
     console.log(selectedUser);
   };
 

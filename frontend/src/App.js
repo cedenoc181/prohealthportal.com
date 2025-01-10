@@ -77,7 +77,7 @@ console.log({decodedToken, expirationTime, currentTime, timeUntilExpiration});
   
 useEffect(() => {
   if (user) {
-    let full_name = user.first_name + ' ' + user.last_name
+    let full_name = user.first_name + ' ' + user.last_name;
     setUserName(full_name);
   }
 }, [user])

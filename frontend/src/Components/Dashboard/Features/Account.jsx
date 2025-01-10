@@ -18,7 +18,7 @@ fetchUsers(token);
 
 
 const handleSelectedUser = (profile) => {
-  setSelectedUser(profile);
+    setSelectedUser(profile);
 }
 
 console.log("all users with account", allUsers);

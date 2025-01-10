@@ -4,11 +4,16 @@ import logo from "../../../../../images/prohealth-logo.png"
 export const MyProfile = ({ user }) => {
 
     const [currentUser, setCurrentUser] = useState('');
-    // const [isEditable, setIsEditable] = useState(false);
+    const [fullName, setFullName] = useState('');
 
 
         useEffect(() => {
-          setCurrentUser(user);
+          if (user) {
+            let full_name = user.first_name + ' ' + user.last_name;
+            setFullName(full_name)
+            setCurrentUser(user);
+          }
+    
         }, [user]);
 
         console.log(currentUser);
@@ -30,7 +35,7 @@ export const MyProfile = ({ user }) => {
             <img className="card-img" src={logo} alt="profile"/>
             <div className="card-info">
               <label>User</label>
-            <h2 className="card-name">{currentUser.full_name}</h2>
+            <h2 className="card-name">{fullName}</h2>
             <label>Role</label>
             <div className="card-role">{currentUser.role}</div>
             <label>Clinic Location</label>
@@ -48,7 +53,7 @@ export const MyProfile = ({ user }) => {
 
         <div className="credentials"> 
        <label>Full Name</label>
-       <p>{currentUser.full_name}</p>
+       <p>{fullName}</p>
        <label>Email</label>
        <p>{currentUser.email}</p>
        <label>Tenure</label>
@@ -57,7 +62,7 @@ export const MyProfile = ({ user }) => {
 
        <div className="clinic-assc">
        <label>Extension</label>
-       <p>251</p>
+       <p>{currentUser.phone_ext}</p>
        <label>Role</label>
        <p>{currentUser.role}</p>
        <label>Current Clinic</label>

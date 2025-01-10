@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
 after_create_commit :post_create_update, :update_insurance_network
-after_update :post_create_update, :update_insurance_network
+after_update :update_insurance_network
 
 
 # relationships 

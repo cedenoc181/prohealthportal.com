@@ -5,11 +5,15 @@ import logo from "../../../../../images/prohealth-logo.png"
 export const StaffProfile = ({ staffUser}) => {
 
     const [selectedStaff, setSelectedStaff] = useState('');
-
+    const [fullName, setFullName] = useState('');
 
     useEffect(() => {
-        setSelectedStaff(staffUser);
+        if (staffUser) {
+          setSelectedStaff(staffUser);
+          let full_name = staffUser.first_name + ' ' + staffUser.last_name;
+          setFullName(full_name);
         console.log(selectedStaff);
+        }
     }, [staffUser, selectedStaff]);
 
 
@@ -21,7 +25,7 @@ export const StaffProfile = ({ staffUser}) => {
             <img className="card-img" src={logo} alt="profile"/>
             <div className="card-info">
               <label>User</label>
-            <h2 className="card-name">{staffUser.full_name}</h2>
+            <h2 className="card-name">{fullName}</h2>
             <label>Role</label>
             <div className="card-role">{staffUser.role}</div>
             <label>Clinic Location</label>
@@ -38,9 +42,11 @@ export const StaffProfile = ({ staffUser}) => {
 
         <div className="credentials"> 
        <label>Full Name</label>
-       <p>{staffUser.full_name}</p>
+       <p>{fullName}</p>
        <label>Email</label>
        <p>{staffUser.email}</p>
+       <label>Ext</label>
+       <p>{staffUser.phone_ext}</p>
      </div>
 
        <div className="clinic-assc">
