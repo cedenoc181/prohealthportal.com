@@ -26,7 +26,7 @@ after_update :post_create_update, :update_insurance_network
 
     validates :password, length: { in: 6..16 }, allow_nil: true
 
-    validates :full_name, presence: true 
+    validates :first_name && :last_name, presence: true 
 
     validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, strict: true
 
@@ -54,13 +54,13 @@ after_update :post_create_update, :update_insurance_network
 private 
 
 def post_create_update
-  self.update_column(:admin, self.role == 'Admin')
-  
-  self.update_column(:direct_access, self.role == "PT" || self.role == 'OT')
-
-  self.update_column(:email, self.email.downcase)
-
-  self.update_column(:first_name, self.first_name.downcase && :last_name, self.last_name.downcase)
+  self.update(
+    admin: role == 'Admin',
+    direct_access: role == "PT" || role == 'OT',
+    email: email&.downcase,
+    first_name: first_name&.downcase,
+    last_name: last_name&.downcase
+  )
 end
 
 # could be temperary
