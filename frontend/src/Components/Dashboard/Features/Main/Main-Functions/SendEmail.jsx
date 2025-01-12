@@ -8,6 +8,7 @@ import './SendEmail.css';
 export const SendEmail = ({ templateObject = {}, user }) => {
   const form = useRef();
 
+  const [fullName, setFullName] = useState("");
   
   const [formData, setFormData] = useState({
     to_name: '',
@@ -24,11 +25,17 @@ export const SendEmail = ({ templateObject = {}, user }) => {
         subject: templateObject.subject || '',
         content: templateObject.body || '',
       });
+    };
+    if (user) {
+      let  name = user.first_name + " " + user.last_name;
+      setFullName(name);
     }
-  }, [templateObject]);
+  }, [templateObject, user]);
 
 console.log(user)
 console.log(templateObject)
+
+
 
 // email sender function 
 
@@ -143,7 +150,7 @@ const sendEmail = (e) => {
         required
       />
       <input class="sender-input" type='email' name='user_email' value={user.email} />
-      <input class="sender-input1" type='name' name='user_full_name' value={user.full_name} />
+      <input class="sender-input1" type='name' name='user_full_name' value={fullName}/>
       <div className="sending-email-button"> 
       <Button  colorScheme='blue' type="submit" variant='solid' size='lg'>
           Send Email
