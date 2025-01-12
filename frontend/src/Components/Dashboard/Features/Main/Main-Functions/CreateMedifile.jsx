@@ -13,7 +13,6 @@ export const CreateMedifile = ({ createMedifile }) => {
     file_cover: null, // Updated to hold File object
     category: '',
     language: '',
-    file_editable: false, // Updated to hold boolean
   });
 
   // Handles the form submission
@@ -40,7 +39,7 @@ export const CreateMedifile = ({ createMedifile }) => {
       <h2 className="createTitle"> Add a New Medical File to Database </h2>
       <form className="medifiles-form" name="medical-form-addition" onSubmit={handleCreateMedifile}>
         <div className="create-email-inputs">
-        <div className="form-check form-switch">
+        {/* <div className="form-check form-switch">
             <input
               className="form-check-input"
               type="checkbox"
@@ -52,7 +51,7 @@ export const CreateMedifile = ({ createMedifile }) => {
             <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
               Live Doc?
             </label>
-          </div>
+          </div> */}
 
           <br />
 

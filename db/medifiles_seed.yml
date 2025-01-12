@@ -106,7 +106,7 @@
   file_cover_alt: 'APOS'
   language: 'English'
   file_link: 'db/ProHealthPDF/APOS-TP-E.pdf'
-  file_cover: 'db/ProHealthPDF/APOS-TP-E.pdf'
+  file_cover: 'db/ProHealthPDFcover/APOS-TP-Cover.jpg'
 
 - title: 'APOS Precautions and Contraindications & Treatment Program Form'
   description: | 
