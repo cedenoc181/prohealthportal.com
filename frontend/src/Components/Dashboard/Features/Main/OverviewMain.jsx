@@ -4,35 +4,38 @@ import './OverviewMain.css';
 import './Main.css';
 import MedicalMain from './MedicalMain.jsx';
 import EmailMain from './EmailMain.jsx';
+import { fetchUsers } from '../../../../ReduxActionsMain/userActions'
 
-export const OverviewMain = () => {
-  // const [userName, setUserName] = useState(null); // Set initial state to null
+export const OverviewMain = ({user, fetchUsers}) => {
+  const [userName, setUserName] = useState(''); // Set initial state to null
 
-  // const greet = "Hi";
+  const greet = "Hi";
 
-  // function capitalizeWords(str) {
-  //   if (!str) return ""; // Handle undefined or null input
-  //   return str
-  //     .split(' ')
-  //     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-  //     .join(' ');
-  // }
+  const token = localStorage.getItem('jwt');
 
-  // useEffect(() => {
-  //   if (user && user.full_name) {
-  //     const name = capitalizeWords(user.full_name); // Capitalize the full name
-  //     setUserName(name.split(' ')[0]); // Extract the first name
-  //   }
-  // }, [user]);
 
-  // if (!userName) {
-  //   // Show a loading state until the userName is available
-  //   return <div className="loading-message">Loading user information...</div>;
-  // }
+  function capitalizeWords(str) {
+    if (!str) return ""; // Handle undefined or null input
+    return str
+      .trim() // Remove extra spaces
+      .toLowerCase() // Convert the entire string to lowercase first
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+  useEffect(() => {
+
+    if (user) {
+      fetchUsers(token);
+      const firstName = capitalizeWords(user.first_name); 
+      setUserName(firstName); // Extract the first name
+    }
+  }, [fetchUsers, token]);
 
   return (
     <div className="main-container">
-      {/* <h1 className="welcome">{greet} {userName}!</h1> */}
+      <h1 className="welcome">{greet} {userName}!</h1>
       <br />
       <h2 className="overview-sub-titles">Continue working on email</h2>
       <EmailMain />
@@ -47,9 +50,11 @@ export const OverviewMain = () => {
 };
 
 const mapStateToProps = (state) => ({
-  // user: state.user.data,
+  user: state.user.data,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  fetchUsers,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(OverviewMain);
