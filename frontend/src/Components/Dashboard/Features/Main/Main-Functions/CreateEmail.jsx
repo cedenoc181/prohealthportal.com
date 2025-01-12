@@ -183,7 +183,7 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
           <br />
         <label className="input-label">Template Tag:</label>
         <select name="category" className="email-category-selection" onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, category: e.target.value})} required>
-        <option value={newPatientTemplate.category}>{newPatientTemplate.category}</option>
+        <option>--Select email tag--</option>
         <option value="Outreach">Outreach</option>
         <option value="Billing">Billing</option>
         <option value="Other">Insurance</option>
