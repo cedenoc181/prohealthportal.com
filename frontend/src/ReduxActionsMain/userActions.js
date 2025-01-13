@@ -145,6 +145,59 @@ export const createDrTemplates = (dr_temp) => {
   };
 };
 
+// create medifiles 
+
+export const createMedifiles = (newMedifile) => {
+  return async (dispatch) => {
+
+    const token = localStorage.getItem("jwt");
+
+    if (!token) {
+      throw new Error("Authorization token is missing.");
+    }
+
+    try {
+      // Create a new FormData object
+      const formData = new FormData();
+
+      // Append files to FormData
+      if (newMedifile.file_link instanceof File) {
+        formData.append('file_link', newMedifile.file_link);
+      }
+
+      if (newMedifile.file_cover instanceof File) {
+        formData.append('file_cover', newMedifile.file_cover);
+      }
+
+      // Append the rest of the data as fields
+      formData.append('title', newMedifile.title);
+      formData.append('description', newMedifile.description);
+      formData.append('instructions', newMedifile.instructions);
+      formData.append('language', newMedifile.language);
+      formData.append('file_cover_alt', newMedifile.category);
+      formData.append('file_owner_id', newMedifile.owner_id);
+      formData.append('file_receiver_id', newMedifile.receiver_id)
+
+
+      // Make the POST request
+      const response = await fetch('http://127.0.0.1:3000/create-medifiles-template', {
+        method: 'POST',
+        body: formData, // No Content-Type header manually set
+      });
+
+      // Error handling
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      dispatch({ type: 'CREATE_USER_MEDIFILE_SUCCESS', payload: data });
+    } catch (error) {
+      console.error('Error creating medifile through user:', error);
+      dispatch({ type: 'CREATE_USER_MEDIFILE_ERROR', payload: error.message });
+    }
+  };
+};
 
 
 
