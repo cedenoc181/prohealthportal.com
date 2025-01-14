@@ -15,7 +15,7 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
     file_cover: null, // Updated to hold File object
     category: "",
     language: "",
-    owner_id: user ? user.id : null, //user.id
+    owner_id: null, //user.id
     receiver_id: null, //user.id
   });
 
@@ -25,7 +25,7 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
   const token = localStorage.getItem('jwt');
 
   useEffect(() => {
-    
+
 if (!allUsers) {
   fetchUsers(token);
 };
@@ -40,6 +40,9 @@ if (!allUsers) {
       });
 
       setUserList(filteredUsers); // Update the state immutably
+      setNewMedifileObject({
+        ...newMedifileObject, owner_id: user.id
+      })
     }
   }, [allUsers, user, fetchUsers, token]);
 
@@ -50,7 +53,9 @@ if (!allUsers) {
   const handleSelectChange = (e) => {
     const userId = e.target.value;
     const receivingUser = userList.find((reciever) => reciever.id === parseInt(userId));
+    console.log(receivingUser.id);
     setSelectedUser(receivingUser);
+    setNewMedifileObject({...newMedifileObject, receiver_id: receivingUser.id})
   };
 
   // Handles the form submission
