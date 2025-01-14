@@ -147,7 +147,7 @@ export const createDrTemplates = (dr_temp) => {
 
 // create medifiles 
 
-export const createMedifiles = (newMedifile) => {
+export const createMedifile = (newMedifile) => {
   return async (dispatch) => {
 
     const token = localStorage.getItem("jwt");

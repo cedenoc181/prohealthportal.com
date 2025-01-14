@@ -48,7 +48,7 @@ export const MedicalMain = ({
   if (!selectedMedifile) {
     return (
       <div>
-        <CreateMedifile />
+        <CreateMedifile/>
       </div>
     );
   }
