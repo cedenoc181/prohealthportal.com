@@ -98,9 +98,9 @@
   }
   
   .icon-select .selected-name {
-    font-size: 16px; /* Style the text */
-    color: #045c96; /* Dark gray for readability */
-    white-space: nowrap; /* Prevent text wrapping */
+    font-size: 16px; 
+    color: #045c96; 
+    white-space: nowrap; 
     text-shadow: #7bbfed;
   }
   

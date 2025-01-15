@@ -26,10 +26,6 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
 
   useEffect(() => {
 
-if (!allUsers) {
-  fetchUsers(token);
-};
-
     if (allUsers && user) {
       const filteredUsers = allUsers.filter((currentUser) => {
         if (user.id === currentUser.id) {
@@ -40,13 +36,21 @@ if (!allUsers) {
       });
 
       setUserList(filteredUsers); // Update the state immutably
-      setNewMedifileObject({
-        ...newMedifileObject, owner_id: user.id
-      })
+      setNewMedifileObject((prev) => ({
+        ...prev,
+        owner_id: user.id,
+      }));
     }
-  }, [allUsers, user, fetchUsers, token]);
+  }, [allUsers, user]);
 
   console.log(userList);
+
+  useEffect(() => {
+
+    if (!allUsers) {
+      fetchUsers(token);
+    };
+  }, [token, allUsers, fetchUsers]);
 
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -55,7 +59,10 @@ if (!allUsers) {
     const receivingUser = userList.find((reciever) => reciever.id === parseInt(userId));
     console.log(receivingUser.id);
     setSelectedUser(receivingUser);
-    setNewMedifileObject({...newMedifileObject, receiver_id: receivingUser.id})
+    setNewMedifileObject((prev) => ({
+      ...prev,
+      receiver_id: receivingUser.id,
+    }));
   };
 
   // Handles the form submission

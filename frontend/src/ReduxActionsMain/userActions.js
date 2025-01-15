@@ -182,6 +182,9 @@ export const createMedifile = (newMedifile) => {
       // Make the POST request
       const response = await fetch('http://127.0.0.1:3000/create-medifiles-template', {
         method: 'POST',
+        headers: { 
+          Authorization: `Bearer ${token}`
+       },
         body: formData, // No Content-Type header manually set
       });
 
