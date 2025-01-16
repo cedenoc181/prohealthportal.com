@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :email, :role, :clinic_location, :credentials, :insurance_network, :direct_access, :admin, :phone_ext, :patient_templates, :dr_templates, :medifiles
+  attributes :id, :first_name, :last_name, :email, :role, :clinic_location, :credentials, :insurance_network, :direct_access, :admin, :phone_ext
 
 
   def created_at 

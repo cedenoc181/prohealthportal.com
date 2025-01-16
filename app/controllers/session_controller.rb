@@ -10,7 +10,7 @@ class SessionController < ApplicationController
         @token = encode_token(user_id: @user.id)
   
         # Store user info in session and token in cookies
-        # session[:user_id] = @user.id
+        session[:user_id] = @user.id
         cookies.encrypted[:auth_token] = {
           value: @token,
           expires: 1.hours.from_now,

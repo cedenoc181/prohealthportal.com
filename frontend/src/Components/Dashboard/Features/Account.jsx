@@ -7,14 +7,13 @@ import "./Features.css"
 
 export const Account = ({user, allUsers, setSelectedUser, fetchUsers}) => {
 
-const token = localStorage.getItem('jwt');
 
 useEffect(() => {
 
 if (!allUsers) {
-fetchUsers(token);
+fetchUsers();
 }
-}, [fetchUsers, token, allUsers]);
+}, [allUsers, fetchUsers]);
 
 
 const handleSelectedUser = (profile) => {

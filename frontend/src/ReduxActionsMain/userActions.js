@@ -1,5 +1,4 @@
 // userActions.js
-
 // Helper function to fetch with Authorization
 const fetchWithAuth = async (url, options = {}) => {
   const token = localStorage.getItem("jwt");
@@ -70,17 +69,9 @@ export const setSelectedUser = (profile) => {
 // Action to create a user
 export const createUser = (newUser) => {
   return async (dispatch) => {
-    const token = localStorage.getItem("jwt");
-
-    if (!token) {
-      throw new Error("Authorization token is missing.");
-    }
     try {
       const data = await fetchWithAuth("http://127.0.0.1:3000/users", {
         method: "POST",
-        headers: { "Content-Type": "application/json" , 
-            Authorization: `Bearer ${token}`
-        },
         body: JSON.stringify(newUser),
       });
       dispatch({ type: "CREATE_USER_SUCCESS", payload: data });
@@ -96,19 +87,9 @@ export const createUser = (newUser) => {
 export const createPatientTemplates = (px_temp) => {
   return async (dispatch) => {
 
-    const token = localStorage.getItem("jwt");
-
-    if (!token) {
-      throw new Error("Authorization token is missing.");
-    }
-
     try {
       const data = await fetchWithAuth("http://127.0.0.1:3000/create-patient-template", {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json", 
-            Authorization: `Bearer ${token}`
-         },
         body: JSON.stringify(px_temp),
       });
       dispatch({ type: "CREATE_USER_PATIENT_TEMP_SUCCESS", payload: data });
@@ -122,20 +103,9 @@ export const createPatientTemplates = (px_temp) => {
 
 export const createDrTemplates = (dr_temp) => {
   return async (dispatch) => {
-
-    const token = localStorage.getItem("jwt");
-
-    if (!token) {
-      throw new Error("Authorization token is missing.");
-    }
-
-    try {
+   try {
       const data = await fetchWithAuth("http://127.0.0.1:3000/create-doctor-template", {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json", 
-            Authorization: `Bearer ${token}`
-         },
         body: JSON.stringify(dr_temp),
       });
       dispatch({ type: "CREATE_USER_DOCTOR_TEMP_SUCCESS", payload: data });
@@ -149,13 +119,6 @@ export const createDrTemplates = (dr_temp) => {
 
 export const createMedifile = (newMedifile) => {
   return async (dispatch) => {
-
-    const token = localStorage.getItem("jwt");
-
-    if (!token) {
-      throw new Error("Authorization token is missing.");
-    }
-
     try {
       // Create a new FormData object
       const formData = new FormData();
@@ -180,11 +143,8 @@ export const createMedifile = (newMedifile) => {
 
 
       // Make the POST request
-      const response = await fetch('http://127.0.0.1:3000/create-medifiles-template', {
+      const response = await fetchWithAuth('http://127.0.0.1:3000/create-medifiles-template', {
         method: 'POST',
-        headers: { 
-          Authorization: `Bearer ${token}`
-       },
         body: formData, // No Content-Type header manually set
       });
 
@@ -196,7 +156,7 @@ export const createMedifile = (newMedifile) => {
       const data = await response.json();
       dispatch({ type: 'CREATE_USER_MEDIFILE_SUCCESS', payload: data });
     } catch (error) {
-      console.error('Error creating medifile through user:', error);
+      // console.error('Error creating medifile through user:', error);
       dispatch({ type: 'CREATE_USER_MEDIFILE_ERROR', payload: error.message });
     }
   };
@@ -207,19 +167,11 @@ export const createMedifile = (newMedifile) => {
 
 // Action to update a user
 export const updateUser = (userId, updatedInfo) => {
-  const token = localStorage.getItem("jwt");
 
-  if (!token) {
-    throw new Error("Authorization token is missing.");
-  }
   return async (dispatch) => {
     try {
       const data = await fetchWithAuth(`http://127.0.0.1:3000/users/${userId}`, {
         method: "PUT",
-        headers: { 
-          "Content-Type": "application/json", 
-          Authorization: `Bearer ${token}`
-         },
         body: JSON.stringify(updatedInfo),
       });
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: data });

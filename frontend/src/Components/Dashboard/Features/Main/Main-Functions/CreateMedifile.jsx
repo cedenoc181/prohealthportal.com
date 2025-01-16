@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 import { Button } from "@chakra-ui/react";
 import { Textarea, Input } from "@chakra-ui/react";
@@ -22,35 +22,59 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
   console.log(newMedifileObject);
 
   const [userList, setUserList] = useState([]);
-  const token = localStorage.getItem('jwt');
+  // const token = localStorage.getItem('jwt');
+
+  // useEffect(() => {
+
+  //   if (allUsers && user) {
+  //     const filteredUsers = allUsers.filter((currentUser) => {
+  //       if (user.id === currentUser.id) {
+  //         console.log("Deleted current user from list:", currentUser);
+  //         return false; // Exclude this user
+  //       }
+  //       return true; // Keep this user
+  //     });
+
+  //     setUserList(filteredUsers); // Update the state immutably
+  //     setNewMedifileObject((prev) => ({
+  //       ...prev,
+  //       owner_id: user.id,
+  //     }));
+  //   }
+  // }, [allUsers, user]);
+
 
   useEffect(() => {
-
     if (allUsers && user) {
-      const filteredUsers = allUsers.filter((currentUser) => {
-        if (user.id === currentUser.id) {
-          console.log("Deleted current user from list:", currentUser);
-          return false; // Exclude this user
-        }
-        return true; // Keep this user
-      });
-
-      setUserList(filteredUsers); // Update the state immutably
-      setNewMedifileObject((prev) => ({
-        ...prev,
-        owner_id: user.id,
-      }));
+      setUserList(allUsers.filter((currentUser) => currentUser.id !== user.id));
+      if (newMedifileObject.owner_id !== user.id) {
+        setNewMedifileObject((prev) => ({
+          ...prev,
+          owner_id: user.id,
+        }));
+      }
     }
-  }, [allUsers, user]);
+  }, [allUsers, user, newMedifileObject.owner_id]);
 
   console.log(userList);
 
-  useEffect(() => {
+  // useEffect(() => {
 
+  //   if (!allUsers) {
+  //     fetchUsers();
+  //   };
+  // }, [allUsers]);
+
+  const memoizedFetchUsers = useCallback(() => {
     if (!allUsers) {
-      fetchUsers(token);
-    };
-  }, [token, allUsers, fetchUsers]);
+      fetchUsers();
+    }
+  }, [allUsers, fetchUsers]);
+  
+  useEffect(() => {
+    memoizedFetchUsers();
+  }, [memoizedFetchUsers]);
+
 
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -67,6 +91,7 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
 
   // Handles the form submission
   const handleCreateMedifile = (e) => {
+    e.preventDefault(); 
     if (
       newMedifileObject.title &&
       newMedifileObject.description &&
@@ -104,7 +129,7 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
             <select onChange={handleSelectChange}>
                   {
                 userList.map((list) => (
-                     <option value={list.id}>{list.first_name} {list.last_name}</option>
+                     <option key={list.id} value={list.id}>{list.first_name} {list.last_name}</option>
                   ))
                 }
                  </select>
@@ -174,7 +199,7 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
             <input
               type="file"
               className="form-control"
-              id="inputGroupFile02"
+              id="fileLinkInput"
               name="pdf-link"
               onChange={(e) =>
                 setNewMedifileObject({
@@ -191,7 +216,7 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
             <input
               type="file"
               className="form-control"
-              id="inputGroupFile02"
+              id="fileCoverInput"
               name="pdf-cover"
               onChange={(e) =>
                 setNewMedifileObject({
