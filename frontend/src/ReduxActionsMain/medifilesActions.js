@@ -45,6 +45,7 @@ export const setSelectedMedifile = (file) => {
   export const createMedifile = (newMedifile) => {
     return async (dispatch) => {
       try {
+        const token = localStorage.getItem('jwt');
         // Create a new FormData object
         const formData = new FormData();
   
@@ -62,11 +63,15 @@ export const setSelectedMedifile = (file) => {
         formData.append('description', newMedifile.description);
         formData.append('instructions', newMedifile.instructions);
         formData.append('language', newMedifile.language);
-        formData.append('file_editable', newMedifile.file_editable);
         formData.append('file_cover_alt', newMedifile.category);
+        formData.append('file_owner_id', newMedifile.owner_id);
+        formData.append('file_receiver_id', newMedifile.receiver_id);
   
         // Make the POST request
         const response = await fetch('http://127.0.0.1:3000/medifiles', {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
           method: 'POST',
           body: formData, // No Content-Type header manually set
         });

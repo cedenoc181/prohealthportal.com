@@ -2,11 +2,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 import { Button } from "@chakra-ui/react";
 import { Textarea, Input } from "@chakra-ui/react";
-import { createMedifile, fetchUsers } from "../../../../../ReduxActionsMain/userActions.js";
+import { fetchUsers, createMedifile } from "../../../../../ReduxActionsMain/userActions.js";
+// import { createMedifile } from "../../../../../ReduxActionsMain/medifilesActions.js";
 
 
 
 export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) => {
+
+
   const [newMedifileObject, setNewMedifileObject] = useState({
     title: "",
     description: "",
@@ -22,26 +25,6 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
   console.log(newMedifileObject);
 
   const [userList, setUserList] = useState([]);
-  // const token = localStorage.getItem('jwt');
-
-  // useEffect(() => {
-
-  //   if (allUsers && user) {
-  //     const filteredUsers = allUsers.filter((currentUser) => {
-  //       if (user.id === currentUser.id) {
-  //         console.log("Deleted current user from list:", currentUser);
-  //         return false; // Exclude this user
-  //       }
-  //       return true; // Keep this user
-  //     });
-
-  //     setUserList(filteredUsers); // Update the state immutably
-  //     setNewMedifileObject((prev) => ({
-  //       ...prev,
-  //       owner_id: user.id,
-  //     }));
-  //   }
-  // }, [allUsers, user]);
 
 
   useEffect(() => {
@@ -57,13 +40,6 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
   }, [allUsers, user, newMedifileObject.owner_id]);
 
   console.log(userList);
-
-  // useEffect(() => {
-
-  //   if (!allUsers) {
-  //     fetchUsers();
-  //   };
-  // }, [allUsers]);
 
   const memoizedFetchUsers = useCallback(() => {
     if (!allUsers) {
@@ -91,7 +67,7 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
 
   // Handles the form submission
   const handleCreateMedifile = (e) => {
-    e.preventDefault(); 
+    // e.preventDefault(); 
     if (
       newMedifileObject.title &&
       newMedifileObject.description &&
@@ -100,11 +76,13 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
       newMedifileObject.file_cover &&
       newMedifileObject.category &&
       newMedifileObject.language &&
-      newMedifileObject.owner_id &&
-      newMedifileObject.receiver_id
+      newMedifileObject.owner_id 
     ) {
       console.log(newMedifileObject);
       createMedifile(newMedifileObject);
+      alert(
+        "medical file added to database successfully"
+      );
     } else {
       alert(
         "Fill out all inputs in order to add new medifile to the database."
@@ -114,6 +92,7 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
       );
     }
   };
+
 
   return (
     <div className="main-container create-medical-file">
@@ -127,6 +106,7 @@ export const CreateMedifile = ({ createMedifile, user, allUsers, fetchUsers }) =
           <div className="form-check form-switch">
             <div class="icon-select">
             <select onChange={handleSelectChange}>
+            <option value={null} >select recipient</option>
                   {
                 userList.map((list) => (
                      <option key={list.id} value={list.id}>{list.first_name} {list.last_name}</option>

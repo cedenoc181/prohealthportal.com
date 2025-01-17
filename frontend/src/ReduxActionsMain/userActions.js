@@ -121,6 +121,7 @@ export const createMedifile = (newMedifile) => {
   return async (dispatch) => {
     try {
       // Create a new FormData object
+      const token = localStorage.getItem('jwt');
       const formData = new FormData();
 
       // Append files to FormData
@@ -139,30 +140,30 @@ export const createMedifile = (newMedifile) => {
       formData.append('language', newMedifile.language);
       formData.append('file_cover_alt', newMedifile.category);
       formData.append('file_owner_id', newMedifile.owner_id);
-      formData.append('file_receiver_id', newMedifile.receiver_id)
-
+      formData.append('file_receiver_id', newMedifile.receiver_id);
 
       // Make the POST request
-      const response = await fetchWithAuth('http://127.0.0.1:3000/create-medifiles-template', {
+      const response = await fetch('http://127.0.0.1:3000/create-medifiles-template', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+        },
         method: 'POST',
         body: formData, // No Content-Type header manually set
       });
 
-      // Error handling
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      dispatch({ type: 'CREATE_USER_MEDIFILE_SUCCESS', payload: data });
-    } catch (error) {
-      // console.error('Error creating medifile through user:', error);
-      dispatch({ type: 'CREATE_USER_MEDIFILE_ERROR', payload: error.message });
+        // Error handling
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+  
+        const data = await response.json();
+        dispatch({ type: 'CREATE_USER_MEDIFILE_SUCCESS', payload: data });
+      } catch (error) {
+         console.error('Error creating medifile through user:', error);
+         dispatch({ type: 'CREATE_USER_MEDIFILE_ERROR', payload: error.message });
     }
   };
 };
-
-
 
 
 // Action to update a user

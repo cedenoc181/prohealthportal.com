@@ -2,6 +2,7 @@
 
 const initialState = {
   data: null,
+  medifileData: [],
   loading: false,
   error: null,
   selectedUser: null,
@@ -36,7 +37,7 @@ const userReducer = (state = initialState, action) => {
     case "CREATE_USER_PATIENT_TEMP_SUCCESS":
       return {
         ...state,
-        error: action.payload,
+        error: [...state, action.payload],
         loading: false,
       };
     case "CREATE_USER_PATIENT_TEMP_ERROR":
@@ -48,7 +49,7 @@ const userReducer = (state = initialState, action) => {
     case "CREATE_USER_DOCTOR_TEMP_SUCCESS":
       return {
         ...state,
-        error: action.payload,
+        error:[...state, action.payload],
         loading: false,
       };
     case "CREATE_USER_DOCTOR_TEMP_ERROR":
@@ -60,14 +61,14 @@ const userReducer = (state = initialState, action) => {
       case "CREATE_USER_MEDIFILE_SUCCESS":
         return {
           ...state,
-          error: action.payload,
+          medifileData: [...state.medifileData, action.payload],
           loading: false,
         };
       case "CREATE_USER_MEDIFILE_ERROR":
         return {
           ...state,
           error: action.payload,
-          laoding: false,
+          loading: false,
         };
     case "UPDATE_USER_SUCCESS":
       return {
