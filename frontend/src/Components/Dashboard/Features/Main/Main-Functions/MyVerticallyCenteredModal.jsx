@@ -15,7 +15,7 @@ console.log(user)
   console.log("found my_medifile association:", myMedifileAssociate);
 
   const handleDelete = () => {
-      if (user && user.id === selectedMedifile.file_owner_id || user.admin) {
+      if ((user && user.id === selectedMedifile.file_owner_id) || user.admin) {
         if (myMedifileAssociate && selectedMedifile.id === myMedifileAssociate.medifile_id) {
           console.log("Deleting selected file");
         deleteMyMedifile(myMedifileAssociate.id);

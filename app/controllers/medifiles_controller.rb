@@ -83,13 +83,18 @@ end
 
   # DELETE /medifiles/1
    def destroy
-     if @medifile.destroy
+    if current_user.role == "Admin"
+      @medifile.destroy
     render json: {file: "#{@medifile} file has been deleted"}, status: :ok  
-     else
+  elsif current_user.role != "Admin"
+    if @medifile.file_owner_id == current_user.id
+      @medifile.destroy
+      render json: { message: 'you successfully deleted your medifile template'}, status: :ok
+  else
        render json: {medifile: @medifile.errors.full_messages, error: "medical file failed be deleted"}, status: :unprocessable_entity
      end
    end
-  
+  end
 
     private
  # Use callbacks to share common setup or constraints between actions.
