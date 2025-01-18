@@ -104,7 +104,7 @@ end
 
       # Only allow a list of trusted parameters through.
       def medifile_params
-        params.permit(:title, :description, :instructions, :language, :file_owner_id, :file_receiver_id, :file_cover_alt, :file_cover, :file_link)
+        params.permit(:title, :description, :instructions, :language, :file_cover_alt)
       end
 
 end

@@ -103,4 +103,11 @@
     white-space: nowrap; 
     text-shadow: #7bbfed;
   }
+
+
+  .medifileEditButton {
+    display: flex;
+    color: rgb(45, 45, 45);
+    justify-self: flex-end;
+  }
   

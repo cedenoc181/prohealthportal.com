@@ -1,47 +1,59 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./MedicalMain.css";
 import "./Main.css";
 import { Button } from "@chakra-ui/react";
 import { ChevronLeftIcon, SmallAddIcon } from "@chakra-ui/icons";
 import CreateMedifile from "./Main-Functions/CreateMedifile";
-import { setSelectedMedifile } from "../../../../ReduxActionsMain/medifilesActions";
+import {
+  setSelectedMedifile,
+  updateMedifile,
+} from "../../../../ReduxActionsMain/medifilesActions";
 import MyVerticallyCenteredModal from "./Main-Functions/MyVerticallyCenteredModal";
-import moment from'moment';
-
+import moment from "moment";
 
 export const MedicalMain = ({
   user,
   selectedMedifile,
   setSelectedMedifile,
   allUsers,
+  updateMedifile,
 }) => {
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [formDate, setFormDate] = useState(null);
-
+  const [medifileUpdatedParams, setMedifileUpdatedParams] = useState(null);
 
   console.log(allUsers);
   console.log(user);
 
- useEffect(() => {
-  if (selectedMedifile) {
-    let formattedDate = moment(selectedMedifile.created_at).format('MM/DD/YYYY');
-    setFormDate(formattedDate);
-  }
- 
- }, [selectedMedifile])
- 
+  useEffect(() => {
+    if (selectedMedifile) {
+      let formattedDate = moment(selectedMedifile.created_at).format(
+        "MM/DD/YYYY"
+      );
+      setFormDate(formattedDate);
+    }
+  }, [selectedMedifile]);
 
   const handleUIClick = () => {
     setShowCreateForm(!showCreateForm);
   };
 
+  const handleUiEdit = () => {
+    setShowEditForm(!showEditForm);
+    console.log(showEditForm);
+  }
+
   const handleModalOpen = (medifile) => {
     setSelectedMedifile(medifile); // Set the selected medifile in Redux state
     setModalShow(true);
-  }; 
+  };
 
+  const handleMedifileUpdate = (medifileId, updatedInfo) => {
+    updateMedifile(medifileId, updatedInfo);
+  };
 
   if (showCreateForm) {
     return (
@@ -60,12 +72,10 @@ export const MedicalMain = ({
   if (!selectedMedifile) {
     return (
       <div>
-        <CreateMedifile/>
+        <CreateMedifile />
       </div>
     );
   }
-
-
 
   return (
     <div className="medical-main">
@@ -77,7 +87,35 @@ export const MedicalMain = ({
       </div>
       <div className="main-container">
         <div className="pdf-container">
-          <h2 id={selectedMedifile.id} className="pdf-title">
+          <button className="medifileEditButton" onClick={handleUiEdit}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-pencil-square"
+              viewBox="0 0 16 16"
+            >
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+              <path
+                fill-rule="evenodd"
+                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+              />
+            </svg>
+          </button>
+
+          {
+            showEditForm ? 
+            (<div>
+
+            </div>)
+           : 
+            (<div>
+              
+            </div>)
+           }
+
+          <h2 key={selectedMedifile.id} className="pdf-title">
             {selectedMedifile.title}
           </h2>
           <p className="subtitle-pdf-description">Document description:</p>
@@ -102,7 +140,6 @@ export const MedicalMain = ({
           <br />
           <p className="subtitle-pdf-instruction">Instructions:</p>
           <p className="pdf-instruction">{selectedMedifile.instructions}</p>
-
         </div>
         <div className="delete-medifile-container">
           <Button
@@ -140,6 +177,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   setSelectedMedifile,
+  updateMedifile,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MedicalMain);

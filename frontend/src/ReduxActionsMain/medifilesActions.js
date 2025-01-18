@@ -94,9 +94,12 @@ export const setSelectedMedifile = (file) => {
   export const updateMedifile = (medifileId, updatedInfo) => {
     return async (dispatch) => {
       try {
+        const token = localStorage.getItem('jwt');
+
         const response = await fetch(`http://127.0.0.1:3000/medifiles/${medifileId}`, {
           method: 'PUT',
           headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(
@@ -104,12 +107,9 @@ export const setSelectedMedifile = (file) => {
               title: updatedInfo.title,
               description: updatedInfo.description,
               instructions: updatedInfo.instructions,
-              file_link: updatedInfo.file_link,
-              file_cover: updatedInfo.file_cover,
               file_cover_alt: updatedInfo.category,
               language: updatedInfo.language,
-              file_editable: updatedInfo.file_editable
-}
+            }
           ),
         });
         const data = await response.json();
