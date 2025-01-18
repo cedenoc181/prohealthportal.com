@@ -7,6 +7,8 @@ import { ChevronLeftIcon, SmallAddIcon } from "@chakra-ui/icons";
 import CreateMedifile from "./Main-Functions/CreateMedifile";
 import { setSelectedMedifile } from "../../../../ReduxActionsMain/medifilesActions";
 import MyVerticallyCenteredModal from "./Main-Functions/MyVerticallyCenteredModal";
+import moment from'moment';
+
 
 export const MedicalMain = ({
   user,
@@ -18,8 +20,11 @@ export const MedicalMain = ({
   const [modalShow, setModalShow] = useState(false);
 
 
+
   console.log(allUsers);
   console.log(user);
+
+  const formattedDate = moment(selectedMedifile.created_at).format('MM/DD/YYYY');
 
 
   const handleUIClick = () => {
@@ -29,7 +34,8 @@ export const MedicalMain = ({
   const handleModalOpen = (medifile) => {
     setSelectedMedifile(medifile); // Set the selected medifile in Redux state
     setModalShow(true);
-  };
+  }; 
+
 
   if (showCreateForm) {
     return (
@@ -85,7 +91,7 @@ export const MedicalMain = ({
           </a>
           <br />
           <div className="medicalPublishDate">
-            <span>Published:&nbsp; </span> {selectedMedifile.created_at}
+            <span>Published:&nbsp; </span> {formattedDate}
           </div>
           <br />
           <p className="subtitle-pdf-instruction">Instructions:</p>
