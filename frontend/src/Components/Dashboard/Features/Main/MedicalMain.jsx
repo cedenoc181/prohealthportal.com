@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import { connect } from "react-redux";
 import "./MedicalMain.css";
 import "./Main.css";
@@ -18,14 +18,20 @@ export const MedicalMain = ({
 }) => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [modalShow, setModalShow] = useState(false);
-
+  const [formDate, setFormDate] = useState(null);
 
 
   console.log(allUsers);
   console.log(user);
 
-  const formattedDate = moment(selectedMedifile.created_at).format('MM/DD/YYYY');
-
+ useEffect(() => {
+  if (selectedMedifile) {
+    let formattedDate = moment(selectedMedifile.created_at).format('MM/DD/YYYY');
+    setFormDate(formattedDate);
+  }
+ 
+ }, [selectedMedifile])
+ 
 
   const handleUIClick = () => {
     setShowCreateForm(!showCreateForm);
@@ -91,7 +97,7 @@ export const MedicalMain = ({
           </a>
           <br />
           <div className="medicalPublishDate">
-            <span>Published:&nbsp; </span> {formattedDate}
+            <span>Published:&nbsp; </span> {formDate}
           </div>
           <br />
           <p className="subtitle-pdf-instruction">Instructions:</p>
