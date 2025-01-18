@@ -3,7 +3,7 @@ class MedifilesController < ApplicationController
   include Rails.application.routes.url_helpers
 
   before_action :set_medifile, only: %i[ show update destroy ]
-  skip_before_action :is_admin?, only: [:index, :show, :create] #this line might change depending on UI functionality
+  skip_before_action :is_admin?, only: [:index, :show, :create, :destroy] #this line might change depending on UI functionality
 
 
 # GET /medifiles
@@ -84,7 +84,7 @@ end
   # DELETE /medifiles/1
    def destroy
      if @medifile.destroy
-    render json: {file: "#{@medifile.title} file has been deleted"}, status: :ok  
+    render json: {file: "#{@medifile} file has been deleted"}, status: :ok  
      else
        render json: {medifile: @medifile.errors.full_messages, error: "medical file failed be deleted"}, status: :unprocessable_entity
      end
