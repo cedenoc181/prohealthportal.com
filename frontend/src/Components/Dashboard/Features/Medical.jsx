@@ -3,13 +3,14 @@ import {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { setSelectedMedifile } from '../../../ReduxActionsMain/medifilesActions.js';
 import { fetchMedifiles } from '../../../ReduxActionsMain/medifilesActions.js';
+import { fetchMyMedifiles } from "../../../ReduxActionsMain/myMedifilesActions";
 import { Input,InputLeftElement, InputGroup } from '@chakra-ui/react';
 import {SearchIcon} from '@chakra-ui/icons';
 import ReactLoading from 'react-loading';
 import "./Features.css";
 
 
-export const Medical = ({ user, medifiles, loading, error, setSelectedMedifile, fetchMedifiles}) => {
+export const Medical = ({ user, medifiles, loading, error, setSelectedMedifile, fetchMedifiles, fetchMyMedifiles}) => {
 
   const token = localStorage.getItem("jwt"); // Retrieve the token
 
@@ -17,8 +18,9 @@ export const Medical = ({ user, medifiles, loading, error, setSelectedMedifile, 
     console.log("token on medical jsx is now true")
     if (token) {
       fetchMedifiles(token);
+      fetchMyMedifiles(token);
     }
-  }, [fetchMedifiles, token]);
+  }, [fetchMedifiles, fetchMyMedifiles, token]);
 
 
 const handleSelectedMedifile = (file) => {
@@ -227,6 +229,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   fetchMedifiles,
   setSelectedMedifile,
+  fetchMyMedifiles,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Medical);

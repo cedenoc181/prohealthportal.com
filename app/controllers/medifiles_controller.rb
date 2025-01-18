@@ -32,21 +32,7 @@ end
 
  # GET /medifiles/1
 def show
-  medifile_with_urls = {
-    id: @medifile.id,
-    title: @medifile.title,
-    description: @medifile.description,
-    instructions: @medifile.instructions,
-    language: @medifile.language,
-    file_owner_id: medifile.file_owner_id,
-    file_receiver_id: medifile.file_receiver_id,
-    file_cover_alt: @medifile.file_cover_alt,
-    created_at: @medifile.created_at,
-    file_link_url: @medifile.file_link.attached? ? url_for(@medifile.file_link) : nil,
-    file_cover_url: @medifile.file_cover.attached? ? url_for(@medifile.file_cover) : nil
-  }
-
-  render json: medifile_with_urls, status: :ok
+  render json: @medifile, serializer: MedifileSerializer, status: :ok
 end
 
 

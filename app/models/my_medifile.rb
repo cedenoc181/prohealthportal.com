@@ -1,8 +1,7 @@
 class MyMedifile < ApplicationRecord
 
  after_create_commit :duplicate, unless: :duplicating?
-
-
+ 
     belongs_to :user
     belongs_to :coworker, class_name: 'User', optional: true
     belongs_to :medifile, inverse_of: :my_medifiles
@@ -40,5 +39,6 @@ class MyMedifile < ApplicationRecord
   def duplicating?
     is_duplicate == true
   end
+
 
 end

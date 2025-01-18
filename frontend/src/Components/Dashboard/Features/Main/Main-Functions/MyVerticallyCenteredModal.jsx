@@ -3,18 +3,33 @@ import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { deleteMedifile } from '../../../../../ReduxActionsMain/medifilesActions';
+import { deleteMyMedifile } from '../../../../../ReduxActionsMain/myMedifilesActions';
 
-export const MyVerticallyCenteredModal = ({ show, onHide, selectedMedifile, deleteMedifile }) => {
+export const MyVerticallyCenteredModal = ({ show, onHide, selectedMedifile, deleteMedifile, deleteMyMedifile, myMedifilesList, user }) => {
   // Log the selectedMedifile data for debugging
   console.log("Selected Medifile:", selectedMedifile);
+  console.log(myMedifilesList);
+console.log(user)
+  
+  let myMedifileAssociate = myMedifilesList.find(file => file.medifile_id === selectedMedifile.id)
+  console.log("found my_medifile association:", myMedifileAssociate);
 
   const handleDelete = () => {
-    if (selectedMedifile && selectedMedifile.id) {
-        console.log("Deleting selected file");
-      deleteMedifile(selectedMedifile.id);
-      onHide(); // Close the modal after deletion
-    }
-  };
+      if (user && user.id === selectedMedifile.file_owner_id) {
+        alert('you may proceed')
+        if (myMedifileAssociate && selectedMedifile.id === myMedifileAssociate.medifile_id) {
+          console.log("Deleting selected file");
+        deleteMyMedifile(myMedifileAssociate.id);
+        deleteMedifile(selectedMedifile.id) 
+        onHide(); // Close the modal after deletion
+      } else if (!myMedifileAssociate) {
+        deleteMedifile(selectedMedifile.id);
+        onHide(); // Close the modal after deletion
+      }
+      } else {
+          alert("only Admin can authorized");
+      }
+    };
 
   return (
     <Modal
@@ -48,10 +63,13 @@ export const MyVerticallyCenteredModal = ({ show, onHide, selectedMedifile, dele
 
 const mapStateToProps = (state) => ({
   selectedMedifile: state.medifiles.selectedMedifile,
+  myMedifilesList: state.myMedifiles.data,
+  user: state.user.data,
 });
 
 const mapDispatchToProps = {
     deleteMedifile,
+    deleteMyMedifile,
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyVerticallyCenteredModal);

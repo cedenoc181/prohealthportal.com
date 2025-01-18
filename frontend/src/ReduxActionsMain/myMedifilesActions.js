@@ -91,8 +91,18 @@ export const setSelectedMyMedifile = (file) => {
   export const deleteMyMedifile = (myMedifileId) => {
     return async (dispatch) => {
       try {
+
+        const token = localStorage.getItem('jwt');
+
+        if (!token) {
+          throw new Error("No token provided");
+        }
+
         await fetch(`http://127.0.0.1:3000/my_medifiles/${myMedifileId}`, {
           method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
         });
         dispatch({ type: 'DELETE_MY_MEDIFILE_SUCCESS', payload: myMedifileId });
       } catch (error) {

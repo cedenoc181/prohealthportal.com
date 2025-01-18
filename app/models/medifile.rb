@@ -1,6 +1,7 @@
 class Medifile < ApplicationRecord
   after_create_commit :validate_files
 
+
     has_many :my_medifiles, inverse_of: :medifile
     has_many :users, through: :my_medifiles
 
@@ -18,6 +19,7 @@ class Medifile < ApplicationRecord
             errors.add(:file_cover, "must be attached")
          end
     end
+
 
 end
 

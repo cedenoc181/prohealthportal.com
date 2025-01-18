@@ -124,7 +124,11 @@ export const setSelectedMedifile = (file) => {
   export const deleteMedifile = (medifileId) => {
     return async (dispatch) => {
       try {
+        const token = localStorage.getItem('jwt');
         const response = await fetch(`http://127.0.0.1:3000/medifiles/${medifileId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
           method: 'DELETE',
         });
         if (response.ok) {
