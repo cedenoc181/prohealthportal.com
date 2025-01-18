@@ -15,19 +15,27 @@ console.log(user)
   console.log("found my_medifile association:", myMedifileAssociate);
 
   const handleDelete = () => {
-      if (user && user.id === selectedMedifile.file_owner_id) {
-        alert('you may proceed')
+      if (user && user.id === selectedMedifile.file_owner_id || user.admin) {
         if (myMedifileAssociate && selectedMedifile.id === myMedifileAssociate.medifile_id) {
           console.log("Deleting selected file");
         deleteMyMedifile(myMedifileAssociate.id);
         deleteMedifile(selectedMedifile.id) 
         onHide(); // Close the modal after deletion
+        setTimeout(() => {
+          alert('file successfully deleted');
+        }, 700);
       } else if (!myMedifileAssociate) {
         deleteMedifile(selectedMedifile.id);
         onHide(); // Close the modal after deletion
+        setTimeout(() => {
+          alert('file successfully deleted');
+        }, 700);
       }
       } else {
-          alert("only Admin can authorized");
+           onHide();
+           setTimeout(() => {
+            alert("Admin or Publisher authorization required: failed to delete");
+          }, 350);
       }
     };
 
