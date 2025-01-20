@@ -38,7 +38,59 @@
     padding-right: 25px;
     font-size: 30px;
     font-weight: 700;
+}
 
+.subtitle-pdf-title, .subtitle-pdf-title-edit {
+    padding-bottom: 4px;
+}
+
+.label-input-title .pdf-title, .title-edit {
+    width: 100%;
+    padding-right: 0px;
+    font-size: 25px;
+    border: solid 1px #7bbfed;
+}
+
+.label-input-title {
+    display: inline-block;
+    width: 75%;
+  }
+
+
+  .form-content {
+    display: flex; /* Align items side by side */
+    flex-direction: row; /* Horizontal alignment */
+    gap: 10%; /* Space between the image and the description */
+    align-items: flex-start; /* Align items to the top */
+  }
+  
+  .pdf-main {
+    width: 40%; /* Adjust as needed */
+    height: auto;
+    border: 1.8px solid black;
+  }
+  
+  .label-input-description {
+    display: flex;
+    flex-direction: column; /* Stack label above the textarea */
+    width: 70%; /* Adjust width */
+    height: auto; /* Let the height adjust based on content */
+    margin-top: 5%;
+  }
+  
+  .pdf-description-edit {
+    width: 100%;
+    height: 100px; /* Set a height for the textarea */
+    resize: vertical; /* Allow users to resize if needed */
+  }
+  
+  
+
+.subtitle-pdf-title-edit, .subtitle-pdf-description-edit, .subtitle-pdf-instruction-edit {
+    font-size: 25px;
+    font-weight: 700;
+    color: black;
+    text-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .medical-submit-button {
@@ -110,4 +162,8 @@
     color: rgb(45, 45, 45);
     justify-self: flex-end;
   }
-  
+
+  .update-form {
+    padding: 3%;
+  }
+

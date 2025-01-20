@@ -23,7 +23,15 @@ export const MedicalMain = ({
   const [showEditForm, setShowEditForm] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [formDate, setFormDate] = useState(null);
-  const [medifileUpdatedParams, setMedifileUpdatedParams] = useState(null);
+  const [medifileUpdatedParams, setMedifileUpdatedParams] = useState({
+    title: "",
+    description: "",
+    instructions: "",
+    language: "",
+    category: "",
+  });
+
+  console.log(medifileUpdatedParams.title);
 
   console.log(allUsers);
   console.log(user);
@@ -44,7 +52,7 @@ export const MedicalMain = ({
   const handleUiEdit = () => {
     setShowEditForm(!showEditForm);
     console.log(showEditForm);
-  }
+  };
 
   const handleModalOpen = (medifile) => {
     setSelectedMedifile(medifile); // Set the selected medifile in Redux state
@@ -104,65 +112,140 @@ export const MedicalMain = ({
             </svg>
           </button>
 
-          {
-            showEditForm ? 
-            (<div>
+          {showEditForm ? (
+            <>
+              <form
+                className="update-form"
+                action="updateMedifile"
+                method="patch"
+                onSubmit={handleMedifileUpdate}
+              >
+              <div className="label-input-title">
+                <label className="subtitle-pdf-title subtitle-pdf-title-edit">
+                  Document Title:
+                </label>
+                <input
+                  key={selectedMedifile.id}
+                  className="pdf-title title-edit"
+                  onChange={(e) =>
+                    setMedifileUpdatedParams({
+                      ...medifileUpdatedParams,
+                      title: e.target.value,
+                    })
+                  }
+                  placeholder={selectedMedifile.title}
+                />
+              </div>
 
-            </div>)
-           : 
-            (<div>
-              
-            </div>)
-           }
+              <div className="form-content">
 
-          <h2 key={selectedMedifile.id} className="pdf-title">
-            {selectedMedifile.title}
-          </h2>
-          <p className="subtitle-pdf-description">Document description:</p>
-          <p className="pdf-description">{selectedMedifile.description}</p>
-          <a
-            href={selectedMedifile.file_link_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pdf-main-link"
-          >
-            <img
-              title={selectedMedifile.title}
-              className="pdf-main"
-              src={selectedMedifile.file_cover_url}
-              alt={selectedMedifile.file_cover_alt}
-            />
-          </a>
-          <br />
-          <div className="medicalPublishDate">
-            <span>Published:&nbsp; </span> {formDate}
-          </div>
-          <br />
-          <p className="subtitle-pdf-instruction">Instructions:</p>
-          <p className="pdf-instruction">{selectedMedifile.instructions}</p>
-        </div>
-        <div className="delete-medifile-container">
-          <Button
-            variant="primary"
-            onClick={() => handleModalOpen(selectedMedifile)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-trash"
-              viewBox="0 0 16 16"
-            >
-              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-              <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-            </svg>
-          </Button>
-
-          <MyVerticallyCenteredModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
+        {/* Description Section */}
+        <div className="label-input-description">
+          <label className="subtitle-pdf-description subtitle-pdf-description-edit">
+            Document description:
+          </label>
+          <textarea
+            className="pdf-description-edit"
+            onChange={(e) =>
+              setMedifileUpdatedParams({
+                ...medifileUpdatedParams,
+                description: e.target.value,
+              })
+            }
+            placeholder={selectedMedifile.description}
           />
+        </div>
+
+                {/* Image Section */}
+           <img
+          title={selectedMedifile.title}
+          className="pdf-main pdf-edit"
+          src={selectedMedifile.file_cover_url}
+          alt={selectedMedifile.file_cover_alt}
+        />
+      </div>
+                <br />
+                <div className="medicalPublishDate">
+                  <span>Published:&nbsp; </span> {formDate}
+                </div>
+                <br />
+                <div className="label-input-org">
+                <label className="subtitle-pdf-instruction subtitle-pdf-instruction-edit">
+                  Instructions:
+                </label>
+                <textarea
+                  className="pdf-instruction"
+                  onChange={(e) =>
+                    setMedifileUpdatedParams({
+                      ...medifileUpdatedParams,
+                      instructions: e.target.value,
+                    })
+                  }
+                  placeholder={selectedMedifile.instructions}
+                />
+                </div>
+                <button type="submit">update</button>
+              </form>
+            </>
+          ) : (
+            <>
+              <div>
+                <h2 key={selectedMedifile.id} className="pdf-title">
+                  {selectedMedifile.title}
+                </h2>
+                <p className="subtitle-pdf-description">
+                  Document description:
+                </p>
+                <p className="pdf-description">
+                  {selectedMedifile.description}
+                </p>
+                <a
+                  href={selectedMedifile.file_link_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pdf-main-link"
+                >
+                  <img
+                    title={selectedMedifile.title}
+                    className="pdf-main"
+                    src={selectedMedifile.file_cover_url}
+                    alt={selectedMedifile.file_cover_alt}
+                  />
+                </a>
+                <br />
+                <div className="medicalPublishDate">
+                  <span>Published:&nbsp; </span> {formDate}
+                </div>
+                <br />
+                <p className="subtitle-pdf-instruction">Instructions:</p>
+                <p className="pdf-instruction">
+                  {selectedMedifile.instructions}
+                </p>
+              </div>
+              <div className="delete-medifile-container">
+                <Button
+                  variant="primary"
+                  onClick={() => handleModalOpen(selectedMedifile)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-trash"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                  </svg>
+                </Button>
+              </div>
+              <MyVerticallyCenteredModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>
