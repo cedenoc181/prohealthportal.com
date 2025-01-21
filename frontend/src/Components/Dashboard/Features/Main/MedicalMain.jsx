@@ -24,14 +24,15 @@ export const MedicalMain = ({
   const [modalShow, setModalShow] = useState(false);
   const [formDate, setFormDate] = useState(null);
   const [medifileUpdatedParams, setMedifileUpdatedParams] = useState({
-    title: "",
-    description: "",
-    instructions: "",
-    category: "",
+    title: selectedMedifile ? selectedMedifile.title : "",
+    description: selectedMedifile ? selectedMedifile.description : "",
+    instructions: selectedMedifile ? selectedMedifile.instructions : "",
+    category: selectedMedifile ? selectedMedifile.file_cover_alt : "",
   });
 
   console.log(allUsers);
   console.log(user);
+  
 
   useEffect(() => {
     if (selectedMedifile) {
@@ -39,6 +40,13 @@ export const MedicalMain = ({
         "MM/DD/YYYY"
       );
       setFormDate(formattedDate);
+      setMedifileUpdatedParams({
+        title: selectedMedifile.title,
+        description: selectedMedifile.description,
+        instructions: selectedMedifile.instructions,
+        category: selectedMedifile.file_cover_alt,
+      
+      })
     }
   }, [selectedMedifile]);
 
@@ -58,6 +66,7 @@ export const MedicalMain = ({
 
   const handleMedifileUpdate = (e) => {
     e.preventDefault(); 
+    if ((user && user.id === selectedMedifile.file_owner_id) || user.admin) {
     if (
       selectedMedifile.id &&
       medifileUpdatedParams.title &&
@@ -71,7 +80,16 @@ export const MedicalMain = ({
     }, 300);
      alert('Medifile updated');
     console.log("medifile update method runs")
-  };
+  } else {
+    alert("Fill all parameters")
+  }
+} else {
+  console.log("not authorized user");
+    setTimeout(() => {
+     alert("Admin or Publisher authorization required: failed to update");
+     setShowEditForm(false);
+   }, 350);
+}
   };
 
 
