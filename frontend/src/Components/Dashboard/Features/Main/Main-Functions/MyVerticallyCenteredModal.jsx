@@ -12,7 +12,7 @@ export const MyVerticallyCenteredModal = ({ show, onHide, selectedMedifile, dele
 console.log(user)
   
   let myMedifileAssociate = myMedifilesList.find(file => file.medifile_id === selectedMedifile.id)
-  console.log("found my_medifile association:", myMedifileAssociate);
+  console.log("found my_medifile association:", myMedifileAssociate ? myMedifileAssociate : "no user association");
 
   const handleDelete = () => {
       if ((user && user.id === selectedMedifile.file_owner_id) || user.admin) {

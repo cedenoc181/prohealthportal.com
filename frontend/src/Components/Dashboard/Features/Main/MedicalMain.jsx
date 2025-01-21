@@ -31,8 +31,6 @@ export const MedicalMain = ({
     category: "",
   });
 
-  console.log(medifileUpdatedParams.title);
-
   console.log(allUsers);
   console.log(user);
 
@@ -61,7 +59,15 @@ export const MedicalMain = ({
 
   const handleMedifileUpdate = (medifileId, updatedInfo) => {
     updateMedifile(medifileId, updatedInfo);
+    alert('Medifile updated');
+    setTimeout(() => {
+      setShowEditForm(false);
+    }, 300);
+    console.log("medifile update method runs")
   };
+
+
+  console.log(medifileUpdatedParams);
 
   if (showCreateForm) {
     return (
@@ -120,11 +126,14 @@ export const MedicalMain = ({
                 className="update-form"
                 action="updateMedifile"
                 method="patch"
-                onSubmit={handleMedifileUpdate}
+                onSubmit={(e) => {
+                  e.preventDefault(); // Prevent the default form submission behavior
+                  handleMedifileUpdate(selectedMedifile.id, medifileUpdatedParams);
+                }}
               >
                 <div className="label-input-title">
                   <label className="subtitle-pdf-title subtitle-pdf-title-edit">
-                    Document Title:
+                    Document title:
                   </label>
                   <input
                     key={selectedMedifile.id}
@@ -169,10 +178,10 @@ export const MedicalMain = ({
                 <div className="medicalPublishDate">
                   <span>Published:&nbsp; </span> {formDate}
                 </div>
-                {/* <br /> */}
+                <br />
                 <div className="label-input-instructions">
                   <label className="subtitle-pdf-instruction subtitle-pdf-instruction-edit">
-                    Instructions:
+                    Document instructions:
                   </label>
                   <textarea
                     className="pdf-instruction-edit"
@@ -184,6 +193,17 @@ export const MedicalMain = ({
                     }
                     placeholder={selectedMedifile.instructions}
                   />
+                </div>
+                <br />
+                <div className="label-input-category">
+                <label className="subtitle-pdf-category subtitle-pdf-category-edit">Document category: </label>
+                <select className="category-update">
+                  <option value="other">Select file category </option>
+                  <option value="APOS">APOS</option>
+                  <option value="authorization">Authorization</option>
+                  <option value="PT/OT">PT/OT</option>
+                  <option value="other">Other</option>
+                </select>
                 </div>
                 <br />
                 <div className="edit-button-submit">

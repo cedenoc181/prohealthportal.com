@@ -18,7 +18,7 @@
 }
 
 
-.pdf-description, .pdf-instruction, .pdf-info {
+.pdf-description, .pdf-instruction, .subtitle-pdf-category, .pdf-info {
     padding-left: 3%;
     padding-bottom: 1%;
     padding-right: 2.5%;
@@ -40,7 +40,7 @@
     font-weight: 700;
 }
 
- .subtitle-pdf-title-edit, .subtitle-pdf-description-edit, .subtitle-pdf-instruction-edit {
+ .subtitle-pdf-title-edit, .subtitle-pdf-description-edit, .subtitle-pdf-instruction-edit, .subtitle-pdf-category-edit {
     padding-bottom: 4px;
 }
 
@@ -50,6 +50,10 @@
     font-size: 25px;
     border: solid 1px #7bbfed;
     text-align: center;
+}
+
+.pdf-edit {
+    margin-top: 5%;
 }
 
 .label-input-title {
@@ -68,7 +72,7 @@
   
   .form-content .pdf-edit{
     width: 40% !important; /* Adjust as needed */
-    height: auto;
+    min-height: 100% !important;
     border: 1.8px solid black;
   }
   
@@ -80,7 +84,7 @@
     margin-top: 5%;
   }
   
-  .pdf-description-edit, .pdf-instruction-edit  {
+  .pdf-description-edit, .pdf-instruction-edit, .category-update  {
     width: 100%;
     height: 200px; /* Set a height for the textarea */
     resize: vertical; 
@@ -88,11 +92,17 @@
     border: solid 1px #7bbfed;
 
   }
+
+  .category-update {
+    height: 35px;
+    padding: 0;
+    width: 50%;
+  }
   
   .label-input-instructions {
     display: inline-block;
     position: relative;
-    margin-top: -10%;
+    margin-top: -25%;
     width: 55.03%;
     
   }
@@ -103,11 +113,15 @@
     padding-top: 3%;
   }
 
-
+.label-input-category {
+    display: inline-block;
+    width: 55.03%;
+    margin-top: 3%;
+}
 
   
 
-.subtitle-pdf-title-edit, .subtitle-pdf-description-edit, .subtitle-pdf-instruction-edit {
+.subtitle-pdf-title-edit, .subtitle-pdf-category-edit, .subtitle-pdf-description-edit, .subtitle-pdf-instruction-edit {
     font-size: 25px;
     font-weight: 700;
     color: black;
