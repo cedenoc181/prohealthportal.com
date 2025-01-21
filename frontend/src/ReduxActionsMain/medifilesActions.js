@@ -108,7 +108,6 @@ export const setSelectedMedifile = (file) => {
               description: updatedInfo.description,
               instructions: updatedInfo.instructions,
               file_cover_alt: updatedInfo.category,
-              language: updatedInfo.language,
             }
           ),
         });

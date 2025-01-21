@@ -67,7 +67,7 @@
     flex-direction: row; /* Horizontal alignment */
     gap: 5%; /* Space between the image and the description */
     align-items: flex-start; /* Align items to the top */
-    margin-top: 3%;
+    margin-top: 1%;
   }
   
   .form-content .pdf-edit{
@@ -97,6 +97,7 @@
     height: 35px;
     padding: 0;
     width: 50%;
+    text-align: center;
   }
   
   .label-input-instructions {

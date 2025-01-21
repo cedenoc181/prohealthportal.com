@@ -27,7 +27,6 @@ export const MedicalMain = ({
     title: "",
     description: "",
     instructions: "",
-    language: "",
     category: "",
   });
 
@@ -57,13 +56,22 @@ export const MedicalMain = ({
     setModalShow(true);
   };
 
-  const handleMedifileUpdate = (medifileId, updatedInfo) => {
-    updateMedifile(medifileId, updatedInfo);
-    alert('Medifile updated');
+  const handleMedifileUpdate = (e) => {
+    e.preventDefault(); 
+    if (
+      selectedMedifile.id &&
+      medifileUpdatedParams.title &&
+      medifileUpdatedParams.description &&
+      medifileUpdatedParams.instructions &&
+      medifileUpdatedParams.category 
+    ) {
+    updateMedifile(selectedMedifile.id, medifileUpdatedParams);
     setTimeout(() => {
       setShowEditForm(false);
     }, 300);
+     alert('Medifile updated');
     console.log("medifile update method runs")
+  };
   };
 
 
@@ -126,10 +134,7 @@ export const MedicalMain = ({
                 className="update-form"
                 action="updateMedifile"
                 method="patch"
-                onSubmit={(e) => {
-                  e.preventDefault(); // Prevent the default form submission behavior
-                  handleMedifileUpdate(selectedMedifile.id, medifileUpdatedParams);
-                }}
+                onSubmit={handleMedifileUpdate}
               >
                 <div className="label-input-title">
                   <label className="subtitle-pdf-title subtitle-pdf-title-edit">
@@ -145,6 +150,7 @@ export const MedicalMain = ({
                       })
                     }
                     placeholder={selectedMedifile.title}
+                    required
                   />
                 </div>
 
@@ -163,6 +169,7 @@ export const MedicalMain = ({
                         })
                       }
                       placeholder={selectedMedifile.description}
+                      required
                     />
                   </div>
 
@@ -192,17 +199,29 @@ export const MedicalMain = ({
                       })
                     }
                     placeholder={selectedMedifile.instructions}
+                    required
                   />
                 </div>
                 <br />
                 <div className="label-input-category">
                 <label className="subtitle-pdf-category subtitle-pdf-category-edit">Document category: </label>
-                <select className="category-update">
-                  <option value="other">Select file category </option>
+                <select 
+                name="category"
+                className="category-update"
+                onChange={(e) => 
+                  setMedifileUpdatedParams({
+                    ...medifileUpdatedParams, 
+                    category: e.target.value,
+                  })
+                }
+                required
+                 >
+                  <option 
+                  value={selectedMedifile.file_cover_alt}>created as: {selectedMedifile.file_cover_alt} </option>
                   <option value="APOS">APOS</option>
-                  <option value="authorization">Authorization</option>
+                  <option value="authorization">authorization</option>
                   <option value="PT/OT">PT/OT</option>
-                  <option value="other">Other</option>
+                  <option value="other">other</option>
                 </select>
                 </div>
                 <br />
