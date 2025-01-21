@@ -12,7 +12,7 @@
 }
 
 
-.subtitle-pdf-description, .subtitle-pdf-instruction, .pdf-info {
+.subtitle-pdf-description, .subtitle-pdf-instruction, .subtitle-pdf-title, .pdf-info {
     padding-left: 3%;
     color: rgba(109, 106, 106, 0.983)
 }
@@ -40,7 +40,7 @@
     font-weight: 700;
 }
 
-.subtitle-pdf-title, .subtitle-pdf-title-edit {
+ .subtitle-pdf-title-edit, .subtitle-pdf-description-edit, .subtitle-pdf-instruction-edit {
     padding-bottom: 4px;
 }
 
@@ -49,6 +49,7 @@
     padding-right: 0px;
     font-size: 25px;
     border: solid 1px #7bbfed;
+    text-align: center;
 }
 
 .label-input-title {
@@ -60,12 +61,13 @@
   .form-content {
     display: flex; /* Align items side by side */
     flex-direction: row; /* Horizontal alignment */
-    gap: 10%; /* Space between the image and the description */
+    gap: 5%; /* Space between the image and the description */
     align-items: flex-start; /* Align items to the top */
+    margin-top: 3%;
   }
   
-  .pdf-main {
-    width: 40%; /* Adjust as needed */
+  .form-content .pdf-edit{
+    width: 40% !important; /* Adjust as needed */
     height: auto;
     border: 1.8px solid black;
   }
@@ -78,12 +80,31 @@
     margin-top: 5%;
   }
   
-  .pdf-description-edit {
+  .pdf-description-edit, .pdf-instruction-edit  {
     width: 100%;
-    height: 100px; /* Set a height for the textarea */
-    resize: vertical; /* Allow users to resize if needed */
+    height: 200px; /* Set a height for the textarea */
+    resize: vertical; 
+    padding: 2.5%;
+    border: solid 1px #7bbfed;
+
   }
   
+  .label-input-instructions {
+    display: inline-block;
+    position: relative;
+    margin-top: -10%;
+    width: 55.03%;
+    
+  }
+
+  .edit-button-submit {
+    display: flex;
+    justify-self: center;
+    padding-top: 3%;
+  }
+
+
+
   
 
 .subtitle-pdf-title-edit, .subtitle-pdf-description-edit, .subtitle-pdf-instruction-edit {

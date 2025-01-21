@@ -95,100 +95,127 @@ export const MedicalMain = ({
       </div>
       <div className="main-container">
         <div className="pdf-container">
-          <button className="medifileEditButton" onClick={handleUiEdit}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-pencil-square"
-              viewBox="0 0 16 16"
-            >
-              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-              <path
-                fill-rule="evenodd"
-                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
-              />
-            </svg>
-          </button>
-
           {showEditForm ? (
             <>
+              <button className="medifileEditButton" onClick={handleUiEdit}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-box-arrow-left"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"
+                  />
+                </svg>
+              </button>
               <form
                 className="update-form"
                 action="updateMedifile"
                 method="patch"
                 onSubmit={handleMedifileUpdate}
               >
-              <div className="label-input-title">
-                <label className="subtitle-pdf-title subtitle-pdf-title-edit">
-                  Document Title:
-                </label>
-                <input
-                  key={selectedMedifile.id}
-                  className="pdf-title title-edit"
-                  onChange={(e) =>
-                    setMedifileUpdatedParams({
-                      ...medifileUpdatedParams,
-                      title: e.target.value,
-                    })
-                  }
-                  placeholder={selectedMedifile.title}
-                />
-              </div>
+                <div className="label-input-title">
+                  <label className="subtitle-pdf-title subtitle-pdf-title-edit">
+                    Document Title:
+                  </label>
+                  <input
+                    key={selectedMedifile.id}
+                    className="pdf-title title-edit"
+                    onChange={(e) =>
+                      setMedifileUpdatedParams({
+                        ...medifileUpdatedParams,
+                        title: e.target.value,
+                      })
+                    }
+                    placeholder={selectedMedifile.title}
+                  />
+                </div>
 
-              <div className="form-content">
+                <div className="form-content">
+                  {/* Description Section */}
+                  <div className="label-input-description">
+                    <label className="subtitle-pdf-description subtitle-pdf-description-edit">
+                      Document description:
+                    </label>
+                    <textarea
+                      className="pdf-description-edit"
+                      onChange={(e) =>
+                        setMedifileUpdatedParams({
+                          ...medifileUpdatedParams,
+                          description: e.target.value,
+                        })
+                      }
+                      placeholder={selectedMedifile.description}
+                    />
+                  </div>
 
-        {/* Description Section */}
-        <div className="label-input-description">
-          <label className="subtitle-pdf-description subtitle-pdf-description-edit">
-            Document description:
-          </label>
-          <textarea
-            className="pdf-description-edit"
-            onChange={(e) =>
-              setMedifileUpdatedParams({
-                ...medifileUpdatedParams,
-                description: e.target.value,
-              })
-            }
-            placeholder={selectedMedifile.description}
-          />
-        </div>
-
-                {/* Image Section */}
-           <img
-          title={selectedMedifile.title}
-          className="pdf-main pdf-edit"
-          src={selectedMedifile.file_cover_url}
-          alt={selectedMedifile.file_cover_alt}
-        />
-      </div>
+                  {/* Image Section */}
+                  <img
+                    title={selectedMedifile.title}
+                    className="pdf-main pdf-edit"
+                    src={selectedMedifile.file_cover_url}
+                    alt={selectedMedifile.file_cover_alt}
+                  />
+                </div>
                 <br />
                 <div className="medicalPublishDate">
                   <span>Published:&nbsp; </span> {formDate}
                 </div>
-                <br />
-                <div className="label-input-org">
-                <label className="subtitle-pdf-instruction subtitle-pdf-instruction-edit">
-                  Instructions:
-                </label>
-                <textarea
-                  className="pdf-instruction"
-                  onChange={(e) =>
-                    setMedifileUpdatedParams({
-                      ...medifileUpdatedParams,
-                      instructions: e.target.value,
-                    })
-                  }
-                  placeholder={selectedMedifile.instructions}
-                />
+                {/* <br /> */}
+                <div className="label-input-instructions">
+                  <label className="subtitle-pdf-instruction subtitle-pdf-instruction-edit">
+                    Instructions:
+                  </label>
+                  <textarea
+                    className="pdf-instruction-edit"
+                    onChange={(e) =>
+                      setMedifileUpdatedParams({
+                        ...medifileUpdatedParams,
+                        instructions: e.target.value,
+                      })
+                    }
+                    placeholder={selectedMedifile.instructions}
+                  />
                 </div>
-                <button type="submit">update</button>
+                <br />
+                <div className="edit-button-submit">
+                  <Button
+                    colorScheme="blue"
+                    variant="solid"
+                    size="lg"
+                    type="submit"
+                  >
+                    update
+                  </Button>
+                </div>
               </form>
             </>
           ) : (
             <>
+              <button className="medifileEditButton" onClick={handleUiEdit}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-pencil-square"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                  <path
+                    fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+                  />
+                </svg>
+              </button>
               <div>
                 <h2 key={selectedMedifile.id} className="pdf-title">
                   {selectedMedifile.title}
