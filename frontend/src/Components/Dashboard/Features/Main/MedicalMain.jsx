@@ -120,7 +120,7 @@ export const MedicalMain = ({
   return (
     <div className="medical-main">
       <div className="createUI-button">
-        <button onClick={handleUIClick}>
+        <button onClick={handleUIClick} data-toggle="tooltip" data-placement="top" title="Create a new medical file">
           <SmallAddIcon />
           Create
         </button>
@@ -129,7 +129,7 @@ export const MedicalMain = ({
         <div className="pdf-container">
           {showEditForm ? (
             <>
-              <button className="medifileEditButton" onClick={handleUiEdit}>
+              <button className="medifileEditButton" onClick={handleUiEdit} data-toggle="tooltip" data-placement="left" title="exit update">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -249,6 +249,9 @@ export const MedicalMain = ({
                     variant="solid"
                     size="lg"
                     type="submit"
+                    data-toggle="tooltip"
+                     data-placement="top" 
+                     title="Submit update"
                   >
                     update
                   </Button>
@@ -257,7 +260,7 @@ export const MedicalMain = ({
             </>
           ) : (
             <>
-              <button className="medifileEditButton" onClick={handleUiEdit}>
+              <button className="medifileEditButton" onClick={handleUiEdit} data-toggle="tooltip" data-placement="top" title="Update medical file">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -310,6 +313,7 @@ export const MedicalMain = ({
                 <Button
                   variant="primary"
                   onClick={() => handleModalOpen(selectedMedifile)}
+                  data-toggle="tooltip" data-placement="top" title="Delete medical file"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

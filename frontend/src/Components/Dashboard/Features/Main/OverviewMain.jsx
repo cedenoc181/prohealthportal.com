@@ -31,7 +31,7 @@ export const OverviewMain = ({user, fetchUsers}) => {
       const firstName = capitalizeWords(user.first_name); 
       setUserName(firstName); // Extract the first name
     }
-  }, [fetchUsers, token]);
+  }, [fetchUsers, token, user]);
 
   return (
     <div className="main-container">
