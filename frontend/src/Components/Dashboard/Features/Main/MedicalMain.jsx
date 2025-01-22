@@ -168,7 +168,7 @@ export const MedicalMain = ({
                       })
                     }
                     placeholder={selectedMedifile.title}
-                    required
+                    // required
                   />
                 </div>
 
@@ -187,7 +187,7 @@ export const MedicalMain = ({
                         })
                       }
                       placeholder={selectedMedifile.description}
-                      required
+                      // required
                     />
                   </div>
 
@@ -217,7 +217,7 @@ export const MedicalMain = ({
                       })
                     }
                     placeholder={selectedMedifile.instructions}
-                    required
+                    // required
                   />
                 </div>
                 <br />
@@ -232,7 +232,7 @@ export const MedicalMain = ({
                     category: e.target.value,
                   })
                 }
-                required
+                // required
                  >
                   <option 
                   value={selectedMedifile.file_cover_alt}>created as: {selectedMedifile.file_cover_alt} </option>

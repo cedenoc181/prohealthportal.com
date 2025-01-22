@@ -54,6 +54,7 @@
 
 .pdf-edit {
     margin-top: 5%;
+    height: 399.1px !important;
 }
 
 .label-input-title {
@@ -98,6 +99,7 @@
     padding: 0;
     width: 50%;
     text-align: center;
+    cursor: pointer;
   }
   
   .label-input-instructions {
