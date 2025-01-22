@@ -96,7 +96,10 @@ setTimeout(() => {
 }, 400)
 }
 
-
+function handleSendEmailExit() {
+  setUseTemplateHtml(false);
+  console.log("clicked")
+}
 
 
   // Render the create form if `showCreateForm` is true
@@ -126,7 +129,7 @@ setTimeout(() => {
   return (
     <div className="email-main">
         <div className="createUI-button">
-        <button onClick={handleUIClick}>
+        <button onClick={handleUIClick} data-toggle="tooltip" data-placement="top" title="Create new email template">
           <SmallAddIcon />
           Compose
         </button>
@@ -192,7 +195,7 @@ setTimeout(() => {
            <br />
       <div className="email-buttons"> 
       <ButtonGroup className="email-save" variant='outline' spacing='6'>
-          <Button colorScheme='blue'  height='48px' width='200px' onClick={handleUseTemplate}>
+          <Button colorScheme='blue'  height='48px' width='200px' onClick={handleUseTemplate} data-toggle="tooltip" data-placement="top" title="use this email template">
               {
                   useTemplate ? 
                  (
@@ -213,7 +216,9 @@ setTimeout(() => {
 
 <div className="export-emails">
   {useTemplateHtml ? (
-    <EmailSenderUI templateObject={useTemplateHtml} />
+    <div>
+    <EmailSenderUI templateObject={useTemplateHtml} exitSendEmail={handleSendEmailExit}/>
+    </div>
   ) : (
     <p></p>
   )}
