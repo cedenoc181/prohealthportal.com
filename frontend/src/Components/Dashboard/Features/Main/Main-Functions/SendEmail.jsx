@@ -111,7 +111,7 @@ const sendEmail = (e) => {
   return (
     <div className="main-container">
       <div>
-        <button onClick={exitSendEmail}>
+        <button className="exitEmailSender" onClick={exitSendEmail} data-toggle="tooltip" data-placement="top" title="exit email sender form">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
         </svg>
@@ -159,7 +159,7 @@ const sendEmail = (e) => {
       <input class="sender-input" type='email' name='user_email' value={user.email} />
       <input class="sender-input1" type='name' name='user_full_name' value={fullName}/>
       <div className="sending-email-button"> 
-      <Button  colorScheme='blue' type="submit" variant='solid' size='lg'>
+      <Button  colorScheme='blue' type="submit" variant='solid' size='lg' data-toggle="tooltip" data-placement="top" title="send email">
           Send Email
       </Button>       
       </div>

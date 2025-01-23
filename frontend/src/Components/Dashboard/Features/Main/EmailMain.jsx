@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import { connect } from 'react-redux'
 import './EmMain.css'
 import './Main.css'
@@ -21,6 +21,8 @@ const [useTempToCreate, setUseTempToCreate] = useState(null);
 
 
 
+const senderRef = useRef(null);
+
 useEffect(() => {
 if (selectedDrEmail) {
   setRenderPatientEmail(false);
@@ -34,6 +36,14 @@ useEffect(() => {
   }
 }, [selectedPxEmail])
 
+useEffect(() => {
+  if (useTemplateHtml) {
+    senderRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+}, [useTemplateHtml])
 
 
 
@@ -41,6 +51,7 @@ const handleUIClick = () => {
   setShowCreateForm(!showCreateForm);
 };
 
+// copy email subject or body to clipboard
 const copyToClipboard = (elementId) => {
   const element = document.getElementById(elementId);
   const textToCopy = element ? element.innerText : '';
@@ -52,6 +63,8 @@ const copyToClipboard = (elementId) => {
 };
 
 
+
+// use templagte to send email
 function handleUseTemplate() {
   setUseTemplate(!useTemplate);
   const getSubject = document.getElementById('subject-p');
@@ -59,24 +72,20 @@ function handleUseTemplate() {
 
 
   setUseTemplateHtml({
-    subject: getSubject ? getSubject.innerText : 'Default Subject',
-    body: getBody ? getBody.innerText : 'Default Body',
+    subject: getSubject ? getSubject.innerText : '',
+    body: getBody ? getBody.innerText : '',
   });
 
-  setTimeout(() => {
-    alert('template copied onto to mailer below')
-  }, 100)
-
-
-
   console.log('Using template: ', useTemplateHtml);
-}
+};
 
 setTimeout(() => {
   setUseTemplate(false);
  },1000);
 
 
+
+//  create a new template using exisiting content
 function handleModifiedTemplate() {
  
   const getSubject = document.getElementById('subject-p');
@@ -96,6 +105,8 @@ setTimeout(() => {
 }, 400)
 }
 
+
+// exit out of the sender component 
 function handleSendEmailExit() {
   setUseTemplateHtml(false);
   console.log("clicked")
@@ -216,8 +227,8 @@ function handleSendEmailExit() {
 
 <div className="export-emails">
   {useTemplateHtml ? (
-    <div>
-    <EmailSenderUI templateObject={useTemplateHtml} exitSendEmail={handleSendEmailExit}/>
+    <div ref={senderRef}>
+    <EmailSenderUI  templateObject={useTemplateHtml} exitSendEmail={handleSendEmailExit}/>
     </div>
   ) : (
     <p></p>

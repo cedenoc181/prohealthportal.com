@@ -156,7 +156,7 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
            mb='12px'
            placeholder='Name your email for future searches'
            size='md'
-           name="px_temp_title"  
+           name="px_temp_title" 
           onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, px_temp_title: e.target.value})}
           required
         />
@@ -183,10 +183,10 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
           <br />
         <label className="input-label">Template Tag:</label>
         <select name="category" className="email-category-selection" onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, category: e.target.value})} required>
-        <option>--Select email tag--</option>
+        <option value="">--Select email tag--</option>
         <option value="Outreach">Outreach</option>
         <option value="Billing">Billing</option>
-        <option value="Other">Insurance</option>
+        <option value="Other">Other</option>
         </select>
 
         <br />

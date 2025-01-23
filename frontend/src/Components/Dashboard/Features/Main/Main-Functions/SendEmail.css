@@ -1,4 +1,9 @@
 /* SendEmail.css */
+
+.exitEmailSender:hover {
+color: #f43905;
+}
+
 .email-title {
     text-align: center;
     font-size: 1.5rem;
