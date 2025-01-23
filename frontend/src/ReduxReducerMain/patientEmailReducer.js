@@ -63,6 +63,7 @@
           return {
             ...state,
             selectedPxEmail: action.payload,
+            loading: false,
           };
       default:
         return state;

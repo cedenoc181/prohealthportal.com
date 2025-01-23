@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_27_022703) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_23_193054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_022703) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "dr_owner_id"
+    t.index ["dr_owner_id"], name: "index_dr_templates_on_dr_owner_id"
   end
 
   create_table "medifiles", force: :cascade do |t|
@@ -95,6 +97,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_022703) do
     t.string "language", default: "english"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "px_owner_id"
+    t.index ["px_owner_id"], name: "index_patient_templates_on_px_owner_id"
   end
 
   create_table "users", force: :cascade do |t|

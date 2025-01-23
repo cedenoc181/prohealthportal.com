@@ -130,11 +130,11 @@ end
     end
 
     def patient_template_params
-      params.permit(:px_temp_title, :px_temp_subject, :px_temp_content, :category, :language)
+      params.permit(:px_temp_title, :px_temp_subject, :px_temp_content, :px_owner_id, :category, :language)
     end
 
     def dr_template_params
-      params.permit(:dr_temp_title, :dr_temp_subject, :dr_temp_content, :category)
+      params.permit(:dr_temp_title, :dr_temp_subject, :dr_temp_content, :dr_owner_id, :category)
     end
 
     def medifile_template_params 

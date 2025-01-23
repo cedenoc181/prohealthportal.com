@@ -19,14 +19,16 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
       px_temp_subject: '',
       px_temp_content: '',
       category: '',
-      language: ''
+      language: '',
+      px_owner_id: 0
   });
   
   const [newDoctorTemplate, setNewDoctorTemplate] = useState({
     dr_temp_title: '',
     dr_temp_subject: '',
     dr_temp_content: '',
-    category: ''
+    category: '',
+    dr_owner_id: 0
   });
 
   const handleToggle = (e) => {

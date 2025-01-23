@@ -19,8 +19,6 @@ const [useTemplateHtml, setUseTemplateHtml] = useState(null);
 
 const [useTempToCreate, setUseTempToCreate] = useState(null);
 
-
-
 const senderRef = useRef(null);
 
 useEffect(() => {
@@ -154,6 +152,7 @@ function handleSendEmailExit() {
         <div className="email-main-subject">
         <span className="key" contentEditable="false">Subject:</span>
         <p className="email-main-text" contentEditable="true" id="subject-p">
+          {renderPatientEmail === null && "loading ..."}
             {renderPatientEmail ? selectedPxEmail.px_temp_subject : selectedDrEmail.dr_temp_subject}
           <span className="copy-button-wrapper">
             <button onClick={() => copyToClipboard('subject-p')}>  

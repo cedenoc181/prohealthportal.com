@@ -86,12 +86,31 @@ export const createUser = (newUser) => {
 
 export const createPatientTemplates = (px_temp) => {
   return async (dispatch) => {
-
     try {
-      const data = await fetchWithAuth("http://127.0.0.1:3000/create-patient-template", {
+      const token = localStorage.getItem('jwt');
+      const formData = new FormData();
+
+      if (px_temp) {
+        formData.append('px_temp_title', px_temp.px_temp_title);
+        formData.append('px_temp_subject', px_temp.px_temp_subject);
+        formData.append('px_temp_content', px_temp.px_temp_content);
+        formData.append('px_owner_id', px_temp.px_owner_id);
+        formData.append('category', px_temp.category);
+        formData.append('language', px_temp.language);
+
+      } 
+
+      const response = await fetch("http://127.0.0.1:3000/create-patient-template", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+        },
         method: "POST",
-        body: JSON.stringify(px_temp),
+        body: formData,
       });
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+      const data = response.json();
       dispatch({ type: "CREATE_USER_PATIENT_TEMP_SUCCESS", payload: data });
     } catch (error) {
       dispatch({ type: "CREATE_USER_PATIENT_TEMP_ERROR", payload: error.message });
@@ -104,10 +123,29 @@ export const createPatientTemplates = (px_temp) => {
 export const createDrTemplates = (dr_temp) => {
   return async (dispatch) => {
    try {
-      const data = await fetchWithAuth("http://127.0.0.1:3000/create-doctor-template", {
+    const token = localStorage.getItem('jwt');
+    const formData = new FormData();
+
+    if (dr_temp) {
+      formData.append('dr_temp_title', dr_temp.dr_temp_title);
+      formData.append('dr_temp_subject', dr_temp.dr_temp_subject);
+      formData.append('dr_temp_content', dr_temp.dr_temp_content);
+      formData.append('dr_owner_id', dr_temp.dr_owner_id);
+      formData.append('category', dr_temp.category);
+
+    } 
+      const response = await fetch("http://127.0.0.1:3000/create-doctor-template", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+        },
         method: "POST",
-        body: JSON.stringify(dr_temp),
+        body: formData,
       });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+      const data = response.json();
       dispatch({ type: "CREATE_USER_DOCTOR_TEMP_SUCCESS", payload: data });
     } catch (error) {
       dispatch({ type: "CREATE_USER_DOCTOR_TEMP_ERROR", payload: error.message });
