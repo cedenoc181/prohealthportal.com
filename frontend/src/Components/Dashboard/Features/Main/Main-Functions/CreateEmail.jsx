@@ -6,7 +6,7 @@ import { createPatientTemplates } from '../../../../../ReduxActionsMain/userActi
 import { createDrTemplates } from '../../../../../ReduxActionsMain/userActions.js'
 
 
-export const CreateEmail = ({createPatientTemplates, createDrTemplates, templateObject}) => {
+export const CreateEmail = ({createPatientTemplates, createDrTemplates, templateObject, user}) => {
 
 
 
@@ -14,13 +14,15 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
   const [templateToggler, setTemplateToggler] = useState(true);
 
 
+  console.log(user);
+
     const [newPatientTemplate, setNewPatientTemplate] = useState({
       px_temp_title: '',
       px_temp_subject: '',
       px_temp_content: '',
       category: '',
       language: '',
-      px_owner_id: 0
+      px_owner_id: user.id
   });
   
   const [newDoctorTemplate, setNewDoctorTemplate] = useState({
@@ -28,7 +30,7 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
     dr_temp_subject: '',
     dr_temp_content: '',
     category: '',
-    dr_owner_id: 0
+    dr_owner_id: user.id
   });
 
   const handleToggle = (e) => {
@@ -44,16 +46,17 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
   const handleCreate = () => {
     if (templateToggler) {
       // Validate patient template fields before creating
-      if (newPatientTemplate.px_temp_title && newPatientTemplate.px_temp_subject && newPatientTemplate.px_temp_content && newPatientTemplate.category && newPatientTemplate.language) {
+      if (newPatientTemplate.px_temp_title && newPatientTemplate.px_temp_subject && newPatientTemplate.px_temp_content && newPatientTemplate.category && newPatientTemplate.language && newPatientTemplate.px_owner_id) {
+        console.log("patient temp is selected");
         createPatientTemplates(newPatientTemplate);
-        alert("patiient email created successfully");
+        alert("patient email created successfully");
       } else {
         alert("Please fill out all required patient email fields.");
         console.log("Please fill out all required patient email fields.");
       }
     } else {
       // Validate doctor template fields before creating
-      if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.category) {
+      if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.category, newDoctorTemplate.dr_owner_id) {
         console.log("dr temp is selected")
         createDrTemplates(newDoctorTemplate);
         alert("doctor email created successfully");
@@ -276,7 +279,9 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
   )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  user: state.user.data,
+})
 
 const mapDispatchToProps = {
   createPatientTemplates,
