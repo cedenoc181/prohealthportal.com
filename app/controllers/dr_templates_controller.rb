@@ -1,6 +1,6 @@
 class DrTemplatesController < ApplicationController
   before_action :set_dr_template, only: %i[ show update destroy ]
-  skip_before_action :is_admin?
+  skip_before_action :is_admin?, only: %i[index show create update]
   
   # GET /dr_templates
   def index
@@ -67,6 +67,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def dr_template_params
-      params.permit(:dr_temp_title, :dr_temp_subject, :dr_temp_content, :category)
+      params.permit(:dr_temp_title, :dr_temp_subject, :dr_temp_content, :dr_owner_id, :category)
     end
 end

@@ -33,7 +33,7 @@ class PatientTemplatesController < ApplicationController
       end
       
     elsif !current_user.admin? 
-      if @patient_template.id >= 23
+      if @patient_template.id >= 23 && current_user.id === @patient_template.px_owner_id
        if @patient_template.update(patient_template_params)
         render json: @patient_template, serializer: PatientTemplateSerializer, message: "Template updated successfully", status: :ok
        else
@@ -67,6 +67,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def patient_template_params
-      params.permit(:px_temp_title, :px_temp_subject, :px_temp_content, :category, :language )
+      params.permit(:px_temp_title, :px_temp_subject, :px_temp_content, :px_owner_id, :category, :language )
     end
 end
