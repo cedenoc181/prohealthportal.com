@@ -42,7 +42,7 @@ class PatientTemplatesController < ApplicationController
   # DELETE /patient_templates/1
   def destroy
     if current_user.admin? || current_user.id == @patient_template.px_owner_id
-      relational = current_user.my_templates.find_by(patient_template_id: @patient_template.id)
+      relational = MyTemplate.find_by(patient_template_id: @patient_template.id)
   
       if relational
         relational.destroy
