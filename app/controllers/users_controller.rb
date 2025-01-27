@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def user_create_patient_template
     new_patient_temp = current_user.patient_templates.create!(patient_template_params)
-     render json: { message: "User patient template successfully created"}, status: :created
+     render json: { message: "#{current_user.first_name} successfully created #{new_patient_temp.px_temp_title}"}, status: :created
   end
 
   def user_create_dr_template

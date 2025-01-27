@@ -1,6 +1,6 @@
 class PatientTemplatesController < ApplicationController
   before_action :set_patient_template, only: %i[ show update destroy ]
-  skip_before_action :is_admin?, only: %i[index show create update]
+  skip_before_action :is_admin?
 
 
   # GET /patient_templates
@@ -15,47 +15,47 @@ class PatientTemplatesController < ApplicationController
   end
 
   # POST /patient_templates
-  def create
-    @patient_template = PatientTemplate.new(patient_template_params)
-    if @patient_template.save
-      render json: { patient_template: @patient_template, message: "Template successfully created" }, status: :created, location: @patient_template
-     else
-      render json: { message: "Unable to create template, double check parameters have been met", errors: @patient_template.errors.full_messages }, status: :unprocessable_entity
-     end
-  end
+  # def create
+  #   @patient_template = PatientTemplate.new(patient_template_params)
+  #   if @patient_template.save
+  #     render json: { patient_template: @patient_template, message: "#{current_user} successfully created template" }, status: :created, location: @patient_template
+  #    else
+  #     render json: { message: "Unable to create template, double check parameters have been met", errors: @patient_template.errors.full_messages }, status: :unprocessable_entity
+  #    end
+  # end
+
 
   def update
-    if current_user.admin? 
+    if current_user.admin? || current_user.id == @patient_template.px_owner_id
       if @patient_template.update(patient_template_params)
-        render json: @patient_template, serializer: PatientTemplateSerializer, message: "Template updated successfully", status: :ok
+        render json:{  patient_template: @patient_template, message: "#{current_user.first_name} updated template successfully"}, status: :ok
       else
         render json: { message: "Template failed to update", errors: @patient_template.errors.full_messages }, status: :unprocessable_entity
       end
-      
-    elsif !current_user.admin? 
-      if @patient_template.id >= 23 && current_user.id === @patient_template.px_owner_id
-       if @patient_template.update(patient_template_params)
-        render json: @patient_template, serializer: PatientTemplateSerializer, message: "Template updated successfully", status: :ok
-       else
-        render json: { message: "Template failed to update", errors: @patient_template.errors.full_messages }, status: :unprocessable_entity
-       end
     else
-      render json: { message: "Template can only be modified by admins" }, status: :unprocessable_entity
+      render json: { message: "Template can only be modified by admins and publishers" }, status: :unprocessable_entity
     end
   end
-end
+
 
 
   # DELETE /patient_templates/1
   def destroy
-    if @patient_template.destroy
-      render json: { message: "#{@patient_template.px_temp_title} template has been deleted"}, status: :ok
+    if current_user.admin? || current_user.id == @patient_template.px_owner_id
+      relational = current_user.my_templates.find_by(patient_template_id: @patient_template.id)
+  
+      if relational
+        relational.destroy
+        @patient_template.destroy
+        render json: { message: "#{@patient_template.px_temp_title} has been deleted by #{current_user.first_name}" }, status: :ok
+      else
+        render json: { message: "Failed to delete, template not found" }, status: :unprocessable_entity
+      end
     else
-      render json: { message: "Failed to delete, template not found" }, status: :unprocessable_entity
+      render json: { message: "Template can only be deleted by admins and publishers" }, status: :unprocessable_entity
     end
-  rescue ActiveRecord::InvalidForeignKey
-    render json: { message: "Failed to delete the template. The foreign key still exists, ensure that any related records in the 'my_template' table are removed first." }, status: :unprocessable_entity
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
