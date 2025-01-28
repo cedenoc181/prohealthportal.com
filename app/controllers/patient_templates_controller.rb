@@ -14,16 +14,6 @@ class PatientTemplatesController < ApplicationController
     render json: @patient_template, serializer: PatientTemplateSerializer, status: :ok
   end
 
-  # POST /patient_templates
-  # def create
-  #   @patient_template = PatientTemplate.new(patient_template_params)
-  #   if @patient_template.save
-  #     render json: { patient_template: @patient_template, message: "#{current_user} successfully created template" }, status: :created, location: @patient_template
-  #    else
-  #     render json: { message: "Unable to create template, double check parameters have been met", errors: @patient_template.errors.full_messages }, status: :unprocessable_entity
-  #    end
-  # end
-
 
   def update
     if current_user.admin? || current_user.id == @patient_template.px_owner_id
@@ -36,7 +26,6 @@ class PatientTemplatesController < ApplicationController
       render json: { message: "Template can only be modified by admins and publishers" }, status: :unprocessable_entity
     end
   end
-
 
 
   # DELETE /patient_templates/1

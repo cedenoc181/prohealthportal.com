@@ -1,6 +1,6 @@
 class DrTemplatesController < ApplicationController
   before_action :set_dr_template, only: %i[ show update destroy ]
-  skip_before_action :is_admin?, only: %i[index show create update]
+  skip_before_action :is_admin?
   
   # GET /dr_templates
   def index
@@ -13,47 +13,35 @@ class DrTemplatesController < ApplicationController
     render json: @dr_template, serializer: DrTemplateSerializer, status: :ok
   end
 
-  # POST /dr_templates
-  def create
-    @dr_template = DrTemplate.new(dr_template_params)
-    if @dr_template.save
-      render json: {dr_template: @dr_template, message: "Template successfully created"}, status: :created, location: @dr_template
-     else
-      render json: {message: "Unable to create template, double check parameters have been met", errors: @dr_template.errors.full_messages}, status: :unprocessable_entity
-     end
-  end
-
   # PATCH/PUT /dr_templates/1
   def update
-      if current_user.admin?
+      if current_user.admin? || current_user.id == @dr_template.dr_owner_id
         if @dr_template.update(dr_template_params)
-          render json: @dr_template, serializer: DrTemplateSerializer, message: "Template successfully updated", status: :ok
+          render json: {doctor_template: @dr_template, message: "#{current_user.first_name} successfully updated #{@dr_template.dr_temp_title}"}, status: :ok
         else
          render json: { message: "Unable to update template", errors: @dr_template.errors.full_messages }, status: :unprocessable_entity 
         end
-      elsif !current_user.admin?
-          if @dr_template.id >= 11
-            if @dr_template.update(dr_template_params)
-              render json: @dr_template, serializer: DrTemplateSerializer, message: "Template updated successfully", status: :ok
-            else 
-              render json: { meesage: "Template was unable to be updated", errors: @dr_template.errors.full_messages }, status: :unprocessable_entity
-            end
       else
-        render json: { message: "Template can only be modified by admin" }, status: :unprocessable_entity
+        render json: { message: "Template can only be modified by admin and publisher" }, status: :unprocessable_entity
       end
   end
-end
 
 
   # DELETE /dr_templates/1
   def destroy
-    if @dr_template.destroy
-      render json: { message: " #{@dr_template.dr_temp_title} template has been deleted" }, status: :ok
+  if current_user.admin? || current_user.id == @dr_template.dr_owner_id
+    relational = MyTemplate.find_by(dr_template_id: @dr_template.id)
+
+    if relational
+      relational.destroy
+      @dr_template.destroy
+      render json: { message: " #{@dr_template.dr_temp_title} template has been deleted by #{current_user.first_name}" }, status: :ok
     else
       render json: { message: "Failed to delete, template not found" }, status: :unprocessable_entity
     end
-  rescue ActiveRecord::InvalidForeignKey
-    render json: { message: "Failed to delete the template. The foreign key still exists, ensure that any related records in the 'my_template' table are removed first." }, status: :unprocessable_entity
+  else
+    render json: { message: "Only admins and publishers are authorized to perform this action"}
+   end 
   end
   
 
