@@ -55,7 +55,7 @@ private
 
 def post_create_update
   self.update(
-    admin: role == 'Admin',
+    admin: role == 'Admin' || role == 'Owner',
     direct_access: role == "PT" || role == 'OT',
     email: email&.downcase,
     first_name: first_name&.downcase,

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # Callbacks to set user before show and destroy action method
   before_action :find_user, only: %i[ show destroy]
   # remove index show create from admin restrictions
-  skip_before_action :is_admin?
+  skip_before_action :is_admin?, only: %i[ show index me update]
   # will take skip before action authroized method off after development, bc admin will be only user avaiilable to perform CRUD
 
 
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     @user = User.new(create_user_params)
     if @user.save 
       token = encode_token({user_id: @user.id})
-      render json: {user: UserSerializer.new(@user), message: "User successfully created", token: token}, status: :created
+      render json: {user: UserSerializer.new(@user), message: "#{@user.first_name} successfully created by : #{current_user.first_name}", token: token}, status: :created
     else
       render json: { message: "Invalid user sign-up.", errors: @user.errors.full_messages }, status: :unprocessable_entity
         end
@@ -40,12 +40,12 @@ class UsersController < ApplicationController
 
   def user_create_patient_template
     new_patient_temp = current_user.patient_templates.create!(patient_template_params)
-     render json: { message: "#{current_user.first_name} successfully created #{new_patient_temp.px_temp_title}"}, status: :created
+     render json: { message: "#{current_user.first_name} successfully created patient template: #{new_patient_temp.px_temp_title}"}, status: :created
   end
 
   def user_create_dr_template
     new_dr_temp = current_user.dr_templates.create!(dr_template_params)
-      render json: { message: "#{current_user.first_name} successfully created #{new_dr_temp.dr_temp_title}"}, status: :created
+      render json: { message: "#{current_user.first_name} successfully created dcotor template: #{new_dr_temp.dr_temp_title}"}, status: :created
   end
 
   def user_create_medifile_template
@@ -85,20 +85,30 @@ class UsersController < ApplicationController
  # PATCH/PUT /users/:id
 # cant update user without being logged in(authorized)
 def update
-  if current_user.admin? 
-    @user = User.find(params[:id])
+  begin
+    if current_user.admin?
+      @user = User.find(params[:id])
+    else
+      # Non-admins can only update their own account
+      @user = current_user
+    end
+
     if @user.update(user_editable_params)
-      render json:  @user, serializer: UserSerializer, message: "user attributes have been successfully updated", status: :ok
+      render json: { 
+        user: UserSerializer.new(@user), 
+        message: "User attributes have been successfully updated: #{@user.first_name} account by: #{current_user.first_name}"
+      }, status: :ok
     else
-      render json: @user.errors.full_messages, status: :unprocessable_entity
+      render json: { 
+        message: "Failed to update user attributes", 
+        errors: @user.errors.full_messages 
+      }, status: :unprocessable_entity
     end
-  else
-    # Non-admin users can only update their own info
-    if current_user.update(user_editable_params)
-      render json: current_user
-    else
-      render json: current_user.errors.full_messages, status: :unprocessable_entity
-    end
+
+  rescue ActiveRecord::RecordNotFound
+    render json: { message: "User not found" }, status: :not_found
+  rescue StandardError => e
+    render json: { message: "An error occurred: #{e.message}" }, status: :unprocessable_entity
   end
 end
 
@@ -106,9 +116,9 @@ end
   # cant destroy user without being logged in(authorized) and being a admin(is_admin?)
   def destroy
        if @user.destroy!
-       render json: {message: "#{user.full_name} user account has been successfully deleted"}, status: :ok
+       render json: {message: "#{@user.first_name} user account has been successfully deleted"}, status: :ok
        else 
-        render json: {message: "Failed to delete #{user.full_name} user account, plesase ensure you are an admin to perform this action"}, status: :unprocessable_entity
+        render json: {message: "Failed to delete #{@user.first_name} user account, plesase ensure you are an admin to perform this action"}, status: :unprocessable_entity
        end
   end
 
@@ -126,7 +136,7 @@ end
     end
 
     def user_editable_params 
-      params.permit( :password, :email, :role, :credentials, :clinic_location, :insurance_network, :direct_access, :admin, :phone_ext)
+        params.permit(:password, :email, :role, :credentials, :clinic_location, :insurance_network, :direct_access, :admin, :phone_ext, :first_name, :last_name)               
     end
 
     def patient_template_params
