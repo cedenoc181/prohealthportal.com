@@ -36,7 +36,12 @@
 
 .email-buttons {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
+}
+
+.deleteEmailButton {
+    background: transparent !important;
+
 }
 
 .save-email-form {

@@ -1,4 +1,6 @@
 class PasswordController < ApplicationController
+      skip_before_action :authorized
+      skip_before_action :is_admin?
   # POST /password/forgot
   def forgot
     user = User.find_by(email: params[:email])

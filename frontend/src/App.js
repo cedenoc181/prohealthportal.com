@@ -93,7 +93,7 @@ useEffect(() => {
         setMainContent(<OverviewMain />);
         break;
       case "/email-templates":
-        setMainContent(<EmailMain />);
+        setMainContent(<EmailMain user={user}/>);
         break;
       case "/medical-forms":
         setMainContent(<MedicalMain />);

@@ -22,7 +22,7 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
       px_temp_content: '',
       category: '',
       language: '',
-      px_owner_id: user.id
+      px_owner_id: ''
   });
   
   const [newDoctorTemplate, setNewDoctorTemplate] = useState({
@@ -30,7 +30,7 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
     dr_temp_subject: '',
     dr_temp_content: '',
     category: '',
-    dr_owner_id: user.id
+    dr_owner_id: ''
   });
 
   const handleToggle = (e) => {
@@ -44,10 +44,15 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
   }
   
   const handleCreate = () => {
+    // e.preventDefault();
     if (templateToggler) {
       // Validate patient template fields before creating
-      if (newPatientTemplate.px_temp_title && newPatientTemplate.px_temp_subject && newPatientTemplate.px_temp_content && newPatientTemplate.category && newPatientTemplate.language && newPatientTemplate.px_owner_id) {
+      if (newPatientTemplate.px_temp_title && newPatientTemplate.px_temp_subject && newPatientTemplate.px_temp_content && newPatientTemplate.category && newPatientTemplate.language ) {
         console.log("patient temp is selected");
+        setNewPatientTemplate({
+          ...newPatientTemplate,
+          px_owner_id: user.id
+        });
         createPatientTemplates(newPatientTemplate);
         alert("patient email created successfully");
       } else {
@@ -56,8 +61,12 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
       }
     } else {
       // Validate doctor template fields before creating
-      if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.category, newDoctorTemplate.dr_owner_id) {
+      if (newDoctorTemplate.dr_temp_title && newDoctorTemplate.dr_temp_subject && newDoctorTemplate.dr_temp_content && newDoctorTemplate.category) {
         console.log("dr temp is selected")
+        setNewDoctorTemplate({
+          ...newDoctorTemplate,
+          dr_owner_id: user.id
+        });
         createDrTemplates(newDoctorTemplate);
         alert("doctor email created successfully");
       } else {
@@ -65,8 +74,6 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
         console.log("Please fill out all required doctor email fields.");
       }
     }
-
-
   };
   
   useEffect(() => {
