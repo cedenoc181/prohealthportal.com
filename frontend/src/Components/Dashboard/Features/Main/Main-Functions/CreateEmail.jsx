@@ -175,9 +175,10 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
        (
         // patient template input
        <div className="create-email-inputs">
-        <label className="input-label">Template Title:</label>
-        {/* <InputGroup> */}
+        <label className="input-label" for="px_temp_title">Template Title:</label>
+
         <Input
+           id="px_temp_title"
            mb='12px'
            placeholder='Name your email for future searches'
            size='md'
@@ -186,8 +187,9 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
           required
         />
         <br />
-        <label className="input-label">Template Subject:</label>
+        <label className="input-label" for="px_temp_subject">Template Subject:</label>
         <Input 
+          id="px_temp_subject"
           mb='12px'
           placeholder='Input email subject here'
           name="px_temp_subject"
@@ -196,8 +198,9 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
           required
         /> 
         <br />
-        <label className="input-label">Template Content:</label>
+        <label className="input-label" for="px_temp_content">Template Content:</label>
         <Textarea 
+          id="px_temp_content"
           mb='12px'
           placeholder='Write your email contents here!'
           name="px_temp_content"
@@ -206,8 +209,8 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
           required
           /> 
           <br />
-        <label className="input-label">Template Tag:</label>
-        <select name="category" className="email-category-selection" onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, category: e.target.value})} required>
+        <label className="input-label" for="px-category">Template Tag:</label>
+        <select id="px-category" name="px-category" className="email-category-selection" onChange= {(e) => setNewPatientTemplate({...newPatientTemplate, category: e.target.value})} required>
         <option value="">--Select email tag--</option>
         <option value="Outreach">Outreach</option>
         <option value="Billing">Billing</option>
@@ -215,8 +218,8 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
         </select>
 
         <br />
-        <label className="input-label">Language: </label>
-        <select className="language-select" name="language" onChange={(e) => setNewPatientTemplate({...newPatientTemplate, language: e.target.value})} required>
+        <label className="input-label" for="px-language">Language: </label>
+        <select id="px-language" className="language-select" name="px-language" onChange={(e) => setNewPatientTemplate({...newPatientTemplate, language: e.target.value})} required>
           <option>--Select Language for email--</option>
           <option value="English">English</option>
           <option value="Spanish">Spanish</option>
@@ -230,9 +233,10 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
         ( 
         // Dr template input 
         <div className="create-email-inputs">
-        <label className="input-label">Template Title:</label>
+        <label className="input-label" for="dr_temp_title">Template Title:</label>
         {/* <InputGroup> */}
         <Input
+           id="dr_temp_title"
            mb='12px'
            placeholder='Name your email for future searches'
            size='md'
@@ -241,8 +245,9 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
           required
         />
         <br />
-        <label className="input-label">Template Subject:</label>
+        <label className="input-label" for="dr_temp_subject">Template Subject:</label>
         <Input 
+          id="dr_temp_subject"
           mb='12px'
           placeholder='Input email subject here'
           name="dr_temp_subject"
@@ -250,8 +255,9 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
           required
         /> 
         <br />
-        <label className="input-label">Template Content:</label>
+        <label className="input-label" for="dr_temp_content">Template Content:</label>
         <Textarea 
+          id="dr_temp_content"
           mb='12px'
           placeholder='Write your email contents here!'
           name="dr_temp_content"
@@ -259,8 +265,8 @@ export const CreateEmail = ({createPatientTemplates, createDrTemplates, template
           required
           /> 
           <br />
-        <label className="input-label">Template Tag:</label>
-        <select name="category" className="email-category-selection" onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, category: e.target.value})} required>
+        <label className="input-label" for="dr-category">Template Tag:</label>
+        <select id="dr-category" name="dr-category" className="email-category-selection" onChange= {(e) => setNewDoctorTemplate({...newDoctorTemplate, category: e.target.value})} required>
         <option value="--Please choose an option below--">--Please choose an option below--</option>
         <option value="Protocols">Protocols</option>
         <option value="Referral">Referral</option>

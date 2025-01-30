@@ -22,6 +22,8 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
 
   const [emailButtonConditional, setEmailButtonConditional] = useState(null);
 
+  const [afterDelete, setAfterDelete] = useState(false);
+
   const senderRef = useRef(null);
 
   useEffect(() => {
@@ -122,7 +124,9 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
       deletePatientEmail(selectedPxEmail.id || selectedDrEmail.id);
       setTimeout(() => {
         alert("This email template has been deleted successfully")
+        setAfterDelete(true);
       }, 400);
+     
      } else {
       alert("only admins and publishers are authorized to delete")
      }
@@ -140,6 +144,14 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
         </div>
         <CreateEmailUI templateObject={useTempToCreate} />
       </div>
+    );
+  }
+
+  if (afterDelete) {
+    return (
+      <div>
+      <CreateEmailUI />
+    </div>
     );
   }
 
@@ -170,25 +182,19 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
           className="emailCard"
           key={renderPatientEmail ? selectedPxEmail.id : selectedDrEmail.id}
         >
-          <h2 className="email-main-title" contentEditable="true">
-            {renderPatientEmail
-              ? selectedPxEmail.px_temp_title
-              : selectedDrEmail.dr_temp_title}
+          <h2 className="email-main-title">
+            {renderPatientEmail ? selectedPxEmail.px_temp_title : selectedDrEmail.dr_temp_title}
           </h2>
           <br />
           <div className="email-main-subject">
-            <span className="key" contentEditable="false">
+            <span className="key">
               Subject:
             </span>
             <p
               className="email-main-text"
-              contentEditable="true"
               id="subject-p"
             >
-              {renderPatientEmail === null && "loading ..."}
-              {renderPatientEmail
-                ? selectedPxEmail.px_temp_subject
-                : selectedDrEmail.dr_temp_subject}
+              {renderPatientEmail ? selectedPxEmail.px_temp_subject : selectedDrEmail.dr_temp_subject}
               <span className="copy-button-wrapper">
                 <button onClick={() => copyToClipboard("subject-p")}>
                   <svg
@@ -206,16 +212,15 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
                 </button>
               </span>
             </p>
+
           </div>
           <br />
           <div className="email-main-contents">
-            <span className="key" contentEditable="false">
+            <span className="key">
               Body:
             </span>
-            <p className="email-main-text" contentEditable="true" id="body-p">
-              {renderPatientEmail
-                ? selectedPxEmail.px_temp_content
-                : selectedDrEmail.dr_temp_content}
+            <p className="email-main-text"  id="body-p">
+              {renderPatientEmail ? selectedPxEmail.px_temp_content : selectedDrEmail.dr_temp_content}
               <span className="copy-button-wrapper">
                 <button onClick={() => copyToClipboard("body-p")}>
                   <svg
@@ -236,20 +241,13 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
           </div>
           <br />
           <div className="email-main-category">
-            <span className="key" contentEditable="false">
+            <span className="key">
               Tag:
             </span>
             <br />
-            <select name="category" className="email-category-selection">
-              <option id="category">
-                {renderPatientEmail
+            <p id="category">  {renderPatientEmail
                   ? selectedPxEmail.category
-                  : selectedDrEmail.category}
-              </option>
-              <option value="Outreach">Outreach</option>
-              <option value="Billing">Billing</option>
-              <option value="Other">Insurance</option>
-            </select>
+                  : selectedDrEmail.category}</p>
           </div>
           <br />
           <button
@@ -257,7 +255,7 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
             onClick={handleModifiedTemplate}
             data-toggle="tooltip"
             data-placement="top"
-            title="Create this template"
+            title="Recreate this template"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -288,13 +286,12 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
               <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
             </svg>
           </span>
-          Emails can be modified and copied to email send form, emails that are
-          modified will not presist to maintain the templates origin. You can
-          create a email that will presist on to data base below in the create
-          form.
+          The 'use template' button below, will copy the template above and compose a ready to send email. 
+          There are also clipboard buttons on each subject and body. As well as a recreate button to make your own 
+          modifications.
         </p>
         <br />
-        <div className="email-buttons">
+        <div className={emailButtonConditional ? "email-buttons" : "email-button-false"}>
           {
             emailButtonConditional ?
           (
@@ -325,10 +322,6 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
             ""
           )
 }
-
-
-
-
 
           <ButtonGroup className="email-save" variant="outline" spacing="6">
             <Button

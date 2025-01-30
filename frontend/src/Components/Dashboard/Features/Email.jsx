@@ -17,7 +17,7 @@ export const Email = ({user, patient, doctor, fetchUsers, fetchPatientEmails, fe
   console.log(user)
 
 // states 
-const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [patientDefault, setPatientDefault] = useState(true);
   const [collapse, setCollapse] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -177,12 +177,13 @@ let doctorEmailTemplate = filteredDoctors.length > 0 ? filteredDoctors.map((file
       <br />
 <div className="selected-menu">{patientDefault ? "Patient Template" : "Doctor Template"}</div>
 <br />
+
 {/* search bar */}
           <div className="filter-Search">
             <div className="search-container">  
               <InputGroup className="inputGroup">
                     <InputLeftElement pointerEvents='none'>
-                 <SearchIcon color='black.600' />
+                          <SearchIcon color='black.600' />
                     </InputLeftElement>
                   <Input className="searchBar" onChange={handleSearchChange} width="60%" focusBorderColor='blue.400' _placeholder={{ color: 'black' }} placeholder='find email template...' />
               </InputGroup>

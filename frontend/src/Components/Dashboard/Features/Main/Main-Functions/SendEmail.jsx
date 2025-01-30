@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import './SendEmail.css';
 
 
-export const SendEmail = ({ templateObject = {}, user, exitSendEmail }) => {
+export const SendEmail = ({ templateObject, user, exitSendEmail }) => {
   const form = useRef();
 
   const [fullName, setFullName] = useState("");
@@ -13,8 +13,8 @@ export const SendEmail = ({ templateObject = {}, user, exitSendEmail }) => {
   const [formData, setFormData] = useState({
     to_name: '',
     to_email: '',
-    subject: templateObject.subject || '',
-    content: templateObject.body || '',
+    subject: '',
+    content: '',
   });
 
   useEffect(() => {
@@ -103,8 +103,14 @@ const sendEmail = (e) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value, // Dynamically update the field
+    }));
   };
+
+  console.log(formData.content);
+  console.log(formData.subject);
 
 
 
@@ -120,8 +126,9 @@ const sendEmail = (e) => {
     <h2 className="email-title">Send an Email</h2>
     <form className="email-form" ref={form} onSubmit={sendEmail}>
 
-      <label>Full Name </label>
+      <label for="to_name">Full Name: </label>
       <input 
+              id="to_name"
               type="name"
               name="to_name"
               value={formData.to_name}
@@ -129,8 +136,9 @@ const sendEmail = (e) => {
               placeholder="Receiver's name"
               required
       />
-      <label>Email:</label>
+      <label for="to_email">Email:</label>
       <input
+        id="to_email"
         type="email"
         name="to_email"
         value={formData.to_email}
@@ -138,8 +146,9 @@ const sendEmail = (e) => {
         placeholder="Receiver's Email"
         required
       />
-      <label>Subject:</label>
+      <label for="subject">Subject:</label>
       <input
+        id="subject"
         type="text"
         name="subject"
         value={formData.subject}
@@ -147,16 +156,17 @@ const sendEmail = (e) => {
         placeholder="Email Subject"
         required
       />
-      <label>Content:</label>
+      <label for="content">Content:</label>
       <textarea
+        id="content"
         type="text"
-        name="message"
+        name="content"
         value={formData.content}
         onChange={handleChange}
         placeholder="Write your message here..."
         required
       />
-      <input class="sender-input" type='email' name='user_email' value={user.email} />
+      <input class="sender-input" type='email' name='user_email' value={user.email} disabled/>
       <input class="sender-input1" type='name' name='user_full_name' value={fullName}/>
       <div className="sending-email-button"> 
       <Button  colorScheme='blue' type="submit" variant='solid' size='lg' data-toggle="tooltip" data-placement="top" title="send email">

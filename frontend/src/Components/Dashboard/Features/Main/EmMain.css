@@ -23,12 +23,9 @@
     background-color: #eeeaea86;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     padding: 3%;
-    cursor: pointer;
+    cursor: default;
 }
 
-.emailCard p:hover {
-    border: 1.5px solid rgba(14, 143, 241, 0.86);
-}
 
 .emailCard .key {
     font-size: 18px;
@@ -37,6 +34,11 @@
 .email-buttons {
     display: flex;
     justify-content: space-between;
+}
+
+.email-button-false {
+    display: flex;
+    justify-content: end;
 }
 
 .deleteEmailButton {
@@ -73,14 +75,6 @@
     color:rgba(14, 143, 241, 0.86)
 }
 
-.email-category-selection {
-    width: 50%;
-    cursor: pointer;
-}
-
-.email-category-selection:hover {
-    border: 1px solid rgba(156, 205, 243, 0.86)
-}
 
 .email-submit-button, .post-email-button {
     display: flex;
@@ -130,6 +124,7 @@
    text-align: center;
 }
 
+/* create-email comp toggler  */
 .toggler {
     display: block;
     padding-left: 75%;
@@ -151,6 +146,7 @@
     text-decoration: underline;
     font-size: 14px;
 }
+/* create-email comp toggler  */
 
 .language-select {
     width: 50%;
