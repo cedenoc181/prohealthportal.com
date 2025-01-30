@@ -197,3 +197,10 @@
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+
+  .templateToggle {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(81, 79, 79);
+    text-decoration: underline;
+  }

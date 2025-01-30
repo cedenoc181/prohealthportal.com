@@ -26,7 +26,7 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
 
   useEffect(() => {
     if (selectedDrEmail) {
-      let emailAuthorizationCondition = user.admin || user.id === selectedDrEmail.dr_owner_id;
+      let emailAuthorizationCondition = user.admin || (user.id === selectedDrEmail.dr_owner_id);
 
       console.log(emailAuthorizationCondition);
       setEmailButtonConditional(emailAuthorizationCondition);
