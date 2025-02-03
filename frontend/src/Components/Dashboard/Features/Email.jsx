@@ -9,7 +9,7 @@ import { fetchPatientEmails, setSelectedPatientEmail } from '../../../ReduxActio
 import { fetchDoctorEmails,  setSelectedDoctorEmail} from '../../../ReduxActionsMain/doctorEmailActions.js';
 import { fetchUsers } from '../../../ReduxActionsMain/userActions.js'
  
-export const Email = ({user, patient, doctor, fetchUsers, fetchPatientEmails, fetchDoctorEmails, setSelectedPatientEmail, setSelectedDoctorEmail}) => {
+export const Email = ({user, patient, doctor, fetchUsers, fetchPatientEmails, fetchDoctorEmails, setSelectedPatientEmail, setSelectedDoctorEmail, updateEmailRendering }) => {
 
   const token = localStorage.getItem("jwt");
   console.log(token)
@@ -41,10 +41,12 @@ const handleFilter = () => { setFilter(!filter); console.log("clicked")};
 
 // following functions sends selected objects to Main components to be rendered on its own
 const handleSelectedPxEmail = (file) => {
+  updateEmailRendering(true);
   setSelectedPatientEmail(file);
 };
 
 const handleSelectedDrEmail = (file) => {
+  updateEmailRendering(false);
   setSelectedDoctorEmail(file);
 };
 
@@ -56,6 +58,7 @@ const handleDrClick = () => {
     setLoadingSpinner(false);
     setCollapse(false);
     setPatientDefault(false);
+    // updateEmailRendering(false);
   }, 1250);
 
 }
@@ -65,11 +68,13 @@ const handlePxClick = () => {
   setLoadingSpinner(true);
   setTimeout(() => {
     setLoadingSpinner(false);
-  setCollapse(false);
-  setPatientDefault(true);
+    setCollapse(false);
+    setPatientDefault(true);
+    // updateEmailRendering(true);
   }, 1250);
  
 }
+
 
 // track input if search field 
 const handleSearchChange = (e) => {

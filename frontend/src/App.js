@@ -33,6 +33,8 @@ function App({ user, loading, error, fetchMyAccount }) {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("jwt"));
   const [userName, setUserName] = useState("");
 
+  const [renderEmailTemplate, setRenderEmailTemplate] = useState(true);
+
  // Fetch user account when authenticated
 useEffect(() => {
   // const token = localStorage.getItem("jwt");
@@ -93,7 +95,7 @@ useEffect(() => {
         setMainContent(<OverviewMain />);
         break;
       case "/email-templates":
-        setMainContent(<EmailMain user={user}/>);
+        setMainContent(<EmailMain emailTemplateStatus={renderEmailTemplate} user={user}/>);
         break;
       case "/medical-forms":
         setMainContent(<MedicalMain />);
@@ -107,7 +109,9 @@ useEffect(() => {
       default:
         setMainContent(null);
     }
-  }, [location, user]);
+  }, [location, user, renderEmailTemplate]);
+
+  console.log("Current status of email rendering in APP js:",renderEmailTemplate);
 
 
   const today = new Date();
@@ -115,7 +119,8 @@ useEffect(() => {
   const formattedDate = today.toLocaleDateString("en-US", options); // e.g., "November 5, 2024"
 
 
-  console.log(userName);
+  // console.log(userName);
+
 
   // Conditionally render login or the main app
   if (!isAuthenticated) {
@@ -145,7 +150,7 @@ useEffect(() => {
         <Routes>
           <Route path="/overview" element={<Overview />} />
           <Route path="/medical-forms" element={<Medifiles />} />
-          <Route path="/email-templates" element={<Email />} />
+          <Route path="/email-templates" element={<Email updateEmailRendering={setRenderEmailTemplate}/>} />
           <Route path="/task-list" element={<TasksList />} />
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/account-settings" element={<Account user={user}/>} />

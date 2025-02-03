@@ -6,13 +6,13 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 import { ChevronLeftIcon, SmallAddIcon } from "@chakra-ui/icons";
 import EmailSenderUI from "./Main-Functions/SendEmail.jsx";
 import CreateEmailUI from "./Main-Functions/CreateEmail.jsx";
-import {deletePatientEmail} from "../../../../ReduxActionsMain/patientEmailActions"
+import EmailDeleteModal from "./Main-Functions/EmailDeleteModal.jsx"
 
-export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail, user }) => {
+export const EmailMain = ({ selectedPxEmail, selectedDrEmail, user, emailTemplateStatus }) => {
 
   const [useTemplate, setUseTemplate] = useState(false);
 
-  const [renderPatientEmail, setRenderPatientEmail] = useState(true);
+  const [renderPatientEmail, setRenderPatientEmail] = useState(emailTemplateStatus);
 
   const [showCreateForm, setShowCreateForm] = useState(false);
 
@@ -22,30 +22,33 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
 
   const [emailButtonConditional, setEmailButtonConditional] = useState(null);
 
-  const [afterDelete, setAfterDelete] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   const senderRef = useRef(null);
 
+  // passed down from APP js coming from sibling component to render true or false based on file selected 
+  console.log("current status of EmailMain state passed down:",emailTemplateStatus);
+ 
+
+  useEffect(() => {
+    setRenderPatientEmail(emailTemplateStatus);
+  }, [emailTemplateStatus]);
+
+  
+// manages user relation to the dr template to grant delete method
   useEffect(() => {
     if (selectedDrEmail) {
-      let emailAuthorizationCondition = user.admin || (user.id === selectedDrEmail.dr_owner_id);
+      setEmailButtonConditional(user.admin || (user.id === selectedDrEmail.dr_owner_id));
+    } 
+  }, [selectedDrEmail, user]);
 
-      console.log(emailAuthorizationCondition);
-      setEmailButtonConditional(emailAuthorizationCondition);
-      setRenderPatientEmail(false);
-    }
-  }, [selectedDrEmail, emailButtonConditional, user]);
-
+  // manages user relation to the patient template to grant delete method
   useEffect(() => {
     if (selectedPxEmail) {
-      let emailAuthorizationCondition = user.admin || (user.id === selectedPxEmail.px_owner_id);
+      setEmailButtonConditional(user.admin || (user.id === selectedPxEmail.px_owner_id));    
+    } 
+  }, [ selectedPxEmail, user]);
 
-      console.log(emailAuthorizationCondition);
-
-      setEmailButtonConditional(emailAuthorizationCondition);
-      setRenderPatientEmail(true);
-    }
-  }, [selectedPxEmail, emailButtonConditional, user]);
 
   useEffect(() => {
     if (useTemplateHtml) {
@@ -118,19 +121,13 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
   }
 
 
-
-  function handleDeleteEmailTemplate() {
-     if (emailButtonConditional){
-      deletePatientEmail(selectedPxEmail.id || selectedDrEmail.id);
-      setTimeout(() => {
-        alert("This email template has been deleted successfully")
-        setAfterDelete(true);
-      }, 400);
-     
-     } else {
-      alert("only admins and publishers are authorized to delete")
-     }
+  const handleModalOpen = () => {
+    setModalShow(true);
   };
+
+
+  console.log(selectedDrEmail);
+  console.log(selectedPxEmail);
 
   // Render the create form if `showCreateForm` is true
   if (showCreateForm) {
@@ -147,20 +144,16 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
     );
   }
 
-  if (afterDelete) {
-    return (
-      <div>
-      <CreateEmailUI />
-    </div>
-    );
-  }
-
   if (!selectedPxEmail && !selectedDrEmail) {
     return (
       <div>
         <CreateEmailUI templateObject={useTempToCreate} />
       </div>
     );
+  }
+
+  if ((emailTemplateStatus && !selectedPxEmail) || (!emailTemplateStatus && !selectedDrEmail)) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -180,10 +173,10 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
       <div className="main-container">
         <div
           className="emailCard"
-          key={renderPatientEmail ? selectedPxEmail.id : selectedDrEmail.id}
+          key={emailTemplateStatus ? selectedPxEmail?.id : selectedDrEmail?.id}
         >
           <h2 className="email-main-title">
-            {renderPatientEmail ? selectedPxEmail.px_temp_title : selectedDrEmail.dr_temp_title}
+            {emailTemplateStatus ? selectedPxEmail?.px_temp_title : selectedDrEmail?.dr_temp_title}
           </h2>
           <br />
           <div className="email-main-subject">
@@ -194,7 +187,7 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
               className="email-main-text"
               id="subject-p"
             >
-              {renderPatientEmail ? selectedPxEmail.px_temp_subject : selectedDrEmail.dr_temp_subject}
+              {emailTemplateStatus ? selectedPxEmail?.px_temp_subject : selectedDrEmail?.dr_temp_subject}
               <span className="copy-button-wrapper">
                 <button onClick={() => copyToClipboard("subject-p")}>
                   <svg
@@ -220,7 +213,7 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
               Body:
             </span>
             <p className="email-main-text"  id="body-p">
-              {renderPatientEmail ? selectedPxEmail.px_temp_content : selectedDrEmail.dr_temp_content}
+              {emailTemplateStatus ? selectedPxEmail?.px_temp_content : selectedDrEmail?.dr_temp_content}
               <span className="copy-button-wrapper">
                 <button onClick={() => copyToClipboard("body-p")}>
                   <svg
@@ -245,9 +238,9 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
               Tag:
             </span>
             <br />
-            <p id="category">  {renderPatientEmail
-                  ? selectedPxEmail.category
-                  : selectedDrEmail.category}</p>
+            <p id="category">  {emailTemplateStatus
+                  ? selectedPxEmail?.category
+                  : selectedDrEmail?.category}</p>
           </div>
           <br />
           <button
@@ -301,7 +294,7 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
                 data-toggle="tooltip"
                 data-placement="top"
                 title="Delete this email template"
-                onClick={handleDeleteEmailTemplate}
+                onClick={handleModalOpen}
                 >
                   {/* trash svg icon */}
               <svg
@@ -354,6 +347,12 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, deletePatientEmail
         <br />
       </div>
 
+      <EmailDeleteModal 
+      show={modalShow}
+      status={renderPatientEmail}
+      onHide={() =>  setModalShow(false)}
+      />
+
       <div className="export-emails">
         {useTemplateHtml ? (
           <div ref={senderRef}>
@@ -377,7 +376,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  deletePatientEmail,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmailMain);

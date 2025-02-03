@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { deleteMedifile } from '../../../../../ReduxActionsMain/medifilesActions';
 import { deleteMyMedifile } from '../../../../../ReduxActionsMain/myMedifilesActions';
+import "./Modal.css"
+
 
 export const MyVerticallyCenteredModal = ({ show, onHide, selectedMedifile, deleteMedifile, deleteMyMedifile, myMedifilesList, user }) => {
   // Log the selectedMedifile data for debugging
@@ -49,14 +51,15 @@ console.log(user)
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Delete Medifile
+          Delete medical form
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <h4>{selectedMedifile ? selectedMedifile.title : "No file selected"}</h4>
-        <p>
-          Are you sure you want to delete this medifile?
-        </p>
+      <Modal.Body className="modal-body">
+      <h2 className="heading-prompt">
+          Are you sure you want to delete this medical form?
+      </h2>
+      <br />
+        <h5 className="medical-file-title">{selectedMedifile ? selectedMedifile.title : "No file selected"}</h5>
         <p>
           <strong>Description:</strong> {selectedMedifile ? selectedMedifile.description : ""}
         </p>
