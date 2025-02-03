@@ -12,6 +12,7 @@ export const EmailDeleteModal = ({
   selectedPxEmail,
   selectedDrEmail,
   status,
+  exitModalFunction,
   deletePatientEmail,
   deleteDoctorEmail,
   user,
@@ -20,17 +21,6 @@ export const EmailDeleteModal = ({
 
   const [rendering , setRendering] = useState(status);
 
-  // useEffect(() => {
-  //   setRendering(status);
-  //   if (selectedPxEmail) {
-  //     setEmailButtonConditional(user.admin || (user.id === selectedPxEmail.px_owner_id));
-  //     console.log("selected patient email for Delete method");
-
-  //   } else if (selectedDrEmail) {
-  //     setEmailButtonConditional(user.admin || (user.id === selectedDrEmail.dr_owner_id));
-  //     console.log("selected doctor email for Delete method");
-  //   }
-  // }, [status, selectedPxEmail, selectedDrEmail, user]);
   useEffect(() => {
     setRendering(status);
   }, [status]);
@@ -52,15 +42,6 @@ export const EmailDeleteModal = ({
   
   console.log("delete modal status false for doctor true for patient", status);
 
-  // useEffect(() => {
-  //   if (selectedPxEmail) {
-  //     let emailAuthorizationCondition =
-  //       user.admin || user.id === selectedPxEmail.px_owner_id;
-  //     setEmailButtonConditional(emailAuthorizationCondition);
-  //   }
-  // }, [selectedPxEmail, emailButtonConditional, user]);
-
-
 
   function handleDeleteEmailTemplate() {
     if (emailButtonConditional && rendering) {
@@ -68,6 +49,7 @@ export const EmailDeleteModal = ({
       setTimeout(() => {
         alert("This email template has been deleted successfully");
         onHide();
+        exitModalFunction(true);
       }, 400);
     } else if (emailButtonConditional && !rendering) {
         console.log(rendering);
@@ -75,11 +57,13 @@ export const EmailDeleteModal = ({
             setTimeout(() => {
               alert("This email template has been deleted successfully");
               onHide();
+              exitModalFunction(true);
             }, 400);
      } else {
      onHide();
       setTimeout(() => {
         alert("Admin or Publisher authorization required: failed to delete");
+        exitModalFunction(true);
       }, 350);
     }
   }
@@ -99,9 +83,9 @@ export const EmailDeleteModal = ({
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal-body">
-        <h2>Are you sure you want to delete this email template?</h2>
+        <h2 className="heading-prompt">Are you sure you want to delete this email template?</h2>
         <br />
-        <h5>
+        <h5 className="email-title-modal">
           {rendering
             ? selectedPxEmail?.px_temp_title 
             : selectedDrEmail?.dr_temp_title 

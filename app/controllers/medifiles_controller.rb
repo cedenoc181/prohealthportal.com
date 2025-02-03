@@ -83,18 +83,21 @@ end
 
   # DELETE /medifiles/1
    def destroy
-    if current_user.role == "Admin"
+    if current_user.admin? || current_user.id == @medifile.file_owner_id
+
+    relational = MyMedifile.find_by(medifile_id: @medifile.id)
+    if relational 
+      relational.destroy
       @medifile.destroy
-    render json: {file: "#{@medifile} file has been deleted"}, status: :ok  
-  elsif current_user.role != "Admin"
-    if @medifile.file_owner_id == current_user.id
-      @medifile.destroy
-      render json: { message: 'you successfully deleted your medifile template'}, status: :ok
-  else
-       render json: {medifile: @medifile.errors.full_messages, error: "medical file failed be deleted"}, status: :unprocessable_entity
+      render json: {file: "#{@medifile} file has been deleted"}, status: :ok  
+    else
+      render json: {file: "#failed to delete, template not found"}, status: :unprocessable_entity
+    end 
+    else
+      render json: { message: "Only admins and publishers are authorized to perform this action"}, status: 401
      end
    end
-  end
+  
 
     private
  # Use callbacks to share common setup or constraints between actions.

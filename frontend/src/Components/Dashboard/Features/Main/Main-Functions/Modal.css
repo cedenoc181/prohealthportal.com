@@ -1,11 +1,11 @@
-/* My vertical centered modal  */
+/* My vertical centered modal and email modal  */
 
 .heading-prompt {
     text-align: center;
 }
 
 
-.medical-file-title {
+.medical-file-title, .email-title-modal{
     text-decoration: underline;
 }
 
@@ -14,5 +14,3 @@
 }
 
 
-
-/* email delete modal  */

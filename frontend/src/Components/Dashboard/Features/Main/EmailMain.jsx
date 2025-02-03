@@ -24,6 +24,8 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, user, emailTemplat
 
   const [modalShow, setModalShow] = useState(false);
 
+  const [exitModal, setExitModal] = useState(false);
+
   const senderRef = useRef(null);
 
   // passed down from APP js coming from sibling component to render true or false based on file selected 
@@ -144,7 +146,7 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, user, emailTemplat
     );
   }
 
-  if (!selectedPxEmail && !selectedDrEmail) {
+  if (!selectedPxEmail && !selectedDrEmail || exitModal) {
     return (
       <div>
         <CreateEmailUI templateObject={useTempToCreate} />
@@ -350,6 +352,7 @@ export const EmailMain = ({ selectedPxEmail, selectedDrEmail, user, emailTemplat
       <EmailDeleteModal 
       show={modalShow}
       status={renderPatientEmail}
+      exitModalFunction={setExitModal}
       onHide={() =>  setModalShow(false)}
       />
 

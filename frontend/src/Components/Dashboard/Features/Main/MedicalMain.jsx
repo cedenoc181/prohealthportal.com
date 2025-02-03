@@ -23,6 +23,7 @@ export const MedicalMain = ({
   const [showEditForm, setShowEditForm] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [formDate, setFormDate] = useState(null);
+  const [emailButtonConditional, setEmailButtonConditional] = useState(null);
   const [medifileUpdatedParams, setMedifileUpdatedParams] = useState({
     title: selectedMedifile ? selectedMedifile.title : "",
     description: selectedMedifile ? selectedMedifile.description : "",
@@ -32,10 +33,12 @@ export const MedicalMain = ({
 
   console.log(allUsers);
   console.log(user);
-  
 
   useEffect(() => {
     if (selectedMedifile) {
+      setEmailButtonConditional(
+        (user && user.id === selectedMedifile.file_owner_id) || user.admin
+      );
       let formattedDate = moment(selectedMedifile.created_at).format(
         "MM/DD/YYYY"
       );
@@ -45,10 +48,9 @@ export const MedicalMain = ({
         description: selectedMedifile.description,
         instructions: selectedMedifile.instructions,
         category: selectedMedifile.file_cover_alt,
-      
-      })
+      });
     }
-  }, [selectedMedifile]);
+  }, [selectedMedifile, user]);
 
   const handleUIClick = () => {
     setShowCreateForm(!showCreateForm);
@@ -65,33 +67,32 @@ export const MedicalMain = ({
   };
 
   const handleMedifileUpdate = (e) => {
-    e.preventDefault(); 
-    if ((user && user.id === selectedMedifile.file_owner_id) || user.admin) {
-    if (
-      selectedMedifile.id &&
-      medifileUpdatedParams.title &&
-      medifileUpdatedParams.description &&
-      medifileUpdatedParams.instructions &&
-      medifileUpdatedParams.category 
-    ) {
-    updateMedifile(selectedMedifile.id, medifileUpdatedParams);
-    setTimeout(() => {
-      setShowEditForm(false);
-    }, 300);
-     alert('Medifile updated');
-    console.log("medifile update method runs")
-  } else {
-    alert("Fill all parameters")
-  }
-} else {
-  console.log("not authorized user");
-    setTimeout(() => {
-     alert("Admin or Publisher authorization required: failed to update");
-     setShowEditForm(false);
-   }, 350);
-}
+    e.preventDefault();
+    if (emailButtonConditional) {
+      if (
+        selectedMedifile.id &&
+        medifileUpdatedParams.title &&
+        medifileUpdatedParams.description &&
+        medifileUpdatedParams.instructions &&
+        medifileUpdatedParams.category
+      ) {
+        updateMedifile(selectedMedifile.id, medifileUpdatedParams);
+        setTimeout(() => {
+          setShowEditForm(false);
+        }, 300);
+        alert("Medifile updated");
+        console.log("medifile update method runs");
+      } else {
+        alert("Fill all parameters");
+      }
+    } else {
+      console.log("not authorized user");
+      setTimeout(() => {
+        alert("Admin or Publisher authorization required: failed to update");
+        setShowEditForm(false);
+      }, 350);
+    }
   };
-
 
   console.log(medifileUpdatedParams);
 
@@ -120,7 +121,12 @@ export const MedicalMain = ({
   return (
     <div className="medical-main">
       <div className="createUI-button">
-        <button onClick={handleUIClick} data-toggle="tooltip" data-placement="top" title="Create a new medical file">
+        <button
+          onClick={handleUIClick}
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Create a new medical file"
+        >
           <SmallAddIcon />
           Create
         </button>
@@ -129,7 +135,13 @@ export const MedicalMain = ({
         <div className="pdf-container">
           {showEditForm ? (
             <>
-              <button className="medifileEditButton" onClick={handleUiEdit} data-toggle="tooltip" data-placement="left" title="exit update">
+              <button
+                className="medifileEditButton"
+                onClick={handleUiEdit}
+                data-toggle="tooltip"
+                data-placement="left"
+                title="exit update"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -222,25 +234,28 @@ export const MedicalMain = ({
                 </div>
                 <br />
                 <div className="label-input-category">
-                <label className="subtitle-pdf-category subtitle-pdf-category-edit">Document category: </label>
-                <select 
-                name="category"
-                className="category-update"
-                onChange={(e) => 
-                  setMedifileUpdatedParams({
-                    ...medifileUpdatedParams, 
-                    category: e.target.value,
-                  })
-                }
-                // required
-                 >
-                  <option 
-                  value={selectedMedifile.file_cover_alt}>created as: {selectedMedifile.file_cover_alt} </option>
-                  <option value="APOS">APOS</option>
-                  <option value="authorization">authorization</option>
-                  <option value="PT/OT">PT/OT</option>
-                  <option value="other">other</option>
-                </select>
+                  <label className="subtitle-pdf-category subtitle-pdf-category-edit">
+                    Document category:{" "}
+                  </label>
+                  <select
+                    name="category"
+                    className="category-update"
+                    onChange={(e) =>
+                      setMedifileUpdatedParams({
+                        ...medifileUpdatedParams,
+                        category: e.target.value,
+                      })
+                    }
+                    // required
+                  >
+                    <option value={selectedMedifile.file_cover_alt}>
+                      created as: {selectedMedifile.file_cover_alt}{" "}
+                    </option>
+                    <option value="APOS">APOS</option>
+                    <option value="authorization">authorization</option>
+                    <option value="PT/OT">PT/OT</option>
+                    <option value="other">other</option>
+                  </select>
                 </div>
                 <br />
                 <div className="edit-button-submit">
@@ -250,8 +265,8 @@ export const MedicalMain = ({
                     size="lg"
                     type="submit"
                     data-toggle="tooltip"
-                     data-placement="top" 
-                     title="Submit update"
+                    data-placement="top"
+                    title="Submit update"
                   >
                     update
                   </Button>
@@ -260,7 +275,13 @@ export const MedicalMain = ({
             </>
           ) : (
             <>
-              <button className="medifileEditButton" onClick={handleUiEdit} data-toggle="tooltip" data-placement="top" title="Update medical file">
+              <button
+                className="medifileEditButton"
+                onClick={handleUiEdit}
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Update medical file"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -310,23 +331,29 @@ export const MedicalMain = ({
                 </p>
               </div>
               <div className="delete-medifile-container">
-                <Button
-                  variant="primary"
-                  onClick={() => handleModalOpen(selectedMedifile)}
-                  data-toggle="tooltip" data-placement="top" title="Delete medical file"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-trash"
-                    viewBox="0 0 16 16"
+                {emailButtonConditional ? (
+                  <Button
+                    variant="primary"
+                    onClick={() => handleModalOpen(selectedMedifile)}
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Delete medical file"
                   >
-                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                  </svg>
-                </Button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-trash"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                      <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                    </svg>
+                  </Button>
+                ) : (
+                  ""
+                )}
               </div>
               <MyVerticallyCenteredModal
                 show={modalShow}

@@ -160,7 +160,7 @@ useEffect(() => {
       <div id="main" className="main">
         <div className="header">
           <div className="date-time">{formattedDate}</div>
-          <div className="user-info">{userName}</div> 
+          <div className="user-info">{userName ?? "user"}</div> 
         </div>
         {mainContent}
       </div>

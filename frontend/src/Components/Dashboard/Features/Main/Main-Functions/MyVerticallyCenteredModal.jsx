@@ -1,38 +1,31 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { deleteMedifile } from '../../../../../ReduxActionsMain/medifilesActions';
-import { deleteMyMedifile } from '../../../../../ReduxActionsMain/myMedifilesActions';
 import "./Modal.css"
 
 
-export const MyVerticallyCenteredModal = ({ show, onHide, selectedMedifile, deleteMedifile, deleteMyMedifile, myMedifilesList, user }) => {
+export const MyVerticallyCenteredModal = ({ show, onHide, selectedMedifile, deleteMedifile, user }) => {
+    const [emailButtonConditional, setEmailButtonConditional] = useState(null);
+  
   // Log the selectedMedifile data for debugging
   console.log("Selected Medifile:", selectedMedifile);
-  console.log(myMedifilesList);
 console.log(user)
-  
-  let myMedifileAssociate = myMedifilesList.find(file => file.medifile_id === selectedMedifile.id)
-  console.log("found my_medifile association:", myMedifileAssociate ? myMedifileAssociate : "no user association");
 
+useEffect(() => {
+  setEmailButtonConditional((user && user.id === selectedMedifile.file_owner_id) || user.admin)
+}, [user])
+
+  
   const handleDelete = () => {
-      if ((user && user.id === selectedMedifile.file_owner_id) || user.admin) {
-        if (myMedifileAssociate && selectedMedifile.id === myMedifileAssociate.medifile_id) {
-          console.log("Deleting selected file");
-        deleteMyMedifile(myMedifileAssociate.id);
+      if (emailButtonConditional) {
+          console.log(`Deleting selected file: ${selectedMedifile.title}`);
         deleteMedifile(selectedMedifile.id) 
         onHide(); // Close the modal after deletion
         setTimeout(() => {
           alert('file successfully deleted');
         }, 700);
-      } else if (!myMedifileAssociate) {
-        deleteMedifile(selectedMedifile.id);
-        onHide(); // Close the modal after deletion
-        setTimeout(() => {
-          alert('file successfully deleted');
-        }, 700);
-      }
       } else {
            onHide();
            setTimeout(() => {
@@ -80,7 +73,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     deleteMedifile,
-    deleteMyMedifile,
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyVerticallyCenteredModal);
