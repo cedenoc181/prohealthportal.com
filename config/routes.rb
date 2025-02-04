@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :ordered_items
+  resources :iventory_items
+  resources :requested_items
+  resources :clinics
 
     #user path to full crud of these models for nested routes
   #these models are specifically for users for personalized exp for nom-admins

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_23_193054) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_04_200711) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_193054) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "clinics", force: :cascade do |t|
+    t.string "clinic_location_name"
+    t.string "clinic_location_address"
+    t.string "clinic_phone_number", default: "212-600-4781"
+    t.string "clinical_director"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "dr_templates", force: :cascade do |t|
     t.string "dr_temp_title"
     t.string "dr_temp_subject"
@@ -51,6 +60,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_193054) do
     t.datetime "updated_at", null: false
     t.integer "dr_owner_id"
     t.index ["dr_owner_id"], name: "index_dr_templates_on_dr_owner_id"
+  end
+
+  create_table "iventory_items", force: :cascade do |t|
+    t.bigint "clinic_id"
+    t.string "item_type"
+    t.string "item_name"
+    t.integer "count"
+    t.string "item_status"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_iventory_items_on_clinic_id"
+    t.index ["user_id"], name: "index_iventory_items_on_user_id"
   end
 
   create_table "medifiles", force: :cascade do |t|
@@ -89,6 +111,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_193054) do
     t.index ["user_id"], name: "index_my_templates_on_user_id"
   end
 
+  create_table "ordered_items", force: :cascade do |t|
+    t.bigint "clinic_id"
+    t.string "item_type"
+    t.string "item_name"
+    t.integer "count"
+    t.date "order_date"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_ordered_items_on_clinic_id"
+    t.index ["user_id"], name: "index_ordered_items_on_user_id"
+  end
+
   create_table "patient_templates", force: :cascade do |t|
     t.string "px_temp_title"
     t.string "px_temp_subject"
@@ -99,6 +134,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_193054) do
     t.datetime "updated_at", null: false
     t.integer "px_owner_id"
     t.index ["px_owner_id"], name: "index_patient_templates_on_px_owner_id"
+  end
+
+  create_table "requested_items", force: :cascade do |t|
+    t.bigint "clinic_id"
+    t.string "item_name"
+    t.string "item_link"
+    t.string "item_type"
+    t.integer "count"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_requested_items_on_clinic_id"
+    t.index ["user_id"], name: "index_requested_items_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -117,6 +165,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_193054) do
     t.datetime "updated_at", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.bigint "clinic_id"
+    t.index ["clinic_id"], name: "index_users_on_clinic_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -128,4 +178,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_193054) do
   add_foreign_key "my_templates", "dr_templates"
   add_foreign_key "my_templates", "patient_templates"
   add_foreign_key "my_templates", "users"
+  add_foreign_key "users", "clinics"
 end
