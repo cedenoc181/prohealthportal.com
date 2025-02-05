@@ -6,6 +6,8 @@ class CreateOrderedItems < ActiveRecord::Migration[7.1]
       t.string :item_name 
       t.integer :count 
       t.date :order_date
+      t.boolean :received
+      t.date :delivery_date
       t.references :user
 
       t.timestamps

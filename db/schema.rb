@@ -68,6 +68,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_04_200711) do
     t.string "item_name"
     t.integer "count"
     t.string "item_status"
+    t.boolean "staple_item"
+    t.string "item_link"
+    t.integer "warning_count"
+    t.boolean "item_requested"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -117,6 +121,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_04_200711) do
     t.string "item_name"
     t.integer "count"
     t.date "order_date"
+    t.boolean "received"
+    t.date "delivery_date"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -142,6 +148,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_04_200711) do
     t.string "item_link"
     t.string "item_type"
     t.integer "count"
+    t.boolean "ordered"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

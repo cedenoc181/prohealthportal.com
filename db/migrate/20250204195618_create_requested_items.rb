@@ -6,6 +6,7 @@ class CreateRequestedItems < ActiveRecord::Migration[7.1]
       t.string :item_link
       t.string :item_type 
       t.integer :count 
+      t.boolean :ordered
       t.references :user
 
 
