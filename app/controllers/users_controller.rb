@@ -136,7 +136,7 @@ end
     end
 
     def user_editable_params 
-        params.permit(:password, :email, :role, :credentials, :clinic_location, :insurance_network, :direct_access, :admin, :phone_ext, :first_name, :last_name)               
+        params.permit(:password, :email, :role, :credentials, :clinic_location, :insurance_network, :direct_access, :admin, :phone_ext, :first_name, :last_name, :clinic_id)               
     end
 
     def patient_template_params
