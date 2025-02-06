@@ -1,7 +1,7 @@
 class IventoryItemsController < ApplicationController
     before_action :find_item, only: %i[ show update destroy ]
 
-skip_before_action :is_admin?, only: %i[ show index ]
+    skip_before_action :is_admin?, only: %i[ show index ]
 
 def index
     @clinics = Clinic.all
