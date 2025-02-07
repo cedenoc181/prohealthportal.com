@@ -12,7 +12,6 @@ def show
     render json: @inventory_item, serializer: InventoryItemSerializer, status: :ok
 end 
 
-
 def create 
     @inventory_item = InventoryItem.new(inventory_items_params)
     if @inventory_item.save
@@ -22,7 +21,6 @@ def create
     end
 end 
 
-
 def update 
     if  @inventory_item.update(inventory_items_params)
         render json: {item: @inventory_item, message: "#{@inventory_item.item_name} has been successfully updated"}, status: :ok
@@ -30,7 +28,6 @@ def update
         render json: {item: @inventory_item.errors.full_messages, message: "failed to update #{@inventory_item.item_name}, please check params have been met"}, status: :unprocessable_entity
     end
 end 
-
 
 def destroy
 

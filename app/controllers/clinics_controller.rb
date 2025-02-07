@@ -6,13 +6,15 @@ skip_before_action :is_admin?, only: %i[ show index ]
 
 def index
     @clinics = Clinic.all
-    render json: @clinics, each_serializer: ClinicalSerializer, status: :ok
+    render json: @clinics, each_serializer: ClinicSerializer, status: :ok
 end 
 
 def show
-    render json: @clinic, serializer: ClinicalSerializer, status: :ok
+    render json: @clinic, serializer: ClinicSerializer, status: :ok
 end 
 
+
+# clinics should store all the orders for inventory
 
 def create 
     @clinic = Clinic.new(clinic_params)

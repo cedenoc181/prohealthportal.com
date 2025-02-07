@@ -20,6 +20,7 @@ after_update :update_insurance_network
     has_many :patient_templates, through: :my_templates
     has_many :dr_templates, through: :my_templates
 
+    belongs_to :clinic
 
     # validations
     has_secure_password

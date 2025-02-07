@@ -5,8 +5,8 @@ class OrderedItemsController < ApplicationController
 
 
     def index
-            @ordered_items = OrderedItem.all
-            render json: @ordered_items, each_serializer: OrderedItemSerializer, status: :ok
+        @ordered_items = OrderedItem.all
+        render json: @ordered_items, each_serializer: OrderedItemSerializer, status: :ok
     end
 
     def show 

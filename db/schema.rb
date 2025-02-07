@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_04_200711) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_07_214429) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_04_200711) do
     t.string "clinic_location_name"
     t.string "clinic_location_address"
     t.string "clinic_phone_number", default: "212-600-4781"
-    t.string "clinical_director"
+    t.bigint "clinical_director"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -179,6 +179,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_04_200711) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "clinics", "users", column: "clinical_director"
   add_foreign_key "my_medifiles", "medifiles"
   add_foreign_key "my_medifiles", "users"
   add_foreign_key "my_medifiles", "users", column: "coworker_id"
