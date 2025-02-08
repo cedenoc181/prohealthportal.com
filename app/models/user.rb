@@ -33,31 +33,32 @@ after_update :update_insurance_network
 
       # Generates a new password reset token and sets the timestamp
   def generate_password_token!
-    token = SecureRandom.hex(10)
-    self.update_columns(
-      reset_password_token: token,
-      reset_password_sent_at: Time.now.utc
-    )
+    update(reset_password_token: generate_token, reset_password_sent_at: Time.now.utc)
   end
 
   # Checks if the password reset token is expired (set to 2 hours)
   def password_token_valid?
-    (self.reset_password_sent_at + 2.hours) > Time.now
+    reset_token_expiration_time > Time.now
   end
 
   # Resets the password and clears the reset token
   def reset_password!(new_password)
-    self.reset_password_token = nil
-    self.password = new_password
-    save!
+    update(password: new_password, reset_password_token: nil)
   end
 
 private 
 
+def reset_token_expiration_time
+  self.reset_password_sent_at + 2.hours
+end
+
+def generate_token
+  SecureRandom.hex(10)
+end
+
 def post_create_update
-  self.update(
-    admin: role == 'Admin' || role == 'Owner',
-    direct_access: role == "PT" || role == 'OT',
+  update(
+    admin: role == 'Admin',
     email: email&.downcase,
     first_name: first_name&.downcase,
     last_name: last_name&.downcase
@@ -68,9 +69,9 @@ end
 def update_insurance_network
   insurance_accepted = ['United Health Care', 'Fidelis Care', 'Metroplus', 'BCBS', 'Atnea', 'Emblem Health', 'Oxford', 'Medicare', 'Cigna']
     if self.role == 'PT' || self.role == 'OT'
-      self.update_column(:insurance_network, insurance_accepted.join(", "))
+      self.update(:insurance_network, insurance_accepted.join(", "))
     else
-      self.update_column(:insurance_network, "not provided")
+      self.update(:insurance_network, "not provided")
     end
 end
 
