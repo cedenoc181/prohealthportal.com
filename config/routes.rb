@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :ordered_items
-  resources :iventory_items
+  resources :inventory_items
   resources :requested_items
   resources :clinics
 

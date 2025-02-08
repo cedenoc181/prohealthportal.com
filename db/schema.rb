@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_08_222038) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_08_230603) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_08_222038) do
     t.index ["dr_owner_id"], name: "index_dr_templates_on_dr_owner_id"
   end
 
-  create_table "iventory_items", force: :cascade do |t|
+  create_table "inventory_items", force: :cascade do |t|
     t.bigint "clinic_id"
     t.string "item_type"
     t.string "item_name"
@@ -75,8 +75,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_08_222038) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["clinic_id"], name: "index_iventory_items_on_clinic_id"
-    t.index ["user_id"], name: "index_iventory_items_on_user_id"
+    t.index ["clinic_id"], name: "index_inventory_items_on_clinic_id"
+    t.index ["user_id"], name: "index_inventory_items_on_user_id"
   end
 
   create_table "medifiles", force: :cascade do |t|

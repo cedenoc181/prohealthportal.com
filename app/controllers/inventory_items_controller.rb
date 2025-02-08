@@ -1,11 +1,11 @@
-class IventoryItemsController < ApplicationController
+class InventoryItemsController < ApplicationController
     before_action :find_item, only: %i[ show update destroy ]
 
     skip_before_action :is_admin?, only: %i[ show index ]
 
 def index
-    @clinics = Clinic.all
-    render json: @inventory_item, each_serializer: InventoryItemSerializer, status: :ok
+    @inventory_items = InventoryItem.all
+    render json: @inventory_items, each_serializer: InventoryItemSerializer, status: :ok
 end 
 
 def show
