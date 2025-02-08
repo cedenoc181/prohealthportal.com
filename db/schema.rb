@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_07_214429) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_08_222038) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -145,7 +145,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_07_214429) do
   create_table "requested_items", force: :cascade do |t|
     t.bigint "clinic_id"
     t.string "item_name"
-    t.string "item_link"
+    t.text "item_link"
     t.string "item_type"
     t.integer "count"
     t.boolean "ordered"

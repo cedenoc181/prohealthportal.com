@@ -22,6 +22,8 @@ after_update :update_insurance_network
 
     belongs_to :clinic
 
+    has_many :requested_items, through: :clinics
+
     # validations
     has_secure_password
 

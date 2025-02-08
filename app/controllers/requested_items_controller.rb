@@ -1,5 +1,5 @@
 class RequestedItemsController < ApplicationController
-    before_action :find_requested_item, only: %i[ show update destroy ]
+    before_action :find_requested_item, only: %i[ show update delete ]
 
     skip_before_action :is_admin?, only: %i[ show index ]
 
