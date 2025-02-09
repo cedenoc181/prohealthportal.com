@@ -1,5 +1,5 @@
 class RequestedItemsController < ApplicationController
-    before_action :find_requested_item, only: %i[ show update delete ]
+    before_action :find_requested_item, only: %i[ show update destroy ]
 
     skip_before_action :is_admin?, only: %i[ show index ]
 
@@ -30,8 +30,8 @@ class RequestedItemsController < ApplicationController
         end
     end
 
-    def delete 
-        if @requested_item.destroy
+    def destroy 
+        if @requested_item.destroy!
             render json: {ordered_item: "#{@requested_item.item_name} has been deleted"}, status: :ok
         else
             render json: {ordered_item: @requested_item.errors.full_messages}, status: :unprocessable_entity

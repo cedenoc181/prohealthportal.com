@@ -24,6 +24,10 @@ after_update :update_insurance_network
 
     has_many :requested_items, through: :clinics
 
+    has_many :ordered_items, through: :clinics
+
+    has_many :inventory_items, through: :clinics
+
     # validations
     has_secure_password
 

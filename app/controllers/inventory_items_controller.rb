@@ -32,7 +32,7 @@ end
 
 def destroy
 
-    if  @inventory_item.destroy
+    if  @inventory_item.destroy!
         render json: {message: "#{@inventory_item.item_name} was successfully deleted"}, status: :ok
         else
          render json: {message: "failed to delete #{ @inventory_item}"}

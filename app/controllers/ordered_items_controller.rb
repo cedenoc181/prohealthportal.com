@@ -24,14 +24,14 @@ class OrderedItemsController < ApplicationController
 
     def update 
         if @ordered_item.update(ordered_items_params)
-            redner json: {ordered_item: @ordered_item, message: "ordered item: #{@ordered_item.item_name} has been updated"}, stats: :ok
+            render json: {ordered_item: @ordered_item, message: "ordered item: #{@ordered_item.item_name} has been updated"}, stats: :ok
         else
             render json: {ordered_item: @ordered_item.errors.full_messages, message: "failed to update ordered item"}, status: :unprocessable_entity
         end
     end
 
-    def delete 
-        if @ordered_item.destroy
+    def destroy 
+        if @ordered_item.destroy!
             render json: {ordered_item: "#{@ordered_item.item_name} has been deleted"}, status: :ok
         else
             render json: {ordered_item: @ordered_item.errors.full_messages}, status: :unprocessable_entity
