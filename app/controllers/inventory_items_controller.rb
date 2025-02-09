@@ -12,6 +12,30 @@ def show
     render json: @inventory_item, serializer: InventoryItemSerializer, status: :ok
 end 
 
+# fetch inventory by low stock
+def render_insufficient_list
+    inventory_groups = InventoryItem.all.group_by(&:item_status)
+    render json: inventory_groups
+end 
+
+# fetch inventory by item category
+def inventory_type
+    inventory_types = InventoryItem.all.group_by(&:item_type)
+    render json: inventory_types
+end
+
+# fetch inventory by clinic
+def inventory_by_clinic
+    clinic_inventory = InventoryItem.all.group_by(&:clinic_id)
+    render json: clinic_inventory
+end 
+
+def inventory_by_requested
+    inventory_requested = InventoryItem.all.group_by(&:item_requested)
+    render json: inventory_requested
+end
+
+
 def create 
     @inventory_item = InventoryItem.new(inventory_items_params)
     if @inventory_item.save
@@ -31,7 +55,6 @@ end
 
 
 def destroy
-
     if  @inventory_item.destroy!
         render json: {message: "#{@inventory_item.item_name} was successfully deleted"}, status: :ok
         else

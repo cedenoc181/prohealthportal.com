@@ -32,6 +32,15 @@ Rails.application.routes.draw do
 
     get '/email_config', to: 'email_config#index'
 
+
+    get '/inventory_sufficient', to: 'inventory_items#render_insufficient_list'
+
+    get '/inventory_type', to: 'inventory_items#inventory_type'
+
+    get '/inventory_by_clinic', to: 'inventory_items#inventory_by_clinic'
+
+    get '/inventory_by_requested', to: 'inventory_items#inventory_by_requested'
+
     #admin will be only user to create instances of these models, 
   resources :dr_templates
   resources :patient_templates
