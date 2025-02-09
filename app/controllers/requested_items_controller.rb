@@ -10,7 +10,7 @@ class RequestedItemsController < ApplicationController
     end
 
     def show 
-        render json: @requested_item, each_serializer: RequestedItemSerializer, status: :ok
+        render json: @requested_item, serializer: RequestedItemSerializer, status: :ok
     end
 
     def create
@@ -24,7 +24,7 @@ class RequestedItemsController < ApplicationController
 
     def update 
         if @requested_item.update(requested_items_params)
-            redner json: {ordered_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been updated"}, stats: :ok
+            render json: {ordered_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been updated"}, stats: :ok
         else
             render json: {ordered_item: @requested_item.errors.full_messages, message: "failed to update requested item"}, status: :unprocessable_entity
         end
@@ -41,7 +41,7 @@ class RequestedItemsController < ApplicationController
     private 
 
     def find_requested_item
-        @requested_item = RquestedItem.find(params[:id])
+        @requested_item = RequestedItem.find(params[:id])
     end
     
     def requested_items_params
