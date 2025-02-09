@@ -10,4 +10,12 @@ def to_clinic
   object.clinic&.slice(:clinic_location_name, :clinic_location_address)
 end 
 
+def created_at 
+  object.created_at.strftime("%m/%d/%Y")
+end
+
+def updated_at 
+  object.updated_at.strftime("%m/%d/%Y")
+end
+
 end

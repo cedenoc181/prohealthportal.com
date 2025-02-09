@@ -22,17 +22,18 @@ def create
 end 
 
 def update 
-    if  @inventory_item.update(inventory_items_params)
+    if @inventory_item.update(inventory_items_params)
         render json: {item: @inventory_item, message: "#{@inventory_item.item_name} has been successfully updated"}, status: :ok
     else
         render json: {item: @inventory_item.errors.full_messages, message: "failed to update #{@inventory_item.item_name}, please check params have been met"}, status: :unprocessable_entity
     end
 end 
 
+
 def destroy
 
     if  @inventory_item.destroy
-        render json: {message: "#{@inventory_item} was successfully deleted"}, status: :ok
+        render json: {message: "#{@inventory_item.item_name} was successfully deleted"}, status: :ok
         else
          render json: {message: "failed to delete #{ @inventory_item}"}
     end
@@ -45,7 +46,7 @@ end
 private 
 
 def find_item 
-    @inventory_item = InventoryItem.find(param[:id])
+    @inventory_item = InventoryItem.find(params[:id])
 end 
 
 def inventory_items_params 
