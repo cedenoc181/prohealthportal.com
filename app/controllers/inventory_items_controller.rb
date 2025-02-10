@@ -46,6 +46,7 @@ def create
 end 
 
 def update 
+    puts params.inspect
     if @inventory_item.update(inventory_items_params)
         render json: {item: @inventory_item, message: "#{@inventory_item.item_name} has been successfully updated"}, status: :ok
     else
