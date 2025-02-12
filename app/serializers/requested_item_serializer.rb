@@ -1,6 +1,5 @@
 class RequestedItemSerializer < ActiveModel::Serializer
-  attributes :id, :item_type, :item_name, :item_link, :count, :ordered, :created_at, :updated_at, :requested_by, :to_clinic
-
+  attributes :id, :item_type, :item_name, :item_link, :requested_quantity, :request_fulfilled, :created_at, :updated_at, :requested_by, :to_clinic
 
 def requested_by
   object.user&.slice(:first_name, :last_name)

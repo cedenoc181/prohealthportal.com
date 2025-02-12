@@ -13,6 +13,20 @@ class RequestedItemsController < ApplicationController
         render json: @requested_item, serializer: RequestedItemSerializer, status: :ok
     end
 
+    def requested_items_for_clinics
+        requested_items = RequestedItem.includes(:clinic).group_by(&:clinic_id)
+        
+        render json: requested_items.transform_values { |items| ActiveModelSerializers::SerializableResource.new(items, each_serializer: RequestedItemSerializer) },
+               status: :ok
+    end
+
+    # if i wanted to isolate the ordered items 
+    # def ordered_items
+    #     requested_items_ordered = RequestedItem.all.where(ordered: true).group_by(&:clinic_id)
+    #     render json: requested_items_ordered, status: :ok
+    # end
+
+
     def create
         @requested_item = RequestedItem.new(requested_items_params)
         if @requested_item.save
@@ -45,6 +59,6 @@ class RequestedItemsController < ApplicationController
     end
     
     def requested_items_params
-        params.permit(:clinic_id, :item_name, :item_link, :item_type, :count, :ordered, :user_id)
+        params.permit(:clinic_id, :item_name, :item_link, :item_type, :requested_quantity, :request_fulfilled, :user_id)
     end
 end

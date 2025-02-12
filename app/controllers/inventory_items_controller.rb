@@ -24,14 +24,16 @@ def inventory_type
     render json: inventory_types
 end
 
-# fetch inventory by clinic
+# fetch inventory by clinic, show all inventroy on hand for each clinic
 def inventory_by_clinic
-    clinic_inventory = InventoryItem.all.group_by(&:clinic_id)
-    render json: clinic_inventory
+    clinic_inventory = InventoryItem.includes(:clinic).group_by(&:clinic_id)
+    render json: clinic_inventory.transform_values { |inventory| ActiveModelSerializers::SerializableResource.new(inventory, each_serializer: InventoryItemSerializer) },
+    status: :ok
 end 
 
-def inventory_by_requested
-    inventory_requested = InventoryItem.all.group_by(&:item_requested)
+# this loads all the items that have been requested due to insuffiecient inventory
+def inventory_by_request_sent
+    inventory_requested = InventoryItem.all.where(item_requested: true).group_by(&:clinic_id)
     render json: inventory_requested
 end
 

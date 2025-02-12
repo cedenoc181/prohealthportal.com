@@ -39,7 +39,11 @@ Rails.application.routes.draw do
 
     get '/inventory_by_clinic', to: 'inventory_items#inventory_by_clinic'
 
-    get '/inventory_by_requested', to: 'inventory_items#inventory_by_requested'
+    get '/inventory_by_requested', to: 'inventory_items#inventory_by_request_sent'
+
+    get '/requested_items_for_clinics', to: 'requested_items#requested_items_for_clinics'
+
+      # get '/requested_items_ordered', to: 'requested_items#ordered_items'
 
     #admin will be only user to create instances of these models, 
   resources :dr_templates

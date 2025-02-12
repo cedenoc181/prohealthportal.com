@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_08_230603) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_12_154202) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -119,9 +119,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_08_230603) do
     t.bigint "clinic_id"
     t.string "item_type"
     t.string "item_name"
-    t.integer "count"
+    t.integer "order_quantity"
     t.date "order_date"
-    t.boolean "received"
+    t.boolean "order_received"
     t.date "delivery_date"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -147,8 +147,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_08_230603) do
     t.string "item_name"
     t.text "item_link"
     t.string "item_type"
-    t.integer "count"
-    t.boolean "ordered"
+    t.integer "requested_quantity"
+    t.boolean "request_fulfilled"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

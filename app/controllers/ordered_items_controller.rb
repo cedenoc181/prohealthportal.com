@@ -45,7 +45,7 @@ class OrderedItemsController < ApplicationController
     end
 
     def ordered_items_params
-        params.permit(:clinic_id, :item_type, :item_name, :count, :order_date, :received, :delivery_date, :user_id)
+        params.permit(:clinic_id, :item_type, :item_name, :order_quantity, :order_date, :order_received, :delivery_date, :user_id)
     end
 
 end
