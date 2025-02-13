@@ -31,6 +31,7 @@ class RequestedItem < ApplicationRecord
                     user_id: self.user_id, 
                     item_type: self.item_type,
                     item_name: self.item_name, 
+                    item_link: self.item_link,
                     order_quantity: self.requested_quantity, 
                     order_date: Date.today,
                     order_received: false
