@@ -1,5 +1,5 @@
 class OrderedItemSerializer < ActiveModel::Serializer
-  attributes :id, :item_type, :item_name, :order_quantity, :order_received, :order_date, :order_updated_at, :ordered_by, :to_clinic
+  attributes :id, :item_type, :item_name, :item_link, :delivery_date, :order_quantity, :order_received, :order_date, :order_updated_at, :ordered_by, :to_clinic
 
   def ordered_by
     object.user&.slice(:first_name, :last_name)

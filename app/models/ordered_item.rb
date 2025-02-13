@@ -6,13 +6,16 @@ class OrderedItem < ApplicationRecord
 
     after_save :update_inventory
 
+
     private 
 
     # automated update for when order is received
     # make sure delievery date on the ui is mandatory before order instance made
 
+
     def update_inventory
-        return unless self.delivery_date >= Date.today && self.save_change_to_order_received?(from: false, to: true)
+        return unless self.delivery_date 
+        return unless Date.today >= self.delivery_date && self.saved_change_to_order_received?(from: false, to: true)
         return unless self.clinic_id.present?
 
         exisiting_inventory = self.clinic.inventory_items.find_by(item_name: self.item_name, clinic_id: self.clinic_id)

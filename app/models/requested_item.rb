@@ -21,7 +21,6 @@ class RequestedItem < ApplicationRecord
             if order_exits
                 order_exits.update(
                     order_received: false, 
-                    delivery_date: nil,
                     order_date: Date.today,
                     user_id: self.user_id
                 )
