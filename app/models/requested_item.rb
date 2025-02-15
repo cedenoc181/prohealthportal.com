@@ -6,6 +6,10 @@ class RequestedItem < ApplicationRecord
 
     after_save :ordered_fulfilled
 
+    validates :clinic_id, :user_id, :requested_quantity, presence: true
+
+ 
+
     private 
 
     # once a requested item is request_fulfilled(true), then method checks for if ordered_item instance exist,

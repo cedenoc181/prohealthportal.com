@@ -132,11 +132,11 @@ end
 
     # Only allow a list of trusted parameters through.
     def create_user_params
-      params.permit(:first_name, :last_name, :email, :password, :clinic_location, :credentials, :phone_ext, :role, :insurance_network, :direct_access)
+      params.permit(:first_name, :last_name, :email, :password, :clinic_location, :credentials, :phone_ext, :admin, :role, :insurance_network, :direct_access)
     end
 
     def user_editable_params 
-        params.permit(:password, :email, :role, :credentials, :clinic_location, :insurance_network, :direct_access, :admin, :phone_ext, :first_name, :last_name, :clinic_id)               
+        params.permit(:password, :email, :role, :credentials, :clinic_location, :insurance_network, :direct_access, :phone_ext, :first_name, :last_name, :clinic_id)               
     end
 
     def patient_template_params

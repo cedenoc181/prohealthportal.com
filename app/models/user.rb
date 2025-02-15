@@ -1,10 +1,10 @@
 class User < ApplicationRecord
 
-after_create_commit :post_create_update, :update_insurance_network
-after_update :update_insurance_network
+  after_create_commit :post_create_update, :update_insurance_network
+  after_update :update_insurance_network
 
 
-# relationships 
+    # relationships 
     has_many :my_medifiles, dependent: :destroy
     has_many :medifiles, through: :my_medifiles
 
@@ -33,52 +33,55 @@ after_update :update_insurance_network
 
     validates :password, length: { in: 6..16 }, allow_nil: true
 
-    validates :first_name && :last_name, presence: true 
+    validates :first_name, :last_name, presence: true 
 
     validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, strict: true
 
       # Generates a new password reset token and sets the timestamp
-  def generate_password_token!
-    update(reset_password_token: generate_token, reset_password_sent_at: Time.now.utc)
-  end
-
-  # Checks if the password reset token is expired (set to 2 hours)
-  def password_token_valid?
-    reset_token_expiration_time > Time.now
-  end
-
-  # Resets the password and clears the reset token
-  def reset_password!(new_password)
-    update(password: new_password, reset_password_token: nil)
-  end
-
-private 
-
-def reset_token_expiration_time
-  self.reset_password_sent_at + 2.hours
-end
-
-def generate_token
-  SecureRandom.hex(10)
-end
-
-def post_create_update
-  update(
-    admin: role == 'Admin',
-    email: email&.downcase,
-    first_name: first_name&.downcase,
-    last_name: last_name&.downcase
-  )
-end
-
-# could be temperary
-def update_insurance_network
-  insurance_accepted = ['United Health Care', 'Fidelis Care', 'Metroplus', 'BCBS', 'Atnea', 'Emblem Health', 'Oxford', 'Medicare', 'Cigna']
-    if self.role == 'PT' || self.role == 'OT'
-      self.update(:insurance_network, insurance_accepted.join(", "))
-    else
-      self.update(:insurance_network, "not provided")
+    def generate_password_token!
+      update(reset_password_token: generate_token, reset_password_sent_at: Time.now.utc)
     end
-end
+
+    # Checks if the password reset token is expired (set to 2 hours)
+    def password_token_valid?
+      reset_token_expiration_time > Time.now
+    end
+
+    # Resets the password and clears the reset token
+    def reset_password!(new_password)
+      update(password: new_password, reset_password_token: nil)
+    end
+
+  private 
+
+    def reset_token_expiration_time
+      self.reset_password_sent_at + 2.hours
+    end
+
+    def generate_token
+      SecureRandom.hex(10)
+    end
+
+    def post_create_update
+      attributes = {
+        email: email&.downcase,
+        first_name: first_name&.downcase,
+        last_name: last_name&.downcase
+      }
+    
+      attributes[:role] = "Admin" if self.admin?  # Only assign role if admin
+    
+      self.update!(attributes)
+    end
+
+    # could be temperary
+    def update_insurance_network
+      insurance_accepted = ['United Health Care', 'Fidelis Care', 'Metroplus', 'BCBS', 'Atnea', 'Emblem Health', 'Oxford', 'Medicare', 'Cigna']
+        if self.role == 'PT' || self.role == 'OT'
+          self.update(insurance_network: insurance_accepted.join(", "))
+        else
+          self.update(insurance_network: "not provided")
+        end
+    end
 
 end
