@@ -1,6 +1,4 @@
 class Medifile < ApplicationRecord
-  after_create_commit :validate_files
-
 
     has_many :my_medifiles, inverse_of: :medifile
     has_many :users, through: :my_medifiles
@@ -8,17 +6,10 @@ class Medifile < ApplicationRecord
     has_one_attached :file_link
     has_one_attached :file_cover
 
-    private 
+    # add some validations
 
-    def validate_files 
-        if !file_link.attached?
-            errors.add(:file_link, "must be attached")
-          end
-      
-          if !file_cover.attached?
-            errors.add(:file_cover, "must be attached")
-         end
-    end
+    validates :file_link, presence: true
+    validates :file_cover, presence: true
 
 
 end

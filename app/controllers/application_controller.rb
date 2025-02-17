@@ -12,19 +12,30 @@ class ApplicationController < ActionController::API
 
       def encode_token(payload)
         payload[:exp] = 1.hours.from_now.to_i 
-        JWT.encode(payload, 'password', 'HS256') 
+        JWT.encode(payload, 'password', 'HS256')
+      rescue StandardError => e
+        Rails.logger.error "🚨 JWT Encoding Error: #{e.message}"
+        nil
       end
 
       def decoded_token
         if cookies.encrypted[:auth_token] || request.headers['Authorization']
           token = cookies.encrypted[:auth_token] || request.headers['Authorization'].split(' ')[1]
+          
           begin
-            JWT.decode(token, 'password', true, { algorithm: 'HS256' })
+            decoded = JWT.decode(token, 'password', true, { algorithm: 'HS256' })
+              Rails.logger.debug "✅ JWT Decoded Successfully: #{decoded}"
+              decoded
           rescue JWT::DecodeError
+              Rails.logger.warn "🚨 JWT Decode Error: #{e.message}"
+            nil
+          rescue JWT::ExpiredSignature
+            Rails.logger.warn "🚨 JWT Expired Signature: Token is no longer valid."
             nil
           end
         end
       end
+
 
     def current_user 
         if decoded_token

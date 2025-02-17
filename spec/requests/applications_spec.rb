@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationController, type: :controller do
-  controller do  
+  controller(ApplicationController) do  
+    skip_before_action :authorized
+    skip_before_action :is_admin?
+    
         def encode_example
           render json: { token: encode_token({ user_id: 1 }) }
         end
