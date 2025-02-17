@@ -1,9 +1,7 @@
 class User < ApplicationRecord
 
-  after_create_commit :post_create_update, :update_insurance_network
-  after_update :update_insurance_network
-
-
+  after_create_commit :post_create_update
+  
     # relationships 
     has_many :my_medifiles, dependent: :destroy
     has_many :medifiles, through: :my_medifiles
@@ -28,12 +26,12 @@ class User < ApplicationRecord
 
     has_many :inventory_items, through: :clinics
 
-    # validations
+    # validations required for user instance to be commited
     has_secure_password
 
     validates :password, length: { in: 6..16 }, allow_nil: true
 
-    validates :first_name, :last_name, presence: true 
+    validates :first_name, :last_name, :clinic_id, presence: true 
 
     validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }, strict: true
 
@@ -62,26 +60,27 @@ class User < ApplicationRecord
       SecureRandom.hex(10)
     end
 
+
     def post_create_update
+
+      insurance_accepted = ['United Health Care', 'Fidelis Care', 'Metroplus', 'BCBS', 'Atnea', 'Emblem Health', 'Oxford', 'Medicare', 'Cigna']
+
       attributes = {
         email: email&.downcase,
         first_name: first_name&.downcase,
-        last_name: last_name&.downcase
+        last_name: last_name&.downcase,
+        clinic_location: self.clinic.clinic_location_name
       }
     
       attributes[:role] = "Admin" if self.admin?  # Only assign role if admin
-    
-      self.update!(attributes)
-    end
-
-    # could be temperary
-    def update_insurance_network
-      insurance_accepted = ['United Health Care', 'Fidelis Care', 'Metroplus', 'BCBS', 'Atnea', 'Emblem Health', 'Oxford', 'Medicare', 'Cigna']
+      
         if self.role == 'PT' || self.role == 'OT'
-          self.update(insurance_network: insurance_accepted.join(", "))
+          attributes[:insurance_network] = insurance_accepted.join(", ")
         else
-          self.update(insurance_network: "not provided")
+          attributes[:insurance_network] = "not provided"
         end
+
+      self.update!(attributes)
     end
 
 end

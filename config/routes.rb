@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   resources :ordered_items
   resources :inventory_items
   resources :requested_items

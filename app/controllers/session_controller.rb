@@ -1,4 +1,5 @@
 class SessionController < ApplicationController
+
     skip_before_action :authorized
     skip_before_action :is_admin?
   
@@ -6,7 +7,7 @@ class SessionController < ApplicationController
   
     def login
       @user = User.find_by!(email: login_params[:email].downcase)
-      if @user.authenticate(login_params[:password])
+      if @user&.authenticate(login_params[:password])
         @token = encode_token(user_id: @user.id)
   
         # Store user info in session and token in cookies
@@ -21,6 +22,7 @@ class SessionController < ApplicationController
           user: UserSerializer.new(@user),
           token: @token
         }, status: :accepted
+        
       else
         render json: { message: 'Incorrect password' }, status: :unauthorized
       end
