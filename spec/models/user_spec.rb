@@ -29,15 +29,27 @@ RSpec.describe User, type: :model do
       it "if user role is PT or OT? insurance network should be populated" do 
         pt_user = User.create!(email: "pt@gmail.com", password: "123456", first_name: "OscaR", last_name: "Moises", role: "PT", admin: false, clinic_id: clinic.id) 
         ot_user = User.create!(email: "ot@gmail.com", password: "123456", first_name: "AleX", last_name: "Burgo", role: "OT", admin: false, clinic_id: clinic.id)
-
         # PT
         expect(pt_user.reload.insurance_network).to eq("United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna")
-
         # OT
         expect(ot_user.reload.insurance_network).to eq("United Health Care, Fidelis Care, Metroplus, BCBS, Atnea, Emblem Health, Oxford, Medicare, Cigna")
-
       end
+    end
 
+    describe "invalid user instance clinic association" do 
+       it "should have clinic user belongs too" do
+        example_user = User.new(
+         email: "example@example.com",
+         password: "password",
+         first_name: "John",
+         last_name: "Doe",
+         role: "frontdesk",
+         credentials: "Communications BA"
+        )
+       
+        expect(example_user.valid?).to be false
+        expect(example_user.errors[:clinic_id]).to include("can't be blank")
+      end
     end
 
 end

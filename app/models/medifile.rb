@@ -10,6 +10,7 @@ class Medifile < ApplicationRecord
 
     validates :file_link, presence: true
     validates :file_cover, presence: true
+    validates :title, :file_owner_id, :description, presence: true
 
 
 end

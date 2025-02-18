@@ -39,13 +39,21 @@ class UsersController < ApplicationController
   end
 
   def user_create_patient_template
-    new_patient_temp = current_user.patient_templates.create!(patient_template_params)
-     render json: { message: "#{current_user.first_name} successfully created patient template: #{new_patient_temp.px_temp_title}"}, status: :created
+    new_patient_temp = current_user.patient_templates.new(patient_template_params)
+    if new_patient_temp.save
+     render json: {response: new_patient_temp,  message: "#{current_user.first_name} successfully created patient template: #{new_patient_temp.px_temp_title}"}, status: :created
+    else
+      render json: { message: new_patient_temp.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def user_create_dr_template
-    new_dr_temp = current_user.dr_templates.create!(dr_template_params)
-      render json: { message: "#{current_user.first_name} successfully created dcotor template: #{new_dr_temp.dr_temp_title}"}, status: :created
+    new_dr_temp = current_user.dr_templates.new(dr_template_params)
+    if new_dr_temp.save
+      render json: {response: new_dr_temp,  message: "#{current_user.first_name} successfully created dcotor template: #{new_dr_temp.dr_temp_title}"}, status: :created
+    else
+      render json: { message: new_dr_temp.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def user_create_medifile_template
@@ -132,7 +140,7 @@ end
 
     # Only allow a list of trusted parameters through.
     def create_user_params
-      params.permit(:first_name, :last_name, :email, :password, :clinic_location, :credentials, :phone_ext, :admin, :role, :insurance_network, :direct_access)
+      params.permit(:first_name, :last_name, :email, :password, :clinic_id, :clinic_location, :credentials, :phone_ext, :admin, :role, :insurance_network, :direct_access)
     end
 
     def user_editable_params 
