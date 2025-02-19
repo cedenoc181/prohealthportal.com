@@ -41,9 +41,9 @@ end
 def create 
     @inventory_item = InventoryItem.new(inventory_items_params)
     if @inventory_item.save
-        render json: {item: @inventory_item, message: "clinic has been successfully created"}, status: :created
+        render json: {item: @inventory_item, message: "inventory item has been successfully created"}, status: :created
     else 
-        render json: {item: @inventory_item.errors.full_messages, message: "clinic was unable to be created, please check params are met."}, status: :unprocessable_entity
+        render json: {item: @inventory_item.errors.full_messages, message: "inventory item was unable to be created, please check params are met."}, status: :unprocessable_entity
     end
 end 
 

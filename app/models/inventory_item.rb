@@ -8,6 +8,14 @@ class InventoryItem < ApplicationRecord
 
     after_save :request_insufficient_item
 
+    # after_commit :request_insufficient_item 
+
+    validates :user_id, :clinic_id, presence: true
+
+    validates :item_name, :item_type, presence: true
+    
+    validates :count, :warning_count, presence: true
+
     private
 
 
@@ -20,6 +28,7 @@ class InventoryItem < ApplicationRecord
 
 # method runs for items that are needed daily for staple items only
 # and if item requested was recently changed from false to true.
+# doesnt work on newly created items with insufficient count
 
     def request_insufficient_item
         return unless self.staple_item  && self.saved_change_to_item_requested?(from: false, to: true) 
