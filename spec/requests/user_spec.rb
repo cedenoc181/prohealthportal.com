@@ -34,7 +34,7 @@ RSpec.describe "Users", type: :request do
     # admin's token
   let(:token) { JWT.encode({ user_id: user.id }, 'password', 'HS256')}
 
-  describe "POST/ Users" do 
+  describe "POST/ (admin only method) Users" do 
     it "should have all params before user is created and must be created by admin" do 
       new_user_params = {
         email: "new_user@example.com",
@@ -103,7 +103,7 @@ RSpec.describe "Users", type: :request do
       }
       post "/create-medifiles-template", params: invalid_medifile, headers: { "Authorization" => "Bearer #{token}" }
 
-           puts "invalid medifile: #{response.body}"
+          #  puts "invalid medifile: #{response.body}"
       expect(response).to have_http_status(:unprocessable_entity)
       json_response = JSON.parse(response.body)
       expect(json_response['medifile']).to include("File link can't be blank","File cover can't be blank","File owner can't be blank")
@@ -158,7 +158,7 @@ RSpec.describe "Users", type: :request do
        }
       post "/create-doctor-template", params: dr_params, headers: { "Authorization" => "Bearer #{token}" }
 
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(:created)
         json_response = JSON.parse(response.body)
         current_temp = json_response["response"]
         # puts "current temp response: #{current_temp}"
@@ -180,8 +180,88 @@ RSpec.describe "Users", type: :request do
       expect(json_response["message"]).to include("Dr owner can't be blank", "Dr temp title can't be blank", "Category can't be blank")
 
     end
-
-
   end
+
+
+  describe "PATCH(admin updating route) /users/:id" do 
+        update_user_params = {
+            first_name: "Choco",
+            credentials: "PT"
+        }
+    it "admin user updating their own account params" do 
+      patch "/users/#{user.id}", params: update_user_params, headers: { "Authorization" => "Bearer #{token}"}
+
+      # puts "patch response: #{response.body}"
+
+      expect(response).to have_http_status(:ok)
+      json_reponse = JSON.parse(response.body)
+      # puts "#{json_reponse['user']}"
+      expect(json_reponse['user']).to be_present
+    end
+
+    it "admin user updating other users" do 
+      patch "/users/#{test_user.id}", params: update_user_params, headers: { "Authorization" => "Bearer #{token}"}
+
+      # puts "patch response: #{response.body}"
+
+      expect(response).to have_http_status(:ok)
+      response_json = JSON.parse(response.body)
+      expect(response_json["user"]).to be_present
+    end
+
+    it "should fail if non admin tries to update another user" do 
+      patch "/users/#{user.id}", params: update_user_params, headers: { "Authorization" => "Bearer #{test_token}"}
+
+      # puts "response should be unauthorized: #{response.status}"
+
+      expect(response).to have_http_status(:unauthorized)
+      json_response = JSON.parse(response.body)
+      expect(json_response["message"]).to eq("Only admins can update other users attributes")
+    end
+  end
+
+
+  describe "PATCH(non Admin update) /current_user-update" do 
+    update_user_params = {
+      first_name: "non_admin",
+      credentials: "non_admin"
+  }
+    it "allows non admins to update their own account" do 
+      patch "/current_user-update", params: update_user_params, headers: { "Authorization" => "Bearer #{test_token}"}
+
+      body = response.body
+      # puts "patch response: #{body}"
+      expect(response).to have_http_status(:ok)
+      expect(body).to be_present
+    end
+
+    it "should fail if admin tries to update through this route" do 
+      patch "/current_user-update", params: update_user_params, headers: { "Authorization" => "Bearer #{token}"}
+      body = response.body
+      # puts "patch response: #{body}"
+      expect(response).to have_http_status(:unauthorized)
+      expect(body).to include("This method only updates non admin accounts")
+    end
+  end
+
+  describe "#destroy (admin only method) /users/:id" do 
+    it "should destroy users account found by admin" do 
+      delete "/users/#{test_user.id}", headers: { "Authorization" => "Bearer #{token}"}
+
+      expect(response).to have_http_status(:ok)
+      json_response  = JSON.parse(response.body)
+      expect(json_response["message"]).to eq("#{test_user.first_name} user account has been successfully deleted")
+    end
+
+    it "should return unauthorized if user is not admin" do 
+      delete "/users/#{user.id}", headers: { "Authorization" => "Bearer #{test_token}"}
+
+      expect(response).to have_http_status(:unauthorized)
+      json_response = JSON.parse(response.body)
+      expect(json_response["message"]).to eq("You must be an admin to perform this action.")
+    end
+  end
+
+
 
 end

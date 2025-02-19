@@ -15,9 +15,11 @@ Rails.application.routes.draw do
 
       #user account route post login
     get "/my-account", to: "users#me"
-#login route
+      # non admin user update route
+    patch "/current_user-update", to: "users#update_non_admin_user"
+    #login route
     post 'account/login', to: 'session#login'
-  #logout route
+   #logout route
     delete 'account/logout', to: 'session#logout'
 
     # Password reset routes

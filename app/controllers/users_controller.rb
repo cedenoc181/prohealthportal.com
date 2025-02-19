@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # Callbacks to set user before show and destroy action method
   before_action :find_user, only: %i[ show destroy]
   # remove index show create from admin restrictions
-  skip_before_action :is_admin?, except: %i[ destroy create]
+  skip_before_action :is_admin?, except: %i[ destroy create ]
   # will take skip before action authroized method off after development, bc admin will be only user avaiilable to perform CRUD
 
 
@@ -93,32 +93,51 @@ class UsersController < ApplicationController
  # PATCH/PUT /users/:id
 # cant update user without being logged in(authorized)
 def update
-  begin
     if current_user.admin?
       @user = User.find(params[:id])
-    else
-      # Non-admins can only update their own account
-      @user = current_user
-    end
-
-    if @user.update(user_editable_params)
-      render json: { 
+      if @user && @user.update(user_editable_params)
+        render json: { 
         user: UserSerializer.new(@user), 
         message: "User attributes have been successfully updated: #{@user.first_name} account by: #{current_user.first_name}"
-      }, status: :ok
-    else
-      render json: { 
-        message: "Failed to update user attributes", 
-        errors: @user.errors.full_messages 
-      }, status: :unprocessable_entity
-    end
+        }, status: :ok
+      else
+         render json: { 
+         message: "Failed to find and update user attributes", 
+         errors: @user.errors.full_messages 
+         }, status: :unprocessable_entity
+      end
 
-  rescue ActiveRecord::RecordNotFound
-    render json: { message: "User not found" }, status: :not_found
-  rescue StandardError => e
-    render json: { message: "An error occurred: #{e.message}" }, status: :unprocessable_entity
-  end
+    else
+      render json: {
+        message: "Only admins can update other users attributes", 
+        errors: current_user.errors.full_messages
+      }, status: :unauthorized
+    end
 end
+
+
+  def update_non_admin_user 
+    if !current_user.admin?
+      @non_admin_user = current_user
+      if @non_admin_user && @non_admin_user.update(user_editable_params)
+      render json: { 
+        user: UserSerializer.new(@non_admin_user), 
+        message: "User attributes have been successfully updated: #{@non_admin_user.first_name} account by: #{current_user.first_name}"
+        }, status: :ok
+      else
+         render json: { 
+         message: "Failed to find and update user attributes", 
+         errors: @non_admin_user.errors.full_messages 
+         }, status: :unprocessable_entity
+      end
+     else
+      render json: {
+      message: "This method only updates non admin accounts",
+      }, status: :unauthorized
+    end
+  end
+
+
 
   # DELETE method only for Admin /users/1
   # cant destroy user without being logged in(authorized) and being a admin(is_admin?)
