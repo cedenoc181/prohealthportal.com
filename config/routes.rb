@@ -35,8 +35,8 @@ Rails.application.routes.draw do
 
     get '/email_config', to: 'email_config#index'
 
-
-    get '/inventory_sufficient', to: 'inventory_items#render_insufficient_list'
+      # INVENTORY ITEMS
+    get '/inventory_item_status', to: 'inventory_items#inventory_item_status'
 
     get '/inventory_type', to: 'inventory_items#inventory_type'
 
@@ -44,6 +44,9 @@ Rails.application.routes.draw do
 
     get '/inventory_by_requested', to: 'inventory_items#inventory_by_request_sent'
 
+    post '/inventory_by_staff', to: 'inventory_items#non_admin_inventory_item'
+
+      # REQUESTED ITEMS 
     get '/requested_items_for_clinics', to: 'requested_items#requested_items_for_clinics'
 
       # get '/requested_items_ordered', to: 'requested_items#ordered_items'
