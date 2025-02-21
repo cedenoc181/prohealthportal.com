@@ -1,7 +1,7 @@
 class InventoryItemsController < ApplicationController
     before_action :find_item, only: %i[ show update destroy ]
 
-    skip_before_action :is_admin?, only: %i[ show index update non_admin_inventory_item ]
+    skip_before_action :is_admin?, only: %i[ show index update non_admin_inventory_item destroy ]
 
     def index
         @inventory_items = InventoryItem.all
@@ -63,20 +63,21 @@ class InventoryItemsController < ApplicationController
 
 
     def update 
-        if current_user.id == @inventory_item.user_id || current_user.clinic_id == @inventory_item.clinic_id || current_user.admin?
+        if current_user.id == @inventory_item.user_id && current_user.clinic_id == @inventory_item.clinic_id || current_user.admin?
                 @inventory_item.update(inventory_items_params)
             render json: {item: @inventory_item, message: "#{@inventory_item.item_name} has been successfully updated"}, status: :ok
         else
-            render json: {item: @inventory_item.errors.full_messages, message: "failed to update #{@inventory_item.item_name}, please check params have been met"}, status: :unprocessable_entity
+            render json: {item: @inventory_item.errors.full_messages, message: "failed to update #{@inventory_item.item_name}, make sure user_id and clinic_id match item."}, status: :unprocessable_entity
         end
     end 
 
 
     def destroy
-        if  @inventory_item.destroy!
+        if current_user.id == @inventory_item.user_id && current_user.clinic_id == @inventory_item.clinic_id || current_user.admin?
+            @inventory_item.destroy!
             render json: {message: "#{@inventory_item.item_name} was successfully deleted"}, status: :ok
-            else
-             render json: {message: "failed to delete #{ @inventory_item}"}
+        else
+             render json: {message: "failed to delete #{ @inventory_item.item_name}"}, status: :unauthorized
         end
 
     end
