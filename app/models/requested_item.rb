@@ -8,7 +8,7 @@ class RequestedItem < ApplicationRecord
 
     validates :clinic_id, :user_id, :requested_quantity, presence: true
 
- 
+    validates :item_name, :item_type, presence: true
 
     private 
 

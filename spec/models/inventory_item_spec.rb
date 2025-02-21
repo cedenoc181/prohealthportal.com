@@ -89,7 +89,7 @@ RSpec.describe InventoryItem, type: :model do
 
 
     describe "Inventory #request_insufficient_item" do
-      it "returns requested items instance created by method"  do 
+      it "returns requested_items instance created by  #request_insufficient_item method"  do 
         # update that triggers condition
         clorox.update(count: clorox.count - 4)
           # should be added to requested items table 
