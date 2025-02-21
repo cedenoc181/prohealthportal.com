@@ -15,13 +15,15 @@ class InventoryItemsController < ApplicationController
     # fetch inventory by low stock
     def inventory_item_status
         inventory_groups = InventoryItem.all.group_by(&:item_status)
-        render json: inventory_groups
+        render json: inventory_groups,
+        status: :ok
     end 
 
     # fetch inventory by item category
     def inventory_type
         inventory_types = InventoryItem.all.group_by(&:item_type)
-        render json: inventory_types
+        render json: inventory_types,
+        status: :ok
     end
 
     # fetch inventory by clinic, show all inventroy on hand for each clinic
@@ -34,7 +36,8 @@ class InventoryItemsController < ApplicationController
     # this loads all the items that have been requested due to insuffiecient inventory
     def inventory_by_request_sent
         inventory_requested = InventoryItem.all.where(item_requested: true).group_by(&:clinic_id)
-        render json: inventory_requested
+        render json: inventory_requested, 
+        status: :ok
     end
 
 

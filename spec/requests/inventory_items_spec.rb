@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "InventoryItems", type: :request do
 
-  include ActionDispatch::TestProcess
-
   let!(:clinic) { Clinic.create!(clinic_location_name: "East", clinic_location_address: "1041 3rd ave")}
 
   let!(:west_clinic) { Clinic.create!( clinic_location_name: "West", clinic_location_address: "180 westend ave" )}

@@ -1,23 +1,23 @@
 class RequestedItemsController < ApplicationController
     before_action :find_requested_item, only: %i[ show update destroy ]
 
-    skip_before_action :is_admin?, only: %i[ show index ]
+    skip_before_action :is_admin?, except: %i[ requested_items_for_clinics]
 
 
     def index
         @requested_items = RequestedItem.all
-        render json: @requested_items, each_serializer: RequestedItemSerializer, status: :ok
+        render json: {item: @requested_items, each_serializer: RequestedItemSerializer}, status: :ok
     end
 
     def show 
-        render json: @requested_item, serializer: RequestedItemSerializer, status: :ok
+        render json: {item: @requested_item, serializer: RequestedItemSerializer}, status: :ok
     end
 
     def requested_items_for_clinics
         requested_items = RequestedItem.includes(:clinic).group_by(&:clinic_id)
         
         render json: requested_items.transform_values { |items| ActiveModelSerializers::SerializableResource.new(items, each_serializer: RequestedItemSerializer) },
-               status: :ok
+        status: :ok
     end
 
     # if i wanted to isolate the ordered items 
@@ -55,7 +55,11 @@ class RequestedItemsController < ApplicationController
     private 
 
     def find_requested_item
-        @requested_item = RequestedItem.find(params[:id])
+     @requested_item = RequestedItem.find(params[:id])
+
+        if @requested_item.nil?
+             render json: { message: "item not found", error: @requested_items.errors.full_messages}, status: :not_found
+       end
     end
     
     def requested_items_params
