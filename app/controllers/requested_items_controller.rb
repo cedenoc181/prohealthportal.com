@@ -63,10 +63,21 @@ class RequestedItemsController < ApplicationController
     end
 
     def destroy 
-        if @requested_item.destroy!
-            render json: {ordered_item: "#{@requested_item.item_name} has been deleted"}, status: :ok
-        else
-            render json: {ordered_item: @requested_item.errors.full_messages}, status: :unprocessable_entity
+        if current_user.admin?
+
+            if @requested_item.destroy!
+                render json: {message: "#{@requested_item.item_name} has been deleted"}, status: :ok
+            else
+                render json: {error: @requested_item.errors.full_messages}, status: :non_found
+            end
+
+         else
+            request_from_clinic_staff = current_user.clinic_id == @requested_item.clinic_id
+            if request_from_clinic_staff && @requested_item.destroy!
+                render json: {message: "#{@requested_item.item_name} has been deleted"}, status: :ok
+            else
+                render json: {error: @requested_item.errors.full_messages}, status: :not_found
+            end
         end
     end
 

@@ -190,6 +190,20 @@ RSpec.describe "RequestedItems", type: :request do
       expect(json_response['message']).to eq("requested item: #{json_response['requested_item']['item_name']} has been updated")
     end
 
+    it "should update; if user updates a item thats associated with their clinic" do 
+      update_params = {
+        item_link: "amazon.com",
+        requested_quantity: 6
+      }
+      patch "/requested_items/#{@clorox.id}", params: update_params, headers: { "Authorization" => "Bearer #{test_token}"}
+
+      expect(response).to have_http_status(:ok)
+
+      json_response = JSON.parse(response.body)
+      expect(json_response['message']).to eq("requested item: #{json_response['requested_item']['item_name']} has been updated")
+
+    end
+
     it "should fail to update instance if non admin tries to update another clinics requested item" do 
       update_params = {
         item_link: "amazon.com",
@@ -209,6 +223,20 @@ RSpec.describe "RequestedItems", type: :request do
     # headers: { "Authorization" => "Bearer #{token}"}
     # headers: { "Authorization" => "Bearer #{test_token}"}
 
+    it "should delete requested_item if user is admin" do 
+      delete "/requested_items/#{@clorox.id}", headers: { "Authorization" => "Bearer #{token}"}
+
+      expect(response).to have_http_status(:ok)
+      json_response = JSON.parse(response.body)
+
+      expect(json_response['message']).to eq("#{@clorox.item_name} has been deleted")
+    end
+
+    it "should only be able to delete if user created requested item " do 
+      delete "/requested_items/#{@clorox.id}", headers: { "Authorization" => "Beaer #{test_token}"}
+
+      expect(response).to have_http_status(:ok)
+    end
   end
 
 
