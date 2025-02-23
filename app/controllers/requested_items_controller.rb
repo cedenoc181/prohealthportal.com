@@ -6,17 +6,17 @@ class RequestedItemsController < ApplicationController
 
     def index
         @requested_items = RequestedItem.all
-        render json: {item: @requested_items, each_serializer: RequestedItemSerializer}, status: :ok
+        render json: {requested_item: @requested_items, each_serializer: RequestedItemSerializer}, status: :ok
     end
 
     def show 
-        render json: {item: @requested_item, serializer: RequestedItemSerializer}, status: :ok
+        render json: {requested_item: @requested_item, serializer: RequestedItemSerializer}, status: :ok
     end
 
     def requested_items_for_clinics
-        requested_items = RequestedItem.includes(:clinic).group_by(&:clinic_id)
+        @requested_items = RequestedItem.includes(:clinic).group_by(&:clinic_id)
         
-        render json: requested_items.transform_values { |items| ActiveModelSerializers::SerializableResource.new(items, each_serializer: RequestedItemSerializer) },
+        render json: @requested_items.transform_values { |items| ActiveModelSerializers::SerializableResource.new(items, each_serializer: RequestedItemSerializer) },
         status: :ok
     end
 
@@ -26,22 +26,47 @@ class RequestedItemsController < ApplicationController
     #     render json: requested_items_ordered, status: :ok
     # end
 
+    # @requested_item = RequestedItem.new(requested_items_params)
+    # if @requested_item.save
+    #     render json: {ordered_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been created"}, status: :created
+    # else 
+    #     render json: {ordered_item: @requested_item.errors.full_messages, message: "failed to create request item row"}, status: :unprocessable_entity
+    # end
 
     def create
+        if current_user.admin?
+          @requested_item = RequestedItem.new(requested_items_params)
+            if @requested_item.save
+                 render json: {requested_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been created"}, status: :created
+            else 
+                render json: {requested_item: @requested_item.errors.full_messages, message: "failed to create request item, check params."}, status: :unprocessable_entity
+            end
+        else
         @requested_item = RequestedItem.new(requested_items_params)
-        if @requested_item.save
-            render json: {ordered_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been created"}, status: :created
-        else 
-            render json: {ordered_item: @requested_item.errors.full_messages, message: "failed to create request item row"}, status: :unprocessable_entity
+          request_from_clinic_staff = current_user.clinic_id == @requested_item.clinic_id
+           if request_from_clinic_staff && @requested_item.save
+                render json: {requested_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been created"}, status: :created
+           else 
+                render json: {requested_item: @requested_item.errors.full_messages, message: "failed to create request item make sure you are a staff at the clinic item is for."}, status: :unprocessable_entity
+           end
         end
     end
 
     def update 
-        if @requested_item.update(requested_items_params)
-            render json: {ordered_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been updated"}, stats: :ok
+        if current_user.admin?
+              if @requested_item.update(requested_items_params)
+                   render json: {requested_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been updated"}, status: :ok
+              else 
+                  render json: {requested_item: @requested_item.errors.full_messages, message: "failed to update request item, check params."}, status: :unprocessable_entity
+              end
         else
-            render json: {ordered_item: @requested_item.errors.full_messages, message: "failed to update requested item"}, status: :unprocessable_entity
-        end
+            request_from_clinic_staff = current_user.clinic_id == @requested_item.clinic_id
+             if request_from_clinic_staff && @requested_item.update(requested_items_params)
+                  render json: {requested_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been updated"}, status: :ok
+             else 
+                  render json: {requested_item: @requested_item.errors.full_messages, message: "failed to update request item make sure you are a staff at the clinic item is for."}, status: :unprocessable_entity
+             end
+          end
     end
 
     def destroy 
