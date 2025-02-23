@@ -26,13 +26,6 @@ class RequestedItemsController < ApplicationController
     #     render json: requested_items_ordered, status: :ok
     # end
 
-    # @requested_item = RequestedItem.new(requested_items_params)
-    # if @requested_item.save
-    #     render json: {ordered_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been created"}, status: :created
-    # else 
-    #     render json: {ordered_item: @requested_item.errors.full_messages, message: "failed to create request item row"}, status: :unprocessable_entity
-    # end
-
     def create
         if current_user.admin?
           @requested_item = RequestedItem.new(requested_items_params)
@@ -64,7 +57,7 @@ class RequestedItemsController < ApplicationController
              if request_from_clinic_staff && @requested_item.update(requested_items_params)
                   render json: {requested_item: @requested_item, message: "requested item: #{@requested_item.item_name} has been updated"}, status: :ok
              else 
-                  render json: {requested_item: @requested_item.errors.full_messages, message: "failed to update request item make sure you are a staff at the clinic item is for."}, status: :unprocessable_entity
+                  render json: {requested_item: @requested_item.errors.full_messages, message: "failed to update request item make sure you are a staff at the clinic item is for."}, status: :unauthorized
              end
           end
     end

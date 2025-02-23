@@ -178,7 +178,31 @@ RSpec.describe "RequestedItems", type: :request do
   describe "PATCH/ RequestedItems.update #Update" do 
     # headers: { "Authorization" => "Bearer #{token}"}
       # headers: { "Authorization" => "Bearer #{test_token}"}
-    
+    it "should update any instance as long as user is admin" do 
+      update_params = {
+        item_link: "amazon.com",
+        requested_quantity: 6
+      }
+      patch "/requested_items/#{@clorox.id}", params: update_params, headers: { "Authorization" => "Bearer #{token}"}
+
+      expect(response).to have_http_status(:ok)
+      json_response = JSON.parse(response.body)
+      expect(json_response['message']).to eq("requested item: #{json_response['requested_item']['item_name']} has been updated")
+    end
+
+    it "should fail to update instance if non admin tries to update another clinics requested item" do 
+      update_params = {
+        item_link: "amazon.com",
+        requested_quantity: 6
+      }
+      patch "/requested_items/#{@windex.id}", params: update_params, headers: { "Authorization" => "Bearer #{test_token}"}
+
+      expect(response).to have_http_status(:unauthorized)
+
+      json_response = JSON.parse(response.body)
+
+      expect(json_response['message']).to eq("failed to update request item make sure you are a staff at the clinic item is for.")
+    end
   end
 
   describe "DELETE/ RequestedItems.destroy #Delete" do
