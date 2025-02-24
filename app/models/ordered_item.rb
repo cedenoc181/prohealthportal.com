@@ -6,6 +6,10 @@ class OrderedItem < ApplicationRecord
 
     after_save :update_inventory
 
+    validates :clinic_id, :user_id, presence: true
+
+    validates :item_name, :item_type, presence: true
+
 
     private 
 
