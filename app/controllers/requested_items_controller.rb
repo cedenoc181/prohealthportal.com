@@ -76,7 +76,7 @@ class RequestedItemsController < ApplicationController
             if request_from_clinic_staff && @requested_item.destroy!
                 render json: {message: "#{@requested_item.item_name} has been deleted"}, status: :ok
             else
-                render json: {error: @requested_item.errors.full_messages}, status: :not_found
+                render json: {error: @requested_item.errors.full_messages}, status: :unauthorized
             end
         end
     end

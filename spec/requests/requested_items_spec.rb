@@ -232,10 +232,21 @@ RSpec.describe "RequestedItems", type: :request do
       expect(json_response['message']).to eq("#{@clorox.item_name} has been deleted")
     end
 
-    it "should only be able to delete if user created requested item " do 
+    it "should only be able to delete if user belongs to the clinic of requested item " do 
       delete "/requested_items/#{@clorox.id}", headers: { "Authorization" => "Beaer #{test_token}"}
 
       expect(response).to have_http_status(:ok)
+      json_response = JSON.parse(response.body)
+      expect(json_response['message']).to eq("#{@clorox.item_name} has been deleted")
+    end
+
+    it "should not allow user to delete if they are not associated with the clinic of instance" do 
+      delete "/requested_items/#{@windex.id}", headers: { "Authorization" => "Beaer #{test_token}"}   
+
+
+      expect(response).to have_http_status(:unauthorized)
+      json_response = JSON.parse(response.body)
+      expect(json_response).to be_present
     end
   end
 
