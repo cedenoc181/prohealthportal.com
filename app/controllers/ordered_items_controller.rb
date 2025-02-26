@@ -5,7 +5,7 @@ class OrderedItemsController < ApplicationController
 
 
     def index
-        @ordered_items = OrderedItem.includes(:clinic, :user).all
+        @ordered_items = OrderedItem.all
         render json: @ordered_items, each_serializer: OrderedItemSerializer, 
         status: :ok
     end
@@ -16,45 +16,71 @@ class OrderedItemsController < ApplicationController
     end
 
     def create
-        @ordered_item = OrderedItem.new(ordered_items_params)
-      
-        if current_user.admin? || current_user.clinic_id == @ordered_item.clinic_id
-          if @ordered_item.save
-            render json: { ordered_item: @ordered_item, message: "Ordered item: #{@ordered_item.item_name} has been created" }, status: :created
-          else
-            render json: { errors: @ordered_item.errors.full_messages, message: "Failed to create ordered item, check parameters used." }, status: :unprocessable_entity
-          end
-        else
-          render json: { error: "Unauthorized to create ordered item" }, status: :unauthorized
+        # admins can create any clinic
+         if current_user.admin?
+            @ordered_item = OrderedItem.new(ordered_items_params)
+            if @ordered_item.save
+                render json: {ordered_item: @ordered_item, message: "ordered item: #{@ordered_item.item_name} has been created"}, 
+                status: :created
+             else 
+                render json: {ordered_item: @ordered_item.errors.full_messages, message: "failed to create ordered item, check parameters used."}, 
+                status: :unprocessable_entity
+            end
+                # else block confirms that non admins can only create their own clinic
+         else
+         @ordered_item = OrderedItem.new(ordered_items_params)
+          order_from_clinic_staff = current_user.clinic_id == @ordered_item.clinic_id
+            if order_from_clinic_staff && @ordered_item.save
+                render json: {ordered_item: @ordered_item, message: "ordered item: #{@ordered_item.item_name} has been created"}, 
+                status: :created
+              else 
+                render json: { ordered_item: @ordered_item.errors.full_messages, message: "failed to create ordered item, check parameters used." }, 
+                status: :unprocessable_entity
+            end
         end
-      end
-      
+    end
 
-    def update
-        if current_user.admin? || current_user.clinic_id == @ordered_item.clinic_id
-          if @ordered_item.update(ordered_items_params)
-            render json: { ordered_item: @ordered_item, message: "Ordered item: #{@ordered_item.item_name} has been updated" }, status: :ok
-          else
-            render json: { errors: @ordered_item.errors.full_messages, message: "Failed to update ordered item" }, status: :unprocessable_entity
-          end
-        else
-          render json: { error: "Unauthorized to update this ordered item" }, status: :unauthorized
+    def update 
+        if current_user.admin?
+             if @ordered_item.update(ordered_items_params)
+                 render json: {ordered_item: @ordered_item, message: "ordered item: #{@ordered_item.item_name} has been updated"}, 
+                 status: :ok
+             else
+                 render json: {error: @ordered_item.errors.full_messages, message: "failed to update ordered item"}, 
+                 status: :unprocessable_entity
+             end
+         else 
+            update_from_clinic_staff = current_user.clinic_id == @ordered_item.clinic_id
+            if update_from_clinic_staff && @ordered_item.update(ordered_items_params)
+                render json: {ordered_item: @ordered_item, message: "ordered item: #{@ordered_item.item_name} has been updated"},
+                 status: :ok
+            else
+                render json: {error: @ordered_item.errors.full_messages, message: "failed to update ordered item"}, 
+                status: :unauthorized
+            end
         end
-      end
-      
+    end
 
-    def destroy
-        if current_user.admin? || current_user.clinic_id == @ordered_item.clinic_id
-          if @ordered_item.destroy
-            render json: { message: "#{@ordered_item.item_name} has been deleted" }, status: :ok
-          else
-            render json: { errors: @ordered_item.errors.full_messages, message: "Failed to delete item" }, status: :unprocessable_entity
-          end
+    def destroy 
+        if current_user.admin?
+            if @ordered_item.destroy
+                render json: {message: "#{@ordered_item.item_name} has been deleted"},
+                status: :ok
+            else
+                render json: {error: @ordered_item.errors.full_messages, message: "failed to delete item"}, 
+                status: :unprocessable_entity
+            end
         else
-          render json: { error: "Unauthorized to delete this item" }, status: :unauthorized
+         destroy_from_clinic_staff = current_user.clinic_id == @ordered_item.clinic_id
+            if destroy_from_clinic_staff && @ordered_item.destroy
+                render json: {message: "#{@ordered_item.item_name} has been deleted"},
+                status: :ok
+            else
+                render json: {error: @ordered_item.errors.full_messages, message: "failed to delete item, make sure item is from your clinic"}, 
+                status: :unauthorized
+            end
         end
-      end
-      
+    end
 
     private 
 
