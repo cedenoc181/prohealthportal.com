@@ -14,6 +14,7 @@ class OrderedItem < ApplicationRecord
     private 
 
     # automated update for when order is received
+    # creates new inventory instance
     # make sure delievery date on the ui is mandatory before order instance made
 
 
