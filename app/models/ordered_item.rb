@@ -8,7 +8,7 @@ class OrderedItem < ApplicationRecord
 
     validates :clinic_id, :user_id, presence: true
 
-    validates :item_name, :item_type, presence: true
+    validates :item_name, :item_type, :order_quantity,  presence: true
 
 
     private 
