@@ -1,24 +1,42 @@
 class OrderedItemsController < ApplicationController
     before_action :find_ordered_item, only: %i[ show update destroy ]
 
-    skip_before_action :is_admin?, only: %i[ show index ]
+    skip_before_action :is_admin?
 
 
     def index
         @ordered_items = OrderedItem.all
-        render json: @ordered_items, each_serializer: OrderedItemSerializer, status: :ok
+        render json: {ordered_item: @ordered_items, each_serializer: OrderedItemSerializer}, 
+        status: :ok
     end
 
     def show 
-        render json:  @ordered_item, serializer: OrderedItemSerializer, status: :ok
+        render json: {ordered_item: @ordered_item, serializer: OrderedItemSerializer},
+         status: :ok
     end
 
     def create
-        @ordered_item = OrderedItem.new(ordered_items_params)
-        if @ordered_item.save
-            render json: {ordered_item: @ordered_item, message: "ordered item: #{@ordered_item.item_name} has been created"}, status: :created
-        else 
-            render json: {ordered_item: @ordered_item.errors.full_messages, message: "failed to create ordered item row"}, status: :unprocessable_entity
+        # admins can create any clinic
+         if current_user.admin?
+            @ordered_item = OrderedItem.new(ordered_items_params)
+            if @ordered_item.save
+                render json: {ordered_item: @ordered_item, message: "ordered item: #{@ordered_item.item_name} has been created"}, 
+                status: :created
+             else 
+                render json: {ordered_item: @ordered_item.errors.full_messages, message: "failed to create ordered item, check parameters used."}, 
+                status: :unprocessable_entity
+            end
+                # else block confirms that non admins can only create their own clinic
+         else
+         @ordered_item = OrderedItem.new(ordered_items_params)
+          order_from_clinic_staff = current_user.clinic_id == @requested_item.clinic_id
+            if order_from_clinic_staff && @ordered_item.save
+                render json: {ordered_item: @ordered_item, message: "ordered item: #{@ordered_item.item_name} has been created"}, 
+                status: :created
+              else 
+                render json: {ordered_item: @ordered_item.errors.full_messages, message: "failed to create ordered item, check parameters used."}, 
+                status: :unprocessable_entity
+            end
         end
     end
 
