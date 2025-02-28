@@ -1,6 +1,8 @@
 class TaskContentsController < ApplicationController
   before_action :set_task_content, only: %i[ show update destroy ]
 
+  skip_before_action :is_admin? 
+  
   # GET /task_contents
   def index
     @task_contents = TaskContent.all

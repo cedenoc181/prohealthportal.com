@@ -53,6 +53,8 @@ Rails.application.routes.draw do
 
       # get '/requested_items_ordered', to: 'requested_items#ordered_items'
 
+        #TASK MODEL 
+        get '/all_clinical_task_tables', to: 'task#manage_all_tables'
     #admin will be only user to create instances of these models, 
   resources :dr_templates
   resources :patient_templates
