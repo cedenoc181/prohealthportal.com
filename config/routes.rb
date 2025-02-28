@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :task_contents
+  resources :tasks
   
   resources :ordered_items
   resources :inventory_items
