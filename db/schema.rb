@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_13_165844) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_28_170043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -157,6 +157,25 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_13_165844) do
     t.index ["user_id"], name: "index_requested_items_on_user_id"
   end
 
+  create_table "task_contents", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.bigint "user_id", null: false
+    t.jsonb "task_data", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_task_contents_on_task_id"
+    t.index ["user_id"], name: "index_task_contents_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.bigint "clinic_id", null: false
+    t.string "task_table_title"
+    t.jsonb "column_names", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_tasks_on_clinic_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -187,5 +206,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_13_165844) do
   add_foreign_key "my_templates", "dr_templates"
   add_foreign_key "my_templates", "patient_templates"
   add_foreign_key "my_templates", "users"
+  add_foreign_key "task_contents", "tasks"
+  add_foreign_key "task_contents", "users"
+  add_foreign_key "tasks", "clinics"
   add_foreign_key "users", "clinics"
 end
