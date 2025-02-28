@@ -49,8 +49,8 @@ puts "All objects in the bucket '#{aws_bucket_name}' have been deleted."
             filename: File.basename(medi['file_cover']),
             content_type: 'image/jpeg'
         )
-# After attachment, update the URLs to the S3 object URLs
-    if @record.file_link.attached? && @record.file_cover.attached?
+ # After attachment, update the URLs to the S3 object URLs
+  if @record.file_link.attached? && @record.file_cover.attached?
     # Generate the URL for file_link (PDF)
     file_link_s3_url = Rails.application.routes.url_helpers.rails_blob_url(@record.file_link, host: "http://127.0.0.1:3000")
 
@@ -61,7 +61,7 @@ puts "All objects in the bucket '#{aws_bucket_name}' have been deleted."
     @record.update_columns(file_link: file_link_s3_url, file_cover: file_cover_s3_url)
 
     p "#{@record.title} medifile created and uploaded to AWS S3 with updated URLs"
-  else
+   else
     p "Error: Failed to attach files for #{@record.title}"
   end
 end
@@ -85,3 +85,7 @@ dr_templates_data.each do |doctor|
          p "doctor templates created successfully"
 
 end
+
+
+# clinic table should be pre seeded
+
