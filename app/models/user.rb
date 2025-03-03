@@ -26,6 +26,8 @@ class User < ApplicationRecord
 
     has_many :inventory_items, through: :clinics
 
+    has_many :task_contents
+
     # validations required for user instance to be commited
     has_secure_password
 
