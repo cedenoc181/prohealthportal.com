@@ -14,9 +14,9 @@ class TasksController < ApplicationController
   end
 
   def manage_all_tables
-    tasks = Task.include(:clinic)
-    task_by_clinics = tasks.group_by(&:clinic_id)
-    render json: task_by_clinics, each_searializer: TaskSerializer, status: :ok
+    @tasks = Task.includes(:clinic).group_by(&:clinic_id)
+    render json: @tasks.transform_values { |clinics| ActiveModelSerializers::SerializableResource.new(clinics, each_serializer: TaskSerializer) },
+     status: :ok
   end
 
   # POST /tasks
@@ -56,6 +56,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.permit(:task_table_title, :clinic_id, :column_names {})
+      params.permit(:task_table_title, :clinic_id, column_names: {})
     end
 end
