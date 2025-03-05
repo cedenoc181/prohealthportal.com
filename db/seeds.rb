@@ -89,3 +89,18 @@ end
 
 # clinic table should be pre seeded
 
+    all_clinics = YAML.load_file(Rails.root.join('db', 'clinic_locations.yml'))
+
+    all_clinics.each do |clinic|
+        Clinic.create!(**clinic)
+        p "Clinics added to database successfully"
+    end
+
+    # Default Task Managers
+
+    task_managers = YAML.load_file(Rails.root.join('db', 'task_table_defaults.yml'))
+
+    task_managers.each do |task_table|
+        Task.create!(**task_table)
+        p "Task table added successfully"
+    end

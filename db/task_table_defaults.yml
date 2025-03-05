@@ -1,0 +1,123 @@
+# daily operations task tables
+
+- clinic_id: 1
+  task_table_title: "Appointment Reminders"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Scheduled" 
+    column_three: "Confirmed"
+    column_four: "Outreached"
+
+- clinic_id: 1
+  task_table_title: "Patient Retention"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Status" 
+    column_three: "Scheduled"
+    column_four: "Outreached"
+
+- clinic_id: 1
+  task_table_title: "Direct Access"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Initial Appointment" 
+    column_three: "Visits Completed"
+    column_four: "Referral"
+
+- clinic_id: 1
+  task_table_title: "Authorization Manager"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Insurance Comp" 
+    column_three: "Date Submitted"
+    column_four: "Status"
+
+- clinic_id: 1
+  task_table_title: "Referral Manager"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Referred status" 
+    column_three: "Date"
+    column_four: "MD associated"
+
+- clinic_id: 2
+  task_table_title: "Appointment Reminders"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Scheduled" 
+    column_three: "Confirmed"
+    column_four: "Outreached"
+
+- clinic_id: 2
+  task_table_title: "Patient Retention"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Status" 
+    column_three: "Scheduled"
+    column_four: "Outreached"
+
+- clinic_id: 2
+  task_table_title: "Direct Access"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Initial Appointment" 
+    column_three: "Visits Completed"
+    column_four: "Referral"
+
+- clinic_id: 2
+  task_table_title: "Authorization Manager"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Insurance Comp" 
+    column_three: "Date Submitted"
+    column_four: "Status"
+
+- clinic_id: 2
+  task_table_title: "Referral Manager"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Referred status" 
+    column_three: "Date"
+    column_four: "MD associated"
+
+- clinic_id: 3
+  task_table_title: "Appointment Reminders"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Scheduled" 
+    column_three: "Confirmed"
+    column_four: "Outreached"
+
+- clinic_id: 3
+  task_table_title: "Patient Retention"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Status" 
+    column_three: "Scheduled"
+    column_four: "Outreached"
+
+- clinic_id: 3
+  task_table_title: "Direct Access"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Initial Appointment" 
+    column_three: "Visits Completed"
+    column_four: "Referral"
+
+- clinic_id: 3
+  task_table_title: "Authorization Manager"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Insurance Comp" 
+    column_three: "Date Submitted"
+    column_four: "Status"
+
+- clinic_id: 3
+  task_table_title: "Referral Manager"
+  column_names: 
+    column_one: "Patient Name"
+    column_two: "Referred status" 
+    column_three: "Date"
+    column_four: "MD associated"
+
+    # APOS task tables

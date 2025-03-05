@@ -94,3 +94,15 @@
     direct_access: false
     admin: false
     password: "123456abc"
+
+  - first_name: "Christian"
+    last_name: "Cedeno"
+    email: "christiancedenob.f@gmail.com"
+    role: "Admin"
+    clinic_location: "Remote"
+    credentials: ""
+    phone_ext: int 
+    insurance_network: "not provided"
+    direct_access: false
+    admin: true
+    password: "123456abc"
