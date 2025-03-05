@@ -14,11 +14,20 @@ class TaskContentsController < ApplicationController
     render json: @task_content, serializer: TaskContentSerializer, status: :ok
   end
 
+  # GET /first 5 tasks
+  def tasks_preview
+    first_five_tasks = TaskContent.includes(:task).limit(5).group_by(&:task_id)
+    render json: first_five_tasks.transform_values { |task| 
+      ActiveModelSerializers::SerializableResource.new(task, each_serializer: TaskContentSerializer) 
+    }, status: :ok
+  end
+
   # POST /task_contents
   def create
     @task_content = TaskContent.new(task_content_params)
-    clinic_match = current_user&.clinic_id == @task_content.clinic_id
-    if current_user&.is_admin? || clinic_match
+    task_assoc_clinic = @task_content.task['clinic_id']
+    clinic_match = current_user&.clinic_id == task_assoc_clinic
+    if current_user&.admin || clinic_match
        if @task_content.save
          render json: @task_content, status: :created, location: @task_content
        else
@@ -31,9 +40,10 @@ class TaskContentsController < ApplicationController
 
   # PATCH/PUT /task_contents/1
   def update
-    clinic_match = current_user&.clinic_id == @task_content.clinic_id
-    if current_user&.is_admin? || clinic_match
-       if @task_content.task_data.update(task_content_params)
+    task_assoc_clinic = @task_content.task['clinic_id']
+    clinic_match = current_user&.clinic_id == task_assoc_clinic
+    if current_user&.admin || clinic_match
+       if @task_content.update(task_content_params)
          render json: {task: @task_content, message: "Successfully update task content"}, status: :ok 
        else
          render json: @task_content.errors, status: :unprocessable_entity
@@ -45,8 +55,9 @@ class TaskContentsController < ApplicationController
 
   # DELETE /task_contents/1
   def destroy
-    clinic_match = current_user&.clinic_id == @task_content.clinic_id
-    if current_user&.is_admin? || clinic_match
+    task_assoc_clinic = @task_content.task['clinic_id']
+    clinic_match = current_user&.clinic_id == task_assoc_clinic
+    if current_user&.admin || clinic_match
         if @task_content.destroy
           render json: { message: "Data has been deleted: #{@task_content.task_data}."}, status: :ok
         else 
@@ -56,6 +67,7 @@ class TaskContentsController < ApplicationController
         render json: {  message: "User is not authorized to perform this action on: #{@task_content.task_data}"}, status: :unauthorized
     end
 end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task_content
@@ -67,6 +79,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def task_content_params
-       params.perrmit(:task_id, :user_id, :task_data {})
+       params.permit(:task_id, :user_id, task_data: {})
     end
 end

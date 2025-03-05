@@ -13,6 +13,7 @@ class TasksController < ApplicationController
     render json: @task, serializer: TaskSerializer, status: :ok
   end
 
+  # GET /all_clinical_task_tables
   def manage_all_tables
     @tasks = Task.includes(:clinic).group_by(&:clinic_id)
     render json: @tasks.transform_values { |clinics| ActiveModelSerializers::SerializableResource.new(clinics, each_serializer: TaskSerializer) },
