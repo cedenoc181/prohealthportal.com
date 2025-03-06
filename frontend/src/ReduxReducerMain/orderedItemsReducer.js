@@ -1,56 +1,56 @@
-const initialInventoryState = {
+const initialOrderedItemsState = {
   data: [],
   loading: false,
   error: null
 };
 
-const inventoryReducer = (state = initialInventoryState, action) => {
+const orderedItemsReducer = (state = initialOrderedItemsState, action) => {
     switch (action.type) {
-        case 'FETCH_INVENTORY_SUCCESS':
+        case 'FETCH_ORDERED_ITEMS_SUCCESS':
             return {
                 ...state,
                 data: action.payload,
                 loading: false,
             };
-        case 'FETCH_INVENTORY_ERROR':
+        case 'FETCH_ORDERED_ITEMS_ERROR':
             return {
                 ...state,
                 loading: false,
                 error: action.payload,
             };
-         case 'CREATE_INVENTORY_SUCCESS':
+         case 'CREATE_ORDERED_ITEMS_SUCCESS':
              return {
                ...state,
                data: [...state.data, action.payload],
                loading: false,
              };
-         case 'CREATE_INVENTORY_ERROR':
+         case 'CREATE_ORDERED_ITEMS_ERROR':
             return {
               ...state,
               error: action.payload,
               loading: false,
             };
-         case 'UPDATE_INVENTORY_SUCCESS': 
+         case 'UPDATE_ORDERED_ITEMS_SUCCESS': 
          return {
-           ...state,
-           data: state.data.map((inventory) =>
-            inventory.id === action.payload.id ? action.payload : inventory
+               ...state,
+               data: state.data.map((orderedItems) =>
+                orderedItems.id === action.payload.id ? action.payload : orderedItems
            ),
            loading: false,
          };
-         case 'UPDATE_INVENTORY_ERROR': 
+         case 'UPDATE_ORDERED_ITEMS_ERROR': 
          return {
            ...state,
            error: action.payload,
            loading: false,
          };
-         case 'DELETE_INVENTORY_SUCCESS':
+         case 'DELETE_ORDERED_ITEMS_SUCCESS':
             return {
               ...state,
-              data: state.data.filter((inventory) => inventory.id !== action.payload),
+              data: state.data.filter((orderedItems) => orderedItems.id !== action.payload),
               loading: false,
             };
-         case 'DELETE_INVENTORY_ERROR':
+         case 'DELETE_ORDERED_ITEMS_ERROR':
            return {
              ...state,
              error: action.payload,
@@ -60,4 +60,4 @@ const inventoryReducer = (state = initialInventoryState, action) => {
          return state;
     }
 };
-export default inventoryReducer;
+export default orderedItemsReducer;
