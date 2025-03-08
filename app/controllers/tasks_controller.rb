@@ -33,11 +33,23 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1
   def update
-    if @task.update(task_params)
-      render json: {task: @task, message: "#{@task.task_table_title} has been successfully updated"}
+
+    if params[:task][:column_names]
+
+      update_columns = @task.column_names.merge(params[:task][:column_names]).compact
+      # Update task with merged JSONB
+      if @task.update(column_names: updated_columns)
+        render json: { task: @task, message: "columns_names: #{@task.column_names} has been successfully updated" }, status: :ok
+      else
+        render json: { errors: @task.errors.full_messages, message: "Failed to update #{@task.task_table_title}" }, status: :unprocessable_entity
+      end
     else
-      render json:{task: @task.errors.full_messages, message: "failed to update #{@task.task_table_title}"}, status: :unprocessable_entity
-    end
+      if @task.update(task_params)
+        render json: {task: @task, message: "#{@task.task_table_title} has been successfully updated"}
+      else
+        render json:{task: @task.errors.full_messages, message: "failed to update #{@task.task_table_title}"}, status: :unprocessable_entity
+      end
+   end
   end
 
   # DELETE /tasks/1
@@ -57,6 +69,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.permit(:task_table_title, :clinic_id, column_names: {})
+      params.require(:task).permit(:task_table_title, :clinic_id, column_names: {})
     end
 end
