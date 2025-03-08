@@ -43,10 +43,19 @@ class TaskContentsController < ApplicationController
     task_assoc_clinic = @task_content.task['clinic_id']
     clinic_match = current_user&.clinic_id == task_assoc_clinic
     if current_user&.admin || clinic_match
-       if @task_content.update(task_content_params)
-         render json: {task: @task_content, message: "Successfully update task content"}, status: :ok 
+      if params[:task_content][:task_data]  
+          task_content_update = @task_content.task_data.merge(params[:task_content][:task_data]).compact
+          if @task_content.update(task_data: task_content_update)
+            render json: { task_data: @task_content.task_data, message: "task_data: #{@task_content.task_data} has been successfully updated."}, status: :ok
+          else
+            render json: { error: @task_content.errors.full_message, message: "failed to update task_data"}, status: :unprocessable_entity
+          end
        else
-         render json: @task_content.errors, status: :unprocessable_entity
+          if @task_content.update(task_content_params)
+            render json: {task: @task_content, message: "Successfully update task content"}, status: :ok 
+          else
+            render json: @task_content.errors.full_message, status: :unprocessable_entity
+          end
        end
      else
       render json: {  message: "User is not authorized to perform this action on: #{@task_content.task_data}"}, status: :unauthorized   
@@ -79,6 +88,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def task_content_params
-       params.permit(:task_id, :user_id, task_data: {})
+       params.require(:task_content).permit(:task_id, :user_id, task_data: {})
     end
 end
