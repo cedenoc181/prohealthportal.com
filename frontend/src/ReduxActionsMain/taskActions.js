@@ -26,6 +26,7 @@ export const fetchTasks = (token) => {
   };
 
   // Action to create a task table
+  // why is the payload task singular 
   export const createTasks = (task) => {
     return async (dispatch) => {
       try {
@@ -87,7 +88,7 @@ export const fetchTasks = (token) => {
           },
           body: JSON.stringify(payload),
         });
-        
+
         const data = await response.json();
         dispatch({ type: 'UPDATE_TASK_SUCCESS', payload: data });
       } catch (error) {
@@ -97,18 +98,18 @@ export const fetchTasks = (token) => {
   };
   
   // Action to delete a patient email template
-  export const deleteDoctorEmail = (emailId) => {
+  export const deleteTasks = (taskId) => {
     return async (dispatch) => {
       try {
-        await fetch(`http://127.0.0.1:3000/dr_templates/${emailId}`, {
+        await fetch(`http://127.0.0.1:3000/tasks/${taskId}`, {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${token}`
           },
         });
-        dispatch({ type: 'DELETE_DOCTOR_EMAIL_SUCCESS', payload: emailId });
+        dispatch({ type: 'DELETE_TASK_SUCCESS', payload: taskId });
       } catch (error) {
-        dispatch({ type: 'DELETE_DOCTOR_EMAIL_ERROR', payload: error.message });
+        dispatch({ type: 'DELETE_TASK_ERROR', payload: error.message });
       }
     };
   };

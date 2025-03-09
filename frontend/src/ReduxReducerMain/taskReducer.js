@@ -21,7 +21,7 @@ const initialTaskState = {
            case 'CREATE_TASK_SUCCESS':
                return {
                  ...state,
-                 tasks: [...state.data, action.payload],
+                 tasks: [...state.tasks, action.payload],
                  loading: false,
                };
            case 'CREATE_TASK_ERROR':
@@ -34,7 +34,13 @@ const initialTaskState = {
            return {
              ...state,
              tasks: state.tasks.map((task) =>
-              task.id === action.payload.id ? action.payload : task
+              task.id === action.payload.id ?  {
+                ...task,
+                column_names: {
+                  ...task.column_names,
+                  ...action.payload.column_names
+                }
+              } : task
              ),
              loading: false,
            };

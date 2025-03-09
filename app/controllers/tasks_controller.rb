@@ -25,29 +25,47 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      render json: {task: TaskSerializer.new(@task), message: "#{current_user.first_name} created a new table: #{@task.task_table_title}"}, status: :created, location: @task
+      render json: {
+        task: TaskSerializer.new(@task), 
+        message: "#{current_user.first_name} created a new table: #{@task.task_table_title}"
+        }, status: :created, location: @task
     else
-      render json: {error: @task.errors.full_messages, message: "Failed to create new task table. Check params"}, status: :unprocessable_entity
+      render json: {
+        error: @task.errors.full_messages, 
+        message: "Failed to create new task table. Check params"
+        }, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /tasks/1
   def update
 
-    if params[:task][:column_names]
+    if params[:column_names].present?
 
-      update_columns = @task.column_names.merge(params[:task][:column_names]).compact
+      update_columns = @task.column_names.merge(params[:column_names]).compact
       # Update task with merged JSONB
       if @task.update(column_names: updated_columns)
-        render json: { task: @task, message: "columns_names: #{@task.column_names} has been successfully updated" }, status: :ok
+        render json: { 
+          task: @task, 
+          message: "columns_names: #{@task.column_names} has been successfully updated"
+          }, status: :ok
       else
-        render json: { errors: @task.errors.full_messages, message: "Failed to update #{@task.task_table_title}" }, status: :unprocessable_entity
+        render json: { 
+          errors: @task.errors.full_messages, 
+          message: "Failed to update #{@task.task_table_title}" 
+          }, status: :unprocessable_entity
       end
     else
       if @task.update(task_params)
-        render json: {task: @task, message: "#{@task.task_table_title} has been successfully updated"}
+        render json: {
+          task: @task, 
+          message: "#{@task.task_table_title} has been successfully updated"
+        }, status: :ok
       else
-        render json:{task: @task.errors.full_messages, message: "failed to update #{@task.task_table_title}"}, status: :unprocessable_entity
+        render json:{
+          task: @task.errors.full_messages, 
+          message: "failed to update #{@task.task_table_title}"
+          }, status: :unprocessable_entity
       end
    end
   end
@@ -55,7 +73,9 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   def destroy
     @task.destroy!
-    render json: { message: "#{@task.task_table_title} has been deleted"}
+    render json: { 
+      message: "#{@task.task_table_title} has been deleted"}, 
+      status: :ok
   end
 
   private
