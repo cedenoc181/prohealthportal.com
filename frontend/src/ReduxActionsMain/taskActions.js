@@ -51,16 +51,43 @@ export const fetchTasks = (token) => {
   
   // Action to update task table
   export const updateTasks = (taskId, updatedInfo) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
       try {
+
+
+        const existingTask = getState().tasks.find(task => task.id === taskId);
+
+        if (!existingTask) {
+          throw new Error(`Task with ID ${taskId} not found`);
+        }
+
+        const updateColumnNames = {
+          ...existingTask.column_names,
+          ...updatedInfo.column_names
+        };
+
+        // remove any null values
+        Object.keys(updateColumnNames).forEach(key => {
+          if (updateColumnNames[key] === null) {
+            delete updateColumnNames[key];
+          }
+        });
+
+        const payload = {
+          task_table_title: updatedInfo.task_table_title || existingTask.task_table_title,
+          clinic_id: updatedInfo.clinic_id || existingTask.clinic_id,
+          column_names: updateColumnNames
+        };
+
         const response = await fetch(`http://127.0.0.1:3000/tasks/${taskId}`, {
           method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(updatedInfo),
+          body: JSON.stringify(payload),
         });
+        
         const data = await response.json();
         dispatch({ type: 'UPDATE_TASK_SUCCESS', payload: data });
       } catch (error) {
