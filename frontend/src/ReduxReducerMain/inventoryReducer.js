@@ -16,7 +16,7 @@ const inventoryReducer = (state = initialInventoryState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: action.payload,
+                error: action.payload || "failed to fetch inventory items",
             };
          case 'CREATE_INVENTORY_SUCCESS':
              return {
@@ -27,7 +27,7 @@ const inventoryReducer = (state = initialInventoryState, action) => {
          case 'CREATE_INVENTORY_ERROR':
             return {
               ...state,
-              error: action.payload,
+              error: action.payload || "Failed to create inventory item",
               loading: false,
             };
          case 'UPDATE_INVENTORY_SUCCESS': 
@@ -41,7 +41,7 @@ const inventoryReducer = (state = initialInventoryState, action) => {
          case 'UPDATE_INVENTORY_ERROR': 
          return {
            ...state,
-           error: action.payload,
+           error: action.payload || "Failed to update inventory item",
            loading: false,
          };
          case 'DELETE_INVENTORY_SUCCESS':
@@ -53,7 +53,7 @@ const inventoryReducer = (state = initialInventoryState, action) => {
          case 'DELETE_INVENTORY_ERROR':
            return {
              ...state,
-             error: action.payload,
+             error: action.payload || "Failed to delete inventory item",
              loading: false,
            };
         default:

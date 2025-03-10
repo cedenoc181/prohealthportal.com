@@ -35,11 +35,7 @@ export const fetchTaskContents = (token) => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            user_id: taskContent.user_id,
-            task_id: taskContent.task_id,
-            task_data: taskContent.task_data || {},
-          }),
+          body: JSON.stringify({taskContent}),
         });
         const data = await response.json();
         dispatch({ type: 'CREATE_TASK_CONTENT_SUCCESS', payload: data });

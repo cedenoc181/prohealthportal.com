@@ -46,13 +46,7 @@ export const setSelectedMyMedifile = (file) => {
             Authorization: `Bearer ${newMyMedifile.token}`,
           },
           method: 'POST',
-          body: JSON.stringify({
-            user_id: newMyMedifile.user_id,
-            medifile_id: newMyMedifile.medifile_id,
-            coworker_id: newMyMedifile.coworker_id,
-            my_file_title: newMyMedifile.my_file_title,
-            my_file_description: newMyMedifile.my_file_description
-          }),
+          body: JSON.stringify({newMyMedifile}),
         });
 
           // Error handling

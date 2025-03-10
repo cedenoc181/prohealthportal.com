@@ -1,6 +1,6 @@
 // doctorEmailActions.js
 const token = localStorage.getItem("jwt");
-// Action to fetch doctor email templates
+
 export const fetchDoctorEmails = (token) => {
     return async (dispatch) => {
       try {
@@ -46,12 +46,7 @@ export const setSelectedDoctorEmail = (file) => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            dr_temp_title: newEmail.dr_temp_title,
-            dr_temp_subject: newEmail.dr_temp_subject,
-            dr_temp_content: newEmail.dr_temp_content,
-            category: newEmail.category,
-          }),
+          body: JSON.stringify({newEmail}),
         });
         const data = await response.json();
         dispatch({ type: 'CREATE_DOCTOR_EMAIL_SUCCESS', payload: data });
