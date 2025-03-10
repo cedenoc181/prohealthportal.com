@@ -1,5 +1,5 @@
 const initialTaskContentState = {
-    data: [],
+    taskContents: [],
     loading: false,
     error: null
   };
@@ -9,51 +9,57 @@ const initialTaskContentState = {
           case 'FETCH_TASK_CONTENT_SUCCESS':
               return {
                   ...state,
-                  data: action.payload,
+                  taskContents: action.payload,
                   loading: false,
               };
           case 'FETCH_TASK_CONTENT_ERROR':
               return {
                   ...state,
                   loading: false,
-                  error: action.payload,
+                  error: action.payload || "Failed to fetch Task Content"
               };
            case 'CREATE_TASK_CONTENT_SUCCESS':
                return {
                  ...state,
-                 data: [...state.data, action.payload],
+                 taskContents: [...state.taskContents, action.payload],
                  loading: false,
                };
            case 'CREATE_TASK_CONTENT_ERROR':
               return {
                 ...state,
-                error: action.payload,
+                error: action.payload || "Failed to create Task Content",
                 loading: false,
               };
            case 'UPDATE_TASK_CONTENT_SUCCESS': 
            return {
              ...state,
-             data: state.data.map((taskContent) =>
-                taskContent.id === action.payload.id ? action.payload : taskContent
+             taskContents: state.taskContents.map((taskContent) =>
+                taskContent.id === action.payload.id ? {
+                  ...taskContent,
+                  task_data: {
+                    ...taskContent.task_data,
+                    ...action.payload.task_data
+                  }
+                }  : taskContent
              ),
              loading: false,
            };
            case 'UPDATE_TASK_CONTENT_ERROR': 
            return {
              ...state,
-             error: action.payload,
+             error: action.payload || "Failed to update Task Content",
              loading: false,
            };
            case 'DELETE_TASK_CONTENT_SUCCESS':
               return {
                 ...state,
-                data: state.data.filter((taskContent) => taskContent.id !== action.payload),
+                taskContents: state.taskContents.filter((taskContent) => taskContent.id !== action.payload),
                 loading: false,
               };
            case 'DELETE_TASK_CONTENT_ERROR':
              return {
                ...state,
-               error: action.payload,
+               error: action.payload || "Failed to delete Task Content",
                loading: false,
              };
           default:

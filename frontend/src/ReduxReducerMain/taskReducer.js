@@ -16,7 +16,7 @@ const initialTaskState = {
               return {
                   ...state,
                   loading: false,
-                  error: action.payload,
+                  error: action.payload || "Failed to fetch Task",
               };
            case 'CREATE_TASK_SUCCESS':
                return {
@@ -27,7 +27,7 @@ const initialTaskState = {
            case 'CREATE_TASK_ERROR':
               return {
                 ...state,
-                error: action.payload,
+                error: action.payload || "Failed to create Task",
                 loading: false,
               };
            case 'UPDATE_TASK_SUCCESS': 
@@ -47,7 +47,7 @@ const initialTaskState = {
            case 'UPDATE_TASK_ERROR': 
            return {
              ...state,
-             error: action.payload,
+             error: action.payload || "Failed to update Task",
              loading: false,
            };
            case 'DELETE_TASK_SUCCESS':
@@ -59,7 +59,7 @@ const initialTaskState = {
            case 'DELETE_TASK_ERROR':
              return {
                ...state,
-               error: action.payload,
+               error: action.payload || "Failed to delete Task",
                loading: false,
              };
           default:

@@ -26,7 +26,6 @@ export const fetchTasks = (token) => {
   };
 
   // Action to create a task table
-  // why is the payload task singular 
   export const createTasks = (task) => {
     return async (dispatch) => {
       try {
