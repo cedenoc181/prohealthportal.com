@@ -14,7 +14,7 @@ class InventoryItemsController < ApplicationController
 
     # fetch inventory by low stock
     def inventory_item_status
-        inventory_groups = InventoryItem.all.group_by(&:item_status)
+        inventory_groups = InventoryItem.where(item_status: "insufficient").order(updated_at: :desc).limit(5)
         render json: inventory_groups,
         status: :ok
     end 

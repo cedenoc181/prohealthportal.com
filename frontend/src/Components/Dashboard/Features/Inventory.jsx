@@ -6,14 +6,11 @@ import {LinkIcon } from '@chakra-ui/icons'
 // import InventoryMain from './Main/InventoryMain'
 
 
-export const Inventory = (props) => {
+export const Inventory = () => {
 
   const [collapse, setCollapse] = useState(false);
 
   const handleTemplate = () => setCollapse(!collapse);
-
-let count = Math.floor(Math.random() * 10) + 1;
-
 
 
   return (
@@ -64,28 +61,28 @@ let count = Math.floor(Math.random() * 10) + 1;
         <td>
           <span className="icon-warning"></span> Staples
         </td>
-        <td>{count}</td>
+        <td></td>
         <td>Insufficient</td>
       </tr>
       <tr>
         <td>
           <span className="icon-warning"></span> Bio freeze
         </td>
-        <td>{count}</td>
+        <td></td>
         <td>Low</td>
       </tr>
       <tr>
         <td>
           <span className="icon-warning"></span> Printing Paper
         </td>
-        <td>{count}</td>
+        <td></td>
         <td>Insufficient</td>
       </tr>
       <tr>
         <td>
           <span className="icon-warning"></span> Paper Towels
         </td>
-        <td>{count}</td>
+        <td></td>
         <td>Low</td>
       </tr>
     </tbody>
@@ -107,28 +104,28 @@ let count = Math.floor(Math.random() * 10) + 1;
         <td>
           <span className="icon-order-status pending"></span> Business Cards
         </td>
-        <td>{count}</td>
+        <td></td>
         <td>Pending</td>
       </tr>
       <tr>
         <td>
           <span className="icon-order-status ordered"></span> Electrodes
         </td>
-        <td>{count}</td>
+        <td></td>
         <td>Ordered</td>
       </tr>
       <tr>
         <td>
           <span className="icon-order-status delivered"></span> Printing Paper
         </td>
-        <td>{count}</td>
+        <td></td>
         <td>Delivered</td>
       </tr>
       <tr>
         <td>
           <span className="icon-order-status ordered"></span> Paper Towels
         </td>
-        <td>{count}</td>
+        <td></td>
         <td>Ordered</td>
       </tr>
     </tbody>

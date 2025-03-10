@@ -28,8 +28,6 @@ const store = configureStore({
     inventory: inventoryReducer,
     requestedItem: requestedItemsReducer,
     orderedItem: orderedItemsReducer
-
-
   }, // Combine all reducers
 });
 
