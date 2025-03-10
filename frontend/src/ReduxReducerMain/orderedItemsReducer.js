@@ -16,7 +16,7 @@ const orderedItemsReducer = (state = initialOrderedItemsState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: action.payload,
+                error: action.payload || "Failed to fetch ordered items",
             };
          case 'CREATE_ORDERED_ITEMS_SUCCESS':
              return {
@@ -27,7 +27,7 @@ const orderedItemsReducer = (state = initialOrderedItemsState, action) => {
          case 'CREATE_ORDERED_ITEMS_ERROR':
             return {
               ...state,
-              error: action.payload,
+              error: action.payload || "Failed to create ordered item",
               loading: false,
             };
          case 'UPDATE_ORDERED_ITEMS_SUCCESS': 
@@ -41,7 +41,7 @@ const orderedItemsReducer = (state = initialOrderedItemsState, action) => {
          case 'UPDATE_ORDERED_ITEMS_ERROR': 
          return {
            ...state,
-           error: action.payload,
+           error: action.payload || "Failed to update ordered item",
            loading: false,
          };
          case 'DELETE_ORDERED_ITEMS_SUCCESS':
@@ -53,7 +53,7 @@ const orderedItemsReducer = (state = initialOrderedItemsState, action) => {
          case 'DELETE_ORDERED_ITEMS_ERROR':
            return {
              ...state,
-             error: action.payload,
+             error: action.payload || "Failed to delete ordered item",
              loading: false,
            };
         default:

@@ -16,7 +16,7 @@ const initialRequestedItemsState = {
               return {
                   ...state,
                   loading: false,
-                  error: action.payload,
+                  error: action.payload || "Failed to fetch requested items",
               };
            case 'CREATE_REQUESTED_ITEMS_SUCCESS':
                return {
@@ -27,7 +27,7 @@ const initialRequestedItemsState = {
            case 'CREATE_REQUESTED_ITEMS_ERROR':
               return {
                 ...state,
-                error: action.payload,
+                error: action.payload || "Failed to create requested items",
                 loading: false,
               };
            case 'UPDATE_REQUESTED_ITEMS_SUCCESS': 
@@ -41,7 +41,7 @@ const initialRequestedItemsState = {
            case 'UPDATE_REQUESTED_ITEMS_ERROR': 
            return {
              ...state,
-             error: action.payload,
+             error: action.payload || "Failed to update requested item",
              loading: false,
            };
            case 'DELETE_REQUESTED_ITEMS_SUCCESS':
@@ -53,7 +53,7 @@ const initialRequestedItemsState = {
            case 'DELETE_REQUESTED_ITEMS_ERROR':
              return {
                ...state,
-               error: action.payload,
+               error: action.payload || "Failed to delete requested items",
                loading: false,
              };
           default:
