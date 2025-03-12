@@ -5,7 +5,7 @@ import userReducer from './ReduxReducerMain/userReducer.js';
 import taskReducer from './ReduxReducerMain/taskReducer.js';
 import patientEmailReducer from './ReduxReducerMain/patientEmailReducer.js';
 import doctorEmailReducer from './ReduxReducerMain/doctorEmailReducer.js';
-import inventoryReducer from './ReduxReducerMain/inventoryReducer.js';
+import inventoryItemsReducer from './ReduxReducerMain/inventoryItemsReducer.js';
 import myEmailTemplateReducer from './ReduxReducerMain/myEmailTemplateReducer.js';
 import myMedifilesReducer from './ReduxReducerMain/myMedifilesReducer.js';
 import taskContentReducer from './ReduxReducerMain/taskContentReducer.js';
@@ -25,7 +25,7 @@ const store = configureStore({
     myEmail: myEmailTemplateReducer,
     patient: patientEmailReducer,
     doctor: doctorEmailReducer,
-    inventory: inventoryReducer,
+    inventoryItem: inventoryItemsReducer,
     requestedItem: requestedItemsReducer,
     orderedItem: orderedItemsReducer
   }, // Combine all reducers

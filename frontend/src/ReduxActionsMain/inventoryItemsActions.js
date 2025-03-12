@@ -1,15 +1,17 @@
-// inventoryActions.js
+// inventoryItemsActions.js
+  
 const token = localStorage.getItem("jwt")
 
-  export const fetchInventoryItems = (token) => {
+export const fetchInventoryItems = (token) => {
     return async (dispatch) => {
         try {
             if (!token) {
                 throw new Error("No token provided")
             }
-            const response = await fetch('http://123.0.0.1:3000/inventory_items', {
+            const response = await fetch('http://127.0.0.1:3000/inventory_items', {
+              method: 'GET',
                 headers: {
-                    Authroization: `Bearer ${token}`,
+                  Authorization: `Bearer ${token}`,
                 },
             });
             if (response.status === 401) {
@@ -18,12 +20,43 @@ const token = localStorage.getItem("jwt")
                 throw new Error("Unauthorized");
             }
             const data = await response.json();
+
+            console.log(`fetch inventoryItems: ${data}`)
+
             dispatch({ type: "FETCH_INVENTORY_SUCCESS", payload: data })
         } catch (error) {
             dispatch({ type: "FETCH_INVENTORY_ERROR", payload: error.message})
         }
     };
   };
+
+  export const fetchInsufficientItems = (token) => {
+    return async (dispatch) => {
+      console.log("Dispatching fetchInsufficientItems...");
+      try {
+          if (!token) {
+              console.log("token failure")
+              throw new Error("No token provided")
+          }
+
+          console.log(token)
+          
+          const response = await fetch('http://127.0.0.1:3000/low_inv_items', {
+              method: 'GET',
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+          });
+          const data = await response.json();
+
+          console.log(`fetch inventoryItems: ${data}`)
+
+          dispatch({ type: "FETCH_LOW_STOCK", payload: data })
+      } catch (error) {
+          dispatch({ type: "FETCHING_LOW_STOCK_ERROR", payload: error.message})
+      }
+  };
+  }
 
    export const createInventoryItems = (newInventoryItems) => {
       return async (dispatch) => {

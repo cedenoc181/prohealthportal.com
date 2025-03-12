@@ -1,7 +1,9 @@
 class InventoryItemsController < ApplicationController
     before_action :find_item, only: %i[ show update destroy ]
 
-    skip_before_action :is_admin?, only: %i[ show index update non_admin_inventory_item destroy ]
+    skip_before_action :is_admin?
+
+    # skip_before_action :authorized
 
     def index
         @inventory_items = InventoryItem.all
@@ -12,10 +14,10 @@ class InventoryItemsController < ApplicationController
         render json: @inventory_item, serializer: InventoryItemSerializer, status: :ok
     end 
 
-    # fetch inventory by low stock
-    def inventory_item_status
-        inventory_groups = InventoryItem.where(item_status: "insufficient").order(updated_at: :desc).limit(5)
-        render json: inventory_groups,
+    # fetch inventory by low stock(preview of 5)
+    def low_inv_items
+         @inventory_groups = InventoryItem.includes(:clinic).where(item_status: "insufficient").order(updated_at: :desc).group_by(&:clinic_id)
+        render json: @inventory_groups.transform_values { |inventory| ActiveModelSerializers::SerializableResource.new(inventory, each_serializer: InventoryItemSerializer) },
         status: :ok
     end 
 

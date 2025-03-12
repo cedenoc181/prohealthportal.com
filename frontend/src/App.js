@@ -148,12 +148,12 @@ useEffect(() => {
 
       <div className="console-display">
         <Routes>
-          <Route path="/overview" element={<Overview />} />
-          <Route path="/medical-forms" element={<Medifiles />} />
-          <Route path="/email-templates" element={<Email updateEmailRendering={setRenderEmailTemplate}/>} />
-          <Route path="/task-list" element={<TasksList />} />
-          <Route path="/inventory" element={<Inventory />} />
-          <Route path="/account-settings" element={<Account user={user}/>} />
+          <Route exact path="/overview" element={<Overview />} />
+          <Route exact path="/medical-forms" element={<Medifiles />} />
+          <Route exact path="/email-templates" element={<Email updateEmailRendering={setRenderEmailTemplate}/>} />
+          <Route exact path="/task-list" element={<TasksList />} />
+          <Route exact path="/inventory" element={<Inventory />} />
+          <Route exact path="/account-settings" element={<Account user={user}/>} />
         </Routes>
       </div>
 

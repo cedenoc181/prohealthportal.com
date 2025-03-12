@@ -38,7 +38,10 @@ Rails.application.routes.draw do
     get '/email_config', to: 'email_config#index'
 
       # INVENTORY ITEMS
-    get '/inventory_item_status', to: 'inventory_items#inventory_item_status'
+    
+    get '/inventory', to: 'inventory_items#index'
+
+    get '/low_inv_items', to: 'inventory_items#low_inv_items'
 
     get '/inventory_type', to: 'inventory_items#inventory_type'
 

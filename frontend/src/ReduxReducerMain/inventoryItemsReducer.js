@@ -1,10 +1,10 @@
-const initialInventoryState = {
+const initialInventoryItemsState = {
   data: [],
   loading: false,
   error: null
 };
 
-const inventoryReducer = (state = initialInventoryState, action) => {
+const inventoryItemsReducer = (state = initialInventoryItemsState, action) => {
     switch (action.type) {
         case 'FETCH_INVENTORY_SUCCESS':
             return {
@@ -18,6 +18,18 @@ const inventoryReducer = (state = initialInventoryState, action) => {
                 loading: false,
                 error: action.payload || "failed to fetch inventory items",
             };
+            case 'FETCH_LOW_STOCK':
+              return {
+                ...state,
+                data: action.payload,
+                loading: false,
+              };
+              case 'FETCHING_LOW_STOCK_ERROR':
+                return {
+                  ...state,
+                  loading: false,
+                  error: action.payload || "failed to fetch low stock items",
+                };
          case 'CREATE_INVENTORY_SUCCESS':
              return {
                ...state,
@@ -60,4 +72,4 @@ const inventoryReducer = (state = initialInventoryState, action) => {
          return state;
     }
 };
-export default inventoryReducer;
+export default inventoryItemsReducer;
