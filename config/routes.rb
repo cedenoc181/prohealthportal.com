@@ -54,6 +54,9 @@ Rails.application.routes.draw do
       # REQUESTED ITEMS 
     get '/requested_items_for_clinics', to: 'requested_items#requested_items_for_clinics'
 
+    # ORDERED ITEMS 
+    get '/ordered_items_grouped', to: 'ordered_items#ordered_items_grouped_by_clinic'
+    
       # get '/requested_items_ordered', to: 'requested_items#ordered_items'
 
         #TASK MODEL 

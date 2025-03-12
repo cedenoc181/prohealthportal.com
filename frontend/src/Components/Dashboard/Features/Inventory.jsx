@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchInsufficientItems } from "../../../ReduxActionsMain/inventoryItemsActions";
+import { orderedItemsByClinic } from "../../../ReduxActionsMain/orderedItemsAction";
 import "./Features.css";
 import {
   Input,
@@ -13,13 +14,13 @@ import {
 import { LinkIcon } from "@chakra-ui/icons";
 // import InventoryMain from './Main/InventoryMain'
 
-export const Inventory = ({ user, inventoryItems, fetchInsufficientItems }) => {
+export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficientItems, orderedItemsByClinic }) => {
   const token = localStorage.getItem("jwt");
   // const [inventory, setInventory] = useState(null);
   const [collapse, setCollapse] = useState(false);
-  const [west150Clinic, setWest150Clinic] = useState(false);
-  const [west180Clinic, setWest180Clinic] = useState(false);
-  const [eastsideClinic, setEastsideClinic] = useState(false);
+  // const [west150Clinic, setWest150Clinic] = useState(false);
+  // const [west180Clinic, setWest180Clinic] = useState(false);
+  // const [eastsideClinic, setEastsideClinic] = useState(false);
 
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -32,33 +33,38 @@ export const Inventory = ({ user, inventoryItems, fetchInsufficientItems }) => {
   useEffect(() => {
     if (user) {
       fetchInsufficientItems(token);
+      orderedItemsByClinic(token);
       if (user.admin) {
         setIsAdmin(true);
       }
     }
-  }, [fetchInsufficientItems, token, user]);
+  }, [fetchInsufficientItems, user]);
 
-  useEffect(() => {
-    if (user) {
-      if (user.clinic_location === "west" && !west150Clinic) {
-        setWest150Clinic(true);
-        setEastsideClinic(false);
-        setWest180Clinic(false);
-      } else if (user.clinic_location === "upper west" && !west180Clinic) {
-        setWest180Clinic(true);
-        setWest150Clinic(false);
-        setEastsideClinic(false);
-      } else if (user.clinic_location === "east" && !eastsideClinic) {
-        setEastsideClinic(true);
-        setWest180Clinic(false);
-        setWest150Clinic(false);
-      }
-    }
-  }, [user, west150Clinic, west180Clinic, eastsideClinic]);
 
-  console.log(eastsideClinic);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     if (user.clinic_location === "west" && !west150Clinic) {
+  //       setWest150Clinic(true);
+  //       setEastsideClinic(false);
+  //       setWest180Clinic(false);
+  //     } else if (user.clinic_location === "upper west" && !west180Clinic) {
+  //       setWest180Clinic(true);
+  //       setWest150Clinic(false);
+  //       setEastsideClinic(false);
+  //     } else if (user.clinic_location === "east" && !eastsideClinic) {
+  //       setEastsideClinic(true);
+  //       setWest180Clinic(false);
+  //       setWest150Clinic(false);
+  //     }
+  //   }
+  // }, [user, west150Clinic, west180Clinic, eastsideClinic]);
+
+  // console.log(eastsideClinic);
 
   console.log(inventoryItems);
+
+  console.log(orderedItems)
 
   const clinicMapping = {
     east: "1",
@@ -125,7 +131,10 @@ export const Inventory = ({ user, inventoryItems, fetchInsufficientItems }) => {
                     <tr key={item.id}>
                       <td>{item.item_name}</td>
                       <td>{item.count}</td>
-                      <td>{item.item_status}</td>
+                      <td>
+                        {item.item_requested === true && "Request sent"}
+                        {item.item_requested === false && "Request Item"}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -137,51 +146,36 @@ export const Inventory = ({ user, inventoryItems, fetchInsufficientItems }) => {
         )}
 
         {/* ordered items */}
-        <h2 className="inv-order-title">Order Status</h2>
+        {userClinicKey && orderedItems[userClinicKey]?.length > 0 ? (
+          <div>
+        <h2 className="inv-order-title">Order Items</h2>
         <div className="inventory-con">
           <table className="order-status-table">
             <thead>
               <tr>
                 <th>Item</th>
-                <th>Count</th>
+                <th>Ordered date</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <span className="icon-order-status pending"></span> Business
-                  Cards
-                </td>
-                <td></td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td>
-                  <span className="icon-order-status ordered"></span> Electrodes
-                </td>
-                <td></td>
-                <td>Ordered</td>
-              </tr>
-              <tr>
-                <td>
-                  <span className="icon-order-status delivered"></span> Printing
-                  Paper
-                </td>
-                <td></td>
-                <td>Delivered</td>
-              </tr>
-              <tr>
-                <td>
-                  <span className="icon-order-status ordered"></span> Paper
-                  Towels
-                </td>
-                <td></td>
-                <td>Ordered</td>
-              </tr>
+            {orderedItems[userClinicKey].slice(0, 5).map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.item_name}</td>
+                      <td>{item.order_date}</td>
+                      <td>
+                        {item.order_received === true && "Delivered"}
+                        {item.order_received === false && "Transit"}
+                        </td>
+                    </tr>
+                  ))}
             </tbody>
           </table>
+         </div>
         </div>
+              ) : (
+                <p>No inventory data available for this clinic</p>
+              )}
 
         <div className="inventory-req">
           <h2 className="inv-req-title">Request Form</h2>
@@ -245,11 +239,13 @@ export const Inventory = ({ user, inventoryItems, fetchInsufficientItems }) => {
 
 const mapStateToProps = (state) => ({
   inventoryItems: state.inventoryItem.data,
+  orderedItems: state.orderedItem.data,
   user: state.user.data,
 });
 
 const mapDispatchToProps = {
   fetchInsufficientItems,
+  orderedItemsByClinic,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

@@ -15,6 +15,12 @@ class OrderedItemsController < ApplicationController
          status: :ok
     end
 
+    def ordered_items_grouped_by_clinic
+        @ordered_groups = OrderedItem.includes(:clinic).where(order_received: false).order(order_date: :desc).group_by(&:clinic_id)
+        render json: @ordered_groups.transform_values { |orderedItems| ActiveModelSerializers::SerializableResource.new(orderedItems, each_serializer: OrderedItemSerializer) },
+        status: :ok
+    end
+
     def create
         # admins can create any clinic
          if current_user.admin?

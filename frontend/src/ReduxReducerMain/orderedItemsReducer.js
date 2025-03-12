@@ -18,6 +18,18 @@ const orderedItemsReducer = (state = initialOrderedItemsState, action) => {
                 loading: false,
                 error: action.payload || "Failed to fetch ordered items",
             };
+            case 'FETCH_ORDERED_GROUPED_ITEMS_SUCCESS':
+              return {
+                  ...state,
+                  data: action.payload,
+                  loading: false,
+              };
+          case 'FETCH_ORDERED_GROUPED_ITEMS_ERROR':
+              return {
+                  ...state,
+                  loading: false,
+                  error: action.payload || "Failed to fetch grouped ordered items",
+              };
          case 'CREATE_ORDERED_ITEMS_SUCCESS':
              return {
                ...state,
