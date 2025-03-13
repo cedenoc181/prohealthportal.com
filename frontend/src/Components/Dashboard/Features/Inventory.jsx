@@ -12,22 +12,34 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { LinkIcon } from "@chakra-ui/icons";
-// import InventoryMain from './Main/InventoryMain'
+
 
 export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficientItems, orderedItemsByClinic }) => {
+
+  const clinicMapping = {
+    east: "1",
+    west: "2",
+    "upper west": "3",
+  };
+
   const token = localStorage.getItem("jwt");
-  // const [inventory, setInventory] = useState(null);
   const [collapse, setCollapse] = useState(false);
-  // const [west150Clinic, setWest150Clinic] = useState(false);
-  // const [west180Clinic, setWest180Clinic] = useState(false);
-  // const [eastsideClinic, setEastsideClinic] = useState(false);
 
   const [isAdmin, setIsAdmin] = useState(false);
+
+  const [selectedClinicKey, setSelectedClinicKey] = useState(
+    clinicMapping[user?.clinic_location]
+  );
 
   const handleTemplate = () => {
     if (isAdmin) {
       setCollapse(!collapse);
     }
+  };
+
+  const handleClinicChange = (clinicKey) => {
+    setSelectedClinicKey(clinicKey);
+    setCollapse(false);
   };
 
   useEffect(() => {
@@ -41,38 +53,10 @@ export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficien
   }, [fetchInsufficientItems, user]);
 
 
-
-  // useEffect(() => {
-  //   if (user) {
-  //     if (user.clinic_location === "west" && !west150Clinic) {
-  //       setWest150Clinic(true);
-  //       setEastsideClinic(false);
-  //       setWest180Clinic(false);
-  //     } else if (user.clinic_location === "upper west" && !west180Clinic) {
-  //       setWest180Clinic(true);
-  //       setWest150Clinic(false);
-  //       setEastsideClinic(false);
-  //     } else if (user.clinic_location === "east" && !eastsideClinic) {
-  //       setEastsideClinic(true);
-  //       setWest180Clinic(false);
-  //       setWest150Clinic(false);
-  //     }
-  //   }
-  // }, [user, west150Clinic, west180Clinic, eastsideClinic]);
-
-  // console.log(eastsideClinic);
-
   console.log(inventoryItems);
 
   console.log(orderedItems)
 
-  const clinicMapping = {
-    east: "1",
-    west: "2",
-    "upper west": "3",
-  };
-
-  const userClinicKey = clinicMapping[user?.clinic_location];
 
   return (
     <div id="inventory">
@@ -96,11 +80,17 @@ export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficien
             </div>
             {collapse ? (
 
-              <ul className="filter-li-container">
-                <li className="filter-li">West 180</li>
-                <li className="filter-li">West 150</li>
-                <li className="filter-li">Eastside</li>
-              </ul>
+                <ul className="filter-li-container">
+                    <li className="filter-li" onClick={() => handleClinicChange('1')}>
+                      Eastside
+                    </li>
+                    <li className="filter-li" onClick={() => handleClinicChange('2')}>
+                      West 150
+                    </li>
+                    <li className="filter-li" onClick={() => handleClinicChange('3')}>
+                      West 180
+                    </li>
+                </ul>
             ) : (
               ""
             )}
@@ -108,13 +98,13 @@ export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficien
         </div>
         <br />
         <div className="selected-menu">
-          {userClinicKey === "1" && "Eastside"}
-          {userClinicKey === "2" && "Westside"}
-          {userClinicKey === "3" && "Upper Westside"}
+           {selectedClinicKey === '1' && 'Eastside'}
+           {selectedClinicKey === '2' && 'West 150'}
+           {selectedClinicKey === '3' && 'West 180'}
         </div>
 
         {/* inventory items */}
-        {userClinicKey && inventoryItems[userClinicKey]?.length > 0 ? (
+        {selectedClinicKey && inventoryItems[selectedClinicKey]?.length > 0 ? (
           <div>
             <h2 className="low-inv-title">Insufficient Inventory</h2>
             <div className="inventory-con">
@@ -127,7 +117,7 @@ export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficien
                   </tr>
                 </thead>
                 <tbody>
-                  {inventoryItems[userClinicKey].slice(0, 5).map((item) => (
+                  {inventoryItems[selectedClinicKey].slice(0, 5).map((item) => (
                     <tr key={item.id}>
                       <td>{item.item_name}</td>
                       <td>{item.count}</td>
@@ -142,11 +132,11 @@ export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficien
             </div>
           </div>
         ) : (
-          <p>No inventory data available for this clinic</p>
+          <p>No inventory insufficient data available for this clinic</p>
         )}
 
         {/* ordered items */}
-        {userClinicKey && orderedItems[userClinicKey]?.length > 0 ? (
+        {selectedClinicKey && orderedItems[selectedClinicKey]?.length > 0 ? (
           <div>
         <h2 className="inv-order-title">Order Items</h2>
         <div className="inventory-con">
@@ -159,13 +149,13 @@ export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficien
               </tr>
             </thead>
             <tbody>
-            {orderedItems[userClinicKey].slice(0, 5).map((item) => (
+            {orderedItems[selectedClinicKey].slice(0, 5).map((item) => (
                     <tr key={item.id}>
                       <td>{item.item_name}</td>
                       <td>{item.order_date}</td>
                       <td>
                         {item.order_received === true && "Delivered"}
-                        {item.order_received === false && "Transit"}
+                        {item.order_received === false && "In Transit"}
                         </td>
                     </tr>
                   ))}
@@ -174,7 +164,7 @@ export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficien
          </div>
         </div>
               ) : (
-                <p>No inventory data available for this clinic</p>
+                <p>No inventory ordered data available for this clinic</p>
               )}
 
         <div className="inventory-req">
