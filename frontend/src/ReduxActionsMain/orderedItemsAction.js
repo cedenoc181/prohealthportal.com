@@ -42,6 +42,22 @@ const token = localStorage.getItem("jwt")
     };
   };
   
+  export const allOrderedItemsGroupedByClinics = (token) => {
+    return async (dispatch) => {
+      try {
+        const response = await fetch('http://127.0.0.1:3000/ordered_items_grouped_by_clinics', {
+         method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+        });
+        const data = await response.json();
+        dispatch({ type: "FETCH_ALL_ORDERED_GROUPED_ITEMS_SUCCESS", payload: data })
+      } catch (error) {
+          dispatch({ type: "FETCH_ALL_ORDERED_GROUPED_ITEMS_ERROR", payload: error.message})
+      }
+    };
+  };
 
    export const createOrderedItems = (newOrderedItems) => {
       return async (dispatch) => {

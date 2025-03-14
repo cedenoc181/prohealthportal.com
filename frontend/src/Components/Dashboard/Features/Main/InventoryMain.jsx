@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import {inventoryByClinic} from "../../../../ReduxActionsMain/inventoryItemsActions"
 import './InvMain.css';
 import './Main.css'
 
-export const InventoryMain = (props) => {
+export const InventoryMain = ({user, inventoryByClinic, }) => {
   // Existing inventory state
   const [inventoryItems, setInventoryItems] = useState([
     { type: 'Office Supply', item: 'Business Cards', count: 10, status: 'Insufficient' },
@@ -256,8 +257,12 @@ export const InventoryMain = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  user: state.user.data,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  inventoryByClinic,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(InventoryMain);

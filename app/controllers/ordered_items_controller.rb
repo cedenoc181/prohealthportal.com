@@ -21,6 +21,12 @@ class OrderedItemsController < ApplicationController
         status: :ok
     end
 
+    def all_ordered_items_grouped_by_clinic
+        @all_ordered_items_by_clinic = OrderedItem.includes(:clinic).group_by(&:clinic_id)
+        render json: @all_ordered_items_by_clinic.transform_values { |orderedItems| ActiveModelSerializers::SerializableResource.new(orderedItems, each_serializer: OrderedItemSerializer) },
+        status: :ok
+    end
+
     def create 
         @ordered_item = OrderedItem.new(ordered_items_params)
         if authorized_to_CUD?

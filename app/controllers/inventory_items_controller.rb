@@ -36,11 +36,11 @@ class InventoryItemsController < ApplicationController
     end 
 
     # this loads all the items that have been requested due to insuffiecient inventory
-    def inventory_by_request_sent
-        inventory_requested = InventoryItem.all.where(item_requested: true).group_by(&:clinic_id)
-        render json: inventory_requested, 
-        status: :ok
-    end
+    # def inventory_by_request_sent
+    #     inventory_requested = InventoryItem.all.where(item_requested: true).group_by(&:clinic_id)
+    #     render json: inventory_requested, 
+    #     status: :ok
+    # end
 
 
     def create 

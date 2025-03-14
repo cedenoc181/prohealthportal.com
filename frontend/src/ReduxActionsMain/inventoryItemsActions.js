@@ -55,8 +55,33 @@ export const fetchInventoryItems = (token) => {
       } catch (error) {
           dispatch({ type: "FETCHING_LOW_STOCK_ERROR", payload: error.message})
       }
+    };
   };
-  }
+
+
+  export const inventoryByClinic = (token) => {
+      return async (dispatch) => {
+        console.log("dispatching inventory by clinic")
+        try {
+          if (!token) {
+            console.log("token failure")
+            throw new Error("No token provided")
+           }
+
+        const response = await fetch('http://127.0.0.1:3000/inventory_by_clinic', {
+          method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+        });
+        const data = await response.json();
+
+        dispatch({ type: "INVENTORY_BY_GROUP_SUCCESS", payload: data })
+      } catch (error) {
+          dispatch({ type: "INVENTORY_BY_GROUP_ERROR", payload: error.message})
+      }
+    };
+  };
 
    export const createInventoryItems = (newInventoryItems) => {
       return async (dispatch) => {
