@@ -226,7 +226,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
               )}
 
         <div className="inventory-req">
-          <h2 className="inv-req-title">Request Form</h2>
+          <h2 className="inv-req-title">Request inventory</h2>
           <form className="inv-form" onSubmit={handleSubmit}>
       <Stack spacing={4} className="form-stack">
         {/* Item Name */}
@@ -293,7 +293,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
 
 
         {/* clinic selection for admins   */}
-
+      { isAdmin ? (
         <div className="input-group select-category">
           <label className="input-group-text" htmlFor="inputGroupSelect01">
             Clinic:
@@ -310,7 +310,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
             <option value="2">West 150</option>
             <option value="3">Upper West 180</option>
           </select>
-        </div>
+        </div>) : " " }
 
 
         {/* Submit Button */}

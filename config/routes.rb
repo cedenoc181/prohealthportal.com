@@ -43,13 +43,12 @@ Rails.application.routes.draw do
 
     get '/low_inv_items', to: 'inventory_items#low_inv_items'
 
-    get '/inventory_type', to: 'inventory_items#inventory_type'
+    # get '/inventory_type', to: 'inventory_items#inventory_type'
 
     get '/inventory_by_clinic', to: 'inventory_items#inventory_by_clinic'
 
-    get '/inventory_by_requested', to: 'inventory_items#inventory_by_request_sent'
+    # get '/inventory_by_requested', to: 'inventory_items#inventory_by_request_sent'
 
-    post '/inventory_by_staff', to: 'inventory_items#non_admin_inventory_item'
 
       # REQUESTED ITEMS 
     get '/requested_items_for_clinics', to: 'requested_items#requested_items_for_clinics'
