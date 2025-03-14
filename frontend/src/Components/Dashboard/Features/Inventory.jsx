@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchInsufficientItems } from "../../../ReduxActionsMain/inventoryItemsActions";
 import { orderedItemsByClinic } from "../../../ReduxActionsMain/orderedItemsAction";
+import { createRequestedItems } from "../../../ReduxActionsMain/requestedItemsAction";
 import "./Features.css";
 import {
   Input,
@@ -14,7 +15,7 @@ import {
 import { LinkIcon } from "@chakra-ui/icons";
 
 
-export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficientItems, orderedItemsByClinic }) => {
+export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedItems, fetchInsufficientItems, orderedItemsByClinic }) => {
 
   const clinicMapping = {
     east: "1",
@@ -31,6 +32,18 @@ export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficien
     clinicMapping[user?.clinic_location]
   );
 
+
+  const  [requestItemForm, setRequestItemForm] = useState({
+      clinic_id: "",
+      user_id: "",
+      item_name: "",
+      item_link: "",
+      item_type: "",
+      requested_quantity: "",
+
+    }
+  )
+
   const handleTemplate = () => {
     if (isAdmin) {
       setCollapse(!collapse);
@@ -46,17 +59,62 @@ export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficien
     if (user) {
       fetchInsufficientItems(token);
       orderedItemsByClinic(token);
+
+      setRequestItemForm((prev) => ({
+        ...prev,
+        clinic_id: user?.clinic_id,
+        user_id: user?.id
+      }))
+
       if (user.admin) {
         setIsAdmin(true);
       }
     }
-  }, [fetchInsufficientItems, user]);
-
+  }, [fetchInsufficientItems, orderedItemsByClinic, user, token]);
 
   console.log(inventoryItems);
 
   console.log(orderedItems)
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRequestItemForm((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  console.log("request form:", requestItemForm)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validate form data
+    if (!requestItemForm.item_name || !requestItemForm.item_type || !requestItemForm.requested_quantity) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    // Ensure clinic_id is an integer
+    const formData = {
+      ...requestItemForm,
+      clinic_id: parseInt(requestItemForm.clinic_id, 10), // Convert to integer
+      requested_quantity: parseInt(requestItemForm.requested_quantity, 10)
+    };
+
+    console.log(formData);
+
+    // Send request to backend via Redux action
+    createRequestedItems(formData);
+
+    // Clear form after submission
+    setRequestItemForm({
+      clinic_id: '',
+      item_name: '',
+      item_link: '',
+      category: '',
+      requested_quantity: ''
+    });
+  };
 
   return (
     <div id="inventory">
@@ -169,58 +227,103 @@ export const Inventory = ({ user, inventoryItems, orderedItems, fetchInsufficien
 
         <div className="inventory-req">
           <h2 className="inv-req-title">Request Form</h2>
-          <form className="inv-form">
-            <Stack spacing={4} className="form-stack">
-              <InputGroup className="inv-input">
-                <Input type="text" placeholder="Item name" />
-              </InputGroup>
+          <form className="inv-form" onSubmit={handleSubmit}>
+      <Stack spacing={4} className="form-stack">
+        {/* Item Name */}
+        <InputGroup className="inv-input">
+          <Input
+            type="text"
+            name="item_name"
+            placeholder="Item name"
+            value={requestItemForm.item_name}
+            onChange={handleChange}
+          />
+        </InputGroup>
 
-              <InputGroup className="inv-input">
-                <InputLeftElement pointerEvents="none">
-                  <LinkIcon color="gray.800" />
-                </InputLeftElement>
-                <Input type="url" placeholder="Item link" />
-              </InputGroup>
+        {/* Item Link */}
+        <InputGroup className="inv-input">
+          <InputLeftElement pointerEvents="none">
+            <LinkIcon color="gray.800" />
+          </InputLeftElement>
+          <Input
+            type="url"
+            name="item_link"
+            placeholder="Item link"
+            value={requestItemForm.item_link}
+            onChange={handleChange}
+          />
+        </InputGroup>
 
-              <div className="input-group select-category">
-                <label
-                  className="input-group-text"
-                  htmlFor="inputGroupSelect01"
-                >
-                  Category:
-                </label>
-                <select className="form-select" id="inputGroupSelect01">
-                  <option value="">Choose...</option>
-                  <option value="1">Office</option>
-                  <option value="2">Cleaning</option>
-                  <option value="3">Equipment</option>
-                </select>
-              </div>
+        {/* Amount */}
+        <div className="input-group select-count">
+          {/* <label className="input-group-text" htmlFor="inputGroupSelect02">
+            Amount:
+          </label> */}
+          <Input
+            type="number"
+            step="1"
+            pattern="^\d+$"
+            className="form-select"
+            placeholder="Requested amount"
+            name="requested_quantity"
+            value={requestItemForm.requested_quantity}
+            onChange={handleChange}
+          >
+          </Input>
+        </div>
 
-              <div className="input-group select-count">
-                <label
-                  className="input-group-text"
-                  htmlFor="inputGroupSelect02"
-                >
-                  Amount:
-                </label>
-                <select className="form-select" id="inputGroupSelect02">
-                  <option value="">Count...</option>
-                  <option value="1">1-3</option>
-                  <option value="2">4-6</option>
-                  <option value="3">7-10</option>
-                </select>
-              </div>
+                {/* Category */}
+        <div className="input-group select-category">
+          <label className="input-group-text" htmlFor="inputGroupSelect01">
+            Category:
+          </label>
+          <select
+            className="form-select"
+            id="inputGroupSelect01"
+            name="item_type"
+            value={requestItemForm.item_type}
+            onChange={handleChange}
+          >
+            <option value="">Choose...</option>
+            <option value="Office">Office</option>
+            <option value="Cleaning">Cleaning</option>
+            <option value="Equipment">Equipment</option>
+          </select>
+        </div>
 
-              <Button
-                className="inv-submission"
-                colorScheme="blue"
-                variant="outline"
-              >
-                Submit
-              </Button>
-            </Stack>
-          </form>
+
+        {/* clinic selection for admins   */}
+
+        <div className="input-group select-category">
+          <label className="input-group-text" htmlFor="inputGroupSelect01">
+            Clinic:
+          </label>
+          <select
+            className="form-select"
+            id="inputGroupSelect01"
+            name="clinic_id"
+            value={requestItemForm.clinic_id}
+            onChange={handleChange}
+          >
+            <option value="">Choose...</option>
+            <option value="1">Eastside</option>
+            <option value="2">West 150</option>
+            <option value="3">Upper West 180</option>
+          </select>
+        </div>
+
+
+        {/* Submit Button */}
+        <Button
+          className="inv-submission"
+          colorScheme="blue"
+          variant="outline"
+          type="submit"
+        >
+          Submit
+        </Button>
+      </Stack>
+    </form>
         </div>
       </div>
     </div>
@@ -236,6 +339,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   fetchInsufficientItems,
   orderedItemsByClinic,
+  createRequestedItems,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

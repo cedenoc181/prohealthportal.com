@@ -29,13 +29,15 @@ const token = localStorage.getItem("jwt")
       return async (dispatch) => {
         try {
        
+          console.log(newRequestedItems)
+
           const response = await fetch('http://127.0.0.1:3000/requested_items', {
             method: 'POST',
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({newRequestedItems}),
+            body: JSON.stringify(newRequestedItems),
           });
           const data = await response.json();
           dispatch({ type: 'CREATE_REQUESTED_ITEMS_SUCCESS', payload: data });
