@@ -25,6 +25,30 @@ const token = localStorage.getItem("jwt")
     };
   };
 
+
+  export const requestedItemsGroupedByClinics = (token) => {
+    return async (dispatch) => {
+        try {
+            if (!token) {
+                throw new Error("No token provided")
+            }
+            const response = await fetch('http://123.0.0.1:3000/requested_items_for_clinics', {
+                method: 'GET',
+                headers: {
+                    Authroization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await response.json();
+            dispatch({ type: "FETCH_ALL_REQUESTED_ITEMS_BY_CLINICS_SUCCESS", payload: data })
+        } catch (error) {
+            dispatch({ type: "FETCH_ALL_REQUESTED_ITEMS_BY_CLINICS_ERROR", payload: error.message})
+        }
+    };
+  };
+
+
+
    export const createRequestedItems = (newRequestedItems) => {
       return async (dispatch) => {
         try {

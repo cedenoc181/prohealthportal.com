@@ -15,7 +15,6 @@ class RequestedItemsController < ApplicationController
 
     def requested_items_for_clinics
         @requested_items = RequestedItem.includes(:clinic).group_by(&:clinic_id)
-        
         render json: @requested_items.transform_values { |items| ActiveModelSerializers::SerializableResource.new(items, each_serializer: RequestedItemSerializer) },
         status: :ok
     end

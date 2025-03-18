@@ -18,6 +18,18 @@ const initialRequestedItemsState = {
                   loading: false,
                   error: action.payload || "Failed to fetch requested items",
               };
+              case 'FETCH_ALL_REQUESTED_ITEMS_BY_CLINICS_SUCCESS':
+                return {
+                    ...state,
+                    data: action.payload,
+                    loading: false,
+                };
+            case 'FETCH_ALL_REQUESTED_ITEMS_BY_CLINICS_ERROR':
+                return {
+                    ...state,
+                    loading: false,
+                    error: action.payload || "Failed to fetch all requested items sorted by clinics",
+                };
            case 'CREATE_REQUESTED_ITEMS_SUCCESS':
                return {
                  ...state,

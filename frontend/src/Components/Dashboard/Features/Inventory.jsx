@@ -226,7 +226,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
               )}
 
         <div className="inventory-req">
-          <h2 className="inv-req-title">Request inventory</h2>
+          <h2 className="inv-req-title">Request Items</h2>
           <form className="inv-form" onSubmit={handleSubmit}>
       <Stack spacing={4} className="form-stack">
         {/* Item Name */}
