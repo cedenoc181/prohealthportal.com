@@ -1,5 +1,7 @@
 const initialInventoryItemsState = {
   data: [],
+  inv: [],
+  insufficient: [],
   loading: false,
   error: null,
 };
@@ -21,7 +23,7 @@ const inventoryItemsReducer = (state = initialInventoryItemsState, action) => {
     case "FETCH_LOW_STOCK":
       return {
         ...state,
-        data: action.payload,
+        insufficient: action.payload,
         loading: false,
       };
     case "FETCHING_LOW_STOCK_ERROR":
@@ -33,7 +35,7 @@ const inventoryItemsReducer = (state = initialInventoryItemsState, action) => {
     case "INVENTORY_BY_GROUP_SUCCESS":
       return {
         ...state,
-        data: action.payload,
+        inv: action.payload,
         loading: false,
       };
     case "INVENTORY_BY_GROUP_ERROR":

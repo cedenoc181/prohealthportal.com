@@ -135,12 +135,8 @@
     font-weight: bold;
   }
   
-  .status.available {
+  .status.sufficent {
     color: green;
     font-weight: bold;
   }
   
-  .status.low {
-    color: rgb(213, 213, 75);
-    font-weight: bold;
-  }

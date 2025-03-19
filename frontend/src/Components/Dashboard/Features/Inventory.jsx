@@ -331,7 +331,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
 };
 
 const mapStateToProps = (state) => ({
-  inventoryItems: state.inventoryItem.data,
+  inventoryItems: state.inventoryItem.insufficient,
   orderedItems: state.orderedItem.data,
   user: state.user.data,
 });
