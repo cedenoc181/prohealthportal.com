@@ -17,7 +17,6 @@ export const InventoryFunction = ({
   updateInventoryItems,
   deleteInventoryItems,
 }) => {
-
   const clinicMapping = {
     east: "1",
     west: "2",
@@ -33,15 +32,16 @@ export const InventoryFunction = ({
   );
 
   const [isEditingInventory, setIsEditingInventory] = useState(false);
-  const [editInventoryIndex, setEditInventoryIndex] = useState(null);
+//   const [editInventoryIndex, setEditInventoryIndex] = useState(null);
 
   // State for new inventory item input for available supplies
   const [newInventoryItem, setNewInventoryItem] = useState({
-    itemType: "",
-    itemName: "",
+    item_type: "",
+    item_name: "",
     count: "",
-    warningCount: "",
-    stapleItem: "",
+    warning_count: "",
+    staple_item: "",
+    index: "",
   });
 
   useEffect(() => {
@@ -68,60 +68,101 @@ export const InventoryFunction = ({
     setNewInventoryItem({ ...newInventoryItem, [name]: value });
   };
 
-  // Add or update available inventory item
-  const addOrUpdateInventoryItem = () => {
-    if (
-      newInventoryItem.itemType &&
-      newInventoryItem.itemName &&
-      newInventoryItem.count &&
-      newInventoryItem.warningCount &&
-      newInventoryItem.stapleItem
-    ) {
-      if (isEditingInventory) {
-        // Update the existing inventory item
-        const updatedInventoryItems = [...inventory];
-        updatedInventoryItems[editInventoryIndex] = newInventoryItem;
 
-        // patch item here
-        // setInventoryItems(updatedInventoryItems);
+  // Add or update available inventory item
+  const addOrUpdateInventoryItem = async () => {
+    if (
+      newInventoryItem.item_type &&
+      newInventoryItem.item_name &&
+      newInventoryItem.count &&
+      newInventoryItem.warning_count &&
+      newInventoryItem.staple_item !== ""
+    ) {
+        
+      try {
+        if (isEditingInventory) {
+          // ✅ UPDATE INVENTORY ITEM
+          const updatedInfo = {
+            clinic_id: parseInt(selectedClinicKey, 10),
+            user_id: user.id,
+            item_type: newInventoryItem.item_type,
+            item_name: newInventoryItem.item_name,
+            count: parseInt(newInventoryItem.count, 10), // Convert to integer
+            warning_count: parseInt(newInventoryItem.warning_count, 10), // Convert to integer
+            staple_item: newInventoryItem.staple_item,
+          };
+
+          await updateInventoryItems(newInventoryItem.index, updatedInfo);
+
+          alert("Inventory item updated successfully!");
+        } else {
+          // ✅ CREATE INVENTORY ITEM
+          const newItem = {
+            clinic_id: parseInt(selectedClinicKey, 10),
+            user_id: user.id,
+            item_type: newInventoryItem.item_type,
+            item_name: newInventoryItem.item_name,
+            count: parseInt(newInventoryItem.count, 10), // Convert to integer
+            warning_count: parseInt(newInventoryItem.warning_count, 10), // Convert to integer
+            staple_item: newInventoryItem.staple_item
+          };
+
+          await createInventoryItems(newItem, token);
+          alert("Inventory item created successfully!");
+        }
+
+        // ✅ RESET STATE
+        setNewInventoryItem({
+            item_type: "",
+            item_name: "",
+            count: "",
+            warning_count: "",
+            item_status: "",
+            staple_item: "",
+            index: "",
+        });
         setIsEditingInventory(false);
-        setEditInventoryIndex(null);
-      } else {
-        // Add a new inventory item
-        // POST Method here
-        // setInventoryItems([...inventory, newInventoryItem]);
+        // setEditInventoryIndex(null);
+
+        // ✅ REFETCH INVENTORY AFTER CHANGES
+        await inventoryByClinic(token);
+      } catch (error) {
+        console.error("Failed to create or update inventory item:", error);
+        alert("Failed to update or create inventory item.");
       }
-      setNewInventoryItem({
-        itemType: "",
-        itemName: "",
-        count: "",
-        warningCount: "",
-        itemStatus: "",
-        stapleItem: "",
-      });
     } else {
       alert("Please fill out all fields before adding an inventory item.");
     }
   };
 
   // Handle edit for available inventory
-  const handleEditInventory = (index) => {
-    setNewInventoryItem(inventory[index]);
+  const handleEditInventory = (item, index) => {
+    console.log(item)
+    console.log(index + 1) // plus one matches the index to its actual db id
+    setNewInventoryItem({
+      item_type: item?.item_type,
+      item_name: item?.item_name,
+      count: item?.count,
+      warning_count: item?.warning_count,
+      staple_item: item?.staple_item || false,
+      index: index + 1// Ensure a boolean value
+    });
     setIsEditingInventory(true);
-    setEditInventoryIndex(index);
+    // setEditInventoryIndex(item);
   };
 
   const handleEditInv = () => {
     setIsEditingInventory(false);
     setNewInventoryItem({
-      itemType: "",
-      itemName: "",
-      count: "",
-      itemStatus: "",
+        item_type: "",
+        item_name: "",
+        count: "",
+        warning_count: "",
+        staple_item: "",
     });
   };
 
-  console.log(inventory[selectedClinicKey])
+  console.log(inventory[selectedClinicKey]);
   return (
     <div>
       {/* Inventory items */}
@@ -139,7 +180,7 @@ export const InventoryFunction = ({
             </thead>
             <tbody>
               {inventory[selectedClinicKey].map((item, index) => (
-                <tr key={index} onClick={() => handleEditInventory(index)}>
+                <tr key={index} onClick={() => handleEditInventory(item, index)}>
                   <td>{item.item_name}</td>
                   <td>{item.count}</td>
                   <td className={`status ${item.item_status.toLowerCase()}`}>
@@ -159,8 +200,8 @@ export const InventoryFunction = ({
             </h3>
             {isEditingInventory && <button onClick={handleEditInv}>x</button>}
             <select
-              name="itemType"
-              value={newInventoryItem?.itemType}
+              name="item_type"
+              value={newInventoryItem?.item_type || ""}
               onChange={handleInventoryChange}
             >
               <option value="">Select Type</option>
@@ -170,32 +211,36 @@ export const InventoryFunction = ({
             </select>
             <input
               type="text"
-              name="itemName"
+              name="item_name"
               placeholder="Item name"
-              value={newInventoryItem?.itemName}
+              value={newInventoryItem?.item_name || ""}
               onChange={handleInventoryChange}
             />
             <input
               type="number"
               name="count"
               placeholder="Quantity"
-              value={newInventoryItem?.count}
+              value={newInventoryItem?.count || ""}
               onChange={handleInventoryChange}
             />
             <input
               type="number"
-              name="warningCount"
+              name="warning_count"
               placeholder="insufficint Quantity"
-              value={newInventoryItem?.warningCount}
+              value={newInventoryItem?.warning_count || ""}
               onChange={handleInventoryChange}
             />
             <label>Staple item?</label>
             <input
               type="checkbox"
-              name="stapleItem"
-              value={newInventoryItem?.stapleItem ? true : false}
-              placeholder="staple item?"
-              onChange={handleInventoryChange}
+              name="staple_item"
+              checked={!!newInventoryItem?.staple_item}
+              onChange={(e) =>
+                setNewInventoryItem({
+                  ...newInventoryItem,
+                  staple_item: e.target.checked,
+                })
+              }
             />
 
             <button onClick={addOrUpdateInventoryItem}>

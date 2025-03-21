@@ -85,6 +85,9 @@ export const fetchInventoryItems = (token) => {
 
    export const createInventoryItems = (newInventoryItems) => {
       return async (dispatch) => {
+
+        console.log("new patch request: ",newInventoryItems);
+
         try {
        
           const response = await fetch('http://127.0.0.1:3000/inventory_items', {
@@ -93,7 +96,7 @@ export const fetchInventoryItems = (token) => {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({newInventoryItems}),
+            body: JSON.stringify(newInventoryItems),
           });
           const data = await response.json();
           dispatch({ type: 'CREATE_INVENTORY_SUCCESS', payload: data });
@@ -105,6 +108,9 @@ export const fetchInventoryItems = (token) => {
 
     export const updateInventoryItems = (inventoryId, updatedInfo) => {
       return async (dispatch) => {
+        console.log(updatedInfo)
+        console.log(inventoryId)
+        
         try {
           const response = await fetch(`http://127.0.0.1:3000/inventory_items/${inventoryId}`, {
             method: 'PUT',
