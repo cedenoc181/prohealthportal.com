@@ -196,7 +196,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
         {/* ordered items */}
         {selectedClinicKey && orderedItems[selectedClinicKey]?.length > 0 ? (
           <div>
-        <h2 className="inv-order-title">Order Items</h2>
+        <h2 className="inv-order-title">Expected delivery</h2>
         <div className="inventory-con">
           <table className="order-status-table">
             <thead>

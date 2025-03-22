@@ -128,15 +128,17 @@ export const fetchInventoryItems = (token) => {
       };
     };
 
-    export const deleteInventoryItems = (inventoryId) => {
+    export const deleteInventoryItems = (inventoryId, token) => {
       return async (dispatch) => {
         try {
-          await fetch(`http://127.0.0.1:3000/inventory_items/${inventoryId}`, {
+        await fetch(`http://127.0.0.1:3000/inventory_items/${inventoryId}`, {
             method: 'DELETE',
             headers: {
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json'
             },
           });
+
           dispatch({ type: 'DELETE_INVENTORY_SUCCESS', payload: inventoryId });
         } catch (error) {
           dispatch({ type: 'DELETE_INVENTORY_ERROR', payload: error.message });

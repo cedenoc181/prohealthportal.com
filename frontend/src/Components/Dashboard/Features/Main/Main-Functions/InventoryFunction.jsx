@@ -32,7 +32,7 @@ export const InventoryFunction = ({
   );
 
   const [isEditingInventory, setIsEditingInventory] = useState(false);
-//   const [editInventoryIndex, setEditInventoryIndex] = useState(null);
+  //   const [editInventoryIndex, setEditInventoryIndex] = useState(null);
 
   // State for new inventory item input for available supplies
   const [newInventoryItem, setNewInventoryItem] = useState({
@@ -58,7 +58,7 @@ export const InventoryFunction = ({
 
   console.log(newInventoryItem);
 
-    const [collapse, setCollapse] = useState(false);
+  const [collapse, setCollapse] = useState(false);
 
   const handleClinicChange = (clinicKey) => {
     setSelectedClinicKey(clinicKey);
@@ -77,32 +77,32 @@ export const InventoryFunction = ({
     setNewInventoryItem({ ...newInventoryItem, [name]: value });
   };
 
-    // Handle edit for available inventory
-    const handleEditInventory = (item) => {
-        console.log(item.id)
-    
-        setNewInventoryItem({
-          item_type: item?.item_type,
-          item_name: item?.item_name,
-          count: item?.count,
-          warning_count: item?.warning_count,
-          staple_item: item?.staple_item || false,
-          index: item.id
-        });
-        setIsEditingInventory(true);
-        // setEditInventoryIndex(item);
-      };
-    
-      const closeEditInv = () => {
-        setIsEditingInventory(false);
-        setNewInventoryItem({
-            item_type: "",
-            item_name: "",
-            count: "",
-            warning_count: "",
-            staple_item: "",
-        });
-      };
+  // Handle edit for available inventory
+  const handleEditInventory = (item) => {
+    console.log(item.id);
+
+    setNewInventoryItem({
+      item_type: item?.item_type,
+      item_name: item?.item_name,
+      count: item?.count,
+      warning_count: item?.warning_count,
+      staple_item: item?.staple_item || false,
+      index: item.id,
+    });
+    setIsEditingInventory(true);
+    // setEditInventoryIndex(item);
+  };
+
+  const closeEditInv = () => {
+    setIsEditingInventory(false);
+    setNewInventoryItem({
+      item_type: "",
+      item_name: "",
+      count: "",
+      warning_count: "",
+      staple_item: "",
+    });
+  };
 
   // Add or update available inventory item
   const addOrUpdateInventoryItem = async () => {
@@ -113,7 +113,6 @@ export const InventoryFunction = ({
       newInventoryItem.warning_count &&
       newInventoryItem.staple_item !== ""
     ) {
-        
       try {
         if (isEditingInventory) {
           // ✅ UPDATE INVENTORY ITEM
@@ -127,7 +126,7 @@ export const InventoryFunction = ({
             staple_item: newInventoryItem.staple_item,
           };
 
-           await updateInventoryItems(newInventoryItem.index, updatedInfo);
+          await updateInventoryItems(newInventoryItem.index, updatedInfo);
 
           alert("Inventory item updated successfully!");
         } else {
@@ -139,7 +138,7 @@ export const InventoryFunction = ({
             item_name: newInventoryItem.item_name,
             count: parseInt(newInventoryItem.count, 10), // Convert to integer
             warning_count: parseInt(newInventoryItem.warning_count, 10), // Convert to integer
-            staple_item: newInventoryItem.staple_item
+            staple_item: newInventoryItem.staple_item,
           };
 
           await createInventoryItems(newItem, token);
@@ -148,13 +147,13 @@ export const InventoryFunction = ({
 
         // ✅ RESET STATE
         setNewInventoryItem({
-            item_type: "",
-            item_name: "",
-            count: "",
-            warning_count: "",
-            item_status: "",
-            staple_item: "",
-            index: "",
+          item_type: "",
+          item_name: "",
+          count: "",
+          warning_count: "",
+          item_status: "",
+          staple_item: "",
+          index: "",
         });
         setIsEditingInventory(false);
         // setEditInventoryIndex(null);
@@ -170,51 +169,89 @@ export const InventoryFunction = ({
     }
   };
 
+  const deleteInvItem = async () => {
+    if (newInventoryItem.index != null) {
+      if (window.confirm("Are you sure you want to delete this item?")) {
+        try {
+          // const success = await deleteInventoryItems(newInventoryItem.index, token);
+          await deleteInventoryItems(newInventoryItem.index, token);
+          alert("Inventory item was deleted!");
 
-  console.log(inventory[selectedClinicKey]);
+          setIsEditingInventory(false);
+
+          setNewInventoryItem({
+            item_type: "",
+            item_name: "",
+            count: "",
+            warning_count: "",
+            item_status: "",
+            staple_item: "",
+            index: "",
+          });
+
+          await inventoryByClinic(token);
+        } catch (error) {
+          console.error("Failed to delete inventory item:", error);
+          alert("Failed to delete inventory item.");
+        }
+      }
+    }
+  };
+
   return (
     <div>
       {/* Inventory items */}
       {selectedClinicKey && inventory[selectedClinicKey]?.length > 0 ? (
         <div className="inventory-table">
-        <h5> 
-           {selectedClinicKey === '1' && 'Eastside'}
-           {selectedClinicKey === '2' && 'West 150'}
-           {selectedClinicKey === '3' && 'West 180'}
-           {isAdmin ? (<span>
-            <div className="sideMenuItems">
-              <svg
-                className="svg-inv-function"
-                onClick={handleTemplate}
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-three-dots-vertical"
-                viewBox="0 0 20 20"
-              >
-                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-              </svg>
-            </div>
-            {collapse ? (
-
-                <ul className="filter-li-container">
-                    <li className="filter-li" onClick={() => handleClinicChange('1')}>
+          <h5>
+            {selectedClinicKey === "1" && "Eastside"}
+            {selectedClinicKey === "2" && "West 150"}
+            {selectedClinicKey === "3" && "West 180"}
+            {isAdmin ? (
+              <span>
+                <div className="sideMenuItems">
+                  <svg
+                    className="svg-inv-function"
+                    onClick={handleTemplate}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-three-dots-vertical"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                  </svg>
+                </div>
+                {collapse ? (
+                  <ul className="filter-li-container">
+                    <li
+                      className="filter-li"
+                      onClick={() => handleClinicChange("1")}
+                    >
                       Eastside
                     </li>
-                    <li className="filter-li" onClick={() => handleClinicChange('2')}>
+                    <li
+                      className="filter-li"
+                      onClick={() => handleClinicChange("2")}
+                    >
                       West 150
                     </li>
-                    <li className="filter-li" onClick={() => handleClinicChange('3')}>
+                    <li
+                      className="filter-li"
+                      onClick={() => handleClinicChange("3")}
+                    >
                       West 180
                     </li>
-                </ul>
+                  </ul>
+                ) : (
+                  ""
+                )}
+              </span>
             ) : (
               ""
             )}
-          </span>) : ("")}
-           
-        </h5>
+          </h5>
           <h2 className="main-title">Supplies Available</h2>
 
           <table>
@@ -228,7 +265,10 @@ export const InventoryFunction = ({
             </thead>
             <tbody>
               {inventory[selectedClinicKey].map((item, index) => (
-                <tr key={index} onClick={() => handleEditInventory(item, index)}>
+                <tr
+                  key={index}
+                  onClick={() => handleEditInventory(item, index)}
+                >
                   <td>{item.item_name}</td>
                   <td>{item.count}</td>
                   <td className={`status ${item.item_status.toLowerCase()}`}>
@@ -290,6 +330,22 @@ export const InventoryFunction = ({
                 })
               }
             />
+            {isEditingInventory ? (
+              <svg
+                onClick={deleteInvItem}
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash"
+                viewBox="0 0 16 16"
+              >
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+              </svg>
+            ) : (
+              ""
+            )}
 
             <button onClick={addOrUpdateInventoryItem}>
               {isEditingInventory
