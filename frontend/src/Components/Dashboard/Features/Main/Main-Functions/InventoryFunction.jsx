@@ -58,9 +58,18 @@ export const InventoryFunction = ({
 
   console.log(newInventoryItem);
 
-  // const handleClinicChange = (clinicKey) => {
-  //   setSelectedClinicKey(clinicKey);
-  // };
+    const [collapse, setCollapse] = useState(false);
+
+  const handleClinicChange = (clinicKey) => {
+    setSelectedClinicKey(clinicKey);
+    setCollapse(!collapse);
+  };
+
+  const handleTemplate = () => {
+    if (isAdmin) {
+      setCollapse(!collapse);
+    }
+  };
 
   // Handle changes for available inventory input
   const handleInventoryChange = (e) => {
@@ -68,6 +77,32 @@ export const InventoryFunction = ({
     setNewInventoryItem({ ...newInventoryItem, [name]: value });
   };
 
+    // Handle edit for available inventory
+    const handleEditInventory = (item) => {
+        console.log(item.id)
+    
+        setNewInventoryItem({
+          item_type: item?.item_type,
+          item_name: item?.item_name,
+          count: item?.count,
+          warning_count: item?.warning_count,
+          staple_item: item?.staple_item || false,
+          index: item.id
+        });
+        setIsEditingInventory(true);
+        // setEditInventoryIndex(item);
+      };
+    
+      const closeEditInv = () => {
+        setIsEditingInventory(false);
+        setNewInventoryItem({
+            item_type: "",
+            item_name: "",
+            count: "",
+            warning_count: "",
+            staple_item: "",
+        });
+      };
 
   // Add or update available inventory item
   const addOrUpdateInventoryItem = async () => {
@@ -92,7 +127,7 @@ export const InventoryFunction = ({
             staple_item: newInventoryItem.staple_item,
           };
 
-          await updateInventoryItems(newInventoryItem.index, updatedInfo);
+           await updateInventoryItems(newInventoryItem.index, updatedInfo);
 
           alert("Inventory item updated successfully!");
         } else {
@@ -135,32 +170,6 @@ export const InventoryFunction = ({
     }
   };
 
-  // Handle edit for available inventory
-  const handleEditInventory = (item, index) => {
-    console.log(item)
-    console.log(index + 1) // plus one matches the index to its actual db id
-    setNewInventoryItem({
-      item_type: item?.item_type,
-      item_name: item?.item_name,
-      count: item?.count,
-      warning_count: item?.warning_count,
-      staple_item: item?.staple_item || false,
-      index: index + 1// Ensure a boolean value
-    });
-    setIsEditingInventory(true);
-    // setEditInventoryIndex(item);
-  };
-
-  const handleEditInv = () => {
-    setIsEditingInventory(false);
-    setNewInventoryItem({
-        item_type: "",
-        item_name: "",
-        count: "",
-        warning_count: "",
-        staple_item: "",
-    });
-  };
 
   console.log(inventory[selectedClinicKey]);
   return (
@@ -168,7 +177,46 @@ export const InventoryFunction = ({
       {/* Inventory items */}
       {selectedClinicKey && inventory[selectedClinicKey]?.length > 0 ? (
         <div className="inventory-table">
+        <h5> 
+           {selectedClinicKey === '1' && 'Eastside'}
+           {selectedClinicKey === '2' && 'West 150'}
+           {selectedClinicKey === '3' && 'West 180'}
+           {isAdmin ? (<span>
+            <div className="sideMenuItems">
+              <svg
+                className="svg-inv-function"
+                onClick={handleTemplate}
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-three-dots-vertical"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+              </svg>
+            </div>
+            {collapse ? (
+
+                <ul className="filter-li-container">
+                    <li className="filter-li" onClick={() => handleClinicChange('1')}>
+                      Eastside
+                    </li>
+                    <li className="filter-li" onClick={() => handleClinicChange('2')}>
+                      West 150
+                    </li>
+                    <li className="filter-li" onClick={() => handleClinicChange('3')}>
+                      West 180
+                    </li>
+                </ul>
+            ) : (
+              ""
+            )}
+          </span>) : ("")}
+           
+        </h5>
           <h2 className="main-title">Supplies Available</h2>
+
           <table>
             <thead>
               <tr>
@@ -198,7 +246,7 @@ export const InventoryFunction = ({
                 ? "Edit Inventory Item"
                 : "Add Existing Inventory Item"}
             </h3>
-            {isEditingInventory && <button onClick={handleEditInv}>x</button>}
+            {isEditingInventory && <button onClick={closeEditInv}>x</button>}
             <select
               name="item_type"
               value={newInventoryItem?.item_type || ""}

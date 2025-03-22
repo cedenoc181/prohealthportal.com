@@ -110,10 +110,10 @@ export const fetchInventoryItems = (token) => {
       return async (dispatch) => {
         console.log(updatedInfo)
         console.log(inventoryId)
-        
+
         try {
           const response = await fetch(`http://127.0.0.1:3000/inventory_items/${inventoryId}`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
