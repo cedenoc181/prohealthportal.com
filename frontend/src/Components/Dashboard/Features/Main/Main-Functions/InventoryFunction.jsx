@@ -18,7 +18,6 @@ export const InventoryFunction = ({
   deleteInventoryItems,
   clinicSelected,
 }) => {
-
   const token = localStorage.getItem("jwt");
 
   const [selectedClinicKey, setSelectedClinicKey] = useState(null);
@@ -32,7 +31,6 @@ export const InventoryFunction = ({
     count: "",
     warning_count: "",
     staple_item: "",
-    index: "",
   });
 
   useEffect(() => {
@@ -41,12 +39,6 @@ export const InventoryFunction = ({
       setSelectedClinicKey(clinicSelected);
     }
   }, [inventoryByClinic, clinicSelected, user, token]);
-
-  console.log(inventory);
-
-  console.log(newInventoryItem);
-
-  console.log("current selected clinic:", clinicSelected);
 
   // Handle changes for available inventory input
   const handleInventoryChange = (e) => {
@@ -59,15 +51,10 @@ export const InventoryFunction = ({
     console.log(item.id);
 
     setNewInventoryItem({
-      item_type: item?.item_type,
-      item_name: item?.item_name,
-      count: item?.count,
-      warning_count: item?.warning_count,
-      staple_item: item?.staple_item || false,
-      index: item.id,
+      ...item,
     });
+    console.log(newInventoryItem);
     setIsEditingInventory(true);
-    // setEditInventoryIndex(item);
   };
 
   const closeEditInv = () => {
@@ -103,14 +90,14 @@ export const InventoryFunction = ({
             staple_item: newInventoryItem.staple_item,
           };
 
-          await updateInventoryItems(newInventoryItem.index, updatedInfo, token);
+          await updateInventoryItems(newInventoryItem.id, updatedInfo, token);
 
           alert("Inventory item updated successfully!");
         } else {
           // ✅ CREATE INVENTORY ITEM
           const newItem = {
             clinic_id: parseInt(selectedClinicKey, 10),
-            user_id: user.id,
+            user_id: user?.id,
             item_type: newInventoryItem.item_type,
             item_name: newInventoryItem.item_name,
             count: parseInt(newInventoryItem.count, 10), // Convert to integer
@@ -130,7 +117,6 @@ export const InventoryFunction = ({
           warning_count: "",
           item_status: "",
           staple_item: "",
-          index: "",
         });
         setIsEditingInventory(false);
         // setEditInventoryIndex(null);
@@ -147,11 +133,11 @@ export const InventoryFunction = ({
   };
 
   const deleteInvItem = async () => {
-    if (newInventoryItem.index != null) {
+    if (newInventoryItem?.id != null) {
       if (window.confirm("Are you sure you want to delete this item?")) {
         try {
           // const success = await deleteInventoryItems(newInventoryItem.index, token);
-          await deleteInventoryItems(newInventoryItem.index, token);
+          await deleteInventoryItems(newInventoryItem.id, token);
           alert("Inventory item was deleted!");
 
           setIsEditingInventory(false);
@@ -163,7 +149,6 @@ export const InventoryFunction = ({
             warning_count: "",
             item_status: "",
             staple_item: "",
-            index: "",
           });
 
           await inventoryByClinic(token);
@@ -192,10 +177,7 @@ export const InventoryFunction = ({
             </thead>
             <tbody>
               {inventory[selectedClinicKey].map((item, index) => (
-                <tr
-                  key={index}
-                  onClick={() => handleEditInventory(item, index)}
-                >
+                <tr key={index} onClick={() => handleEditInventory(item)}>
                   <td>{item.item_name}</td>
                   <td>{item.count}</td>
                   <td className={`status ${item.item_status.toLowerCase()}`}>

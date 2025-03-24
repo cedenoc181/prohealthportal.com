@@ -1,5 +1,4 @@
 // orderedItemsAction.js
-const token = localStorage.getItem("jwt")
 
   export const fetchOrderedItems = (token) => {
     return async (dispatch) => {
@@ -25,7 +24,7 @@ const token = localStorage.getItem("jwt")
     };
   };
 
-  export const orderedItemsByClinic = (token) => {
+  export const pendingOrderedItemsByClinic = (token) => {
     return async (dispatch) => {
       try {
         const response = await fetch('http://127.0.0.1:3000/ordered_items_grouped', {
@@ -42,7 +41,7 @@ const token = localStorage.getItem("jwt")
     };
   };
   
-  export const allOrderedItemsGroupedByClinics = (token) => {
+  export const receivedOrderedItemsGroupedByClinics = (token) => {
     return async (dispatch) => {
       try {
         const response = await fetch('http://127.0.0.1:3000/ordered_items_grouped_by_clinics', {
@@ -59,7 +58,7 @@ const token = localStorage.getItem("jwt")
     };
   };
 
-   export const createOrderedItems = (newOrderedItems) => {
+   export const createOrderedItems = (newOrderedItems, token) => {
       return async (dispatch) => {
         try {
        
@@ -79,7 +78,7 @@ const token = localStorage.getItem("jwt")
       };
     };
 
-    export const updateOrderedItems = (orderedItemsId, updatedInfo) => {
+    export const updateOrderedItems = (orderedItemsId, updatedInfo, token) => {
       return async (dispatch) => {
         try {
           const response = await fetch(`http://127.0.0.1:3000/ordered_items/${orderedItemsId}`, {
@@ -98,7 +97,7 @@ const token = localStorage.getItem("jwt")
       };
     };
 
-    export const deleteOrderedItems = (orderedItemsId) => {
+    export const deleteOrderedItems = (orderedItemsId, token) => {
       return async (dispatch) => {
         try {
           await fetch(`http://127.0.0.1:3000/ordered_items/${orderedItemsId}`, {

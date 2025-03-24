@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchInsufficientItems } from "../../../ReduxActionsMain/inventoryItemsActions";
-import { orderedItemsByClinic } from "../../../ReduxActionsMain/orderedItemsAction";
+import { pendingOrderedItemsByClinic } from "../../../ReduxActionsMain/orderedItemsAction";
 import { createRequestedItems } from "../../../ReduxActionsMain/requestedItemsAction";
 import "./Features.css";
 import {
@@ -15,7 +15,7 @@ import {
 import { LinkIcon } from "@chakra-ui/icons";
 
 
-export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedItems, fetchInsufficientItems, orderedItemsByClinic }) => {
+export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedItems, fetchInsufficientItems, pendingOrderedItemsByClinic }) => {
 
   const clinicMapping = {
     east: "1",
@@ -58,7 +58,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
   useEffect(() => {
     if (user) {
       fetchInsufficientItems(token);
-      orderedItemsByClinic(token);
+      pendingOrderedItemsByClinic(token);
 
       setRequestItemForm((prev) => ({
         ...prev,
@@ -70,7 +70,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
         setIsAdmin(true);
       }
     }
-  }, [fetchInsufficientItems, orderedItemsByClinic, user, token]);
+  }, [fetchInsufficientItems, pendingOrderedItemsByClinic, user, token]);
 
   console.log(inventoryItems);
 
@@ -338,7 +338,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   fetchInsufficientItems,
-  orderedItemsByClinic,
+  pendingOrderedItemsByClinic,
   createRequestedItems,
 };
 

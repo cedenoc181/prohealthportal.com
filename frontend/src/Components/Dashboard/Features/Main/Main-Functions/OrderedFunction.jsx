@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
-  allOrderedItemsGroupedByClinics,
+receivedOrderedItemsGroupedByClinics,
+  pendingOrderedItemsByClinic,
   createOrderedItems,
   updateOrderedItems,
   deleteOrderedItems,
@@ -12,47 +13,43 @@ import "../Main.css";
 export const OrderedFunction = ({
   user,
   orderedItems,
-  allOrderedItemsGroupedByClinics,
+  orderedItemsNotReceived,
+  receivedOrderedItemsGroupedByClinics,
+  pendingOrderedItemsByClinic,
   createOrderedItems,
   updateOrderedItems,
   deleteOrderedItems,
+  clinicSelected,
 }) => {
-  const clinicMapping = {
-    east: "1",
-    west: "2",
-    "upper west": "3",
-  };
   const token = localStorage.getItem("jwt");
 
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  const [selectedClinicKey, setSelectedClinicKey] = useState(
-    clinicMapping[user?.clinic_location]
-  );
+  const [selectedClinicKey, setSelectedClinicKey] = useState(null);
 
   useEffect(() => {
     if (user) {
-        allOrderedItemsGroupedByClinics(token);
-
-      if (user.admin) {
-        setIsAdmin(true);
-      }
+        receivedOrderedItemsGroupedByClinics(token);
+      pendingOrderedItemsByClinic(token);
+      setSelectedClinicKey(clinicSelected);
     }
-  }, [allOrderedItemsGroupedByClinics, user, token]);
+  }, [receivedOrderedItemsGroupedByClinics, pendingOrderedItemsByClinic, clinicSelected, user, token]);
 
-  console.log(orderedItems);
+  console.log("Orders received:", orderedItems);
+  console.log("orders not received:", orderedItemsNotReceived[selectedClinicKey]);
+
+  console.log("Current clinic selected:", clinicSelected);
 
   // State for new ordered item input
   const [newOrderedItem, setNewOrderedItem] = useState({
-    itemType: "",
-    itemName: "",
-    count: "",
-    orderDate: "",
-    deliveryDate: "",
+    item_type: "",
+    item_name: "",
+    item_link: "",
+    order_quantity: "",
+    order_date: "",
+    delivery_date: "",
+    order_received: false,
   });
 
   const [isEditingOrdered, setIsEditingOrdered] = useState(false);
-  const [editOrderedIndex, setEditOrderedIndex] = useState(null);
 
   // Handle changes for ordered inventory input
   const handleOrderedChange = (e) => {
@@ -60,46 +57,72 @@ export const OrderedFunction = ({
     setNewOrderedItem({ ...newOrderedItem, [name]: value });
   };
 
+    // Handle edit for ordered inventory
+    const handleEditOrdered = (item) => {
+        console.log("item being handled handleEditOrdered:",item);
+        setNewOrderedItem({ ...item });
+        setIsEditingOrdered(true);
+      };
+    
+      const closeEditOrder = () => {
+        setIsEditingOrdered(false);
+        setNewOrderedItem({
+            item_type: "",
+            item_name: "",
+            item_link: "",
+            order_quantity: "",
+            order_date: "",
+            delivery_date: "",
+            order_received: false,
+        });
+      };
+
   // Add or update ordered inventory item
   const addOrUpdateOrderedItem = async () => {
     if (
-      newOrderedItem.itemType &&
-      newOrderedItem.itemName &&
-      newOrderedItem.count &&
-      newOrderedItem.orderDate 
+      newOrderedItem?.item_type &&
+      newOrderedItem?.item_name &&
+      newOrderedItem?.order_quantity &&
+      newOrderedItem?.order_date
     ) {
       try {
         if (isEditingOrdered) {
           // ✅ UPDATE ORDERED ITEM
           const updatedItem = {
             ...newOrderedItem,
-            clinicId: selectedClinicKey,
+            clinic_id: parseInt(selectedClinicKey, 10),
+            order_quantity: parseInt(newOrderedItem, 10),
           };
-  
-          await updateOrderedItems(updatedItem, token);
+
+          console.log(updatedItem)
+
+          await updateOrderedItems(newOrderedItem.id, updatedItem, token);
           alert("Ordered item updated successfully!");
         } else {
           // ✅ CREATE ORDERED ITEM
           const newItem = {
             ...newOrderedItem,
-            clinicId: selectedClinicKey,
+            user_id: user?.id,
+            clinic_id: parseInt(selectedClinicKey, 10),
+            order_quantity: parseInt(newOrderedItem.order_quantity, 10),
           };
-  
+
           await createOrderedItems(newItem, token);
           alert("Ordered item created successfully!");
         }
-  
+
         // ✅ RESET STATE
         setNewOrderedItem({
-          itemType: "",
-          itemName: "",
-          count: "",
-          orderDate: "",
-          deliveryDate: "",
+            item_type: "",
+            item_name: "",
+            item_link: "",
+            order_quantity: "",
+            order_date: "",
+            delivery_date: "",
+            order_received: false,
         });
         setIsEditingOrdered(false);
-        setEditOrderedIndex(null);
-  
+
         // ✅ REFETCH DATA AFTER CHANGES
         await allOrderedItemsGroupedByClinics(token);
       } catch (error) {
@@ -110,42 +133,25 @@ export const OrderedFunction = ({
       alert("Please fill out all fields before adding an ordered item.");
     }
   };
-  
 
-  // Handle edit for ordered inventory
-  const handleEditOrdered = (index) => {
-    setNewOrderedItem(orderedItems[index]);
-    setIsEditingOrdered(true);
-    setEditOrderedIndex(index);
-  };
-  
-
-  const handleOrderEdit = () => {
-    setIsEditingOrdered(false);
-    setNewOrderedItem({ itemType: "", itemName: "", count: "", orderDate: "", deliveryDate: "" });
-  };
 
   // Handle marking an item as "Delivered"
   const markAsDelivered = () => {
-    if (isEditingOrdered && editOrderedIndex !== null) {
-      const deliveredItem = newOrderedItem;
-      // patch to ordered item to update index with ordered received attribute to true
-      // setInventoryItems([
-      //   ...inventory,
-      //   {
-      //     type: deliveredItem.type,
-      //     item: deliveredItem.item,
-      //     count: deliveredItem.count,
-      //     status: "Available",
-      //   },
-      // ]);
-      const updatedOrderedItems = orderedItems.filter(
-        (_, i) => i !== editOrderedIndex
-      );
-    //   setOrderedItems(updatedOrderedItems);
-      setIsEditingOrdered(false);
-      setEditOrderedIndex(null);
-      setNewOrderedItem({ type: "", item: "", count: "", orderDate: "" });
+    if (isEditingOrdered && newOrderedItem.order_received) {
+
+
+        // RESET STATE CLOSE EDIT FORM and refetch OrderItem table
+      setNewOrderedItem({ 
+        item_type: "",
+        item_name: "",
+        item_link: "",
+        order_quantity: "",
+        order_date: "",
+        delivery_date: "",
+        order_received: false,
+       });
+
+       setIsEditingOrdered(false);
     } else {
       alert("Please select an item to edit before marking as delivered.");
     }
@@ -155,82 +161,88 @@ export const OrderedFunction = ({
     <div>
       {/* Ordered item */}
       {selectedClinicKey && orderedItems[selectedClinicKey]?.length > 0 ? (
-      <div className="ordered-inventory-table">
-        <h2 className="main-title">Ordered Inventory</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Item name</th>
-              <th>Quantity</th>
-              <th>Order date</th>
-              <th>Delivery date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orderedItems[selectedClinicKey].map((item, index) => (
-              <tr key={index} onClick={() => handleEditOrdered(index)}>
-                <td>{item.item_name}</td>
-                <td>{item.order_quantity}</td>
-                <td>{item.order_date}</td>
-                <td>{item.delivery_date}</td>
+        <div className="ordered-inventory-table">
+          <h2 className="main-title">Ordered Inventory</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Item name</th>
+                <th>Quantity</th>
+                <th>Order date</th>
+                <th>Delivery date</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {orderedItems[selectedClinicKey].map((item, index) => (
+                <tr key={index} onClick={() => handleEditOrdered(item)}>
+                  <td>{item.item_name}</td>
+                  <td>{item.order_quantity}</td>
+                  <td>{item.order_date}</td>
+                  <td>{item.delivery_date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-        <div className="add-ordered-item-form">
-          <h3>
-            {isEditingOrdered ? "Edit Ordered Item" : "Add New Ordered Item"}
-          </h3>
-          {isEditingOrdered && (
-            <button onClick={handleOrderEdit} className="editOrderClose">
-              x
-            </button>
-          )}
-          <input
-            type="text"
-            name="item"
-            placeholder="Item name"
-            value={newOrderedItem.itemName}
-            onChange={handleOrderedChange}
-          />
-          <input
-            type="number"
-            name="orderedQuantity"
-            placeholder="Ordered quantity"
-            value={newOrderedItem.count}
-            onChange={handleOrderedChange}
-          />
-          <label>Order date</label>
-          <input
-             type="date"
-             name="orderDate"
-            value={newOrderedItem.orderDate || ""}
-             onChange={handleOrderedChange}
+          <div className="add-ordered-item-form">
+            <h3>
+              {isEditingOrdered ? "Edit Ordered Item" : "Add New Ordered Item"}
+            </h3>
+            {isEditingOrdered && (
+              <button onClick={closeEditOrder} className="editOrderClose">
+                x
+              </button>
+            )}
+            <input
+              type="text"
+              name="item_name"
+              placeholder="Item name"
+              value={newOrderedItem?.item_name}
+              onChange={handleOrderedChange}
             />
-          <label>Delivery date</label>
-          <input
-            type="date"
-            name="deliveryDate"
-            value={newOrderedItem.deliveryDate || ""}
-            onChange={(e) =>
-             setNewOrderedItem({
-             ...newOrderedItem,
-             deliveryDate: e.target.value,
-             })
-            }
-        />
-          <button onClick={addOrUpdateOrderedItem}>
-            {isEditingOrdered ? "Update Ordered Item" : "Add Ordered Item"}
-          </button>
-          {isEditingOrdered && (
-            <button onClick={markAsDelivered}>Mark as Delivered</button>
-          )}
+            <input
+              type="number"
+              name="order_quantity"
+              placeholder="Ordered quantity"
+              value={newOrderedItem?.order_quantity}
+              onChange={handleOrderedChange}
+            />
+            <label>Order date</label>
+            <input
+              type="date"
+              name="order_date"
+              value={newOrderedItem?.order_date || ""}
+              onChange={(e) =>
+                setNewOrderedItem({
+                  ...newOrderedItem,
+                  order_date: e.target.value,
+                })
+              }
+            />
+            <label>Delivery date</label>
+            <input
+              type="date"
+              name="delivery_date"
+              value={newOrderedItem?.delivery_date || ""}
+              onChange={(e) =>
+                setNewOrderedItem({
+                  ...newOrderedItem,
+                  delivery_date: e.target.value,
+                })
+              }
+            />
+
+            <button onClick={addOrUpdateOrderedItem}>
+              {isEditingOrdered ? "Update Ordered Item" : "Add Ordered Item"}
+            </button>
+            {isEditingOrdered && (
+              <button onClick={markAsDelivered}>Mark as Delivered</button>
+            )}
+          </div>
         </div>
-      </div>
-    ) : (
-     <p>No inventory insufficient data available for this clinic</p>
-    )}
+      ) : (
+        <p>No inventory insufficient data available for this clinic</p>
+      )}
     </div>
   );
 };
@@ -238,10 +250,12 @@ export const OrderedFunction = ({
 const mapStateToProps = (state) => ({
   user: state.user.data,
   orderedItems: state.orderedItem.data,
+  orderedItemsNotReceived: state.orderedItem.notReceived,
 });
 
 const mapDispatchToProps = {
-  allOrderedItemsGroupedByClinics,
+receivedOrderedItemsGroupedByClinics,
+  pendingOrderedItemsByClinic,
   createOrderedItems,
   updateOrderedItems,
   deleteOrderedItems,

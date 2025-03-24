@@ -1,5 +1,6 @@
 const initialOrderedItemsState = {
   data: [],
+  notReceived: [],
   loading: false,
   error: null,
 };
@@ -21,7 +22,7 @@ const orderedItemsReducer = (state = initialOrderedItemsState, action) => {
     case "FETCH_ORDERED_GROUPED_ITEMS_SUCCESS":
       return {
         ...state,
-        data: action.payload,
+        notReceived: action.payload,
         loading: false,
       };
     case "FETCH_ORDERED_GROUPED_ITEMS_ERROR":
