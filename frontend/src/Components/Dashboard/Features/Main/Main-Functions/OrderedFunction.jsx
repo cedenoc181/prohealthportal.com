@@ -27,7 +27,7 @@ export const OrderedFunction = ({
 
   useEffect(() => {
     if (user) {
-        receivedOrderedItemsGroupedByClinics(token);
+      receivedOrderedItemsGroupedByClinics(token);
       pendingOrderedItemsByClinic(token);
       setSelectedClinicKey(clinicSelected);
     }
@@ -91,7 +91,7 @@ export const OrderedFunction = ({
           const updatedItem = {
             ...newOrderedItem,
             clinic_id: parseInt(selectedClinicKey, 10),
-            order_quantity: parseInt(newOrderedItem, 10),
+            order_quantity: parseInt(newOrderedItem.order_quantity, 10),
           };
 
           console.log(updatedItem)
@@ -124,7 +124,7 @@ export const OrderedFunction = ({
         setIsEditingOrdered(false);
 
         // ✅ REFETCH DATA AFTER CHANGES
-        await allOrderedItemsGroupedByClinics(token);
+        await pendingOrderedItemsByClinic(token);
       } catch (error) {
         console.error("Failed to create or update ordered item:", error);
         alert("Failed to update or create ordered item.");
@@ -134,13 +134,22 @@ export const OrderedFunction = ({
     }
   };
 
+  console.log("Order item after mark delivered clicked:",newOrderedItem);
+
 
   // Handle marking an item as "Delivered"
-  const markAsDelivered = () => {
-    if (isEditingOrdered && newOrderedItem.order_received) {
+  const markAsDelivered = async () => {
+    if (isEditingOrdered && newOrderedItem?.order_received) {
+        try {
 
+        const updatedItemRecevied = {
+            order_received: newOrderedItem.order_received,
+        }
 
-        // RESET STATE CLOSE EDIT FORM and refetch OrderItem table
+     await updateOrderedItems(newOrderedItem.id, updatedItemRecevied, token);
+              alert("Order item is now marked as received!")
+
+    // RESET STATE CLOSE EDIT FORM and refetch OrderItem table
       setNewOrderedItem({ 
         item_type: "",
         item_name: "",
@@ -152,8 +161,16 @@ export const OrderedFunction = ({
        });
 
        setIsEditingOrdered(false);
+
+       await pendingOrderedItemsByClinic(token);
+      } catch (error) {
+        console.error("Failed to update orderd item:", error);
+        alert("Failed to update orderd item");
+      }
+
+
     } else {
-      alert("Please select an item to edit before marking as delivered.");
+      alert("Ordered item was not updated.");
     }
   };
 

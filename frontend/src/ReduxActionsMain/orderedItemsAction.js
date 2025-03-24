@@ -80,9 +80,12 @@
 
     export const updateOrderedItems = (orderedItemsId, updatedInfo, token) => {
       return async (dispatch) => {
+
+        console.log("updated info in action:",updatedInfo)
+
         try {
           const response = await fetch(`http://127.0.0.1:3000/ordered_items/${orderedItemsId}`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
