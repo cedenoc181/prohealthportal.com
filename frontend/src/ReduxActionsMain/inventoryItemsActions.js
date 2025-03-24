@@ -1,6 +1,6 @@
 // inventoryItemsActions.js
   
-const token = localStorage.getItem("jwt")
+// const token = localStorage.getItem("jwt")
 
 export const fetchInventoryItems = (token) => {
     return async (dispatch) => {
@@ -83,7 +83,7 @@ export const fetchInventoryItems = (token) => {
     };
   };
 
-   export const createInventoryItems = (newInventoryItems) => {
+   export const createInventoryItems = (newInventoryItems, token) => {
       return async (dispatch) => {
 
         console.log("new patch request: ",newInventoryItems);
