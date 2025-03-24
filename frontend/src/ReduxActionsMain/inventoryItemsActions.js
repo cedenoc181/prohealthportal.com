@@ -106,7 +106,7 @@ export const fetchInventoryItems = (token) => {
       };
     };
 
-    export const updateInventoryItems = (inventoryId, updatedInfo) => {
+    export const updateInventoryItems = (inventoryId, updatedInfo, token) => {
       return async (dispatch) => {
         console.log(updatedInfo)
         console.log(inventoryId)

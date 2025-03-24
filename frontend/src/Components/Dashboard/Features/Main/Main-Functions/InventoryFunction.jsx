@@ -16,23 +16,14 @@ export const InventoryFunction = ({
   createInventoryItems,
   updateInventoryItems,
   deleteInventoryItems,
+  clinicSelected,
 }) => {
-  const clinicMapping = {
-    east: "1",
-    west: "2",
-    "upper west": "3",
-  };
 
   const token = localStorage.getItem("jwt");
 
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  const [selectedClinicKey, setSelectedClinicKey] = useState(
-    clinicMapping[user?.clinic_location]
-  );
+  const [selectedClinicKey, setSelectedClinicKey] = useState(null);
 
   const [isEditingInventory, setIsEditingInventory] = useState(false);
-  //   const [editInventoryIndex, setEditInventoryIndex] = useState(null);
 
   // State for new inventory item input for available supplies
   const [newInventoryItem, setNewInventoryItem] = useState({
@@ -47,29 +38,15 @@ export const InventoryFunction = ({
   useEffect(() => {
     if (user) {
       inventoryByClinic(token);
-
-      if (user.admin) {
-        setIsAdmin(true);
-      }
+      setSelectedClinicKey(clinicSelected);
     }
-  }, [inventoryByClinic, user, token]);
+  }, [inventoryByClinic, clinicSelected, user, token]);
 
   console.log(inventory);
 
   console.log(newInventoryItem);
 
-  const [collapse, setCollapse] = useState(false);
-
-  const handleClinicChange = (clinicKey) => {
-    setSelectedClinicKey(clinicKey);
-    setCollapse(!collapse);
-  };
-
-  const handleTemplate = () => {
-    if (isAdmin) {
-      setCollapse(!collapse);
-    }
-  };
+  console.log("current selected clinic:", clinicSelected);
 
   // Handle changes for available inventory input
   const handleInventoryChange = (e) => {
@@ -126,7 +103,7 @@ export const InventoryFunction = ({
             staple_item: newInventoryItem.staple_item,
           };
 
-          await updateInventoryItems(newInventoryItem.index, updatedInfo);
+          await updateInventoryItems(newInventoryItem.index, updatedInfo, token);
 
           alert("Inventory item updated successfully!");
         } else {
@@ -203,57 +180,7 @@ export const InventoryFunction = ({
       {/* Inventory items */}
       {selectedClinicKey && inventory[selectedClinicKey]?.length > 0 ? (
         <div className="inventory-table">
-          <h5>
-            {selectedClinicKey === "1" && "Eastside"}
-            {selectedClinicKey === "2" && "West 150"}
-            {selectedClinicKey === "3" && "West 180"}
-            {isAdmin ? (
-              <span>
-                <div className="sideMenuItems">
-                  <svg
-                    className="svg-inv-function"
-                    onClick={handleTemplate}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-three-dots-vertical"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                  </svg>
-                </div>
-                {collapse ? (
-                  <ul className="filter-li-container">
-                    <li
-                      className="filter-li"
-                      onClick={() => handleClinicChange("1")}
-                    >
-                      Eastside
-                    </li>
-                    <li
-                      className="filter-li"
-                      onClick={() => handleClinicChange("2")}
-                    >
-                      West 150
-                    </li>
-                    <li
-                      className="filter-li"
-                      onClick={() => handleClinicChange("3")}
-                    >
-                      West 180
-                    </li>
-                  </ul>
-                ) : (
-                  ""
-                )}
-              </span>
-            ) : (
-              ""
-            )}
-          </h5>
           <h2 className="main-title">Supplies Available</h2>
-
           <table>
             <thead>
               <tr>
