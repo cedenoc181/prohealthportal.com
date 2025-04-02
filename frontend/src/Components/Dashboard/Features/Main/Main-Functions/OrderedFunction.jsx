@@ -204,7 +204,18 @@ export const OrderedFunction = ({
           }
         }
       }
-  }
+  };
+
+
+  const formatDate = (dateString) => {
+    if (!dateString) return ''; 
+
+    if (typeof dateString === 'string') {
+      const [year, month, day] = dateString.split('-');
+      return `${month}/${day}/${year}`;
+    }
+    return dateString;
+  };
 
   return (
     <div>
@@ -219,6 +230,7 @@ export const OrderedFunction = ({
                 <th>Quantity</th>
                 <th>Order date</th>
                 <th>Delivery date</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -226,8 +238,12 @@ export const OrderedFunction = ({
                 <tr key={index} onClick={() => handleEditOrdered(item)}>
                   <td>{item.item_name}</td>
                   <td>{item.order_quantity}</td>
-                  <td>{item.order_date}</td>
-                  <td>{item.delivery_date}</td>
+                  <td>{formatDate(item.order_date)}</td>
+                  <td>{formatDate(item.delivery_date)}</td>
+                  <td>
+                    {item.order_received === true && "Delivered"}
+                    {item.order_received === false && "In Transit"}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -311,14 +327,13 @@ export const OrderedFunction = ({
             <button onClick={addOrUpdateOrderedItem}>
               {isEditingOrdered ? "Update Ordered Item" : "Add Ordered Item"}
             </button>
-            {isEditingOrdered && (
+            {isEditingOrdered && !newOrderedItem.order_received && (
               <button onClick={markAsDelivered}>Mark as Delivered</button>
             )}
           </div>
         </div>
       ) : (
         <div>
-            <br/>
             <p>No ordered items available for this clinic, add below.</p>
         <div className="add-ordered-item-form">
         <h3>
@@ -392,7 +407,7 @@ export const OrderedFunction = ({
 const mapStateToProps = (state) => ({
   user: state.user.data,
   orderedItems: state.orderedItem.data,
-  orderedItemsNotReceived: state.orderedItem.notReceived,
+  orderedItemsNotReceived: state.orderedItem.data,
 });
 
 const mapDispatchToProps = {

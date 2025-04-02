@@ -265,7 +265,6 @@ export const InventoryFunction = ({
         </div>
       ) : (
         <div>
-            <br/>
             <p>No inventory items available for this clinic, add below.</p>
         <div className="add-inventory-item-form">
             <h3>

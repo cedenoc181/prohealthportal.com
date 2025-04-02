@@ -90,9 +90,14 @@ import "./Main.css";
               ""
             )}
           </h5>
+      <div className="main-container">
       <InventoryTable clinicSelected={selectedClinicKey}/>
+      </div>
+      <br />
+      <div className="main-container">
       <OrderedItemsTable clinicSelected={selectedClinicKey}/>
     </div>
+  </div>
   );
 };
 

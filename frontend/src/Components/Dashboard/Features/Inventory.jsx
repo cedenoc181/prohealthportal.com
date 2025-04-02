@@ -116,6 +116,16 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
     });
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return ''; 
+
+    if (typeof dateString === 'string') {
+      const [year, month, day] = dateString.split('-');
+      return `${month}/${day}/${year}`;
+    }
+    return dateString;
+  };
+
   return (
     <div id="inventory">
       <div className="console">
@@ -202,7 +212,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
             <thead>
               <tr>
                 <th>Item</th>
-                <th>Ordered date</th>
+                <th>Delivery date</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -210,7 +220,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
             {orderedItems[selectedClinicKey].slice(0, 5).map((item) => (
                     <tr key={item.id}>
                       <td>{item.item_name}</td>
-                      <td>{item.order_date}</td>
+                      <td>{formatDate(item.delivery_date)}</td>
                       <td>
                         {item.order_received === true && "Delivered"}
                         {item.order_received === false && "In Transit"}
@@ -332,7 +342,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
 
 const mapStateToProps = (state) => ({
   inventoryItems: state.inventoryItem.insufficient,
-  orderedItems: state.orderedItem.data,
+  orderedItems: state.orderedItem.notReceived,
   user: state.user.data,
 });
 
