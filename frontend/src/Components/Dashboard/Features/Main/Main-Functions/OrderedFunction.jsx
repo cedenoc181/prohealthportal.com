@@ -25,22 +25,8 @@ export const OrderedFunction = ({
 
   const [selectedClinicKey, setSelectedClinicKey] = useState(null);
 
-  useEffect(() => {
-    if (user) {
-      receivedOrderedItemsGroupedByClinics(token);
-      pendingOrderedItemsByClinic(token);
-      setSelectedClinicKey(clinicSelected);
-    }
-  }, [receivedOrderedItemsGroupedByClinics, pendingOrderedItemsByClinic, clinicSelected, user, token]);
+  const [isEditingOrdered, setIsEditingOrdered] = useState(false);
 
-// receivedOrderedItemsGroupedByClinics
-
-  console.log("ALL ORDERED ITEMS FOR ALL CLINICS:", orderedItems);
-  console.log("ALL ORDERED ITEMS not received FOR USERS CLINIC:", orderedItemsNotReceived[selectedClinicKey]);
-
-  console.log("Current clinic selected:", clinicSelected);
-
-  // State for new ordered item input
   const [newOrderedItem, setNewOrderedItem] = useState({
     item_type: "",
     item_name: "",
@@ -51,7 +37,33 @@ export const OrderedFunction = ({
     order_received: false,
   });
 
-  const [isEditingOrdered, setIsEditingOrdered] = useState(false);
+
+
+  useEffect(() => {
+    if (user) {
+      receivedOrderedItemsGroupedByClinics(token);
+      pendingOrderedItemsByClinic(token);
+      setSelectedClinicKey(clinicSelected);
+      setNewOrderedItem({
+        item_type: "",
+        item_name: "",
+        item_link: "",
+        order_quantity: "",
+        order_date: "",
+        delivery_date: "",
+        order_received: false,
+      })
+      setIsEditingOrdered(false);
+      console.log(" CLINIC RENDERED!!!!!!!!!!!!!!!!");
+    } 
+  }, [receivedOrderedItemsGroupedByClinics, pendingOrderedItemsByClinic, clinicSelected, user, token]);
+
+// receivedOrderedItemsGroupedByClinics
+
+  console.log("ALL ORDERED ITEMS FOR ALL CLINICS:", orderedItems);
+  console.log("ALL ORDERED ITEMS not received FOR USERS CLINIC:", orderedItemsNotReceived[selectedClinicKey]);
+
+  console.log("Current clinic selected:", clinicSelected);
 
   // Handle changes for ordered inventory input
   const handleOrderedChange = (e) => {

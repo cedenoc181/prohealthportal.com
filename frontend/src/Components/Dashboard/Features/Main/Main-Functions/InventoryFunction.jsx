@@ -37,6 +37,15 @@ export const InventoryFunction = ({
     if (user) {
       inventoryByClinic(token);
       setSelectedClinicKey(clinicSelected);
+      setIsEditingInventory(false);
+      setNewInventoryItem({
+        item_type: "",
+        item_name: "",
+        count: "",
+        warning_count: "",
+        staple_item: "",
+      })
+
     }
   }, [inventoryByClinic, clinicSelected, user, token]);
 
