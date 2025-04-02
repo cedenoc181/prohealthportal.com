@@ -121,7 +121,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_28_170043) do
     t.string "item_name"
     t.integer "order_quantity"
     t.date "order_date"
-    t.boolean "order_received"
+    t.boolean "order_received", default: false
     t.date "delivery_date"
     t.bigint "user_id"
     t.datetime "created_at", null: false

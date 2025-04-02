@@ -57,8 +57,8 @@ const orderedItemsReducer = (state = initialOrderedItemsState, action) => {
       };
     case "UPDATE_ORDERED_ITEMS_SUCCESS":
       return {
-        ...state,
-        data: state.data.map((orderedItems) =>
+          ...state,
+          data: state.data.map((orderedItems) =>
           orderedItems.id === action.payload.id ? action.payload : orderedItems
         ),
         loading: false,

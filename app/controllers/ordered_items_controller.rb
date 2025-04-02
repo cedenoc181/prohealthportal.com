@@ -15,8 +15,9 @@ class OrderedItemsController < ApplicationController
          status: :ok
     end
 
+
     def ordered_items_grouped_by_clinic
-        @ordered_groups = OrderedItem.includes(:clinic).where(order_received: false).order(order_date: :desc).group_by(&:clinic_id)
+        @ordered_groups = OrderedItem.includes(:clinic).where(order_received: [false, nil] ).order(order_date: :desc).group_by(&:clinic_id)
         render json: @ordered_groups.transform_values { |orderedItems| ActiveModelSerializers::SerializableResource.new(orderedItems, each_serializer: OrderedItemSerializer) },
         status: :ok
     end
@@ -31,11 +32,14 @@ class OrderedItemsController < ApplicationController
         @ordered_item = OrderedItem.new(ordered_items_params)
         if authorized_to_CUD?
             if @ordered_item.save
+                Rails.logger.debug "saving created instance"
             render json: {item: @ordered_item, message: "Ordered item has been successfully created"}, status: :created
              else 
+                 Rails.logger.error "failed to create instance"
             render json: {item: @ordered_item.errors.full_messages, message: "Ordered item was unable to be created, please check params are met and user is admin."}, status: :unprocessable_entity
             end
         else
+            Rails.logger.warn "⛔ Unauthorized update attempt by user #{current_user&.first_name}"
             render json: {  
                 message: "User is not authorized to perform to create Ordered item data for other clinic"
                 }, status: :unauthorized   
@@ -47,11 +51,14 @@ class OrderedItemsController < ApplicationController
     def update 
         if authorized_to_CUD?
             if @ordered_item.update(ordered_items_params)
+                    Rails.logger.debug "saving created instance"
             render json: {item: @ordered_item, message: "#{@ordered_item.item_name} has been successfully updated"}, status: :ok
             else
+                 Rails.logger.error "failed to update instance"
             render json: {item: @ordered_item.errors.full_messages, message: "failed to update #{@ordered_item.item_name}, make sure user_id and clinic_id match item."}, status: :unprocessable_entity
             end
         else
+                        Rails.logger.warn "⛔ Unauthorized update attempt by user #{current_user&.first_name}"
             render json: {  
                 message: "User is not authorized to update items from other clinics"
                 }, status: :unauthorized   

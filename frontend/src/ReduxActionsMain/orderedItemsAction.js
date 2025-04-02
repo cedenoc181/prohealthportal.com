@@ -24,6 +24,7 @@
     };
   };
 
+  // ITEMS THAT ARE NOT RECEIVED
   export const pendingOrderedItemsByClinic = (token) => {
     return async (dispatch) => {
       try {
@@ -41,10 +42,12 @@
     };
   };
   
+
+  // ALL ORDER ITEMS RECEIVED OR NOT RECEIVED
   export const receivedOrderedItemsGroupedByClinics = (token) => {
     return async (dispatch) => {
       try {
-        const response = await fetch('http://127.0.0.1:3000/ordered_items_grouped_by_clinics', {
+        const response = await fetch('http://127.0.0.1:3000/all_ordered_items_grouped_by_clinics', {
          method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`
@@ -68,7 +71,7 @@
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({newOrderedItems}),
+            body: JSON.stringify(newOrderedItems),
           });
           const data = await response.json();
           dispatch({ type: 'CREATE_ORDERED_ITEMS_SUCCESS', payload: data });
@@ -82,6 +85,7 @@
       return async (dispatch) => {
 
         console.log("updated info in action:",updatedInfo)
+        console.log(orderedItemsId)
 
         try {
           const response = await fetch(`http://127.0.0.1:3000/ordered_items/${orderedItemsId}`, {
