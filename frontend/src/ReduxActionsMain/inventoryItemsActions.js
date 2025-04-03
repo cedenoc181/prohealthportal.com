@@ -1,6 +1,4 @@
 // inventoryItemsActions.js
-  
-// const token = localStorage.getItem("jwt")
 
 export const fetchInventoryItems = (token) => {
     return async (dispatch) => {
@@ -99,6 +97,7 @@ export const fetchInventoryItems = (token) => {
             body: JSON.stringify(newInventoryItems),
           });
           const data = await response.json();
+          dispatch(inventoryByClinic(token));
           dispatch({ type: 'CREATE_INVENTORY_SUCCESS', payload: data });
         } catch (error) {
           dispatch({ type: 'CREATE_INVENTORY_ERROR', payload: error.message });
@@ -121,6 +120,7 @@ export const fetchInventoryItems = (token) => {
             body: JSON.stringify(updatedInfo),
           });
           const data = await response.json();
+          dispatch(inventoryByClinic(token));
           dispatch({ type: 'UPDATE_INVENTORY_SUCCESS', payload: data });
         } catch (error) {
           dispatch({ type: 'UPDATE_INVENTORY_ERROR', payload: error.message });
@@ -138,7 +138,8 @@ export const fetchInventoryItems = (token) => {
               'Content-Type': 'application/json'
             },
           });
-
+          dispatch(inventoryByClinic(token));
+          
           dispatch({ type: 'DELETE_INVENTORY_SUCCESS', payload: inventoryId });
         } catch (error) {
           dispatch({ type: 'DELETE_INVENTORY_ERROR', payload: error.message });

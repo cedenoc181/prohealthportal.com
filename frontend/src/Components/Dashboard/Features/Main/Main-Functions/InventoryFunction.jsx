@@ -129,10 +129,7 @@ export const InventoryFunction = ({
           staple_item: "",
         });
         setIsEditingInventory(false);
-        // setEditInventoryIndex(null);
 
-        // ✅ REFETCH INVENTORY AFTER CHANGES
-        await inventoryByClinic(token);
       } catch (error) {
         console.error("Failed to create or update inventory item:", error);
         alert("Failed to update or create inventory item.");
@@ -160,8 +157,6 @@ export const InventoryFunction = ({
             item_status: "",
             staple_item: "",
           });
-
-          await inventoryByClinic(token);
         } catch (error) {
           console.error("Failed to delete inventory item:", error);
           alert("Failed to delete inventory item.");
