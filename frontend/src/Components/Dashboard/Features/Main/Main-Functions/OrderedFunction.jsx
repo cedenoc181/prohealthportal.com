@@ -265,14 +265,7 @@ export const OrderedFunction = ({
                 x
               </button>
             )}
-            <input
-              type="text"
-              name="item_name"
-              placeholder="Item name"
-              value={newOrderedItem?.item_name}
-              onChange={handleOrderedChange}
-            />
-              <select
+             <select
               name="item_type"
               value={newOrderedItem?.item_type || ""}
               onChange={handleOrderedChange}
@@ -282,7 +275,13 @@ export const OrderedFunction = ({
               <option value="Medical Equipment">Medical Equipment</option>
               <option value="Cleaning Supply">Cleaning Supply</option>
             </select>
-
+            <input
+              type="text"
+              name="item_name"
+              placeholder="Item name"
+              value={newOrderedItem?.item_name}
+              onChange={handleOrderedChange}
+            />
             <input
               type="number"
               name="order_quantity"
@@ -351,14 +350,7 @@ export const OrderedFunction = ({
                 x
               </button>
             )}
-            <input
-              type="text"
-              name="item_name"
-              placeholder="Item name"
-              value={newOrderedItem?.item_name}
-              onChange={handleOrderedChange}
-            />
-              <select
+             <select
               name="item_type"
               value={newOrderedItem?.item_type || ""}
               onChange={handleOrderedChange}
@@ -368,6 +360,14 @@ export const OrderedFunction = ({
               <option value="Medical Equipment">Medical Equipment</option>
               <option value="Cleaning Supply">Cleaning Supply</option>
             </select>
+
+            <input
+              type="text"
+              name="item_name"
+              placeholder="Item name"
+              value={newOrderedItem?.item_name}
+              onChange={handleOrderedChange}
+            />
 
             <input
               type="number"
