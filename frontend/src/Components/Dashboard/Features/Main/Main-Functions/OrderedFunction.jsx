@@ -12,7 +12,7 @@ import "../Main.css";
 
 export const OrderedFunction = ({
   user,
-  orderedItems,
+//   orderedItems, THIS IS FOR ALL CLINICS ORDERS NOT ORGANIZED
   orderedItemsNotReceived,
   receivedOrderedItemsGroupedByClinics,
   createOrderedItems,
@@ -42,7 +42,6 @@ export const OrderedFunction = ({
   useEffect(() => {
     if (user) {
       receivedOrderedItemsGroupedByClinics(token);
-    //   pendingOrderedItemsByClinic(token);
       setSelectedClinicKey(clinicSelected);
       setNewOrderedItem({
         item_type: "",
@@ -58,9 +57,7 @@ export const OrderedFunction = ({
     } 
   }, [receivedOrderedItemsGroupedByClinics, clinicSelected, user, token]);
 
-// pendingOrderedItemsByClinic
-
-  console.log("ALL ORDERED ITEMS FOR ALL CLINICS:", orderedItems);
+//   console.log("ALL ORDERED ITEMS FOR ALL CLINICS:", orderedItems);
   console.log("ALL ORDERED ITEMS not received FOR USERS CLINIC:", orderedItemsNotReceived[selectedClinicKey]);
 
   console.log("Current clinic selected:", clinicSelected);
@@ -138,10 +135,6 @@ export const OrderedFunction = ({
         });
         setIsEditingOrdered(false);
 
-        // ✅ REFETCH DATA AFTER CHANGES
-        console.log("FETCHING ORDERED ITEM ADDED")
-        await receivedOrderedItemsGroupedByClinics(token);
-
       } catch (error) {
         console.error("Failed to create or update ordered item:", error);
         alert("Failed to update or create ordered item.");
@@ -182,8 +175,6 @@ export const OrderedFunction = ({
        });
 
        setIsEditingOrdered(false);
-
-       await receivedOrderedItemsGroupedByClinics(token);
       } catch (error) {
         console.error("Failed to update orderd item:", error);
         alert("Failed to update orderd item");
@@ -214,9 +205,7 @@ export const OrderedFunction = ({
                 delivery_date: "",
                 order_received: false,
             });
-  
-            await  receivedOrderedItemsGroupedByClinics(token);
-          } catch (error) {
+            } catch (error) {
             console.error("Failed to delete ordered item:", error);
             alert("Failed to delete ordered item.");
           }
@@ -430,7 +419,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   receivedOrderedItemsGroupedByClinics,
-//   pendingOrderedItemsByClinic,
   createOrderedItems,
   updateOrderedItems,
   deleteOrderedItems,

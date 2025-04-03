@@ -74,6 +74,7 @@
             body: JSON.stringify(newOrderedItems),
           });
           const data = await response.json();
+          dispatch(receivedOrderedItemsGroupedByClinics(token));
           dispatch({ type: 'CREATE_ORDERED_ITEMS_SUCCESS', payload: data });
         } catch (error) {
           dispatch({ type: 'CREATE_ORDERED_ITEMS_ERROR', payload: error.message });
@@ -97,6 +98,7 @@
             body: JSON.stringify(updatedInfo),
           });
           const data = await response.json();
+          dispatch(receivedOrderedItemsGroupedByClinics(token));
           dispatch({ type: 'UPDATE_ORDERED_ITEMS_SUCCESS', payload: data });
         } catch (error) {
           dispatch({ type: 'UPDATE_ORDERED_ITEMS_ERROR', payload: error.message });
@@ -113,6 +115,7 @@
               Authorization: `Bearer ${token}`
             },
           });
+          dispatch(receivedOrderedItemsGroupedByClinics(token));
           dispatch({ type: 'DELETE_ORDERED_ITEMS_SUCCESS', payload: orderedItemsId });
         } catch (error) {
           dispatch({ type: 'DELETE_ORDERED_ITEMS_ERROR', payload: error.message });
