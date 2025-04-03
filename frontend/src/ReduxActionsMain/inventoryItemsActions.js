@@ -98,6 +98,7 @@ export const fetchInventoryItems = (token) => {
           });
           const data = await response.json();
           dispatch(inventoryByClinic(token));
+          dispatch(fetchInsufficientItems(token));
           dispatch({ type: 'CREATE_INVENTORY_SUCCESS', payload: data });
         } catch (error) {
           dispatch({ type: 'CREATE_INVENTORY_ERROR', payload: error.message });
@@ -121,6 +122,7 @@ export const fetchInventoryItems = (token) => {
           });
           const data = await response.json();
           dispatch(inventoryByClinic(token));
+          dispatch(fetchInsufficientItems(token));
           dispatch({ type: 'UPDATE_INVENTORY_SUCCESS', payload: data });
         } catch (error) {
           dispatch({ type: 'UPDATE_INVENTORY_ERROR', payload: error.message });
