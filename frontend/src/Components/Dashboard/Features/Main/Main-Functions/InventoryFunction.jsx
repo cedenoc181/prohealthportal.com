@@ -45,6 +45,7 @@ export const InventoryFunction = ({
         warning_count: "",
         staple_item: "",
       })
+      
 
     }
   }, [inventoryByClinic, clinicSelected, user, token]);

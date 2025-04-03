@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
 receivedOrderedItemsGroupedByClinics,
-  pendingOrderedItemsByClinic,
   createOrderedItems,
   updateOrderedItems,
   deleteOrderedItems,
 } from "../../../../../ReduxActionsMain/orderedItemsAction";
+import { inventoryByClinic } from "../../../../../ReduxActionsMain/inventoryItemsActions";
 import "../InvMain.css";
 import "../Main.css";
 
@@ -15,11 +15,11 @@ export const OrderedFunction = ({
   orderedItems,
   orderedItemsNotReceived,
   receivedOrderedItemsGroupedByClinics,
-  pendingOrderedItemsByClinic,
   createOrderedItems,
   updateOrderedItems,
   deleteOrderedItems,
   clinicSelected,
+  inventoryByClinic
 }) => {
   const token = localStorage.getItem("jwt");
 
@@ -42,7 +42,7 @@ export const OrderedFunction = ({
   useEffect(() => {
     if (user) {
       receivedOrderedItemsGroupedByClinics(token);
-      pendingOrderedItemsByClinic(token);
+    //   pendingOrderedItemsByClinic(token);
       setSelectedClinicKey(clinicSelected);
       setNewOrderedItem({
         item_type: "",
@@ -56,9 +56,9 @@ export const OrderedFunction = ({
       setIsEditingOrdered(false);
       console.log(" CLINIC RENDERED!!!!!!!!!!!!!!!!");
     } 
-  }, [receivedOrderedItemsGroupedByClinics, pendingOrderedItemsByClinic, clinicSelected, user, token]);
+  }, [receivedOrderedItemsGroupedByClinics, clinicSelected, user, token]);
 
-// receivedOrderedItemsGroupedByClinics
+// pendingOrderedItemsByClinic
 
   console.log("ALL ORDERED ITEMS FOR ALL CLINICS:", orderedItems);
   console.log("ALL ORDERED ITEMS not received FOR USERS CLINIC:", orderedItemsNotReceived[selectedClinicKey]);
@@ -140,7 +140,7 @@ export const OrderedFunction = ({
 
         // ✅ REFETCH DATA AFTER CHANGES
         console.log("FETCHING ORDERED ITEM ADDED")
-        await pendingOrderedItemsByClinic(token);
+        await receivedOrderedItemsGroupedByClinics(token);
 
       } catch (error) {
         console.error("Failed to create or update ordered item:", error);
@@ -156,14 +156,20 @@ export const OrderedFunction = ({
   const markAsDelivered = async () => {
     if (isEditingOrdered && newOrderedItem?.delivery_date) {
         try {
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().slice(0, 10).replace(/-/g, '/'); // Formats date as "yyyy/mm/dd"
+
                 const markOrderItemDelivered = {
+                    delivery_date: formattedDate,
                     order_received: true
                 }
         console.log("mark as delivered object:",markOrderItemDelivered.order_received)
 
      await updateOrderedItems(newOrderedItem.id, markOrderItemDelivered, token);
+     await inventoryByClinic(token);
               alert("Order item is now marked as received!")
 
+ 
     // RESET STATE CLOSE EDIT FORM and refetch OrderItem table
       setNewOrderedItem({ 
         item_type: "",
@@ -177,7 +183,7 @@ export const OrderedFunction = ({
 
        setIsEditingOrdered(false);
 
-       await pendingOrderedItemsByClinic(token);
+       await receivedOrderedItemsGroupedByClinics(token);
       } catch (error) {
         console.error("Failed to update orderd item:", error);
         alert("Failed to update orderd item");
@@ -209,7 +215,7 @@ export const OrderedFunction = ({
                 order_received: false,
             });
   
-            await  pendingOrderedItemsByClinic(token);
+            await  receivedOrderedItemsGroupedByClinics(token);
           } catch (error) {
             console.error("Failed to delete ordered item:", error);
             alert("Failed to delete ordered item.");
@@ -232,7 +238,7 @@ export const OrderedFunction = ({
   return (
     <div>
       {/* Ordered item */}
-      {selectedClinicKey && orderedItems[selectedClinicKey]?.length > 0 ? (
+      {selectedClinicKey && orderedItemsNotReceived[selectedClinicKey]?.length > 0 ? (
         <div className="ordered-inventory-table">
           <h2 className="main-title">Ordered Inventory</h2>
           <table>
@@ -418,16 +424,17 @@ export const OrderedFunction = ({
 
 const mapStateToProps = (state) => ({
   user: state.user.data,
-  orderedItems: state.orderedItem.data,
+//   orderedItems: state.orderedItem.data,
   orderedItemsNotReceived: state.orderedItem.data,
 });
 
 const mapDispatchToProps = {
   receivedOrderedItemsGroupedByClinics,
-  pendingOrderedItemsByClinic,
+//   pendingOrderedItemsByClinic,
   createOrderedItems,
   updateOrderedItems,
   deleteOrderedItems,
+  inventoryByClinic
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderedFunction);

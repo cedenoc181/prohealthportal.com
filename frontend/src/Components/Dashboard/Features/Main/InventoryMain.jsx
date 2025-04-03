@@ -37,7 +37,7 @@ import "./Main.css";
     }
   };
 
-  console.log("current selected clinic:", selectedClinicKey)
+  console.log("current selected clinic:", selectedClinicKey);
 
   return (
     <div className="main-container">
