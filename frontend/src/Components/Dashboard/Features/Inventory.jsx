@@ -15,7 +15,7 @@ import {
 import { LinkIcon } from "@chakra-ui/icons";
 
 
-export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedItems, fetchInsufficientItems, pendingOrderedItemsByClinic }) => {
+export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedItems, fetchInsufficientItems, pendingOrderedItemsByClinic, clinicForInvMain }) => {
 
   const clinicMapping = {
     east: "1",
@@ -56,6 +56,14 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
   };
 
   useEffect(() => {
+      clinicForInvMain(selectedClinicKey);
+
+  }, [selectedClinicKey, clinicForInvMain])
+  
+
+  console.log("CURRENT CLINNIC SELECTED FROM CONSOLE.JSX:", selectedClinicKey)
+
+  useEffect(() => {
     if (user) {
       fetchInsufficientItems(token);
       pendingOrderedItemsByClinic(token);
@@ -64,7 +72,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
         ...prev,
         clinic_id: user?.clinic_id,
         user_id: user?.id
-      }))
+      }));
 
       if (user.admin) {
         setIsAdmin(true);

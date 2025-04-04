@@ -35,6 +35,8 @@ function App({ user, loading, error, fetchMyAccount }) {
 
   const [renderEmailTemplate, setRenderEmailTemplate] = useState(true);
 
+  const [clinicFromConsole, setClinicFromConsole] = useState('');
+
  // Fetch user account when authenticated
 useEffect(() => {
   // const token = localStorage.getItem("jwt");
@@ -84,12 +86,13 @@ useEffect(() => {
   }
 }, [user])
 
+console.log("CLINIC PASSED INTO APP.JS:", clinicFromConsole);
 
   // Update main content based on the route
   useEffect(() => {
     switch (location.pathname) {
       case "/inventory":
-        setMainContent(<InventoryMain />);
+        setMainContent(<InventoryMain clinicSelected={clinicFromConsole}/>);
         break;
       case "/overview":
         setMainContent(<OverviewMain />);
@@ -109,7 +112,7 @@ useEffect(() => {
       default:
         setMainContent(null);
     }
-  }, [location, user, renderEmailTemplate]);
+  }, [location, user, renderEmailTemplate, clinicFromConsole]);
 
   console.log("Current status of email rendering in APP js:",renderEmailTemplate);
 
@@ -152,7 +155,7 @@ useEffect(() => {
           <Route exact path="/medical-forms" element={<Medifiles />} />
           <Route exact path="/email-templates" element={<Email updateEmailRendering={setRenderEmailTemplate}/>} />
           <Route exact path="/task-list" element={<TasksList />} />
-          <Route exact path="/inventory" element={<Inventory />} />
+          <Route exact path="/inventory" element={<Inventory clinicForInvMain={setClinicFromConsole}/>} />
           <Route exact path="/account-settings" element={<Account user={user}/>} />
         </Routes>
       </div>
