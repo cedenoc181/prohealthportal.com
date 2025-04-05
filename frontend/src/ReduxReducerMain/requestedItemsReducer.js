@@ -1,5 +1,6 @@
 const initialRequestedItemsState = {
     data: [],
+    reqList: [],
     loading: false,
     error: null
   };
@@ -21,7 +22,7 @@ const initialRequestedItemsState = {
               case 'FETCH_ALL_REQUESTED_ITEMS_BY_CLINICS_SUCCESS':
                 return {
                     ...state,
-                    data: action.payload,
+                    reqList: action.payload,
                     loading: false,
                 };
             case 'FETCH_ALL_REQUESTED_ITEMS_BY_CLINICS_ERROR':

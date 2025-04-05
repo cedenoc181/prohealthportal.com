@@ -1,7 +1,7 @@
 class RequestedItemsController < ApplicationController
     before_action :find_requested_item, only: %i[ show update destroy ]
 
-    skip_before_action :is_admin?, except: %i[ requested_items_for_clinics]
+    skip_before_action :is_admin? 
 
 
     def index
@@ -15,8 +15,10 @@ class RequestedItemsController < ApplicationController
 
     def requested_items_for_clinics
         @requested_items = RequestedItem.includes(:clinic).group_by(&:clinic_id)
-        render json: @requested_items.transform_values { |items| ActiveModelSerializers::SerializableResource.new(items, each_serializer: RequestedItemSerializer) },
-        status: :ok
+        if authorized_to_CUD?
+          render json: @requested_items.transform_values { |items| ActiveModelSerializers::SerializableResource.new(items, each_serializer: RequestedItemSerializer) },
+          status: :ok
+        end
     end
 
     # if i wanted to isolate the ordered items 
@@ -84,7 +86,7 @@ class RequestedItemsController < ApplicationController
 
 
     def authorized_to_CUD?
-        associated_clinic = @requested_item.clinic_id
+        associated_clinic = @requested_item&.clinic_id
         current_user&.admin || current_user&.clinic_id == associated_clinic
     end
 end

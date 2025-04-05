@@ -2,41 +2,17 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import InventoryTable from "./Main-Functions/InventoryFunction.jsx"
 import OrderedItemsTable from "./Main-Functions/OrderedFunction.jsx"
+import RequestedItemsTable from "./Main-Functions/RequestedFunction.jsx"
 import "./InvMain.css";
 import "./Main.css";
 
   export const InventoryMain = ({ user, clinicSelected }) => {
 
-  // const clinicMapping = {
-  //     east: "1",
-  //     west: "2",
-  //     "upper west": "3",
-  // };
-
-  const [isAdmin, setIsAdmin] = useState(false);
-
   const [selectedClinicKey, setSelectedClinicKey] = useState('');
-
-
-    useEffect(() => {
-    if (user?.admin) {
-          setIsAdmin(true);
-        }
-    }, [user]);
-
 
   useEffect(() => {
     setSelectedClinicKey(clinicSelected);
-    console.log("CLINIC CHANGED FROM MAIN.JSX:", clinicSelected);
   }, [clinicSelected]);
-
-  const handleTemplate = () => {
-    if (isAdmin) {
-      setCollapse(!collapse);
-    }
-  };
-
-
 
   return (
     <div className="main-container">
@@ -51,6 +27,9 @@ import "./Main.css";
       <br />
       <div className="main-container">
       <OrderedItemsTable clinicSelected={selectedClinicKey}/>
+    </div>
+    <div className="main-container">
+      <RequestedItemsTable clinicSelected={selectedClinicKey}/>
     </div>
   </div>
   );

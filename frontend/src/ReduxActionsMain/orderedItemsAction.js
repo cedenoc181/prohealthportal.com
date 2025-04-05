@@ -6,7 +6,7 @@
             if (!token) {
                 throw new Error("No token provided")
             }
-            const response = await fetch('http://123.0.0.1:3000/ordered_items', {
+            const response = await fetch('http://127.0.0.1:3000/ordered_items', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
