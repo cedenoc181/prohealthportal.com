@@ -51,7 +51,7 @@ export const OrderedFunction = ({
         order_date: "",
         delivery_date: "",
         order_received: false,
-      })
+      });
       setIsEditingOrdered(false);
       console.log(" CLINIC RENDERED!!!!!!!!!!!!!!!!");
     } 
@@ -192,7 +192,7 @@ export const OrderedFunction = ({
           try {
             await deleteOrderedItems(newOrderedItem.id, token);
             // console.log(newOrderedItem.id);
-            alert("Inventory item was deleted!");
+            alert("Ordered item was deleted!");
   
             setIsEditingOrdered(false);
   
