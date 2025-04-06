@@ -7,12 +7,13 @@ import {
   deleteRequestedItems,
   updateRequestedItems,
 } from "../../../../../ReduxActionsMain/requestedItemsAction.js";
-
+import { receivedOrderedItemsGroupedByClinics } from "../../../../../ReduxActionsMain/orderedItemsAction.js";
 export const RequestedFunction = ({
   user,
   clinicSelected,
   itemsRequestedList,
   requestedItemsGroupedByClinics,
+  receivedOrderedItemsGroupedByClinics,
   deleteRequestedItems,
   updateRequestedItems,
 }) => {
@@ -86,11 +87,14 @@ export const RequestedFunction = ({
             ),
           };
 
+          console.log("update info being sent:", updatedInfo)
+
           await updateRequestedItems(
             selectedRequestItem.id,
             updatedInfo,
             token
           );
+         await receivedOrderedItemsGroupedByClinics(token);
           alert("Ordered item updated successfully!");
         }
 
@@ -266,6 +270,7 @@ const mapDispatchToProps = {
   requestedItemsGroupedByClinics,
   deleteRequestedItems,
   updateRequestedItems,
+  receivedOrderedItemsGroupedByClinics,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RequestedFunction);

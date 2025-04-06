@@ -28,7 +28,7 @@ class RequestedItemsController < ApplicationController
     # end
 
     def create 
-        @requested_item = OrderedItem.new(requested_items_params)
+        @requested_item = RequestedItem.new(requested_items_params)
         if authorized_to_CUD?
             if @requested_item.save
             render json: {item: @requested_item, message: "requested item has been successfully created"}, status: :created

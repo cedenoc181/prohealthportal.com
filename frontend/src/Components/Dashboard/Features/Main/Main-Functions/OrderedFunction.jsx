@@ -150,8 +150,15 @@ export const OrderedFunction = ({
     if (isEditingOrdered && newOrderedItem?.delivery_date) {
         try {
             const currentDate = new Date();
-            const formattedDate = currentDate.toISOString().slice(0, 10).replace(/-/g, '/'); // Formats date as "yyyy/mm/dd"
-
+             // Get the local date components
+             const year = currentDate.getFullYear();
+             const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+             const day = String(currentDate.getDate()).padStart(2, '0');
+ 
+             const formattedDate = `${year}/${month}/${day}`; // Formats date as "yyyy/mm/dd"
+ 
+             console.log("Local Date:", formattedDate); // Check your local date output
+             
                 const markOrderItemDelivered = {
                     delivery_date: formattedDate,
                     order_received: true

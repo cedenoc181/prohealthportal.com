@@ -5,18 +5,17 @@ import { fetchInsufficientItems } from "../../../ReduxActionsMain/inventoryItems
 import { pendingOrderedItemsByClinic } from "../../../ReduxActionsMain/orderedItemsAction";
 import { createRequestedItems } from "../../../ReduxActionsMain/requestedItemsAction";
 import "./Features.css";
-import {
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-  Button,
-} from "@chakra-ui/react";
-import { LinkIcon } from "@chakra-ui/icons";
+import { Input, InputGroup, Stack, Button } from "@chakra-ui/react";
 
-
-export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedItems, fetchInsufficientItems, pendingOrderedItemsByClinic, clinicForInvMain }) => {
-
+export const Inventory = ({
+  user,
+  createRequestedItems,
+  inventoryItems,
+  orderedItems,
+  fetchInsufficientItems,
+  pendingOrderedItemsByClinic,
+  clinicForInvMain,
+}) => {
   const clinicMapping = {
     east: "1",
     west: "2",
@@ -24,6 +23,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
   };
 
   const token = localStorage.getItem("jwt");
+
   const [collapse, setCollapse] = useState(false);
 
   const [isAdmin, setIsAdmin] = useState(false);
@@ -32,17 +32,14 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
     clinicMapping[user?.clinic_location]
   );
 
-
-  const  [requestItemForm, setRequestItemForm] = useState({
-      clinic_id: "",
-      user_id: "",
-      item_name: "",
-      item_link: "",
-      item_type: "",
-      requested_quantity: "",
-
-    }
-  )
+  const [requestItemForm, setRequestItemForm] = useState({
+    clinic_id: "",
+    user_id: "",
+    item_name: "",
+    item_link: "",
+    item_type: "",
+    requested_quantity: "",
+  });
 
   const handleTemplate = () => {
     if (isAdmin) {
@@ -56,12 +53,10 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
   };
 
   useEffect(() => {
-      clinicForInvMain(selectedClinicKey);
+    clinicForInvMain(selectedClinicKey);
+  }, [selectedClinicKey, clinicForInvMain]);
 
-  }, [selectedClinicKey, clinicForInvMain])
-  
-
-  console.log("CURRENT CLINNIC SELECTED FROM CONSOLE.JSX:", selectedClinicKey)
+  console.log("CURRENT CLINNIC SELECTED FROM CONSOLE.JSX:", selectedClinicKey);
 
   useEffect(() => {
     if (user) {
@@ -71,7 +66,7 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
       setRequestItemForm((prev) => ({
         ...prev,
         clinic_id: user?.clinic_id,
-        user_id: user?.id
+        user_id: user?.id,
       }));
 
       if (user.admin) {
@@ -82,53 +77,58 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
 
   console.log(inventoryItems);
 
-  console.log(orderedItems)
+  console.log(orderedItems);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setRequestItemForm((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    setRequestItemForm({...requestItemForm, [name]: value});
   };
 
-  console.log("request form:", requestItemForm)
+  console.log("request form:", requestItemForm);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate form data
-    if (!requestItemForm.item_name || !requestItemForm.item_type || !requestItemForm.requested_quantity) {
-      alert('Please fill in all required fields.');
+    
+    if (
+      !requestItemForm.item_name ||
+      !requestItemForm.item_type ||
+      !requestItemForm.requested_quantity
+    ) {
+      alert("Please fill in all required fields.");
       return;
     }
-    // Ensure clinic_id is an integer
-    const formData = {
-      ...requestItemForm,
-      clinic_id: parseInt(requestItemForm.clinic_id, 10), // Convert to integer
-      requested_quantity: parseInt(requestItemForm.requested_quantity, 10)
-    };
+    try {
+      const formData = {
+        ...requestItemForm,
+        clinic_id: parseInt(requestItemForm.clinic_id, 10), // Convert to integer
+        requested_quantity: parseInt(requestItemForm.requested_quantity, 10),
+      };
 
-    console.log(formData);
+      console.log(formData);
 
-    // Send request to backend via Redux action
-    createRequestedItems(formData);
+      // Send request to backend via Redux action
+      await createRequestedItems(formData, token);
+      alert("request has been successfully made!");
 
-    // Clear form after submission
-    setRequestItemForm({
-      clinic_id: '',
-      item_name: '',
-      item_link: '',
-      category: '',
-      requested_quantity: ''
-    });
+      // Clear form after submission
+      setRequestItemForm({
+        clinic_id: "",
+        item_name: "",
+        item_link: "",
+        item_type: "",
+        requested_quantity: "",
+      });
+    } catch (error) {
+      console.error("Failed to create request for item:", error);
+      alert("Failed to create request for item.");
+    }
   };
 
   const formatDate = (dateString) => {
-    if (!dateString) return ''; 
+    if (!dateString) return "";
 
-    if (typeof dateString === 'string') {
-      const [year, month, day] = dateString.split('-');
+    if (typeof dateString === "string") {
+      const [year, month, day] = dateString.split("-");
       return `${month}/${day}/${year}`;
     }
     return dateString;
@@ -155,18 +155,26 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
               </svg>
             </div>
             {collapse ? (
-
-                <ul className="filter-li-container">
-                    <li className="filter-li" onClick={() => handleClinicChange('1')}>
-                      Eastside
-                    </li>
-                    <li className="filter-li" onClick={() => handleClinicChange('2')}>
-                      West 150
-                    </li>
-                    <li className="filter-li" onClick={() => handleClinicChange('3')}>
-                      West 180
-                    </li>
-                </ul>
+              <ul className="filter-li-container">
+                <li
+                  className="filter-li"
+                  onClick={() => handleClinicChange("1")}
+                >
+                  Eastside
+                </li>
+                <li
+                  className="filter-li"
+                  onClick={() => handleClinicChange("2")}
+                >
+                  West 150
+                </li>
+                <li
+                  className="filter-li"
+                  onClick={() => handleClinicChange("3")}
+                >
+                  West 180
+                </li>
+              </ul>
             ) : (
               ""
             )}
@@ -174,9 +182,9 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
         </div>
         <br />
         <div className="selected-menu">
-           {selectedClinicKey === '1' && 'Eastside'}
-           {selectedClinicKey === '2' && 'West 150'}
-           {selectedClinicKey === '3' && 'West 180'}
+          {selectedClinicKey === "1" && "Eastside"}
+          {selectedClinicKey === "2" && "West 150"}
+          {selectedClinicKey === "3" && "West 180"}
         </div>
 
         {/* inventory items */}
@@ -214,134 +222,137 @@ export const Inventory = ({ user, createRequestedItems, inventoryItems, orderedI
         {/* ordered items */}
         {selectedClinicKey && orderedItems[selectedClinicKey]?.length > 0 ? (
           <div>
-        <h2 className="inv-order-title">Expected delivery</h2>
-        <div className="inventory-con">
-          <table className="order-status-table">
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Delivery date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-            {orderedItems[selectedClinicKey].slice(0, 5).map((item) => (
+            <h2 className="inv-order-title">Expected delivery</h2>
+            <div className="inventory-con">
+              <table className="order-status-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Delivery date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orderedItems[selectedClinicKey].slice(0, 5).map((item) => (
                     <tr key={item.id}>
                       <td>{item.item_name}</td>
                       <td>{formatDate(item.delivery_date)}</td>
                       <td>
                         {item.order_received === true && "Delivered"}
                         {item.order_received === false && "In Transit"}
-                        </td>
+                      </td>
                     </tr>
                   ))}
-            </tbody>
-          </table>
-         </div>
-        </div>
-              ) : (
-                <p>No inventory ordered data available for this clinic</p>
-              )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <p>No inventory ordered data available for this clinic</p>
+        )}
 
         <div className="inventory-req">
           <h2 className="inv-req-title">Request Items</h2>
           <form className="inv-form" onSubmit={handleSubmit}>
-      <Stack spacing={4} className="form-stack">
-        {/* Item Name */}
-        <InputGroup className="inv-input">
-          <Input
-            type="text"
-            name="item_name"
-            placeholder="Item name"
-            value={requestItemForm.item_name}
-            onChange={handleChange}
-          />
-        </InputGroup>
+            <Stack spacing={4} className="form-stack">
+              {/* Item Name */}
+              <InputGroup className="inv-input">
+                <Input
+                  type="text"
+                  name="item_name"
+                  placeholder="Item name"
+                  value={requestItemForm.item_name}
+                  onChange={handleChange}
+                />
+              </InputGroup>
 
-        {/* Item Link */}
-        <InputGroup className="inv-input">
-          <InputLeftElement pointerEvents="none">
-            <LinkIcon color="gray.800" />
-          </InputLeftElement>
-          <Input
-            type="url"
-            name="item_link"
-            placeholder="Item link"
-            value={requestItemForm.item_link}
-            onChange={handleChange}
-          />
-        </InputGroup>
+              {/* Item Link */}
+              <InputGroup className="inv-input">
+                <Input
+                  type="url"
+                  name="item_link"
+                  placeholder="Item link"
+                  value={requestItemForm.item_link}
+                  onChange={handleChange}
+                />
+              </InputGroup>
 
-        {/* Amount */}
-        <div className="input-group select-count">
-          {/* <label className="input-group-text" htmlFor="inputGroupSelect02">
+              {/* Amount */}
+              <div className="input-group select-count">
+                {/* <label className="input-group-text" htmlFor="inputGroupSelect02">
             Amount:
           </label> */}
-          <Input
-            type="number"
-            step="1"
-            pattern="^\d+$"
-            className="form-select"
-            placeholder="Requested amount"
-            name="requested_quantity"
-            value={requestItemForm.requested_quantity}
-            onChange={handleChange}
-          >
-          </Input>
-        </div>
+                <Input
+                  type="number"
+                  step="1"
+                  pattern="^\d+$"
+                  className="form-select"
+                  placeholder="Requested amount"
+                  name="requested_quantity"
+                  value={requestItemForm.requested_quantity}
+                  onChange={handleChange}
+                ></Input>
+              </div>
 
-                {/* Category */}
-        <div className="input-group select-category">
-          <label className="input-group-text" htmlFor="inputGroupSelect01">
-            Category:
-          </label>
-          <select
-            className="form-select"
-            id="inputGroupSelect01"
-            name="item_type"
-            value={requestItemForm.item_type}
-            onChange={handleChange}
-          >
-            <option value="">Choose...</option>
-            <option value="Office">Office</option>
-            <option value="Cleaning">Cleaning</option>
-            <option value="Equipment">Equipment</option>
-          </select>
-        </div>
+              {/* Category */}
+              <div className="input-group select-category">
+                <label
+                  className="input-group-text"
+                  htmlFor="inputGroupSelect01"
+                >
+                 Item type:
+                </label>
+                <select
+                  className="form-select"
+                  id="inputGroupSelect01"
+                  name="item_type"
+                  value={requestItemForm.item_type}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Type</option>
+                  <option value="Office Supply">Office Supply</option>
+                  <option value="Medical Equipment">Medical Equipment</option>
+                  <option value="Cleaning Supply">Cleaning Supply</option>
+                </select>
+              </div>
 
+              {/* clinic selection for admins   */}
+              {isAdmin ? (
+                <div className="input-group select-category">
+                  <label
+                    className="input-group-text"
+                    htmlFor="inputGroupSelect01"
+                  >
+                    Clinic:
+                  </label>
+                  <select
+                    className="form-select"
+                    id="inputGroupSelect01"
+                    name="clinic_id"
+                    value={requestItemForm.clinic_id}
+                    onChange={handleChange}
+                  >
+                    <option value="">Choose...</option>
+                    <option value="1">Eastside</option>
+                    <option value="2">West 150</option>
+                    <option value="3">Upper West 180</option>
+                  </select>
+                </div>
+              ) : (
+                " "
+              )}
 
-        {/* clinic selection for admins   */}
-      { isAdmin ? (
-        <div className="input-group select-category">
-          <label className="input-group-text" htmlFor="inputGroupSelect01">
-            Clinic:
-          </label>
-          <select
-            className="form-select"
-            id="inputGroupSelect01"
-            name="clinic_id"
-            value={requestItemForm.clinic_id}
-            onChange={handleChange}
-          >
-            <option value="">Choose...</option>
-            <option value="1">Eastside</option>
-            <option value="2">West 150</option>
-            <option value="3">Upper West 180</option>
-          </select>
-        </div>) : " " }
-
-
-        {/* Submit Button */}
-        <Button
-          className="inv-submission"
-          colorScheme="blue"
-          variant="outline"
-          type="submit"
-        >
-          Submit
-        </Button>
-      </Stack>
-    </form>
+              {/* Submit Button */}
+              <Button
+                className="inv-submission"
+                colorScheme="blue"
+                variant="outline"
+                type="submit"
+              >
+                Submit
+              </Button>
+            </Stack>
+          </form>
         </div>
       </div>
     </div>

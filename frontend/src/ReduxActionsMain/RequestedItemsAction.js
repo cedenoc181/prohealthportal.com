@@ -46,7 +46,7 @@
     };
   };
 
-   export const createRequestedItems = (newRequestedItems) => {
+   export const createRequestedItems = (newRequestedItems, token) => {
       return async (dispatch) => {
         try {
        
@@ -70,7 +70,7 @@
     };
 
 
-    export const deleteRequestedItems = (requestedItemsId) => {
+    export const deleteRequestedItems = (requestedItemsId, token) => {
       return async (dispatch) => {
         try {
           await fetch(`http://127.0.0.1:3000/requested_items/${requestedItemsId}`, {
@@ -86,8 +86,8 @@
         }
       };
     };
-    
-    export const updateRequestedItems = (requestedItemsId, updatedInfo) => {
+
+    export const updateRequestedItems = (requestedItemsId, updatedInfo, token) => {
       return async (dispatch) => {
         try {
           const response = await fetch(`http://127.0.0.1:3000/requested_items/${requestedItemsId}`, {
