@@ -63,6 +63,19 @@
   button.add-item:hover {
     background-color: #45a049; /* Green when hovered */
   }
+
+div.closeButton {
+   display: flex;
+   justify-content: end;
+   color: gray;
+   padding-bottom: 3%;
+  }
+
+
+  div.closeButton svg:hover {
+    color: #333;
+    cursor: pointer;
+  }
   
   .add-inventory-item-form,
   .add-ordered-item-form {

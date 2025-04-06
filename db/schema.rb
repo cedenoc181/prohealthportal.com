@@ -149,7 +149,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_28_170043) do
     t.text "item_link"
     t.string "item_type"
     t.integer "requested_quantity"
-    t.boolean "request_fulfilled"
+    t.boolean "request_fulfilled", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

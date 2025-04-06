@@ -355,6 +355,11 @@ margin: 5%;
 
 /* Inventory CSS */
 
+.altMessage {
+    text-align: center;
+    padding-top: 2%;
+    margin-top: 1%;
+}
 
 .low-inv-title, .inv-req-title, .inv-order-title {
     font-size: 25px;

@@ -87,14 +87,14 @@ export const RequestedFunction = ({
             ),
           };
 
-          console.log("update info being sent:", updatedInfo)
+          console.log("update info being sent:", updatedInfo);
 
           await updateRequestedItems(
             selectedRequestItem.id,
             updatedInfo,
             token
           );
-         await receivedOrderedItemsGroupedByClinics(token);
+          await receivedOrderedItemsGroupedByClinics(token);
           alert("Ordered item updated successfully!");
         }
 
@@ -179,74 +179,84 @@ export const RequestedFunction = ({
             <div className="add-ordered-item-form">
               <h3>{isEditingRequested ? "Edit Requested Item" : ""} </h3>
               {isEditingRequested && (
-                <button onClick={closeEditRequest} className="editOrderClose">
-                  x
-                </button>
+                <div className="closeButton">
+                  <svg
+                    onClick={closeEditRequest}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-x "
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                  </svg>
+                 </div>
               )}
-                <select
-                  name="item_type"
-                  value={selectedRequestItem?.item_type || ""}
-                  onChange={handleRequestedItemChange}
-                >
-                  <option value="">Select Type</option>
-                  <option value="Office Supply">Office Supply</option>
-                  <option value="Medical Equipment">Medical Equipment</option>
-                  <option value="Cleaning Supply">Cleaning Supply</option>
-                </select>
+              <select
+                name="item_type"
+                value={selectedRequestItem?.item_type || ""}
+                onChange={handleRequestedItemChange}
+              >
+                <option value="">Select Type</option>
+                <option value="Office Supply">Office Supply</option>
+                <option value="Medical Equipment">Medical Equipment</option>
+                <option value="Cleaning Supply">Cleaning Supply</option>
+              </select>
 
-                <input
-                  type="text"
-                  name="item_name"
-                  placeholder="Item name"
-                  value={selectedRequestItem?.item_name}
-                  onChange={handleRequestedItemChange}
-                />
+              <input
+                type="text"
+                name="item_name"
+                placeholder="Item name"
+                value={selectedRequestItem?.item_name}
+                onChange={handleRequestedItemChange}
+              />
 
-                <input
-                  type="number"
-                  name="requested_quantity"
-                  placeholder="Requested quantity"
-                  value={selectedRequestItem?.requested_quantity}
-                  onChange={handleRequestedItemChange}
-                />
+              <input
+                type="number"
+                name="requested_quantity"
+                placeholder="Requested quantity"
+                value={selectedRequestItem?.requested_quantity}
+                onChange={handleRequestedItemChange}
+              />
 
-                <input
-                  type="url"
-                  name="item_link"
-                  placeholder="Item link"
-                  value={selectedRequestItem?.item_link}
-                  onChange={handleRequestedItemChange}
-                />
+              <input
+                type="url"
+                name="item_link"
+                placeholder="Item link"
+                value={selectedRequestItem?.item_link}
+                onChange={handleRequestedItemChange}
+              />
 
-                <label>Request fulfilled </label>
-                <input
-                  type="checkbox"
-                  name="request_fulfilled"
-                  checked={!!selectedRequestItem?.request_fulfilled}
-                  onChange={(e) =>
-                    setSelectedRequestItem({
-                      ...selectedRequestItem,
-                      request_fulfilled: e.target.checked,
-                    })
-                  }
-                />
+              <label>Request fulfilled </label>
+              <input
+                type="checkbox"
+                name="request_fulfilled"
+                checked={!!selectedRequestItem?.request_fulfilled}
+                onChange={(e) =>
+                  setSelectedRequestItem({
+                    ...selectedRequestItem,
+                    request_fulfilled: e.target.checked,
+                  })
+                }
+              />
 
-                <svg
-                  onClick={deleteReqItem}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-trash"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                </svg>
+              <svg
+                onClick={deleteReqItem}
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash"
+                viewBox="0 0 16 16"
+              >
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+              </svg>
 
-                <button onClick={updateRequestedItem}>
-                  Update Requested Item
-                </button>
+              <button onClick={updateRequestedItem}>
+                Update Requested Item
+              </button>
             </div>
           ) : (
             ""

@@ -216,7 +216,7 @@ export const Inventory = ({
             </div>
           </div>
         ) : (
-          <p>No inventory insufficient data available for this clinic</p>
+          <p className="altMessage">Sufficient invenotry.</p>
         )}
 
         {/* ordered items */}
@@ -248,7 +248,7 @@ export const Inventory = ({
             </div>
           </div>
         ) : (
-          <p>No inventory ordered data available for this clinic</p>
+          <p className="altMessage">No pending deliveries at this time.</p>
         )}
 
         <div className="inventory-req">
