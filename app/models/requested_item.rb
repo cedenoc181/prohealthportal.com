@@ -4,7 +4,7 @@ class RequestedItem < ApplicationRecord
 
     has_many :ordered_items, through: :clinic
 
-    after_save :ordered_fulfilled
+    after_update :ordered_fulfilled
 
     validates :clinic_id, :user_id, :requested_quantity, presence: true
 
@@ -17,7 +17,7 @@ class RequestedItem < ApplicationRecord
 
 
         def ordered_fulfilled
-            return unless self.saved_change_to_request_fulfilled?(from: false, to: true)
+            return unless self.saved_change_to_request_fulfilled?(from: false || nil, to: true)
             return unless self.clinic_id.present?
 
             order_exits = self.clinic.ordered_items.find_by(clinic_id: self.clinic_id, item_name: self.item_name)

@@ -95,7 +95,7 @@ export const RequestedFunction = ({
             token
           );
           await receivedOrderedItemsGroupedByClinics(token);
-          alert("Ordered item updated successfully!");
+          alert("requested item updated successfully!");
         }
 
         // ✅ RESET STATE
