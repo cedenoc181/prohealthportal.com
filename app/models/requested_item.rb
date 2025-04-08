@@ -17,7 +17,7 @@ class RequestedItem < ApplicationRecord
 
 
         def ordered_fulfilled
-            return unless self.saved_change_to_request_fulfilled?(from: false || nil, to: true)
+            return unless self.saved_change_to_request_fulfilled?(from: false, to: true) || self.saved_change_to_request_fulfilled?(from: nil, to: true)
             return unless self.clinic_id.present?
 
             order_exits = self.clinic.ordered_items.find_by(clinic_id: self.clinic_id, item_name: self.item_name)
