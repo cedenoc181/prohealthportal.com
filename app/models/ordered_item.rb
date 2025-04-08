@@ -4,7 +4,7 @@ class OrderedItem < ApplicationRecord
 
     has_many :inventory_items, through: :clinic
 
-    after_save :update_inventory
+    after_update :update_inventory
 
     validates :clinic_id, :user_id, presence: true
 
@@ -27,11 +27,13 @@ class OrderedItem < ApplicationRecord
 
         exisiting_inventory = self.clinic.inventory_items.find_by(item_name: self.item_name, clinic_id: self.clinic_id)
 
+        delete_existing_request = self.clinic.requested_items.find_by(item_name: self.item_name, clinic_id: self.clinic_id)
+
         if exisiting_inventory
             # current count plus ordered count
             exisiting_inventory.update(
                 count: exisiting_inventory.count + self.order_quantity,
-            )
+        )
         else 
             self.clinic.inventory_items.create!(
                 clinic_id: self.clinic_id,
@@ -43,5 +45,11 @@ class OrderedItem < ApplicationRecord
                 item_link: self.item_link
             )
         end
+
+        if delete_existing_request 
+            delete_existing_request.delete
+        end
+
+
     end
 end

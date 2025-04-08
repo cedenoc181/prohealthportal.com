@@ -9,6 +9,7 @@ receivedOrderedItemsGroupedByClinics,
 import { inventoryByClinic } from "../../../../../ReduxActionsMain/inventoryItemsActions";
 import "../InvMain.css";
 import "../Main.css";
+import { requestedItemsGroupedByClinics } from "../../../../../ReduxActionsMain/requestedItemsAction";
 
 export const OrderedFunction = ({
   user,
@@ -19,7 +20,8 @@ export const OrderedFunction = ({
   updateOrderedItems,
   deleteOrderedItems,
   clinicSelected,
-  inventoryByClinic
+  inventoryByClinic,
+  requestedItemsGroupedByClinics,
 }) => {
   const token = localStorage.getItem("jwt");
 
@@ -167,6 +169,7 @@ export const OrderedFunction = ({
 
      await updateOrderedItems(newOrderedItem.id, markOrderItemDelivered, token);
      await inventoryByClinic(token);
+     await requestedItemsGroupedByClinics(token);
               alert("Order item is now marked as received!")
 
  
@@ -439,7 +442,8 @@ const mapDispatchToProps = {
   createOrderedItems,
   updateOrderedItems,
   deleteOrderedItems,
-  inventoryByClinic
+  inventoryByClinic,
+  requestedItemsGroupedByClinics,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderedFunction);
