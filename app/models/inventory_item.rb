@@ -36,6 +36,8 @@ class InventoryItem < ApplicationRecord
       
         existing_request = self.clinic.requested_items.find_by(item_name: self.item_name, clinic_id: self.clinic_id)
       
+        delete_expired_ordered_item = self.clinic.ordered_items.find_by(item_name: self.item_name, clinic_id: self.clinic_id, order_received: true);
+
         if existing_request
           # If the request exists, update `ordered` to false to indicate it needs attention
           existing_request.update(
@@ -53,6 +55,10 @@ class InventoryItem < ApplicationRecord
             user_id: self.user_id,
             request_fulfilled: false
           )
+          end
+
+          if delete_expired_ordered_item
+            delete_expired_ordered_item.delete
           end
 
         end

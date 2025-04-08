@@ -6,6 +6,8 @@ import {
   updateInventoryItems,
   deleteInventoryItems,
 } from "../../../../../ReduxActionsMain/inventoryItemsActions";
+import { requestedItemsGroupedByClinics } from "../../../../../ReduxActionsMain/requestedItemsAction";
+import { receivedOrderedItemsGroupedByClinics } from "../../../../../ReduxActionsMain/orderedItemsAction";
 import "../InvMain.css";
 import "../Main.css";
 
@@ -17,6 +19,8 @@ export const InventoryFunction = ({
   updateInventoryItems,
   deleteInventoryItems,
   clinicSelected,
+  requestedItemsGroupedByClinics,
+  receivedOrderedItemsGroupedByClinics,
 }) => {
   const token = localStorage.getItem("jwt");
 
@@ -99,6 +103,9 @@ export const InventoryFunction = ({
           };
 
           await updateInventoryItems(newInventoryItem.id, updatedInfo, token);
+
+          await requestedItemsGroupedByClinics(token);
+          await receivedOrderedItemsGroupedByClinics(token);
 
           alert("Inventory item updated successfully!");
         } else {
@@ -371,6 +378,8 @@ const mapDispatchToProps = {
   createInventoryItems,
   updateInventoryItems,
   deleteInventoryItems,
+  requestedItemsGroupedByClinics,
+  receivedOrderedItemsGroupedByClinics,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InventoryFunction);

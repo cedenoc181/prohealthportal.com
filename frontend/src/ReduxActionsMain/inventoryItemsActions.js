@@ -141,7 +141,7 @@ export const fetchInventoryItems = (token) => {
             },
           });
           dispatch(inventoryByClinic(token));
-          
+          dispatch(fetchInsufficientItems(token));
           dispatch({ type: 'DELETE_INVENTORY_SUCCESS', payload: inventoryId });
         } catch (error) {
           dispatch({ type: 'DELETE_INVENTORY_ERROR', payload: error.message });
