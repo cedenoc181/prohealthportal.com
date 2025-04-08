@@ -203,7 +203,7 @@ export const RequestedFunction = ({
                 <option value="Medical Equipment">Medical Equipment</option>
                 <option value="Cleaning Supply">Cleaning Supply</option>
               </select>
-
+              {isEditingRequested ? (<label>Item</label>) : ""}
               <input
                 type="text"
                 name="item_name"
@@ -211,15 +211,15 @@ export const RequestedFunction = ({
                 value={selectedRequestItem?.item_name}
                 onChange={handleRequestedItemChange}
               />
-
+            {isEditingRequested ? (<label>Quantity requested</label>) : ""}
               <input
                 type="number"
                 name="requested_quantity"
-                placeholder="Requested quantity"
+                placeholder="Quantity requested "
                 value={selectedRequestItem?.requested_quantity}
                 onChange={handleRequestedItemChange}
               />
-
+             {isEditingRequested ? (<label>Item link</label>) : ""}
               <input
                 type="url"
                 name="item_link"
