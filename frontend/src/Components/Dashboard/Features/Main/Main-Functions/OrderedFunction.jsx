@@ -295,6 +295,7 @@ export const OrderedFunction = ({
               <option value="Medical Equipment">Medical Equipment</option>
               <option value="Cleaning Supply">Cleaning Supply</option>
             </select>
+            {isEditingOrdered ? (<label>Item</label>) : ""}
             <input
               type="text"
               name="item_name"
@@ -302,6 +303,7 @@ export const OrderedFunction = ({
               value={newOrderedItem?.item_name}
               onChange={handleOrderedChange}
             />
+             {isEditingOrdered ? (<label>Ordered quantity</label>) : ""}
             <input
               type="number"
               name="order_quantity"
