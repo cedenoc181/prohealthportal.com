@@ -229,6 +229,7 @@ export const InventoryFunction = ({
               <option value="Medical Equipment">Medical Equipment</option>
               <option value="Cleaning Supply">Cleaning Supply</option>
             </select>
+            {isEditingInventory ? (<label>Item</label>) : ""}
             <input
               type="text"
               name="item_name"
@@ -236,6 +237,7 @@ export const InventoryFunction = ({
               value={newInventoryItem?.item_name || ""}
               onChange={handleInventoryChange}
             />
+            {isEditingInventory ? (<label>Item quantity</label>) : ""}
             <input
               type="number"
               name="count"
@@ -243,6 +245,7 @@ export const InventoryFunction = ({
               value={newInventoryItem?.count || ""}
               onChange={handleInventoryChange}
             />
+            {isEditingInventory ? (<label>Warning quantity</label>) : ""}
             <input
               type="number"
               name="warning_count"
