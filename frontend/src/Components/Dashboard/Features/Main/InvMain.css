@@ -75,6 +75,25 @@ div.closeButton {
     color: #333;
     cursor: pointer;
   }
+
+  .infoLable  {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .infoLable svg {
+    height: 16px !important;
+    width: 16px !important;
+    color: rgb(67, 158, 214);
+  }
+
+  button.toolTipButton {
+    background: transparent !important;
+    color: transparent !important;
+    padding: 0px !important;
+  }
   
   .add-inventory-item-form,
   .add-ordered-item-form {
