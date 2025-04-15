@@ -11,7 +11,7 @@ import { fetchMyAccount } from "./ReduxActionsMain/userActions.js"
 import Overview from "./Components/Dashboard/Features/Overview.jsx";
 import Email from "./Components/Dashboard/Features/Email.jsx";
 import Medifiles from "./Components/Dashboard/Features/Medical.jsx";
-import TasksList from "./Components/Dashboard/Features/Task.jsx";
+// import TasksList from "./Components/Dashboard/Features/Task.jsx";
 import Inventory from "./Components/Dashboard/Features/Inventory.jsx";
 import Account from "./Components/Dashboard/Features/Account.jsx";
 
@@ -20,7 +20,7 @@ import InventoryMain from "./Components/Dashboard/Features/Main/InventoryMain.js
 import OverviewMain from "./Components/Dashboard/Features/Main/OverviewMain.jsx";
 import EmailMain from "./Components/Dashboard/Features/Main/EmailMain.jsx";
 import MedicalMain from "./Components/Dashboard/Features/Main/MedicalMain.jsx";
-import TasksMain from "./Components/Dashboard/Features/Main/TasksMain.jsx";
+// import TasksMain from "./Components/Dashboard/Features/Main/TasksMain.jsx";
 import AccountMain from "./Components/Dashboard/Features/Main/AccountMain.jsx";
 
 function App({ user, loading, error, fetchMyAccount }) {
@@ -103,9 +103,9 @@ console.log("CLINIC PASSED INTO APP.JS:", clinicFromConsole);
       case "/medical-forms":
         setMainContent(<MedicalMain />);
         break;
-      case "/task-list":
-        setMainContent(<TasksMain />);
-        break;
+      // case "/task-list":
+      //   setMainContent(<TasksMain />);
+      //   break;
       case "/account-settings":
         setMainContent(<AccountMain user={user}/>);
         break;
@@ -154,7 +154,7 @@ console.log("CLINIC PASSED INTO APP.JS:", clinicFromConsole);
           <Route exact path="/overview" element={<Overview />} />
           <Route exact path="/medical-forms" element={<Medifiles />} />
           <Route exact path="/email-templates" element={<Email updateEmailRendering={setRenderEmailTemplate}/>} />
-          <Route exact path="/task-list" element={<TasksList />} />
+          {/* <Route exact path="/task-list" element={<TasksList />} /> */}
           <Route exact path="/inventory" element={<Inventory clinicForInvMain={setClinicFromConsole}/>} />
           <Route exact path="/account-settings" element={<Account user={user}/>} />
         </Routes>

@@ -1,13 +1,37 @@
 // taskActions.js
-const token = localStorage.getItem("jwt");
-// Action to fetch task table
-export const fetchTasks = (token) => {
+
+// export const fetchTasks = (token) => {
+//     return async (dispatch) => {
+//       try {
+//         if (!token) {
+//           throw new Error("No token provided");
+//         }
+//         const response = await fetch('http://127.0.0.1:3000/tasks',{
+//           headers: {
+//             Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+//           },
+//         } );
+//         if (response.status === 401) {
+//           localStorage.removeItem("jwt"); // Clear the token
+//           window.location.href = "/login"; // Redirect to login
+//           throw new Error("Unauthorized");
+//         }
+//         const data = await response.json();
+//         dispatch({ type: 'FETCH_TASK_SUCCESS', payload: data });
+//       } catch (error) {
+//         dispatch({ type: 'FETCH_TASK_ERROR', payload: error.message });
+//       }
+//     };
+//   };
+
+// Action to fetch task table by clinic
+  export const groupedClinicTasksTables = (token) => {
     return async (dispatch) => {
       try {
         if (!token) {
           throw new Error("No token provided");
         }
-        const response = await fetch('http://127.0.0.1:3000/tasks',{
+        const response = await fetch('http://127.0.0.1:3000/all_clinical_task_tables',{
           headers: {
             Authorization: `Bearer ${token}`, // Include the token in the Authorization header
           },
@@ -25,8 +49,12 @@ export const fetchTasks = (token) => {
     };
   };
 
+
+
+
+
   // Action to create a task table
-  export const createTasks = (task) => {
+  export const createTasks = (task, token) => {
     return async (dispatch) => {
       try {
         const response = await fetch('http://127.0.0.1:3000/tasks', {
@@ -46,7 +74,7 @@ export const fetchTasks = (token) => {
   };
   
   // Action to update task table
-  export const updateTasks = (taskId, updatedInfo) => {
+  export const updateTasks = (taskId, updatedInfo, token) => {
     return async (dispatch, getState) => {
       try {
 
@@ -93,7 +121,7 @@ export const fetchTasks = (token) => {
   };
   
   // Action to delete a patient email template
-  export const deleteTasks = (taskId) => {
+  export const deleteTasks = (taskId, token) => {
     return async (dispatch) => {
       try {
         await fetch(`http://127.0.0.1:3000/tasks/${taskId}`, {

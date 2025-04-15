@@ -1,5 +1,5 @@
 const initialTaskState = {
-    tasks: [],
+    data: [],
     loading: false,
     error: null
   };
@@ -9,7 +9,7 @@ const initialTaskState = {
           case 'FETCH_TASK_SUCCESS':
               return {
                   ...state,
-                  tasks: action.payload,
+                  data: action.payload,
                   loading: false,
               };
           case 'FETCH_TASK_ERROR':
@@ -21,7 +21,7 @@ const initialTaskState = {
            case 'CREATE_TASK_SUCCESS':
                return {
                  ...state,
-                 tasks: [...state.tasks, action.payload],
+                 data: [...state.data, action.payload],
                  loading: false,
                };
            case 'CREATE_TASK_ERROR':
@@ -33,7 +33,7 @@ const initialTaskState = {
            case 'UPDATE_TASK_SUCCESS': 
            return {
              ...state,
-             tasks: state.tasks.map((task) =>
+             data: state.data.map((task) =>
               task.id === action.payload.id ?  {
                 ...task,
                 column_names: {
@@ -53,7 +53,7 @@ const initialTaskState = {
            case 'DELETE_TASK_SUCCESS':
               return {
                 ...state,
-                tasks: state.tasks.filter((task) => task.id !== action.payload),
+                data: state.data.filter((task) => task.id !== action.payload),
                 loading: false,
               };
            case 'DELETE_TASK_ERROR':

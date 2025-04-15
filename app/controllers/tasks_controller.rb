@@ -46,7 +46,7 @@ class TasksController < ApplicationController
       # Update task with merged JSONB
       if @task.update(column_names: updated_columns)
         render json: { 
-          task: @task, 
+          task: @task.column_names, 
           message: "columns_names: #{@task.column_names} has been successfully updated"
           }, status: :ok
       else
