@@ -62,7 +62,7 @@ def column_types
                 column_four: "select"  
             }
     end
-
+end
     def select_type_options
         case task_table_title
             when "Patient Retention"
@@ -88,12 +88,6 @@ def column_types
                 }
         end
     end
-end
-
-
-
-
-
 
 
 end

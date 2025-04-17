@@ -1,5 +1,5 @@
 class TaskSerializer < ActiveModel::Serializer
-  attributes :id, :clinic_id, :task_table_title, :column_names
+  attributes :id, :clinic_id, :task_table_title, :column_names, :column_types, :select_type_options
 
   # def clinic_association
   #   return {} unless object.clinic # Prevent errors if clinic is nil
