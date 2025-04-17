@@ -1,5 +1,5 @@
 class TaskContentSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :task_id, :task_data, :task, :updated_at
+  attributes :id, :user_id, :task_id, :task_data
 
   belongs_to :task
 
