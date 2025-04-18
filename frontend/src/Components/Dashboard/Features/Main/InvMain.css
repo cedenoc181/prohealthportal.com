@@ -119,6 +119,7 @@ div.closeButton {
   input[type="url"],
   input[type="number"],
   input[type="date"],
+  input[type="select"],
   input[type="datetime-local"],
   select {
     padding: 8px;
@@ -130,6 +131,8 @@ div.closeButton {
   input[type="text"]:focus,
   input[type="number"]:focus,
   input[type="date"]:focus,
+  input[type="select"]:focus,
+  input[type="checkbox"]:focus,
   select:focus {
     border-color: #4c84af;
     outline: none;

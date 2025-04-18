@@ -28,6 +28,8 @@ export const fetchFiveTaskContents = (token) => {
   // Action to create a task content data
   export const createTaskContent = (taskContent, token) => {
     return async (dispatch) => {
+      console.log("data in action file:", taskContent);
+
       try {
         const response = await fetch('http://127.0.0.1:3000/task_contents', {
           method: 'POST',
@@ -35,7 +37,7 @@ export const fetchFiveTaskContents = (token) => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({taskContent}),
+          body: JSON.stringify(taskContent),
         });
         const data = await response.json();
         dispatch({ type: 'CREATE_TASK_CONTENT_SUCCESS', payload: data });
@@ -48,23 +50,25 @@ export const fetchFiveTaskContents = (token) => {
   // Action to update task content data
   export const updateTaskContents = (taskContentId, updatedInfo, token) => {
     return async (dispatch) => {
+      console.log("data in action file:", updatedInfo);
+
       try {
-        const updateTaskData = {
-          ...updatedInfo.task_data
-        };
+        // const updateTaskData = {
+        //   ...updatedInfo.task_data
+        // };
   
-        // remove any null values
-        Object.keys(updateTaskData).forEach(key => {
-          if (updateTaskData[key] === null) {
-            delete updateTaskData[key];
-          }
-        });
+        // // remove any null values
+        // Object.keys(updateTaskData).forEach(key => {
+        //   if (updateTaskData[key] === null) {
+        //     delete updateTaskData[key];
+        //   }
+        // });
   
-        const payload = {
-          task_id: updatedInfo.task_id,
-          user_id: updatedInfo.user_id,
-          task_data: updateTaskData
-        };
+        // const payload = {
+        //   task_id: updatedInfo.task_id,
+        //   user_id: updatedInfo.user_id,
+        //   task_data: updateTaskData
+        // };
   
         const response = await fetch(`http://127.0.0.1:3000/task_contents/${taskContentId}`, {
           method: 'PUT',
@@ -72,7 +76,7 @@ export const fetchFiveTaskContents = (token) => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(updatedInfo),
         });
   
         if (!response.ok) {

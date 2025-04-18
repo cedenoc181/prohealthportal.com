@@ -22,14 +22,14 @@ def column_types
         when "Patient Retention"
             {
                 column_one: "text",
-                column_two: "datetime-local",
+                column_two: "date",
                 column_three: "select",
                 column_four: "datetime-local"
             }
         when "Direct Access"
             {
                 column_one: "text",
-                column_two: "datetime-local",
+                column_two: "date",
                 column_three: "number",
                 column_four: "checkbox"   
             }
