@@ -211,6 +211,8 @@ export const TasksMain = ({
               ? formatDateTime(taskContent.task_data[key])
               : type === "date"
               ? formatDate(taskContent.task_data[key])
+              : type === "checkbox"
+              ? taskContent.task_data[key] === true ? "Yes" : "No"
               : String(taskContent.task_data[key])
             )}
           </td>
