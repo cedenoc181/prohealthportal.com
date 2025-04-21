@@ -4,7 +4,7 @@ import "./Features.css"
 import waterJug from '../../../images/WaterJug.png'
 import cleaning from '../../../images/Cleaning.png'
 
-export const Task = (props) => {
+export const Task = () => {
 
   const [collapse, setCollapse] = useState(false);
 

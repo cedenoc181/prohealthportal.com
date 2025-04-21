@@ -126,7 +126,17 @@ export const TasksMain = ({
   };
 
 
-
+  const handleDeleteRow = async (taskContentId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this row?");
+    if (!confirmDelete) return;
+  
+    try {
+      await deleteTaskContent(taskContentId, token);
+      await groupedClinicTasksTables(token); // refresh data
+    } catch (error) {
+      console.error("Failed to delete task content:", error);
+    }
+  };
 
 
 
@@ -150,11 +160,12 @@ export const TasksMain = ({
                       </tr>
                     </thead>
                     <tbody>
-  {table.task_contents?.map((taskContent) => (
-    <tr
-      key={taskContent.id}
-      onClick={() => handleEditClick(taskContent)}
-    >
+    {table.task_contents?.map((taskContent) => (
+      <tr
+       key={taskContent.id}
+       onClick={() => handleEditClick(taskContent)}
+       onDoubleClick={() => handleDeleteRow(taskContent.id)}
+       >
       {Object.keys(table.column_names).map((key, idx) => {
         const value =
           editingRowId === taskContent.id
