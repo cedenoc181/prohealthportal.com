@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./Main.css";
+import { formatDate, formatDateTime } from "../Utils/DateUtils.js"
 import { groupedClinicTasksTables } from "../../../../ReduxActionsMain/taskActions";
 import {
   createTaskContent,
@@ -25,8 +26,6 @@ export const TasksMain = ({
   const token = localStorage.getItem("jwt");
 
   const [selectedClinicKey, setSelectedClinicKey] = useState("");
-
-  // const [isEditingReminder, setIsEditingReminder] = useState(false);
 
   const [editingRowId, setEditingRowId] = useState(null);
   const [formData, setFormData] = useState({});
@@ -56,6 +55,14 @@ export const TasksMain = ({
 
   // for adding task changes
   const handleNewTaskChange = (tableId, key, value) => {
+
+    let parsedValue = value;
+
+    if (columnTypes[key] === "date" && typeof value === "string") {
+      const localDate = new Date(value + "T00:00:00");
+      parsedValue = localDate.toISOString().split("T")[0]; // "YYYY-MM-DD"
+    }
+
     setNewTaskDataMap((prev) => ({
       ...prev,
       [tableId]: {
@@ -117,6 +124,11 @@ export const TasksMain = ({
       console.error("Error creating new task content:", error);
     }
   };
+
+
+
+
+
 
   return (
     <div className="main-container">
@@ -195,7 +207,11 @@ export const TasksMain = ({
                 />
               )
             ) : (
-              String(taskContent.task_data[key])
+              type === "datetime-local"
+              ? formatDateTime(taskContent.task_data[key])
+              : type === "date"
+              ? formatDate(taskContent.task_data[key])
+              : String(taskContent.task_data[key])
             )}
           </td>
         );
