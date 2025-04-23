@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show update destroy ]
-  skip_before_action :is_admin?, only: %i[ index show ]
+  skip_before_action :is_admin?
   
   # GET /tasks
   def index
@@ -19,6 +19,15 @@ class TasksController < ApplicationController
     render json: @tasks.transform_values { |clinics| ActiveModelSerializers::SerializableResource.new(clinics, each_serializer: TaskSerializer) },
      status: :ok
   end
+
+  def unconfirmed_reminders
+    contents = TaskContent.joins(:task)
+      .where(tasks: { task_table_title: "Appointment Reminders" })
+      .where("task_data ->> 'column_four' IS NULL OR task_data ->> 'column_four' = 'false'")
+  
+    render json: contents, each_serializer: TaskContentSerializer
+  end
+  
 
   # POST /tasks
   def create

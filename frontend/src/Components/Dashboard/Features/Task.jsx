@@ -1,8 +1,6 @@
 import {React, useState} from 'react'
 import { connect } from 'react-redux'
 import "./Features.css"
-import waterJug from '../../../images/WaterJug.png'
-import cleaning from '../../../images/Cleaning.png'
 
 export const Task = () => {
 
@@ -23,24 +21,6 @@ export const Task = () => {
         <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
      </svg>
     </div>
-   {collapse ? 
-   ( 
-    // if front desk/ PT or OT 
-    //daily operations will be for:  all task that fd will be in charge of like schedule, inventory, medifiles, checklist 
-    // authorizations will be for : auth status, track D.A, case management(get new Rx),  
-    //APOS will track: pick up status, signature pending, date letter faxed, 1st FU visit scheduled
-    <ul className="filter-li-container">
-        <li className="filter-li">Daily operations</li> 
-        <li className="filter-li"> authorizations</li>
-        <li className="filter-li">APOS</li>
-    </ul>
-
-)
-   :
-    (
-        ""
-    )
-}
 </span>
 </div>
 <br />
@@ -73,23 +53,7 @@ export const Task = () => {
         </tbody>
         </table>
       </div> 
-<h2 className="task-title"> Scheduled</h2>
-<br />
-<div className="opService">
-
-      <div className="WaterDelivery">
-          <h3>Water delivery</h3>
-              <img src={waterJug} alt="water delivery"/>
-              <p>Expected: 11/15/24</p>
-      </div>
-
-      <div className="cleaningService">
-      <h3>Cleaning Service</h3>
-            <img src={cleaning} alt="cleaning service"/>
-        <p>Expected: 11/07/24</p>
-      </div>
-  </div>
-    </div>
+</div>
   )
 }
 

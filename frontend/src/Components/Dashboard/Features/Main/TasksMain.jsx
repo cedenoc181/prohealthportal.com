@@ -54,7 +54,7 @@ export const TasksMain = ({
   };
 
   // for adding task changes
-  const handleNewTaskChange = (tableId, key, value) => {
+  const handleNewTaskChange = (tableId, key, value, columnTypes = {}) => {
 
     let parsedValue = value;
 
@@ -265,7 +265,8 @@ export const TasksMain = ({
                                 handleNewTaskChange(
                                   table.id,
                                   key,
-                                  e.target.checked
+                                  e.target.checked,
+                                  columnTypes
                                 )
                               }
                             />
@@ -276,7 +277,8 @@ export const TasksMain = ({
                                 handleNewTaskChange(
                                   table.id,
                                   key,
-                                  e.target.value
+                                  e.target.value,
+                                  columnTypes
                                 )
                               }
                             >
@@ -300,7 +302,7 @@ export const TasksMain = ({
                                       : parseInt(inputValue, 10)
                                     : inputValue;
 
-                                handleNewTaskChange(table.id, key, parsedValue);
+                                handleNewTaskChange(table.id, key, parsedValue, columnTypes);
                               }}
                             />
                           )}

@@ -66,6 +66,8 @@ Rails.application.routes.draw do
         # TASKCONTENT MODEL
         get "/first_five_clinical_task", to: "task_contents#tasks_preview"
 
+get "/unconfirmed_reminders", to: "tasks#unconfirmed_reminders"
+
     #admin will be only user to create instances of these models, 
   resources :dr_templates
   resources :patient_templates
