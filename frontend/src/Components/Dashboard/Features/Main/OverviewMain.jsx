@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import './OverviewMain.css';
 import './Main.css';
 import MedicalMain from './MedicalMain.jsx';
-import EmailMain from './EmailMain.jsx';
 import { fetchUsers } from '../../../../ReduxActionsMain/userActions'
 
 export const OverviewMain = ({user, fetchUsers}) => {
@@ -36,12 +35,7 @@ export const OverviewMain = ({user, fetchUsers}) => {
   return (
     <div className="main-container">
       <h1 className="welcome">{greet} {userName}!</h1>
-      <br />
-      <h2 className="overview-sub-titles">Continue working on email</h2>
-      <EmailMain />
-      <br />
-      <h2 className="overview-sub-titles">Continue working on medical file</h2>
-      <div className="medical-comp">
+          <div className="medical-comp">
         <MedicalMain />
       </div>
       <br />

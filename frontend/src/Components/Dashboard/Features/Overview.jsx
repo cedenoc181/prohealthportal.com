@@ -2,18 +2,31 @@ import {React, useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import { fetchUsers } from "../../../ReduxActionsMain/userActions.js";
 import { fetchMedifiles } from '../../../ReduxActionsMain/medifilesActions.js';
+import { fetchInsufficientItems } from "../../../ReduxActionsMain/inventoryItemsActions";
+
 import "./Features.css"
 
 
-export const Overview = ({ fetchUsers, fetchMedifiles }) => {
+export const Overview = ({ fetchUsers, fetchMedifiles, fetchInsufficientItems, inventoryItems, user }) => {
+
+  const clinicMapping = {
+    east: "1",
+    west: "2",
+    "upper west": "3",
+  };
+
+    const [selectedClinicKey, setSelectedClinicKey] = useState(clinicMapping[user?.clinic_location]);
+
+  const token = localStorage.getItem("jwt");
 
   useEffect(() => {
-    fetchUsers();
-    const token = localStorage.getItem("jwt"); // Retrieve the token
-    if (token) {
-      fetchMedifiles(token); // Pass the token to the fetchMedifiles function
+    fetchUsers(); // Retrieve the token
+    if (user) {
+      fetchMedifiles(token);
+      fetchInsufficientItems(token);
+       // Pass the token to the fetchMedifiles function
     }
-  }, [fetchUsers, fetchMedifiles]);
+  }, [fetchUsers, user, fetchInsufficientItems, fetchMedifiles, token]);
 
   console.log("Overview:", fetchUsers);
 
@@ -50,56 +63,43 @@ export const Overview = ({ fetchUsers, fetchMedifiles }) => {
 
   const [dailyOps, setDailyOps] = useState(['Appointment reminders', "Patient retention outreach", "Direct Access management", "referral management"]);
 
-  let count = Math.floor(Math.random() * 10) + 1;
+
 
 
   return (
     <div id="overview-console" className="console">
         <h2 className="console-title">Overview</h2>
-    
-  
-     <h2 className="low-inv-title">Insufficient Inventory</h2>
-<div className="inventory-con">
-  <table className="low-inv-table">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Count</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <span className="icon-warning"></span> Staples
-        </td>
-        <td>{count}</td>
-        <td>Insufficient</td>
-      </tr>
-      <tr>
-        <td>
-          <span className="icon-warning"></span> Bio freeze
-        </td>
-        <td>{count}</td>
-        <td>Low</td>
-      </tr>
-      <tr>
-        <td>
-          <span className="icon-warning"></span> Printing Paper
-        </td>
-        <td>{count}</td>
-        <td>Insufficient</td>
-      </tr>
-      <tr>
-        <td>
-          <span className="icon-warning"></span> Paper Towels
-        </td>
-        <td>{count}</td>
-        <td>Low</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        {/* inventory items */}
+        {selectedClinicKey && inventoryItems[selectedClinicKey]?.length > 0 ? (
+          <div>
+            <h2 className="low-inv-title">Insufficient Inventory</h2>
+            <div className="inventory-con">
+              <table className="low-inv-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Count</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {inventoryItems[selectedClinicKey].slice(0, 5).map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.item_name}</td>
+                      <td>{item.count}</td>
+                      <td>
+                        {item.item_requested === true && "Request sent"}
+                        {item.item_requested === false && "Request Item"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <p className="altMessage">Sufficient invenotry.</p>
+        )}
 <br />
 
 <div className="apos-lead-preview">
@@ -161,12 +161,14 @@ export const Overview = ({ fetchUsers, fetchMedifiles }) => {
 }
 
 const mapStateToProps = (state) => ({
-  // user: state.user.data,
+  user: state.user.data,
+  inventoryItems: state.inventoryItem.insufficient,
 })
 
 const mapDispatchToProps = {
   fetchUsers,
   fetchMedifiles,
+  fetchInsufficientItems,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Overview)

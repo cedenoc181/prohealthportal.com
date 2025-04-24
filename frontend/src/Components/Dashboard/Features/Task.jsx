@@ -1,6 +1,8 @@
 import {React, useState} from 'react'
 import { connect } from 'react-redux'
 import "./Features.css"
+import waterJug from '../../../images/WaterJug.png'
+import cleaning from '../../../images/Cleaning.png'
 
 export const Task = () => {
 
@@ -53,6 +55,22 @@ export const Task = () => {
         </tbody>
         </table>
       </div> 
+<h2 className="task-title"> Scheduled</h2>
+<br />
+<div className="opService">
+
+      <div className="WaterDelivery">
+          <h3>Water delivery</h3>
+              <img src={waterJug} alt="water delivery"/>
+              <p>Expected: 11/15/24</p>
+      </div>
+
+      <div className="cleaningService">
+      <h3>Cleaning Service</h3>
+            <img src={cleaning} alt="cleaning service"/>
+        <p>Expected: 11/07/24</p>
+      </div>
+  </div>
 </div>
   )
 }

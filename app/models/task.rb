@@ -9,21 +9,6 @@ class Task < ApplicationRecord
     validates :clinic_id, presence: true
 
 
-def direct_acccess_pending
-end 
-
-def authroization_status
-end
-
-
-def appointment_reminder
-    clinical_task_list = Task.includes(:clinic).group_by(&:task_table_title)
-end 
-
-
-
-
-
 def column_types
     case task_table_title
         when "Appointment Reminders"

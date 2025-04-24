@@ -20,13 +20,14 @@ class TasksController < ApplicationController
      status: :ok
   end
 
-  def unconfirmed_reminders
-    contents = TaskContent.joins(:task)
-      .where(tasks: { task_table_title: "Appointment Reminders" })
-      .where("task_data ->> 'column_four' IS NULL OR task_data ->> 'column_four' = 'false'")
+  # this would be used to render all appointments that have not been confirmed
+  # def unconfirmed_reminders
+  #   contents = TaskContent.joins(:task)
+  #     .where(tasks: { task_table_title: "Appointment Reminders" })
+  #     .where("task_data ->> 'column_four' IS NULL OR task_data ->> 'column_four' = 'false'")
   
-    render json: contents, each_serializer: TaskContentSerializer
-  end
+  #   render json: contents, each_serializer: TaskContentSerializer
+  # end
   
 
   # POST /tasks
